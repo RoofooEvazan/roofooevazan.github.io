@@ -28,6 +28,14 @@ Custom filters leave out the live market prices (rune values, Rainbow Facet valu
 
 The builder lives in the filter repo's `docs/` folder. How it works and how to update it is in [`tools/site/README.md`](https://github.com/RoofooEvazan/Roofoo-s-PD2-Loot-Filter/blob/main/tools/site/README.md).
 
+**Screenshots:** the builder screenshots in the filter's README (`screenshots/Builder*.png`) are taken by [`tools/site/screenshots.mjs`](https://github.com/RoofooEvazan/Roofoo-s-PD2-Loot-Filter/blob/main/tools/site/screenshots.mjs), which drives headless Chrome or Edge. From the filter repo, run:
+
+```
+node --experimental-websocket tools/site/screenshots.mjs
+```
+
+It shoots the live site by default; pass a URL (e.g. `http://localhost:8765/docs/`) to shoot a local copy first. Set `BROWSER` to the path of `chrome.exe` if no browser is found.
+
 ## Adding a tool
 
 To add a tool, add a card to the `Tools` section of `index.html` and commit. GitHub Pages republishes within a minute or two.
