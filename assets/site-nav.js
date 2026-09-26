@@ -15,6 +15,7 @@
     { label: 'Hit Chance', path: '/pd2-hit-chance/' },
     { label: 'Damage Atlas', path: '/pd2-damage-atlas/' },
     { label: 'Spawn Simulator', path: '/pd2-spawn-simulator/' },
+    { label: 'Base Finder', path: '/pd2-base-finder/' },
     { label: 'Loot Filter Builder', path: '/Roofoo-s-PD2-Loot-Filter/' }
   ];
 
