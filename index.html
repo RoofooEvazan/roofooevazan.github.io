@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0b0906">
 <meta name="color-scheme" content="dark">
 <title>PD2 Calculators</title>
-<meta name="description" content="Project Diablo 2 calculators and simulators built on the game's reverse-engineered code: attack speed, advanced stats, hit chance, a damage atlas, and map spawns with loot.">
+<meta name="description" content="Project Diablo 2 calculators and simulators built on the game's reverse-engineered code: attack speed, advanced stats, hit chance, a damage atlas, map spawns with loot, and a loot filter builder.">
 <meta property="og:title" content="PD2 Calculators">
 <meta property="og:description" content="Project Diablo 2 calculators and simulators built on the game's reverse-engineered code.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22o%22%20cx%3D%22.5%22%20cy%3D%22.7%22%20r%3D%22.6%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23e0342a%22/%3E%3Cstop%20offset%3D%22.5%22%20stop-color%3D%22%238c1310%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%232a0404%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%20fill%3D%22url%28%23o%29%22%20stroke%3D%22%23b8974f%22%20stroke-width%3D%224%22/%3E%3Cellipse%20cx%3D%2224%22%20cy%3D%2220%22%20rx%3D%229%22%20ry%3D%225%22%20fill%3D%22%23fff%22%20opacity%3D%22.45%22/%3E%3C/svg%3E">
@@ -157,7 +157,7 @@ footer p{margin:4px 0}
       <div class="tool-foot"><span class="open">Open atlas →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-damage-atlas">Source</a></div>
     </article>
 
-    <article class="tool wide">
+    <article class="tool">
       <div class="tool-head">
         <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg></span>
         <h3><a href="https://roofooevazan.github.io/pd2-spawn-simulator/">Spawn Simulator</a></h3>
@@ -166,13 +166,23 @@ footer p{margin:4px 0}
       <ul class="tags"><li>Density</li><li>Elites</li><li>XP</li><li>Loot run</li></ul>
       <div class="tool-foot"><span class="open">Open simulator →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-spawn-simulator">Source</a></div>
     </article>
+
+    <article class="tool">
+      <div class="tool-head">
+        <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg></span>
+        <h3><a href="https://roofooevazan.github.io/Roofoo-s-PD2-Loot-Filter/">Loot Filter Builder</a></h3>
+      </div>
+      <p>Make Roofoo's loot filter your own without touching filter code: color themes, drop sounds, star tiers, mystery drops, and what shows or hides on each filter level.</p>
+      <ul class="tags"><li>Themes</li><li>Drop sounds</li><li>Show / hide</li><li>Item tester</li></ul>
+      <div class="tool-foot"><span class="open">Open builder →</span><a class="source" href="https://github.com/RoofooEvazan/Roofoo-s-PD2-Loot-Filter">Source</a></div>
+    </article>
   </div>
 
   <h2>Other projects</h2>
   <div class="others">
     <a class="other" href="https://github.com/RoofooEvazan/Roofoo-s-PD2-Loot-Filter">
       <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg></span>
-      <span><b>Roofoo's PD2 Loot Filter</b><span>A fork of Kryszard's filter with late-game tweaks for FL7+ and FL8+.</span></span>
+      <span><b>Roofoo's PD2 Loot Filter</b><span>A fork of Kryszard's filter with late-game tweaks for FL7+ and FL8+. Customize it with the Loot Filter Builder above.</span></span>
     </a>
     <a class="other" href="https://github.com/RoofooEvazan/pd2-exploration-automap">
       <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></span>
@@ -185,7 +195,7 @@ footer p{margin:4px 0}
 
 <footer class="wrap">
   <p>A fan-made project. Not affiliated with or endorsed by Blizzard Entertainment or the Project Diablo 2 team. Diablo is a trademark of Blizzard Entertainment.</p>
-  <p>No game assets are included. Everything runs in your browser, with no tracking.</p>
+  <p>No game assets are included, apart from short sound clips the Loot Filter Builder uses to preview drop sounds. Everything runs in your browser, with no tracking.</p>
 </footer>
 </body>
 </html>

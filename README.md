@@ -11,6 +11,7 @@ The main page that links all of RoofooEvazan's Project Diablo 2 tools together. 
 | Hit Chance | https://roofooevazan.github.io/pd2-hit-chance/ | [pd2-hit-chance](https://github.com/RoofooEvazan/pd2-hit-chance) |
 | Damage Atlas | https://roofooevazan.github.io/pd2-damage-atlas/ | [pd2-damage-atlas](https://github.com/RoofooEvazan/pd2-damage-atlas) |
 | Spawn Simulator | https://roofooevazan.github.io/pd2-spawn-simulator/ | [pd2-spawn-simulator](https://github.com/RoofooEvazan/pd2-spawn-simulator) |
+| Loot Filter Builder | https://roofooevazan.github.io/Roofoo-s-PD2-Loot-Filter/ | [Roofoo-s-PD2-Loot-Filter](https://github.com/RoofooEvazan/Roofoo-s-PD2-Loot-Filter) |
 
 To add a tool, add a card to the `Tools` section of `index.html` and commit. GitHub Pages republishes within a minute or two.
 
