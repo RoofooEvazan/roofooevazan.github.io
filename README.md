@@ -12,6 +12,34 @@ The main page that links all of RoofooEvazan's Project Diablo 2 tools together. 
 | Damage Atlas | https://roofooevazan.github.io/pd2-damage-atlas/ | [pd2-damage-atlas](https://github.com/RoofooEvazan/pd2-damage-atlas) |
 | Spawn Simulator | https://roofooevazan.github.io/pd2-spawn-simulator/ | [pd2-spawn-simulator](https://github.com/RoofooEvazan/pd2-spawn-simulator) |
 | Loot Filter Builder | https://roofooevazan.github.io/Roofoo-s-PD2-Loot-Filter/ | [Roofoo-s-PD2-Loot-Filter](https://github.com/RoofooEvazan/Roofoo-s-PD2-Loot-Filter) |
+| PD2 Wiki | https://roofooevazan.github.io/wiki/ | this repo, [`wiki/`](wiki/) |
+
+## PD2 Wiki
+
+**https://roofooevazan.github.io/wiki/**
+
+A copy of the [Project Diablo 2 wiki](https://wiki.projectdiablo2.com/) that's easier to read and search, on desktop or phone:
+
+- **Search** finds pages, single sections (every runeword, skill and unique has its own) and full-text mentions as you type. Press `/` to jump to it.
+- **Browse** uses the wiki's own main-page menus in a sidebar, with guides, patch notes and every other page grouped below.
+- **Pages** get a sticky outline, sortable tables, row filters on long tables, collapsible changelogs and tap-to-zoom images.
+- **Act 2 Merc Weapon Compare** turns the [merc weapon spreadsheet](https://docs.google.com/spreadsheets/d/1EnksMO35WPthXshjlNCg_wmbfYB_kcgUT321p6GhcsI/edit?gid=0) into a tool: set item and skill IAS (and optionally merc Str/Dex) to rank every weapon, see the best weapon at each IAS, and how much IAS the next breakpoint needs.
+
+**Daily sync.** [`.github/workflows/wiki-sync.yml`](.github/workflows/wiki-sync.yml) runs [`tools/wiki-sync/sync.mjs`](tools/wiki-sync/sync.mjs) every day at 07:23 UTC. It asks the wiki's API which pages changed, re-fetches only those, pulls the spreadsheet, and commits anything new to `wiki/data/`, which Pages then republishes. Each run's changes are listed on the wiki's Recent Changes page. To sync right away, open **Actions → Wiki sync → Run workflow** (tick *full* to re-fetch every page). To run it locally:
+
+```
+node tools/wiki-sync/sync.mjs
+```
+
+Wiki content is by the PD2 Wiki's contributors under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); every page links back to its original and history.
+
+## Site navigation bar
+
+[`assets/site-nav.js`](assets/site-nav.js) draws the bar at the top of the main page and the wiki. The list of pages lives in that one file. Any tool can show the same bar by adding this as the first line inside `<body>`:
+
+```html
+<script src="https://roofooevazan.github.io/assets/site-nav.js"></script>
+```
 
 ## Loot Filter Builder
 
@@ -38,6 +66,6 @@ It shoots the live site by default; pass a URL (e.g. `http://localhost:8765/docs
 
 ## Adding a tool
 
-To add a tool, add a card to the `Tools` section of `index.html` and commit. GitHub Pages republishes within a minute or two.
+To add a tool, add a card to the `Tools` section of `index.html` and a link to `LINKS` in `assets/site-nav.js`, then commit. GitHub Pages republishes within a minute or two.
 
 A fan-made project. Not affiliated with or endorsed by Blizzard Entertainment or the Project Diablo 2 team.
