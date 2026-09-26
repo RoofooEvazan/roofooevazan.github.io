@@ -1,0 +1,506 @@
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr"><p>This is an unlisted page that is transcluded on <a href="/wiki/Item_Filtering" title="Item Filtering">Item Filtering</a>.
+</p><p><br />
+</p>
+
+<div class="mw-heading mw-heading3"><h3 id="Formal_Definition">Formal Definition</h3></div>
+<p>Formulas can be defined anywhere in the loot filter using <code>Formula[KEY]: FORMULA</code>. References to a formula must be in the form of <code>FORMULAKEY</code>. <code>Formula[_A]: STAT1!=STAT2</code> can be referenced by <code>FORMULA_A</code> or <code>%FORMULA_A%</code>.
+</p><p>Only '_' or 'A' to 'Z' may be used in a formula's key.
+</p><p>Aliases cannot be used in the definition.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Inline_Definition">Inline Definition</h3></div>
+<p>An inline formula definition is a formula inside a block <code>$f(STAT1!=STAT2)</code>. The 'f' must be lowercase and parentheses must match.
+</p><p>Aliases can be used in the definition.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Item_Input">Item Input</h3></div>
+<p>A formula can be used as a boolean, value or a part of an add condition.
+</p>
+<table class="wikitable">
+<tbody><tr>
+<th>condition</th>
+<th>description
+</th></tr>
+<tr>
+<td>ItemDisplay[$f(STAT1+STAT2)&gt;25]</td>
+<td>value comparison
+</td></tr>
+<tr>
+<td>ItemDisplay[$f(STAT1+STAT2&gt;20)]</td>
+<td>boolean condition
+</td></tr>
+<tr>
+<td>ItemDisplay[$f(STAT1)+STAT2&gt;15]</td>
+<td>add condition
+</td></tr></tbody></table>
+<p>The "truthiness" of a formula is based on a value being NOT equal to zero.
+</p>
+<table class="wikitable">
+<tbody><tr>
+<th>formula</th>
+<th>description
+</th></tr>
+<tr>
+<td>1.5</td>
+<td>true, since 1.5&#160;!= 0
+</td></tr>
+<tr>
+<td>TRUE</td>
+<td>true, since TRUE (1)&#160;!= 0
+</td></tr>
+<tr>
+<td>FALSE</td>
+<td>false, since FALSE (0) == 0
+</td></tr>
+<tr>
+<td>0</td>
+<td>false, since 0 == 0
+</td></tr>
+<tr>
+<td>.0000001</td>
+<td>true, x&#160;!= 0
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading3"><h3 id="Item_Output">Item Output</h3></div>
+<p>The result of a formula is a real number. It is rendered with either 0-2 decimal places depending on the fractional part with two decimal places. If a math error occurs or the value is too large to be rendered, the text is <code>f_err</code>. The maximum absolute value of a renderable result is 2^31 (2147483648).
+</p>
+<table class="wikitable">
+<tbody><tr>
+<th>formula</th>
+<th>intermediate text</th>
+<th>rendered text
+</th></tr>
+<tr>
+<td>1.49</td>
+<td>1.49</td>
+<td>1.49
+</td></tr>
+<tr>
+<td>1.495</td>
+<td>1.50</td>
+<td>1.5
+</td></tr>
+<tr>
+<td>1.494</td>
+<td>1.49</td>
+<td>1.49
+</td></tr>
+<tr>
+<td>1.5</td>
+<td>1.50</td>
+<td>1.5
+</td></tr>
+<tr>
+<td>TRUE</td>
+<td>1.00</td>
+<td>1
+</td></tr>
+<tr>
+<td>FALSE</td>
+<td>0.00</td>
+<td>0
+</td></tr>
+<tr>
+<td>0</td>
+<td>0.00</td>
+<td>0
+</td></tr>
+<tr>
+<td>.0000001</td>
+<td>0.00</td>
+<td>0
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading3"><h3 id="Operators">Operators</h3></div>
+<p><code>==</code>, <code>&gt;</code>, <code>&lt;</code>, <code>!=</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>&#47;</code>, <code>^</code>, <code>!</code>
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Variables">Variables</h3></div>
+<p>All variables are case-insensitive. Each variable mirrors the code used in input or output.
+</p>
+<div class="mw-heading mw-heading4"><h4 id="Parameterized">Parameterized</h4></div>
+<p>Parameters are integers separated by a ','.
+</p>
+<table class="wikitable">
+
+<tbody><tr>
+<th>code</th>
+<th>example</th>
+<th>details</th>
+<th>parameters
+</th></tr>
+<tr>
+<td>stat</td>
+<td>stat3</td>
+<td>vitality</td>
+<td>1
+</td></tr>
+<tr>
+<td>multi</td>
+<td>MULTI83,2</td>
+<td>Necromancer skills; must have two parameters</td>
+<td>2
+</td></tr>
+<tr>
+<td>charstat</td>
+<td>CHARSTAT15</td>
+<td>gold in stash</td>
+<td>1
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading4"><h4 id="Parameterless">Parameterless</h4></div>
+<table class="wikitable">
+<tbody><tr>
+<th colspan="5">code
+</th></tr>
+<tr>
+<td>allattrib</td>
+<td>allsk</td>
+<td>alvl</td>
+<td>amazon</td>
+<td>ar
+</td></tr>
+<tr>
+<td>area</td>
+<td>armor</td>
+<td>arper</td>
+<td>assassin</td>
+<td>automod
+</td></tr>
+<tr>
+<td>axe</td>
+<td>bar</td>
+<td>barbarian</td>
+<td>baseblock</td>
+<td>basemaxkick
+</td></tr>
+<tr>
+<td>basemaxoneh</td>
+<td>basemaxsmite</td>
+<td>basemaxthrow</td>
+<td>basemaxtwoh</td>
+<td>baseminkick
+</td></tr>
+<tr>
+<td>baseminoneh</td>
+<td>baseminsmite</td>
+<td>baseminthrow</td>
+<td>basemintwoh</td>
+<td>belt
+</td></tr>
+<tr>
+<td>boots</td>
+<td>bow</td>
+<td>buyprice</td>
+<td>charm</td>
+<td>charstat
+</td></tr>
+<tr>
+<td>chest</td>
+<td>chsk</td>
+<td>circ</td>
+<td>cl</td>
+<td>class
+</td></tr>
+<tr>
+<td>clsk</td>
+<td>club</td>
+<td>clvl</td>
+<td>craft</td>
+<td>craftalvl
+</td></tr>
+<tr>
+<td>cres</td>
+<td>cube</td>
+<td>dagger</td>
+<td>def</td>
+<td>dex
+</td></tr>
+<tr>
+<td>diff</td>
+<td>din</td>
+<td>dru</td>
+<td>druid</td>
+<td>dtm
+</td></tr>
+<tr>
+<td>ed</td>
+<td>edam</td>
+<td>edef</td>
+<td>elt</td>
+<td>eq
+</td></tr>
+<tr>
+<td>equipped</td>
+<td>eth</td>
+<td>exc</td>
+<td>false</td>
+<td>fbr
+</td></tr>
+<tr>
+<td>fcr</td>
+<td>fhr</td>
+<td>filtlvl</td>
+<td>fools</td>
+<td>fres
+</td></tr>
+<tr>
+<td>frw</td>
+<td>gem</td>
+<td>gemlevel</td>
+<td>gemmed</td>
+<td>gemtype
+</td></tr>
+<tr>
+<td>gfind</td>
+<td>gloves</td>
+<td>gold</td>
+<td>ground</td>
+<td>hammer
+</td></tr>
+<tr>
+<td>height</td>
+<td>helm</td>
+<td>ias</td>
+<td>id</td>
+<td>ilvl
+</td></tr>
+<tr>
+<td>inf</td>
+<td>inventory</td>
+<td>jav</td>
+<td>jewelry</td>
+<td>life
+</td></tr>
+<tr>
+<td>lres</td>
+<td>lvlreq</td>
+<td>mace</td>
+<td>maek</td>
+<td>mag
+</td></tr>
+<tr>
+<td>mana</td>
+<td>mapid</td>
+<td>maptier</td>
+<td>maxdmg</td>
+<td>maxdur
+</td></tr>
+<tr>
+<td>maxres</td>
+<td>maxsockets</td>
+<td>merc</td>
+<td>mfind</td>
+<td>mindmg
+</td></tr>
+<tr>
+<td>misc</td>
+<td>multi</td>
+<td>nec</td>
+<td>necromancer</td>
+<td>nmag
+</td></tr>
+<tr>
+<td>norm</td>
+<td>onehand</td>
+<td>os</td>
+<td>paladin</td>
+<td>polearm
+</td></tr>
+<tr>
+<td>pres</td>
+<td>price</td>
+<td>qlvl</td>
+<td>qty</td>
+<td>quiver
+</td></tr>
+<tr>
+<td>rare</td>
+<td>repair</td>
+<td>replife</td>
+<td>repquant</td>
+<td>reqdex
+</td></tr>
+<tr>
+<td>reqlvl</td>
+<td>reqstr</td>
+<td>rerollalvl</td>
+<td>res</td>
+<td>rune
+</td></tr>
+<tr>
+<td>rw</td>
+<td>scepter</td>
+<td>sellprice</td>
+<td>set</td>
+<td>shield
+</td></tr>
+<tr>
+<td>shop</td>
+<td>sin</td>
+<td>sk</td>
+<td>sock</td>
+<td>sockets
+</td></tr>
+<tr>
+<td>sor</td>
+<td>sorceress</td>
+<td>spear</td>
+<td>staff</td>
+<td>stash
+</td></tr>
+<tr>
+<td>stat</td>
+<td>str</td>
+<td>sup</td>
+<td>sword</td>
+<td>tabsk
+</td></tr>
+<tr>
+<td>throwing</td>
+<td>tmace</td>
+<td>true</td>
+<td>twohand</td>
+<td>uni
+</td></tr>
+<tr>
+<td>updex</td>
+<td>uplvl</td>
+<td>upstr</td>
+<td>wand</td>
+<td>weapon
+</td></tr>
+<tr>
+<td>width</td>
+<td>wp</td>
+<td>xbow</td>
+<td>zon
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading3"><h3 id="Functions">Functions</h3></div>
+<p>All functions require one or more arguments (arity).
+</p>
+<table class="wikitable">
+
+<tbody><tr>
+<th>name</th>
+<th>details</th>
+<th>arity</th>
+<th>example
+</th></tr>
+<tr>
+<td>if</td>
+<td>second arg if true, otherwise the third</td>
+<td>3</td>
+<td>IF(STAT3&gt;100,TRUE,FALSE)
+</td></tr>
+<tr>
+<td>and</td>
+<td>true if all values are true, false otherwise</td>
+<td>1+</td>
+<td>AND(STAT3&gt;100,STAT0&gt;100)
+</td></tr>
+<tr>
+<td>or</td>
+<td>true if any values are true, false otherwise</td>
+<td>1+</td>
+<td>OR(STAT3&gt;100,STAT0&gt;100)
+</td></tr>
+<tr>
+<td>exp</td>
+<td>Euler's number (e) raised to a power</td>
+<td>1</td>
+<td>exp(ln(STAT2))==STAT2
+</td></tr>
+<tr>
+<td>ln</td>
+<td>logarithm of a number, base e</td>
+<td>1</td>
+<td>ln(STAT2)
+</td></tr>
+<tr>
+<td>floor</td>
+<td>rounds a number down to the nearest integer</td>
+<td>1</td>
+<td>floor(1.5)==1
+</td></tr>
+<tr>
+<td>ceil</td>
+<td>rounds a number up to the nearest integer</td>
+<td>1</td>
+<td>ceil(1.49)==2
+</td></tr>
+<tr>
+<td>round</td>
+<td>rounds a number according to standard rules</td>
+<td>1</td>
+<td>round(1.49)==1; round(1.5)==2
+</td></tr>
+<tr>
+<td>min</td>
+<td>minimum value</td>
+<td>1+</td>
+<td>MIN(STAT2,50)&lt;=50
+</td></tr>
+<tr>
+<td>max</td>
+<td>maximum value</td>
+<td>1+</td>
+<td>MAX(STAT2,50)&gt;=50
+</td></tr>
+<tr>
+<td>mod</td>
+<td>modulus of A/B</td>
+<td>2</td>
+<td>MOD(-17,5)==-2
+</td></tr>
+<tr>
+<td>average</td>
+<td>average of n-args</td>
+<td>1+</td>
+<td>AVERAGE(8,8,8,8,8)==8
+</td></tr>
+<tr>
+<td>sqrt</td>
+<td>square root of a non-negative number</td>
+<td>1</td>
+<td>SQRt(4)==2
+</td></tr>
+<tr>
+<td>pow</td>
+<td>a number raised to a power</td>
+<td>2</td>
+<td>pow(2, 2)==4
+</td></tr>
+<tr>
+<td>count</td>
+<td>number of true values</td>
+<td>1+</td>
+<td>COUNT(1,0,1,TRUE)==3
+</td></tr>
+<tr>
+<td>countif</td>
+<td>number of values equal to the last value</td>
+<td>2+</td>
+<td>COUNTIF(1,0,1)==1
+</td></tr>
+<tr>
+<td>xor</td>
+<td>true if an odd number of args are true</td>
+<td>1+</td>
+<td>XOR(1,0)==1
+</td></tr>
+<tr>
+<td>abs</td>
+<td>absolute value of x</td>
+<td>1</td>
+<td>abs(-1)==1
+</td></tr>
+<tr>
+<td>sign</td>
+<td>sign of x</td>
+<td>1</td>
+<td>sign(-1)==-1; sign(0)==0; sign(1)==1
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading3"><h3 id="Minor_Details">Minor Details</h3></div>
+<p>Tidbits that may or may not change.
+</p>
+<ul><li><code>AND</code> and <code>OR</code> are <a rel="nofollow" class="external text" href="https://en.wikipedia.org/wiki/Short-circuit_evaluation">short-circuited</a></li>
+<li>constant expressions such as <code>POW(3,3)</code> or <code>IF(TRUE,STAT1,STAT2)</code> are evaluated once</li>
+<li>an input reference only requires the first letter (F) to be capitalized the rest is case-insensitive</li>
+<li>an output reference is always case-insensitive</li></ul>
+<p><br />
+</p></div>

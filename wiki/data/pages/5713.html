@@ -1,0 +1,944 @@
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="mw-heading mw-heading1"><h1 id="Season_13_Betrayal_-_April_24th_2026">Season 13 Betrayal - April 24th 2026</h1></div>
+<table class="non-table mw-collapsible mw-collapsed">
+<caption>Patch Notes S13
+</caption>
+<tbody><tr>
+<td>
+<p><a rel="nofollow" class="external text" href="https://docs.google.com/document/d/1biWlLF7x5uq5NSr171-w6eRh9yjoQ3btStpGeLipYM0/edit?tab=t.0#heading=h.9kegd15e6zbz">Official Patch Notes Document</a>
+</p><p><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:Pd2_s13_betrayal.gif" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/3/3f/Pd2_s13_betrayal.gif/534px-Pd2_s13_betrayal.gif" decoding="async" loading="lazy" width="534" height="300" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/3/3f/Pd2_s13_betrayal.gif 1.5x" /></a></span>
+</p>
+<div class="mw-heading mw-heading1"><h1 id="Project_Diablo_2_Season_13_Betrayal_Patch_Notes">Project Diablo 2 Season 13 Betrayal Patch Notes</h1></div>
+<div class="mw-heading mw-heading2"><h2 id="General_Changes">General Changes</h2></div>
+<ul><li>Repair costs of a singular item now cap at 250k</li>
+<li>You may now use potions during any mobility skills (E.g. charge, leap, whirlwind, etc)</li>
+<li>All sources of critical strike are now combined instead of there being Critical Strike from Weapon Mastery and Critical Strike (amazon skill) as two independent rolls</li>
+<li>All sources of critical strike now have a 2x damage multiplier (increased from 1.5x)
+<ul><li>Note: This relates to “critical strike” not “deadly strike”</li></ul></li>
+<li>Increased the density of the act 5 portals in hell mode by roughly 67%</li>
+<li>Doubled the drop rate of demonic cubes in hell mode</li>
+<li>Lower density corrupted zones will now receive density increases when corrupted
+<ul><li>Note: These numbers still need to be tuned during beta so zones will currently be a bit all over</li></ul></li>
+<li>Worldstone shard and map drop rates in corrupted zones have been reduced by roughly 50% to offset the density increases
+<ul><li>Note:  We actually plan to increase the drop rate a little bit from what is listed above</li></ul></li>
+<li>Normal weapon bases will now have a smaller splash radius compared to exceptional / elite
+<ul><li>Note: When upgraded they will have the full melee splash radius</li></ul></li>
+<li>Items dropped from objects (chests, barrels, etc.) in corrupted zones or maps with a +Area Level bonus will now drop with the correct item level</li>
+<li>Added a controller button graphics override setting</li>
+<li>Freezes target no longer applies to melee splash</li>
+<li>Ctrl-v paste now works in-game</li>
+<li>Pet and mercenary health updates now happen every 15 frames instead of 30
+<ul><li>Note: There are 25 frames per second in diablo 2</li></ul></li>
+<li>Increased the maximum number of items shown on the ground from 32 to 48</li>
+<li>Item boxes will no longer cover the stash</li>
+<li>Added a  .age  command
+<ul><li>For now, any previously created characters won’t have an age and will just show “Ancient”.</li>
+<li>This may be something we can fix for old characters in the future</li></ul></li>
+<li>Added a few more searchable sections to the stash search:
+<ul><li>Weapon details: E.g. "Staff Class - Fast Attack Speed"</li>
+<li>Item Description: E.g. "Tier: 2" on maps. "Cube with an item to add sockets" on a Puzzlebox</li>
+<li>Socket Fillers: bonus stat details on unstacked runes and gems</li></ul></li>
+<li>Changed the way quick cast handles multiple spell casts in a short time frame (there should be less delay between casts)
+<ul><li>This also extends to controller</li>
+<li>Added a small input buffer to allow multiple casts even when not timed perfectly</li></ul></li>
+<li>Crushing blow damage scaling buff
+<ul><li>Prime evil Crushing Blow base damage increased from 1/(80 + missing_hp^2) to 1/(70 + missing_hp*10)</li>
+<li>Map bosses now use a base Crushing Blow damage of 1/30hp instead of the prime evil formula</li>
+<li>Player count modifier for Crushing Blow damage reduced heavily:
+<ul><li>Originally the player count hp% increase was added, which is 490% in p8</li>
+<li>Originally went from 1/8hp in p1 to 1/498hp(~0.2% hp) in p8</li>
+<li>Now uses player count hp% / 50</li>
+<li>New range goes from 1/7hp in p1 to 1/(7+(490/50)) = 1/16.8(~6% hp) in p8</li>
+<li>Ranged penalty was added back and applies 1.5x after all of the above changes, i.e. base damage is 1/(7*1.5)</li></ul></li></ul></li>
+<li>Character Sheet
+<ul><li>Changed the wording of the Defense hover string to match the Attack Rating one</li>
+<li>Added melee defense and missile defense details to the hover display
+<ul><li>It will only show both if they aren't the same value</li></ul></li>
+<li>Added Ignore Target's Defense, -% Target Defense, Attack Rating against Demons, and Attack Rating against Undead into the chance to hit calc hover display
+<ul><li>Ignore Target's Defense and -% Target Defense will also take the target monster’s “quality” into account, so Ignore Target's Defense won’t be factored in when you’re fighting a unique/boss monster, for example.</li></ul></li>
+<li>Both of these hover detail updates will now also show super unique monster names
+<ul><li>"Rakanishu" instead of "Fallen"</li></ul></li></ul></li>
+<li>Sound Updates
+<ul><li>Sounds are no longer added to the queue if their respective sound group is muted
+<ul><li>Previously, sounds would get added to the queue and would go through the full cycle of sorting/prioritization, volume adjustment, playback, etc. even if the sound would never actually be heard</li>
+<li>Now if you have Monster sounds muted, for example, those sounds just get dropped</li></ul></li>
+<li>Increased sound cache size from 5MB to 50MB
+<ul><li>The previous cache was hilariously small.</li>
+<li>Just loading into the game was taking up 35% of it, and walking around the cow level would max it out almost immediately.</li>
+<li>Sounds would get loaded and unloaded pretty much constantly, even in a single player game (I’m sure it would be even worse for 8 player games)</li></ul></li>
+<li>Increased the number of channels from 16 to 32</li>
+<li>Fixed a bug which would mute the music when the main sound slider was muted</li>
+<li>Fixed a crash on act cutscene transition when using the  -ns  command line arg</li>
+<li>Other minor performance optimizations</li></ul></li>
+<li>Did not add a secret</li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Bug_Fixes">Bug Fixes</h2></div>
+<ul><li>Fixed Item Help Text not showing for set items</li>
+<li>Fixed a copy-paste bug which would paste the wrong text for non-US keyboard layouts when copied from the trade side</li>
+<li>Fixed a bug which would wipe the stash when trading in TCP/IP</li>
+<li>Fixed a bug which would cause the Chat Log to not save between games</li>
+<li>Fixed a bug which prevented Hell from being selected after completing Nightmare
+<ul><li>This fix also extends to the  .completedifficulty  closed beta command</li></ul></li>
+<li>Fixed a bug that caused melee splash to occasionally pull skill ED% from the wrong skill</li>
+<li>Fixed a bug which would pick up stash items when depositing gold when using a controller</li>
+<li>Fixed a bug which prevented gold from being dropped when using a controller</li>
+<li>Fixed a crash that would happen when using controller + quick cast</li>
+<li>Fixed a crash that would happen when killing Diablo for the quest with controller</li>
+<li>Fixed a crash that would happen when unplugging the controller while playing</li>
+<li>Fixed exceptional and elite quivers being unable to be mirrored</li>
+<li>Fixed a bug that would cause item tooltips to display incorrectly when they have min/max damage and have a min/max damage socketable inserted</li>
+<li>Fixed andariel quest bug</li>
+<li>Fixed several mastery stats displaying incorrectly in the advanced sheet</li>
+<li>Fixed an issue with experience display on the advanced sheet</li>
+<li>Fixed several bugs related to quick cast</li>
+<li>Fixed -% player physical damage reduction map mod not properly applying</li>
+<li>Fixed several unique maps getting their affix modifiers applied twice (city of ureh, imperial palace, outer void)</li>
+<li>Fixed 4 socket affix not spawning on rare weapons, body armor, and shields</li>
+<li>Fixed 10-15% physical damage reduction affix not spawning on rare helmets</li>
+<li>Fixed a bug with copying an item's stats using ctrl + c</li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Loot_Filter">Loot Filter</h2></div>
+<ul><li>Thanks to segnis-de-pugis for the following updates:
+<ul><li>Added  WIDTH  keyword</li>
+<li>Added  HEIGHT  keyword</li>
+<li>Added  AREA  keyword</li>
+<li><a rel="nofollow" class="external free" href="https://github.com/Project-Diablo-2/BH/pull/74">https://github.com/Project-Diablo-2/BH/pull/74</a></li></ul></li>
+<li>Thanks to exiledagain for the following updates:
+<ul><li>Added formula for item conditions or display</li>
+<li><a rel="nofollow" class="external free" href="https://github.com/Project-Diablo-2/BH/pull/75">https://github.com/Project-Diablo-2/BH/pull/75</a></li>
+<li>Added  MAXSOCKETS  &amp;  %MAXSOCKETS%  keywords</li>
+<li><a rel="nofollow" class="external free" href="https://github.com/Project-Diablo-2/BH/pull/76">https://github.com/Project-Diablo-2/BH/pull/76</a></li>
+<li>Added  UPDEX  &amp;  %UPDEX%  keywords</li>
+<li>Added  UPSTR  &amp;  %UPSTR%  keywords</li>
+<li>Added  UPLVL  &amp;  %UPLVL%  keywords</li>
+<li><a rel="nofollow" class="external free" href="https://github.com/Project-Diablo-2/BH/pull/77">https://github.com/Project-Diablo-2/BH/pull/77</a></li>
+<li>Added  MAXRES  &amp;  %MAXRES%  keywords</li>
+<li><a rel="nofollow" class="external free" href="https://github.com/Project-Diablo-2/BH/pull/78">https://github.com/Project-Diablo-2/BH/pull/78</a></li>
+<li>Added  ALLATTRIB  &amp;  %ALLATTRIB%  keywords</li>
+<li><a rel="nofollow" class="external free" href="https://github.com/Project-Diablo-2/BH/pull/79">https://github.com/Project-Diablo-2/BH/pull/79</a></li>
+<li>Added  BASEBLOCK  &amp;  %BASEBLOCK%  keywords</li>
+<li><a rel="nofollow" class="external free" href="https://github.com/Project-Diablo-2/BH/pull/80">https://github.com/Project-Diablo-2/BH/pull/80</a></li>
+<li>Added  BASEMAXONEH  &amp;  %BASEMAXONEH%  keywords</li>
+<li>Added  BASEMAXTWOH  &amp;  %BASEMAXTWOH%  keywords</li>
+<li>Added  BASEMAXSMITE  &amp;  %BASEMAXSMITE%  keywords</li>
+<li>Added  BASEMAXTHROW  &amp;  %BASEMAXTHROW%  keywords</li>
+<li>Added  BASEMAXKICK  &amp;  %BASEMAXKICK%  keywords</li>
+<li><a rel="nofollow" class="external free" href="https://github.com/Project-Diablo-2/BH/pull/81">https://github.com/Project-Diablo-2/BH/pull/81</a></li>
+<li>Added  REQDEX  &amp;  %REQDEX%  keywords</li>
+<li>Added  REQSTR  &amp;  %REQSTR%  keywords</li>
+<li>Added  REQDEX  &amp;  %REQDEX%  keywords</li>
+<li>Added  %CS%  keyword (conditional space)</li>
+<li><a rel="nofollow" class="external free" href="https://github.com/Project-Diablo-2/BH/pull/82">https://github.com/Project-Diablo-2/BH/pull/82</a></li></ul></li>
+<li>Updated MINDMG &amp; MAXDMG loot filter conditions to work correctly with all weapon types</li>
+<li>Improved item cache flags</li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Maps">Maps</h2></div>
+<ul><li>Maps now only drop as white or unique</li>
+<li>Increased the size of the Skovos Stronghold map and added a second variation</li>
+<li>Fortifying a map now grants players +30% movement speed velocity</li>
+<li>Unique map drop rate from monsters has been increased by 25%</li>
+<li>Unique map drop rate from map bosses has been increased by 50%</li>
+<li>The City of Ureh map
+<ul><li>The boss will now only drop unique items that can roll sockets</li>
+<li>Increased the additional chance to drop armors and weapons mods from +4-6% to +10-15%</li></ul></li>
+<li>Added a new unique map “Djinn’s Domain” Item Code: t57 (Map made by Vulpen)</li></ul>
+<p><span typeof="mw:File"><a href="/wiki/File:Djinn.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/c/c4/Djinn.png/600px-Djinn.png" decoding="async" loading="lazy" width="600" height="269" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/thumb/c/c4/Djinn.png/900px-Djinn.png 1.5x, //static.wikitide.net/projectdiablo2wiki/thumb/c/c4/Djinn.png/1200px-Djinn.png 2x" /></a></span>
+</p>
+<ul><li><ul><li>Note: Has the new unique map modifiers (Map boss drops a treasure explosion and monsters have +50% chance to drop extra items</li></ul></li>
+<li>Added a new unique map “Na-krul’s Abyss” Item Code: t58 (Map made by GimliHC)</li></ul>
+<p><span typeof="mw:File"><a href="/wiki/File:Abyss.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/7/7b/Abyss.png/600px-Abyss.png" decoding="async" loading="lazy" width="600" height="273" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/thumb/7/7b/Abyss.png/900px-Abyss.png 1.5x, //static.wikitide.net/projectdiablo2wiki/thumb/7/7b/Abyss.png/1200px-Abyss.png 2x" /></a></span>
+</p>
+<ul><li><ul><li>Note: Has the new unique map modifiers (Map boss drops ethereal uniques and monsters have +100% chance to drop ethereal items)</li></ul></li>
+<li>Added 1 new tier 3 “Kyovoshad” Item Code: t3b (Made by Borq)</li>
+<li>Monster map resists/immunities have been updated to the following</li></ul>
+<p><span typeof="mw:File"><a href="/wiki/File:Mapimmunes.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/d/d0/Mapimmunes.png/600px-Mapimmunes.png" decoding="async" loading="lazy" width="600" height="595" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/d/d0/Mapimmunes.png 1.5x" /></a></span>
+</p>
+<ul><li><ul><li>Note: Immune monsters (without modifiers) in maps are now capped at the following values (Magic = 105, physical = 115, fire/cold/lightning/poison = 120)</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Map_Events">Map Events</h2></div>
+<ul><li>Added a new map event “Corrupted Heroes Invasion”
+<ul><li>Corrupted heroes will invade your map and attack the player dropping their items on death</li>
+<li>Corrupted heroes will also drop their ears on death, each corrupted hero can drop a different ear based on their class which can be combined with a map to increase the difficulty and rewards</li>
+<li>Item Codes: ivea, ivez, iveb, ived, iven, ivep, ives</li></ul></li></ul>
+<p><span typeof="mw:File"><a href="/wiki/File:Ears.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/e/ec/Ears.png/500px-Ears.png" decoding="async" loading="lazy" width="500" height="133" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/e/ec/Ears.png 1.5x" /></a></span><br />
+<span typeof="mw:File"><a href="/wiki/File:Amazonear.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/2/23/Amazonear.png/500px-Amazonear.png" decoding="async" loading="lazy" width="500" height="266" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/2/23/Amazonear.png 1.5x" /></a></span>
+</p>
+<ul><li><ul><li>Note: Each ear will apply different dangerous modifiers</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Ubers">Ubers</h2></div>
+<ul><li>Slightly reduced difficulty of tier 2 uber bosses
+<ul><li>Minion HP reduced by ~25%</li>
+<li>Minions no longer have innate damage reduction/poison length reduction</li>
+<li>Boss innate damage reduction reduced</li>
+<li>Poison length reduction reduced</li>
+<li>Magic resistance reduced for bosses and their minions</li>
+<li>Rathma teeth damage reduced</li>
+<li>Rathma ground fire damage reduced</li></ul></li>
+<li>Tier 2 uber drop rates are now the same as tier 1 (now 1/200)</li>
+<li>Lucion desecrate chances increased from 40/50/60% (t0/t1/t2) to 50/60/60%</li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Amazon">Amazon</h2></div>
+<ul><li>Critical Strike
+<ul><li>1.5x base damage modifier increased to 2x</li></ul></li>
+<li>Fend
+<ul><li>Fixed splash bonus not applying</li>
+<li>Now applies +20%/40%/60% increased melee splash radius up from +0%/+20%/+40%</li>
+<li>Note: These bonuses never worked properly so this is the first season of them applying</li></ul></li>
+<li>Valkyrie
+<ul><li>Strength per level bonus reduced from +20 to +10</li>
+<li>Dexterity per level bonus reduced from +15 to +10</li>
+<li>Level 1-8 power strike scaling reduced from 0-3 to 0-2</li>
+<li>Level 8-16 power strike scaling reduced from 0-5 to 0-4</li>
+<li>Level 16-22 power strike scaling reduced from 0-13 to 0-11</li>
+<li>Level 22-28 power strike scaling increased from 0-22 to 0-25</li>
+<li>Note: Valkyrie also benefits from critical strike modifier being increased from 1.5x to 2x</li></ul></li>
+<li>Jab
+<ul><li>Enhanced damage per level reduced from +20% to +18%</li>
+<li>Synergies reduced from +18% to +15%</li></ul></li>
+<li>Decoy
+<ul><li>Base damage reduced from 35-50 to 14-18</li>
+<li>Level 1-8 damage scaling reduced from 4-6 to 2-4</li>
+<li>Level 8-16 damage scaling reduced from 6-8 to 5-7</li>
+<li>Level 16-22 damage scaling reduced from 9-11 to 8-10</li>
+<li>Level 28+ damage scaling increased from 15-17 to 17-19</li>
+<li>Note: Decoy also benefits from critical strike modifier being increased from 1.5x to 2x</li></ul></li>
+<li>Fire Arrow
+<ul><li>Fire arrow has been reworked: Arrows now leave ground fire that deals damage over time on impact</li></ul></li>
+<li>Spear and Javelin Mastery
+<ul><li>No longer has critical strike</li>
+<li>Enhanced damage per level reduced from 15% to 12%</li>
+<li>Fixed enhanced damage not properly applying to throw skills</li>
+<li>Now has +% critical strike multiplier</li>
+<li>Note: This is additive with the 200% (2x) critical strike multiplier</li></ul></li>
+<li>Charged Strike
+<ul><li>Base minimum damage increased from 1 to 7</li>
+<li>Levels 1-8 minimum damage scaling increased from 0 to 2</li>
+<li>Levels 8-16 minimum damage scaling increased from 0 to 2</li>
+<li>Levels 16-22 minimum damage scaling increased from 0 to 3</li>
+<li>Levels 22-28 minimum damage scaling increased from 0 to 4</li>
+<li>Levels 28+ minimum damage scaling increased from 0 to 4</li></ul></li>
+<li>Lightning Strike
+<ul><li>Base minimum damage increased from 1 to 6</li>
+<li>Levels 1-8 minimum damage scaling increased from 0 to 2</li>
+<li>Levels 8-16 minimum damage scaling increased from 0 to 4</li>
+<li>Levels 16-22 minimum damage scaling increased from 0 to 7</li>
+<li>Levels 22-28 minimum damage scaling increased from 0 to 11</li>
+<li>Levels 28+ minimum damage scaling increased from 0 to 15</li></ul></li>
+<li>Lightning Bolt
+<ul><li>Base minimum damage increased from 1 to 5</li>
+<li>Levels 1-8 minimum damage scaling increased from 0 to 1</li>
+<li>Levels 8-16 minimum damage scaling increased from 0 to 3</li>
+<li>Levels 16-22 minimum damage scaling increased from 0 to 5</li>
+<li>Levels 22-28 minimum damage scaling increased from 0 to 8</li>
+<li>Levels 28+ minimum damage scaling increased from 0 to 11</li></ul></li>
+<li>Lightning Fury
+<ul><li>Base minimum damage increased from 1 to 14</li>
+<li>Levels 1-8 minimum damage scaling increased from 0 to 2</li>
+<li>Levels 8-16 minimum damage scaling increased from 0 to 2</li>
+<li>Levels 16-22 minimum damage scaling increased from 0 to 2</li>
+<li>Levels 22-28 minimum damage scaling increased from 0 to 2</li>
+<li>Levels 28+ minimum damage scaling increased from 0 to 3</li></ul></li>
+<li>Cold Arrow
+<ul><li>Synergies reduced from 17% to 15%</li></ul></li>
+<li>Multiple Shot
+<ul><li>Base enhanced damage bonus reduced from +40% to +30%</li>
+<li>Enhanced damage per level reduced from 3% to 2%</li></ul></li>
+<li>Guided Arrow
+<ul><li>Base enhanced damage increased from 0% to +25%</li></ul></li>
+<li>Strafe
+<ul><li>Base enhanced damage reduced from +100% to +80%</li>
+<li>Enhanced damage per level reduced from +15% to +12%</li></ul></li>
+<li>Evade
+<ul><li>+% Movement speed bonus is no longer capped at 65%</li>
+<li>Now gains +1% movement speed bonus per level at level 28+</li>
+<li>Note: previously this skill did not gain additional movement speed bonuses after level 26</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Assassin">Assassin</h2></div>
+<ul><li>Shock Web
+<ul><li>Base minimum damage increased from 1 to 2</li>
+<li>Levels 1-8 minimum damage scaling increased from 0 to 1</li>
+<li>Levels 8-16 minimum damage scaling increased from 0 to 2</li>
+<li>Levels 16-22 minimum damage scaling increased from 0 to 3</li>
+<li>Levels 22-28 minimum damage scaling increased from 0 to 4</li>
+<li>Levels 28+ minimum damage scaling increased from 0 to 6</li></ul></li>
+<li>Lightning Sentry
+<ul><li>Base minimum damage increased from 1 to 7</li>
+<li>Levels 1-8 minimum damage scaling increased from 0 to 3</li>
+<li>Levels 8-16 minimum damage scaling increased from 0 to 4</li>
+<li>Levels 16-22 minimum damage scaling increased from 0 to 5</li>
+<li>Levels 22-28 minimum damage scaling increased from 0 to 7</li>
+<li>Levels 28+ minimum damage scaling increased from 0 to 8</li></ul></li>
+<li>Chain Lightning Sentry
+<ul><li>Maximum chains increased from 7 to 8</li>
+<li>Base minimum damage increased from 1 to 9</li>
+<li>Levels 1-8 minimum damage scaling increased from 0 to 1</li>
+<li>Levels 8-16 minimum damage scaling increased from 0 to 2</li>
+<li>Levels 16-22 minimum damage scaling increased from 0 to 3</li>
+<li>Levels 22-28 minimum damage scaling increased from 0 to 4</li>
+<li>Levels 28+ minimum damage scaling increased from 0 to 5</li></ul></li>
+<li>Fire blast
+<ul><li>Now gains an additional bomb every 3 soft points instead of base levels</li>
+<li>Now caps at a maximum of 9 bombs up from 7</li></ul></li>
+<li>Blade Sentinel
+<ul><li>Nerfed the AOE damage to be ¾ the collision damage</li>
+<li>Removed the extra AOE explosion on sentinel death</li>
+<li>Increased the minimum travel time before explosions (if it reached the end of its path too quickly, it will not proc an AOE explosion)</li></ul></li>
+<li>Claw and Dagger Mastery
+<ul><li>Critical strike multiplier increased from 1.5x to 2x</li>
+<li>Critical strike cap increased from +25% to +30%</li></ul></li>
+<li>Shadow Master/Warrior
+<ul><li>Traps set by master/warrior no longer “belong” to the player and instead are owned by the shadow</li>
+<li>This mostly applies to blade sentinel and blade fury, which will now use the shadow’s weapon/stats for damage</li></ul></li>
+<li>Tiger Strike
+<ul><li>Melee splash bonus now only applies to Tiger Strike itself</li></ul></li>
+<li>Dragon Talon
+<ul><li>Level 1 mana cost reduced from 6 to 2</li>
+<li>Mana cost now increased by .25 per level</li>
+<li>Base enhanced damage bonus increased from 50% to 60%</li>
+<li>Enhanced damage per level increased to 25% to 30%</li>
+<li>Synergies increased from 22% to 25%</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Barbarian">Barbarian</h2></div>
+<ul><li>Added a new ability “Split Throw”
+<ul><li>Throws your main hand throwing weapon splitting it into multiple projectiles which return to you after reaching their max distance (returning projectiles will always pierce)</li>
+<li>Returning projectiles can shotgun (Initial outgoing projectiles cannot)</li>
+<li>Gains an additional projectile every 5 levels (capping at 7 projectiles)</li></ul></li>
+<li>Concentrate
+<ul><li>Now has +20% increased melee splash radius</li></ul></li>
+<li>Berserk
+<ul><li>Now has +20% increased melee splash radius</li></ul></li>
+<li>Frenzy
+<ul><li>Melee splash bonus now only applies to frenzy itself</li>
+<li>Changed frenzy to have a static 5 stacks max at all levels</li>
+<li>+1 second duration increased per base level increased to +2</li></ul></li>
+<li>General Mastery
+<ul><li>Has been reworked to One Handed Mastery</li>
+<li>Now applies to any melee weapon when held in one hand</li>
+<li>Base attack rating bonus increased from +28% to +35%</li>
+<li>Attack rating bonus per level increased from +10% to 12%</li>
+<li>Now grants +1% increased melee splash radius per soft point (Up to 20%)</li>
+<li>Critical strike multiplier increased from 1.5x damage to 2x</li></ul></li>
+<li>Spear and Polearm Mastery
+<ul><li>Has been reworked to Two Handed Mastery</li>
+<li>Now applies to any melee weapon when held in two hands</li>
+<li>Base enhanced damage bonus increased from +30% to +45%</li>
+<li>Enhanced damage per level bonus increased from +10% to +15%</li>
+<li>No longer grants chance of critical strike</li>
+<li>Now grants +20% increased melee splash radius at level 1 and +1% per soft point (Up to +40%)</li>
+<li>Now grants +% chance of crushing blow</li>
+<li>Now grants +% crushing blow efficiency</li></ul></li>
+<li>Throwing Mastery
+<ul><li>Fixed pierce not properly applying</li>
+<li>Critical strike bonus increased from 1.5x damage to 2x</li>
+<li>Fixed enhanced damage not properly applying to throw skills</li></ul></li>
+<li>Warcry
+<ul><li>Radius increased by ~15%</li>
+<li>Base damage increased from 2-4 to 3-5</li></ul></li>
+<li>Taunt
+<ul><li>Increased the radius of taunt by 25% to better match the visual</li>
+<li>Increased the speed of the taunt visuals</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Druid">Druid</h2></div>
+<ul><li>Fury
+<ul><li>Fix splash bonus not applying</li>
+<li>Note: It appears the splash bonus for fury never applied properly so this is the first time this mechanic will be in play</li>
+<li>Now applies +20%/40%/60% increased melee splash radius up from +0%/+20%/+40%</li></ul></li>
+<li>Arctic Blast
+<ul><li>Base cold pierce increased from -2% to -5%</li>
+<li>Cold pierce no longer caps at -50% (New value is uncapped)</li></ul></li>
+<li>Twister
+<ul><li>Reduces gust cooldown by 0.25 seconds on cast increased to 0.5 seconds</li>
+<li>Level 22-28 scaling increased from 17.5-18.5 to 20-21</li></ul></li>
+<li>Tornado
+<ul><li>Reduces gust cooldown by 0.25 seconds on cast increased to 0.5 seconds</li>
+<li>Level 22-28 scaling increased from 28-30 to 30-32</li>
+<li>Level 28+ scaling increased from 34-36 to 38-40</li></ul></li>
+<li>Cyclone Armor
+<ul><li>Added twister as a synergy, grants +10 additional elemental damage absorbed per level</li>
+<li>Added tornado as a synergy, grants +10 additional elemental damage absorbed per level</li></ul></li>
+<li>Spirit of Barbs
+<ul><li>Now grants +8% deadly strike +1% per two soft levels</li>
+<li>Now grants +1% maximum deadly strike chance per 4 base points</li></ul></li>
+<li>Heart of the Wolverine
+<ul><li>Enhanced damage bonus per level reduced from +10% to +8%</li>
+<li>Attack rating bonus per level reduced from +10% to +8%</li></ul></li>
+<li>Raven
+<ul><li>Renamed to summon ravens</li>
+<li>Maximum raven limit is now increased every second level instead of every level</li>
+<li>Ravens now deal 100% cold damage instead of 50% cold and 50% physical</li>
+<li>Base damage reduced from 4-6 to 2-3</li>
+<li>Synergies reduced from 10% to 8%</li></ul></li>
+<li>Volcano
+<ul><li>Base minimum damage reduced from 16 to 14</li>
+<li>Levels 1-8 minimum damage scaling reduced from 6 to 4</li>
+<li>Levels 8-16 minimum damage scaling reduced from 10 to 8</li>
+<li>Levels 16-22 minimum damage scaling reduced from 14 to 10</li>
+<li>Levels 22-28 minimum damage scaling reduced from 16 to 12</li>
+<li>Levels 28+ minimum damage scaling reduced from 18 to 12</li>
+<li>Synergies reduced from 9% to 8%</li></ul></li>
+<li>Armageddon
+<ul><li>Added Fireclaw as a 5% synergy</li>
+<li>Molten Boulder and Volcano synergies reduced from 12% to 10%</li>
+<li>Fixed synergies not properly applying to the fire damage per second</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Necromancer">Necromancer</h2></div>
+<ul><li>Desecrate
+<ul><li>Damage synergies increased from 20% to 22%</li>
+<li>Base mana cost reduced from 12 to 9</li></ul></li>
+<li>Skeleton Mages
+<ul><li>Increased the level 22+ damage scaling</li>
+<li>Fixed skeleton mastery’s synergy value not displaying</li></ul></li>
+<li>Fire Golem
+<ul><li>Aura damage scaling has been reduced and that scaling has been added to the on hit attack damage</li>
+<li>Aura tick delay increased from 25 to 30 frames</li>
+<li>Melee splash radius increased</li></ul></li>
+<li>Poison Strike
+<ul><li>Slightly reduced aoe radius</li></ul></li>
+<li>Blood Golem
+<ul><li>Melee splash radius increased</li>
+<li>Ai delay reduced from 10 to 9</li></ul></li>
+<li>Iron Golem
+<ul><li>Added melee splash</li></ul></li>
+<li>Clay Golem
+<ul><li>Melee splash radius increased</li>
+<li>Ai delay reduced from 11 to 8</li></ul></li>
+<li>Corpse Explosion
+<ul><li>Maximum radius reduced by ~12%</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Paladin">Paladin</h2></div>
+<ul><li>Zeal
+<ul><li>Fixed splash bonus not applying</li>
+<li>Note: It appears the splash bonus for Zeal never applied properly so this is the first time this mechanic will be in play</li>
+<li>Now applies +20%/40%/60% increased melee splash radius up from +0%/+20%/+40%</li></ul></li>
+<li>Smite
+<ul><li>Base crushing blow efficiency increased from +10% to +15%</li>
+<li>Crushing blow efficiency per level from levels 1-8 has been increased from +1% to +2%</li>
+<li>Crushing blow efficiency no longer caps at +50%</li></ul></li>
+<li>Sacrifice
+<ul><li>Maximum radius reduced by 16%</li>
+<li>Corpse explosion now deals full physical damage instead of half physical and half magical</li>
+<li>Overkill damage reduced from +150% to +125%</li>
+<li>Enhanced damage per level increased from +25% to +30%</li>
+<li>Reduced base self damage to self from 8% to 6%</li>
+<li>Reduced minimum damage to self from 3% to 2% (This is a buff)</li>
+<li>Damage to self now reduces by 1% every 2 levels instead of every level</li></ul></li>
+<li>Fist of the Heavens
+<ul><li>Increased projectile speed of the holy bolts by 25%</li>
+<li>Added projectile speed acceleration to the holy bolts causing them to increase in speed as they travel</li>
+<li>Level 8-16 holy bolt damage scaling increased from 4-5 to 5-6</li>
+<li>Level 16-22 holy bolt damage scaling reduced from 9-10 to 8-9</li>
+<li>Level 28+ holy bolt damage scaling increased from 20-21 to 23-24</li></ul></li>
+<li>Resist Lightning Aura
+<ul><li>Level 22+ elemental damage bonuses increased from 1% per level to 2%</li></ul></li>
+<li>Resist Fire Aura
+<ul><li>Level 22+ elemental damage bonuses increased from 1% per level to 2%</li></ul></li>
+<li>Resist Cold Aura
+<ul><li>Level 22+ elemental damage bonuses increased from 1% per level to 2%</li></ul></li>
+<li>Vengeance
+<ul><li>Level 1 chain chance increased from 16% to 24%</li></ul></li>
+<li>Cleansing
+<ul><li>Base curse resistance increased from +5% to +10%</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Sorceress">Sorceress</h2></div>
+<ul><li>Lightning
+<ul><li>Base minimum damage increased from 1 to 8</li>
+<li>Levels 1-8 minimum damage scaling increased from 0 to 3</li>
+<li>Levels 8-16 minimum damage scaling increased from 0 to 3</li>
+<li>Levels 16-22 minimum damage scaling increased from 0 to 4</li>
+<li>Levels 22-28 minimum damage scaling increased from 0 to 5</li>
+<li>Levels 28+ minimum damage scaling increased from 0 to 6</li></ul></li>
+<li>Chain Lightning
+<ul><li>Base minimum damage increased from 1 to 8</li>
+<li>Levels 1-8 minimum damage scaling increased from 0 to 2</li>
+<li>Levels 8-16 minimum damage scaling increased from 0 to 3</li>
+<li>Levels 16-22 minimum damage scaling increased from 0 to 4</li>
+<li>Levels 22-28 minimum damage scaling increased from 0 to 4</li>
+<li>Levels 28+ minimum damage scaling increased from 0 to 5</li></ul></li>
+<li>Inferno
+<ul><li>Base fire pierce increased from -2% to -5%</li>
+<li>Fire pierce no longer caps at -30% (New value is uncapped)</li></ul></li>
+<li>Static Field
+<ul><li>Base lightning pierce increased from -2% to -5%</li>
+<li>Lightning pierce no longer caps at -40% (New value is uncapped)</li></ul></li>
+<li>Fire Wall
+<ul><li>Completely reworked the damage scaling, will now deal significantly lower damage at early game and similar damage at end game</li>
+<li>Base mana cost reduced from 22 to 15</li>
+<li>Mana cost increase per level reduced from 1 to .75</li></ul></li>
+<li>Hydra
+<ul><li>Now pierces</li>
+<li>Aoe has been reduced</li>
+<li>Hydra projectiles now have a 3 frame next hit delay</li></ul></li>
+<li>Nova
+<ul><li>Levels 1-8 minimum damage scaling reduced from 6 to 4</li>
+<li>Levels 8-16 minimum damage scaling reduced from 7 to 5</li>
+<li>Levels 16-22 minimum damage scaling reduced from 8 to 6</li>
+<li>Levels 22-28 minimum damage scaling reduced from 8 to 6</li>
+<li>Levels 28+ minimum damage scaling reduced from 6 to 4</li>
+<li>Radius slightly reduced</li></ul></li>
+<li>Frost nova
+<ul><li>Radius slightly reduced</li>
+<li>Synergies increased from +6% to +7%</li></ul></li>
+<li>Charged bolt
+<ul><li>Levels 16-22 minimum damage scaling reduced from 2 to 1</li>
+<li>Levels 22-28 minimum damage scaling reduced from 3 to 2</li>
+<li>Levels 28+ minimum damage scaling reduced from 4 to 2</li></ul></li>
+<li>Fire Enchant
+<ul><li>Level 1-8 damage scaling increased from 6-8 to 8-10</li>
+<li>Level 8-16 damage scaling increased from 12-14 to 14-16</li>
+<li>Level 16-22 damage scaling increased from 20-22 to 24-26</li>
+<li>Level 22-28 damage scaling increased from 34-36 to 36-38</li>
+<li>Level 28+ damage scaling reduced from 50-52 to 46-48</li></ul></li>
+<li>Cold Enchant
+<ul><li>Level 8-16 damage scaling increased from 5-6 to 6-7</li>
+<li>Level 16-22 damage scaling increased from 11-12 to 12-13</li>
+<li>Level 22-28 damage scaling increased from 20-21 to 20-22</li>
+<li>Level 28+ damage scaling reduced from 29-30 to 27-30</li></ul></li>
+<li>Telekinesis
+<ul><li>Base minimum damage increased from 1 to 2</li>
+<li>Levels 1-8 minimum damage scaling increased from 0 to 1</li>
+<li>Levels 8-16 minimum damage scaling increased from 0 to 1</li>
+<li>Levels 16-22 minimum damage scaling increased from 0 to 2</li>
+<li>Levels 22-28 minimum damage scaling increased from 0 to 2</li>
+<li>Levels 28+ minimum damage scaling increased from 0 to 2</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Items">Items</h2></div>
+<ul><li>Improved the superior Item Bonuses
+<ul><li>+1-3 attack rating replaced with +15-25% bonus attack rating</li>
+<li>+5-15% enhanced damage increased to +10-20%</li>
+<li>+5-15% enhanced defense increased to +10-20%</li>
+<li>+1-3 attack rating and 5-15% enhanced damage replaced with to +10-20% bonus attack rating and 5-15% enhanced damage</li>
+<li>+5-15% durability increased to +15-25%</li>
+<li>+1-3 attack rating and +10-15% durability replaced with +10-20% attack rating and +10-20% durability</li>
+<li>+5-15% enhanced damage and +10-15% durability increased to +5-15% enhanced damage and +10-20% durability</li>
+<li>+5-15% enhanced defense and +10-15% enhanced durability increased to +10-20% enhanced durability</li></ul></li>
+<li>Added quivers to the gamble pool</li>
+<li>Throwing Knives now have +15% critical strike multiplier implicit</li>
+<li>Added Rainbow Facet jewels to the Allocated Loot pool</li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Affixes">Affixes</h2></div>
+<ul><li>Increased the values of life and mana after each kill affixes</li>
+<li>Helmets
+<ul><li>Can now roll up to 15% physical damage reduction as a suffix</li>
+<li>Can now roll up to 20% crushing blow or deadly strike as a prefix (Cannot roll both on the same item)</li>
+<li>Can now roll up to 3 sockets as an affix on rares</li>
+<li>Fixed +10-30% enhanced damage affix not spawning on high level circlets and now spawns on all helmet types</li></ul></li>
+<li>Armors &amp; Shields
+<ul><li>can now roll up to 25% physical damage reduction</li>
+<li>Can now roll up to 4 sockets as an affix on rares</li></ul></li>
+<li>Gloves
+<ul><li>Can now roll +2 to combat skills (barbarian only) on rare gloves and +3 on magic</li>
+<li>Can now roll +2 to shapeshifting (druid only) on rare gloves and +3 on magic</li>
+<li>Can now roll up to +16% increased chance to block as a suffix (cannot roll on an item with faster block rate suffix)</li>
+<li>Can now roll up to +20% faster block rate (cannot roll on an item with increased chance to block suffix)</li>
+<li>Can now roll life after each kill</li>
+<li>Can now roll mana after each kill</li>
+<li>Disabled the +1 to 2-6 fire damage affix</li>
+<li>Can now roll up to +10% deadly strike</li>
+<li>Can now roll up to +10% crushing blow</li></ul></li>
+<li>Weapons
+<ul><li>Can now roll up to 4 sockets as an affix on rares</li>
+<li>Removed barbarian skills from clubs</li>
+<li>Staves can now roll +2-4 to sorceress skills (up from +1-2)</li></ul></li>
+<li>Amulets
+<ul><li>Can now roll life after each kill</li>
+<li>Can now roll mana after each kill</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Uniques">Uniques</h2></div>
+<ul><li>Death’s Fathom
+<ul><li>+2-5 life after each kill increased to +3-6</li>
+<li>+25-40% fire resist reduced to +25-35%</li>
+<li>+25-40% lightning resist reduced to +25-35%</li></ul></li>
+<li>Arm of King Leoric
+<ul><li>14-32 replenish life increased to +24-32</li>
+<li>+3-4 to Skeleton Warriors reduced to 2-3</li>
+<li>+3-4 to Skeleton Mastery reduced to +2-3</li>
+<li>Removed +2-3 to Skeleton Mages</li>
+<li>Can now roll +2 additional skeleton archers instead of +2 additional skeleton warriors</li></ul></li>
+<li>Wisp projector
+<ul><li>Level 7 spirit of the barbs reduced to level 2</li>
+<li>Note: This is because spirit of the barbs now grants deadly strike and we wanted the spirit to be comparable in strength to the heart of the wolverine also found on the ring</li></ul></li>
+<li>Eschuta’s Temper
+<ul><li>Removed -5% to enemy fire resistance</li>
+<li>Removed -5% to enemy lightning resistance</li>
+<li>+1-3 to all skills increased to +2-3</li>
+<li>Added +18% chance to cast level 25 blaze on casting</li>
+<li>Added +4-5 to teleport</li></ul></li>
+<li>Death Cleaver
+<ul><li>60% deadly strike reduced to 40%</li>
+<li>Removed +15% maximum deadly strike</li>
+<li>Added +50% deadly strike multiplier</li></ul></li>
+<li>Wraithskin
+<ul><li>Added +25% deadly strike multiplier</li></ul></li>
+<li>Fleshripper
+<ul><li>Removed +4-5 to Claw and Dagger Mastery (o-skill)</li>
+<li>Added +25% deadly strike multiplier</li></ul></li>
+<li>Kira’s guardian
+<ul><li>Removed Cannot be frozen</li>
+<li>Added half freeze duration</li></ul></li>
+<li>Arachnid’s Mesh
+<ul><li>+10-20% faster cast rate reduced to +10%</li></ul></li>
+<li>Bonehew
+<ul><li>+10-20% curse resistance increased to +30-40</li></ul></li>
+<li>Mara’s Kaleidoscope
+<ul><li>+5-8 to all attributes reduced to +4-6</li></ul></li>
+<li>Shatterblade
+<ul><li>16% chance to cast level 28 Ice Barrage on kill increased to level 32</li></ul></li>
+<li>Endless Hail
+<ul><li>6% chance to cast level 24 Blizzard replaced with 8% chance to cast level 24 Ice Barrage
+<ul><li><i>actual value is 6% patch notes are wrong</i></li></ul></li></ul></li>
+<li>Mang’s Song
+<ul><li>+85% faster cast rate reduced to +75%</li>
+<li>+6 to all skills reduced to +5</li>
+<li>-10 to -20% to enemy fire / lightning / cold resistances now rolls -12 to -20%</li></ul></li>
+<li>Gladiator’s Bane
+<ul><li>+15-25 magical damage reduction reduced to +10-20</li>
+<li>+2 to Critical Strike (o-skill) replaced with +12-16% chance of critical strike</li>
+<li>Note: All sources of critical strike are now additive</li></ul></li>
+<li>Steelrend
+<ul><li>+5-10% crushing blow efficiency increased to +10-20%</li></ul></li>
+<li>Grandfather
+<ul><li>+180-240% enhanced damage increased to +200-275%</li></ul></li>
+<li>Crainte Vomir
+<ul><li>Slows target by 15% increased to 25%</li></ul></li>
+<li>Demon Machine
+<ul><li>10% chance to cast level 16 Multiple Shot reduced to level 12 Multiple Shot</li></ul></li>
+<li>Spirit Shroud
+<ul><li>Removed +30% faster cast rate</li>
+<li>+10% curse resistance increased to +20-30%</li></ul></li>
+<li>Plague Bearer
+<ul><li>+3-5 to Rabies increased to +4-5</li></ul></li>
+<li>Hellmouth
+<ul><li>Molten Boulder on striking changed to on attack</li></ul></li>
+<li>Ondal’s Wisdom
+<ul><li>+3-4 to all skills increased to +4-5</li></ul></li>
+<li>Ribcracker
+<ul><li>+10-25% crushing blow efficiency increased to +30-40%</li></ul></li>
+<li>The Patriarch
+<ul><li>260-290% enhanced damage reduced to 230-260%</li></ul></li>
+<li>Akarat’s Devotion
+<ul><li>25% chance to cast level 35 Blessed Hammer on striking / cast increased to 28%</li></ul></li>
+<li>Pus Spitter
+<ul><li>+20-25 life after each hit reduced to +5-8</li>
+<li>+150 poison damage over 4 seconds increased to +300 poison damage over 4 seconds</li></ul></li>
+<li>Crackleshot
+<ul><li>+100-450 lightning damage increased to +100-600</li></ul></li>
+<li>Warshrike
+<ul><li>Added +25% deadly strike multiplier</li>
+<li>+75% pierce reduced to +50%</li>
+<li>40% chance to cast level 35 Nova on striking changed to 18% chance to cast level 40 Nova on striking</li></ul></li>
+<li>Flamebellow
+<ul><li>Level 24-28 holy fire increased to level 26-28</li></ul></li>
+<li>Odium
+<ul><li>+255-500 cold damage increased to +600-900</li></ul></li>
+<li>Crown of Thieves
+<ul><li>+5-10% life stolen per hit increased to +9-12%</li></ul></li>
+<li>Undead Crown
+<ul><li>+2-3 to skeleton mastery (necromancer only) replaced with +6-8 to skeleton mastery (o-skill)</li>
+<li>+2-3 to raise skeleton warrior (necromancer only) replaced with +6-8 to raise skeleton warrior (o-skill)</li></ul></li>
+<li>Demonhorn’s Edge
+<ul><li>Removed +20% increased attack speed</li>
+<li>Added +2 to deep wounds (barbarian only)</li></ul></li>
+<li>Spirit Keeper
+<ul><li>Removed +4-5% cold absorb</li></ul></li>
+<li>Earthshaker
+<ul><li>+2-4 to elemental skills increased to +3-4</li>
+<li>14% chance to cast level 24 Fissure on striking changed to on kill</li></ul></li>
+<li>Stone Crusher
+<ul><li>Added +10-30 damage</li></ul></li>
+<li>Gavel of Pain
+<ul><li>+10-20% curse resistance increased to +20%</li></ul></li>
+<li>Overlord’s Helm
+<ul><li>Item base changed from Giant Conch to Bone Visage</li></ul></li>
+<li>Arreat’s Face
+<ul><li>+20 all resistance increased to +20-30</li></ul></li>
+<li>Crow Caw
+<ul><li>+70 open wounds damage per second increased to +140</li></ul></li>
+<li>Guardian Angel
+<ul><li>+1 to all skills increased to +1-2</li>
+<li>+14 to attack rating per level against demons reduced to +7 attack rating per level against demons</li></ul></li>
+<li>Que-Hegan’s Wisdom
+<ul><li>+6-9 to mana after each kill increased to +8-12</li></ul></li>
+<li>Ormus’ Robes
+<ul><li>+3 to a random sorceress skill reduced to +2</li></ul></li>
+<li>Lance Guard
+<ul><li>Removed +50% faster block rate</li>
+<li>Added +25% deadly strike multiplier</li></ul></li>
+<li>Lidless Wall
+<ul><li>+1-2 to all skills reduced to +1</li>
+<li>+20% faster cast rate increased to +40%</li></ul></li>
+<li>Boneflame
+<ul><li>+2-3 to necromancer skills reduced to +2</li></ul></li>
+<li>Soul Drainer
+<ul><li>-4 to -5% to enemy physical resistance reduced to -3 to -4%</li></ul></li>
+<li>Sandstorm Trek
+<ul><li>+20% faster run walk increased to +30%</li></ul></li>
+<li>Added a new unique “Embersworn”</li></ul>
+<p><span typeof="mw:File"><a href="/wiki/File:Embersworn.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/2/20/Embersworn.png/500px-Embersworn.png" decoding="async" loading="lazy" width="500" height="422" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/2/20/Embersworn.png 1.5x" /></a></span>
+</p>
+<ul><li>Added a new unique “Sage’s Defiance”</li></ul>
+<p><span typeof="mw:File"><a href="/wiki/File:Sagedef.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/4/46/Sagedef.png/500px-Sagedef.png" decoding="async" loading="lazy" width="500" height="323" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/4/46/Sagedef.png 1.5x" /></a></span>
+</p>
+<ul><li>Added a new unique “Giant Maimer”</li></ul>
+<p><span typeof="mw:File"><a href="/wiki/File:Giantmaimer.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/2/23/Giantmaimer.png/500px-Giantmaimer.png" decoding="async" loading="lazy" width="500" height="497" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/2/23/Giantmaimer.png 1.5x" /></a></span>
+</p>
+<ul><li>Added a new unique “Ephemeral”</li></ul>
+<p><span typeof="mw:File"><a href="/wiki/File:Ephemeral.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/2/29/Ephemeral.png/500px-Ephemeral.png" decoding="async" loading="lazy" width="500" height="437" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/2/29/Ephemeral.png 1.5x" /></a></span>
+</p>
+<ul><li>Added a new unique “Skyfall”</li></ul>
+<p><span typeof="mw:File"><a href="/wiki/File:Skyfall.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/c/c8/Skyfall.png/500px-Skyfall.png" decoding="async" loading="lazy" width="500" height="380" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/c/c8/Skyfall.png 1.5x" /></a></span>
+</p>
+<ul><li>Added a new unique” Nethercrux”</li></ul>
+<p><span typeof="mw:File"><a href="/wiki/File:Nethercrux.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/4/4a/Nethercrux.png/500px-Nethercrux.png" decoding="async" loading="lazy" width="500" height="369" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/4/4a/Nethercrux.png 1.5x" /></a></span>
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Runewords">Runewords</h2></div>
+<ul><li>Zenith
+<ul><li>+2 to all skills increased to +3</li>
+<li>Increased elemental damage rolls from 360-420 to 430-500 (fire/cold/lightning)</li></ul></li>
+<li>Call to Arms
+<ul><li>Can no longer be made in bows or crossbows</li></ul></li>
+<li>Asylum
+<ul><li>+2 to all skills increased to +4</li>
+<li>25% chance to cast level 40 Fist of the Heavens on striking / cast increased to 28% chance to cast level 40 Fist of the Heavens on striking / cast</li></ul></li>
+<li>Insight
+<ul><li>+2-6 to critical strike (oskill) replaced with +15-25% critical strike chance</li></ul></li>
+<li>Last Wish
+<ul><li>Added you may apply an additional curse</li>
+<li>Removed chance to cast charged bolt on striking</li>
+<li>Level 19 Might aura increased to level 20</li>
+<li>Enhanced damage increased from +350-400% to +375-425%</li></ul></li>
+<li>Peace
+<ul><li>+2 to critical strike (oskill) changed to +2-3 to critical strike (amazon only)</li></ul></li>
+<li>Fury
+<ul><li>+33-66% deadly strike changed to +50%</li></ul></li>
+<li>Chains of Honor
+<ul><li>+8% life stolen per hit increased to +8-12%</li></ul></li>
+<li>Beast Runeword
+<ul><li>+260-290% enhanced damage increased to +275-325%</li></ul></li>
+<li>Principle
+<ul><li>75% chance to cast level 25 Holy Bolt on striking changed to 40% chance to cast level 30 Holy Bolt on striking</li></ul></li>
+<li>Phoenix
+<ul><li>20% chance to cast level 40 firestorm on striking changed to 33% chance to cast level 40 firestorm on attack (Weapons and Shields)</li>
+<li>20% chance to cast level 40 firestorm on casting increased to 33% (Staves)</li></ul></li>
+<li>Infinity
+<ul><li>Removed +35% faster cast rate (staves only)</li>
+<li>-45% to -55% to enemy lightning resists reduced to -40% to 50%</li></ul></li>
+<li>Rapture
+<ul><li>30% chance to cast level 35 Lower Resist on striking increased to 47% chance to cast level 35 Lower Resist on striking</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Crafting">Crafting</h2></div>
+<ul><li>Several Crafts have been updated - See the link below</li>
+<li><a rel="nofollow" class="external free" href="https://docs.google.com/spreadsheets/d/1nMv7r8hwxkK31hPobtfyKjxnzYI0jB-cdC8HLUnUpCs/edit?gid=0#gid=0">https://docs.google.com/spreadsheets/d/1nMv7r8hwxkK31hPobtfyKjxnzYI0jB-cdC8HLUnUpCs/edit?gid=0#gid=0</a></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="PVP">PVP</h2></div>
+<ul><li>Pvp
+<ul><li>Resistances in the hell mode pvp arena will now cap at 80%</li>
+<li>Removed the resistance penalty in nightmare and hell within the pvp arenas</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Low_Level_Dueling_Modifier_Changes_(Normal_Mode_PVP_Arena)"><span id="Low_Level_Dueling_Modifier_Changes_.28Normal_Mode_PVP_Arena.29"></span>Low Level Dueling Modifier Changes (Normal Mode PVP Arena)</h2></div>
+<ul><li>ASSASSIN
+<ul><li>Reduced Dragon Claw LLD PVP effectiveness (100% → 90%)</li>
+<li>Reduced Tiger Strike LLD PVP effectiveness (100% → 90%)</li>
+<li>Reduced Blade Fury LLD PVP effectiveness (100% → 90%)</li>
+<li>Reduced Wake of Inferno LLD PVP effectiveness (70% → 60%)</li>
+<li>Reduced Dragon Talon LLD PVP effectiveness (80% → 70%)</li>
+<li>Reduced Lightning Sentry LLD PVP effectiveness (45% → 37%)</li>
+<li>Reduced Blade Sentinel LLD PVPl effectiveness (25% → 20%)</li></ul></li>
+<li>AMAZON
+<ul><li>Reduced Guided Arrow LLD PVP effectiveness (114% → 90%)</li>
+<li>Reduced Strafe LLD PVP effectiveness (45% → 35%)</li>
+<li>Reduced Multisho LLD PVPt effectiveness (100% → 85%)</li>
+<li>Reduced Jab LLD PVP effectiveness (50% → 40%)</li>
+<li>Reduced Lightning Fury LLD PVP physical damage (100% → 75%)</li>
+<li>Reduced Plague Javelin LLD PVP physical damage (100% → 75%)</li>
+<li>Reduced Poison Javelin LLD PVP physical damage (100% → 75%)</li>
+<li>Reduced Lightning Bolt LLD PVP effectiveness (80% → 55%)</li>
+<li>Reduced Charged Strike LLD PVP effectiveness (100% → 85%)</li></ul></li>
+<li>BARBARIAN
+<ul><li>Reduced Whirlwind LLD PVP effectiveness (63% → 55%)</li>
+<li>Reduced Concentrate LLD PVP damage (Physical: 100% → 90%, Magic: 50% → 45%)</li>
+<li>Reduced Frenzy LLD PVP effectiveness (100% → 90%)</li>
+<li>Reduced Berserk LLD PVP effectiveness (100% → 90%)</li>
+<li>Reduced Stun LLD PVP effectiveness (100% → 90%)</li>
+<li>Reduced Double Swing LLD PVP effectiveness (100% → 90%)</li></ul></li>
+<li>SORCERESS
+<ul><li>Reduced Ice Bolt LLD PVP effectiveness (110% → 90%)</li>
+<li>Reduced Lightning LLD PVP effectiveness (120% → 90%)</li>
+<li>Reduced Ice Barrage LLD PVP effectiveness (190% → 160%)</li></ul></li>
+<li>DRUID
+<ul><li>Reduced Rabies LLD PVP effectiveness (150% → 125%)</li>
+<li>Reduced Arctic Blast LLD PVP effectiveness (200% → 150%)</li>
+<li>Reduced Fissure LLD PVP effectiveness (100% → 90%)</li></ul></li>
+<li>PALADIN
+<ul><li>Reduced Smite LLD PVP effectiveness (60% → 50%)</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Credits">Credits</h2></div>
+<ul><li>Mod Developers:
+<ul><li>Canight</li>
+<li>Elmegaard</li>
+<li>Synthetic</li>
+<li>Aerlynn</li>
+<li>AnbucyrusMadinsane</li>
+<li>SenpaiSomething</li></ul></li>
+<li>Art:
+<ul><li>Avunaos</li>
+<li>Lazarus</li>
+<li>Lurix</li>
+<li>Nephretes</li>
+<li>Aerlynn</li></ul></li>
+<li>Website:
+<ul><li>HalfCrimp</li>
+<li>Art.Damage</li>
+<li>Lippershey</li>
+<li>GreatGrievance</li></ul></li>
+<li>Launcher
+<ul><li>Alphabot</li>
+<li>Equa1ity</li>
+<li>Vilyanare</li>
+<li>JNebeker</li></ul></li>
+<li>Map making:
+<ul><li>Paul Siramy</li>
+<li>Karvarousku</li>
+<li>Aerlynn</li>
+<li>Indio</li>
+<li>KillerNate</li>
+<li>Error</li>
+<li>Gimli[Hc]</li>
+<li>FreakClub</li>
+<li>Borq</li>
+<li>Toadflax</li>
+<li>Alma</li>
+<li>Vulpen</li></ul></li>
+<li>Moderators (Both current and past):
+<ul><li>Cory</li>
+<li>Sajb</li>
+<li>Drantho</li>
+<li>Hastan</li>
+<li>HellzAlien</li>
+<li>WizSpike</li>
+<li>Ztaziz</li>
+<li>Kamanji</li>
+<li>Xes</li>
+<li>Reaxis</li>
+<li>Hoohah</li>
+<li>Majuus</li>
+<li>Onion</li>
+<li>Zinthros</li>
+<li>Ezraeil</li>
+<li>TobieeR</li>
+<li>Gelara</li>
+<li>NEOSUIT</li>
+<li>Laumi</li>
+<li>Sniff</li>
+<li>Kablooey Krebs</li>
+<li>KadeDemise</li>
+<li>Steve</li></ul></li>
+<li>Wiki:
+<ul><li>BetweenWalls</li>
+<li>Gasior</li>
+<li>Kustos</li>
+<li>Meeps</li>
+<li>Naomi</li>
+<li>Grandalf</li>
+<li>Wappn8r</li>
+<li>pita-plz</li>
+<li>Kanzeon</li>
+<li>Dozer</li></ul></li>
+<li>Loot Filters:
+<ul><li>Wolfie</li>
+<li>Kryszard</li>
+<li>BetweenWalls</li>
+<li>Kassahi</li>
+<li>eqN</li>
+<li>Dreamerbg</li>
+<li>Erazure</li>
+<li>Hiimfilter</li>
+<li>Adevdh</li>
+<li>Pillla</li>
+<li>Dauracul</li>
+<li>Talrasha125</li>
+<li>Theirateseagoer</li>
+<li>Kanzeon</li>
+<li>Imtheantinoob</li>
+<li>Exiledagain</li>
+<li>Segnis</li></ul></li>
+<li>D2Template&#160;:
+<ul><li>Devurandom</li>
+<li>Mir Drualga</li>
+<li>Planqi</li>
+<li>Whist</li>
+<li>Olivierverville</li></ul></li>
+<li>SlashDiabloHD:
+<ul><li>Mir Drualga</li></ul></li>
+<li>CNC-DDraw:
+<ul><li>FunkyFr3sh</li>
+<li>Mvdhout1992</li>
+<li>Hifi</li></ul></li>
+<li>D2GL:
+<ul><li>Bayaraa</li></ul></li>
+<li>Shaders:
+<ul><li>Libretro community</li></ul></li>
+<li>BH:
+<ul><li>Arolds</li>
+<li>Dschu012</li>
+<li>JimmyTheJ</li>
+<li>Lamerman</li>
+<li>Mir Drualga</li>
+<li>Planqi</li>
+<li>Slayergod13</li>
+<li>Youbetterdont</li>
+<li>Jascen</li></ul></li>
+<li>PvPGN:
+<ul><li>Celetuiw</li>
+<li>Cen1</li>
+<li>D1zzy</li>
+<li>HarpyWar</li>
+<li>Pelish</li>
+<li>Plisskenwat</li>
+<li>RElesgoe</li></ul></li>
+<li>Without the research and findings from many at Phrozen Keep this project would not have been possible</li>
+<li>Special Thanks to resources, advice or findings from:
+<ul><li>FearedBliss</li>
+<li>Firehawk</li>
+<li>Jarulf</li>
+<li>Kingpin</li>
+<li>Meanski</li>
+<li>Misiek1294</li>
+<li>Necrolis</li>
+<li>Stargazer</li>
+<li>dav92</li>
+<li>cla$$ics</li>
+<li>EmaEstagram</li>
+<li>Thanatos</li>
+<li>Beko</li>
+<li>Disturb</li>
+<li>Ya Lee</li>
+<li>Nefarius</li>
+<li>Ogodei</li>
+<li>Rob</li>
+<li>Whist</li>
+<li>Lady Isabelle</li>
+<li>Alpha</li>
+<li>Sir Xavius</li>
+<li>Gimli[HC]</li>
+<li>I_Burner</li>
+<li>Incandescent One</li>
+<li>Incandescence</li></ul></li>
+<li>Thanks to everyone who played, tested and contributed to this mod's development</li>
+<li>And thanks to everyone who developed the original game</li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Season_13_Patch_#1"><span id="Season_13_Patch_.231"></span>Season 13 Patch #1</h2></div>
+<p>PSA: Some players have applied many ears to a single map which was unintended and can cause their character to crash when hovering it, if you have this issue take another item and place it on your cursor then swap it with the map that was infused with several ears and drop it on the ground to prevent it from crashing you
+</p>
+<ul><li>Fixed ears not properly applying the bonus drops</li>
+<li>Fixed being able to apply more than one ear at a time</li>
+<li>Fixed a bug that could be caused by bad cube recipes</li>
+<li>Fixed canyon of sescheron maps not dropping</li>
+<li>Fixed a few issues with gamepad targeting on controller</li>
+<li>Fixed not being able to use potions while casting on controller</li>
+<li>Fixed several controller crashes</li>
+<li>Fixed hydra incorrectly gaining synergy damage from fireball instead of lesser hydra</li>
+<li>Lowered the max portal text to prevent crashes on hover</li>
+<li>Fixed one handed / two handed mastery applying to the wrong item types</li>
+<li>Fixed split throw missiles sticking to the player after returning</li>
+<li>Fixed feral rage showing incorrect damage values</li>
+<li>Fixed several map corruptions not being present in the map corruption pool</li>
+<li>Fixed Na-Krul's Abyss monsters always drop ethereal items mod from affecting zones outside of the map</li></ul>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Season_13_Patch_#2"><span id="Season_13_Patch_.232"></span>Season 13 Patch #2</h2></div>
+<ul><li>Made several server changes to hopefully fix the queue issue on game creation</li>
+<li>Fixed river of blood having cold immunes</li>
+<li>Fixed throne of insanity not having poison immunes</li>
+<li>Fixed charms being droppable with quick drop binds when the inventory was locked</li>
+<li>Fixed (hopefully) magic maps from dropping from chests and clickables</li>
+<li>Fixed diablo clone incorrectly dropping sage's defiance instead of overlord's helm</li>
+<li>Fixed Ruins of Viz'jun being area level 88 instead of 87</li>
+<li>Increased base target search range on the left joystick when using controller</li>
+<li>Fixed a typo on the corrupted amazon ear</li>
+<li>Increased ear treacherous modifiers +50% chance of monsters dropping extra items to +75%</li>
+<li>Fixed ear treacherous modifiers incorrectly working on unique maps</li>
+<li>Fixed only 1 variation of Na-krul's Abyss spawning</li>
+<li>Fixed shadow warrior and shadow master sometimes becoming untargetable</li>
+<li>Fixed an audio bug when using 2 pots at the same time</li>
+<li>Fixed quest completion sounds not playing```</li></ul>
+</td></tr></tbody></table></div>

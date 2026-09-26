@@ -1,0 +1,21 @@
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr"><p>This page lists all differences between the multiplayer and singleplayer versions of the game.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Differences">Differences</h3></div>
+<ul><li>The <b>/players X</b> command (X is 1-8) artificially adjusts the number of "players in the game", which affects the <a href="/wiki/Game_Mechanics#Item_drop_mechanics" title="Game Mechanics">nodrop</a> rate and monster difficulty</li>
+<li>Non-PlugY: The shared stash is not enabled for singleplayer since <a href="/wiki/Plugy" class="mw-redirect" title="Plugy">PlugY</a> already includes its own shared stash which has more features suited for offline play</li>
+<li>Major new endgame content may be restricted during the season it's introduced, in which case it won't be available in singleplayer or non-ladder during that time:
+<ul><li>Season 4 - <a href="/wiki/Monsters#Rathma" title="Monsters">Rathma</a> disabled</li>
+<li>Season 7 - <a href="/wiki/Recipes#Uber_Difficulty" title="Recipes">Difficulty levels</a> above level 1 for Diablo Clone &amp; Rathma disabled</li></ul></li>
+<li>The DPS meter doesn't work in singleplayer (nor do new commands such as <a href="/wiki/General_Changes#Quality-of-Life" title="General Changes">.roll or .party</a>)</li>
+<li>The "lock inventory" button doesn't work in singleplayer</li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Singleplayer-Only_Bugs">Singleplayer-Only Bugs</h3></div>
+<ul><li>PlugY: Having too many maps in a stash page can cause crashes if that page is the most recently visited stash page
+<dl><dd><span class="omod">Fix: Reduce the number of maps stored per page, or switch to another page before leaving the stash</span></dd></dl></li>
+<li>PlugY: Having gold in the shared stash can cause issues such as preventing oskills from working correctly
+<dl><dd><span class="omod">Fix: Remove all gold from the shared stash, or disable the shared gold feature in the config file</span></dd></dl></li>
+<li>PlugY: The "toggle stash" button may be set to the wrong stash upon loading until interacting with the current stash - this happens if the most recent stash interaction prior to saving/exiting involved using a PlugY stash button instead of manipulating an item in the stash
+<dl><dd><span class="omod">Workaround: Add or remove an item from the stash prior to saving/exiting (this also fixes the button at any time if it's set wrong)</span></dd></dl></li>
+<li>PlugY: Stash navigation may be buggy if the stash pages are empty - the navigation will appear to jump between the wrong pages, but it is actually just displaying the wrong page numbers for all pages between the first page (page 1) and the first index (page 10)
+<dl><dd><span class="omod">Fix: Put an item on page 10 or higher and save/exit</span></dd></dl></li></ul>
+<p>Also see: <a href="/wiki/Bugs" title="Bugs">Bugs</a>
+</p></div>

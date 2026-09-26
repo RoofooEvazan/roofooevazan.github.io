@@ -1,0 +1,1220 @@
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="mw-heading mw-heading1"><h1 id="Season_10_Desecration_-_October_25th_2024">Season 10 Desecration - October 25th 2024</h1></div>
+<table class="non-table mw-collapsible mw-collapsed">
+<caption>Patch Notes S10
+</caption>
+<tbody><tr>
+<td>
+<p><a rel="nofollow" class="external text" href="https://docs.google.com/document/d/1EdVB0nJqkR9fHdVTmLqnCcMKN3n6WoX7CUBtusaxw74/edit?tab=t.0#heading=h.vnhyfwieh2r5">Patch Notes Document</a> (<a rel="nofollow" class="external text" href="https://www.reddit.com/r/ProjectDiablo2/comments/1gbib4k/season_10_desecration_final_patch_notes_project/">Reddit Thread</a>)
+</p><p><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:Season_10.gif" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/f/f8/Season_10.gif/533px-Season_10.gif" decoding="async" loading="lazy" width="533" height="300" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/f/f8/Season_10.gif 1.5x" /></a></span>
+</p>
+<div class="mw-heading mw-heading2"><h2 id="GENERAL_CHANGES">GENERAL CHANGES</h2></div>
+<ul><li>Added "Allocated Loot" which can be toggled on or off on game creation
+<ul><li>When enabled, this mode will automatically allocate loot to party members at random</li>
+<li>These are the items that can be allocated, the rest will be FFA like before:
+<ul><li>Runes from Lem to Zod</li>
+<li>Worlstone and Catalyst Shards</li>
+<li>Set items</li>
+<li>Unique items</li>
+<li>Map materials</li>
+<li>Uber materials</li>
+<li>Larzuk's Puzzlebox and Larzuk's Puzzlepiece</li>
+<li>Lilith's Mirror, Lightsong Vial, Skeleton Key, Horadric Navigator, Horadric Almanac</li></ul></li>
+<li>Party members must be within 2 screens of the monster on death to be eligible for allocated loot <br /> <span typeof="mw:File"><a href="/wiki/File:Allocated_Loot_Option.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/5/58/Allocated_Loot_Option.png/250px-Allocated_Loot_Option.png" decoding="async" loading="lazy" width="250" height="275" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/thumb/5/58/Allocated_Loot_Option.png/375px-Allocated_Loot_Option.png 1.5x, //static.wikitide.net/projectdiablo2wiki/thumb/5/58/Allocated_Loot_Option.png/500px-Allocated_Loot_Option.png 2x" /></a></span></li></ul></li></ul>
+<ul><li>New BNET command: <code>/home</code>, which can be used to set a default "home" channel (aliases: <code>/homechannel</code> and <code>/defaultchannel</code>)
+<ul><li>To set your channel: <code>/home channel_name_here</code></li>
+<li>To go to your home channel: <code>/home</code></li></ul></li></ul>
+<ul><li>New in-game command: <code>.allstats</code>, which will show time played, deaths, and all of your kill stats</li>
+<li>New in-game command: <code>.noexp</code>, which can be used to toggle experience gain on and off</li>
+<li>New in-game command: <code>.set-home X</code>, which can be used to set a home act to start in. This is a per-character setting
+<ul><li>NOTE: Applies to all difficulties where character is eligible for the selected act</li>
+<li><code>.set-home 3</code> will set your home act to Act 3</li>
+<li><code>.set-home 0</code> will revert back to LoD behavior</li>
+<li>It will not send you to an act that you have not yet unlocked</li></ul></li>
+<li>New in-game commands: <code>.savehotkeys</code> and <code>.loadhotkeys</code>, which can be used to save hotkeys from one character and load them on another
+<ul><li>Dev note: In the future, we'd like to have these be dedicated buttons in the hotkey config screen, but for now these should allow you to easily transfer or back up configured hotkeys from one character to another.</li></ul></li></ul>
+<ul><li>Updated the stats screen key combos:
+<ul><li>Ctrl + Left Click: +5 points</li>
+<li>Shift + Left Click: +20 points</li>
+<li>Ctrl + Shift + Left Click: All points</li></ul></li></ul>
+<ul><li>Orbs purchased from Anya will now automatically stack</li></ul>
+<ul><li>On kill proc effects will now proc from spells</li></ul>
+<ul><li>+% elemental large charms now cap at +3% (The previous +[3-4]% affix now always rolls +3%)</li></ul>
+<ul><li>Updated equipment lock behavior
+<ul><li>Will now also lock your mercenary's equipment</li>
+<li>Will now also prevent you from socketing equipped items</li></ul></li></ul>
+<ul><li>On Non-Ladder, Akara will now sell <a href="/wiki/Token_of_Absolution" class="mw-redirect" title="Token of Absolution">Token of Absolution</a></li></ul>
+<ul><li>Updated the (H) Help Screen to reflect Season 10 changes</li></ul>
+<ul><li>Poison/Open Wounds reworked to be only overwritten per source (e.g. player, mercenary, or minion)</li>
+<li>Open Wounds no longer has a ranged penalty</li>
+<li>Updated the Advanced Stat Screen to include base level Open Wounds damage</li></ul>
+<ul><li>Prime Evil Soul drop rate increased by ~25%</li></ul>
+<ul><li>Larzuk's Puzzlepiece drop rate increased by 10%</li></ul>
+<ul><li>Black Soulstone is no longer a random drop and now always drops from the final Uber in Uber Tristram</li></ul>
+<ul><li>Curse Resistance cap increased from +50% to +75%</li></ul>
+<ul><li>Consolidated and reduced the amount of corrupted zones to the following list</li></ul>
+<table class="wikitable">
+<tbody><tr>
+<th>New
+</th></tr>
+<tr>
+<td>The Blood Moor and Den of Evil
+</td></tr>
+<tr>
+<td>The Cold Plains and The Cave
+</td></tr>
+<tr>
+<td>The Stony Field and Tristram
+</td></tr>
+<tr>
+<td>The Dark Wood and The Underground Passage
+</td></tr>
+<tr>
+<td>The Black Marsh and The Hole
+</td></tr>
+<tr>
+<td>The Tamoe Highland and The Pit
+</td></tr>
+<tr>
+<td>The Burial Ground and Mausoleum
+</td></tr>
+<tr>
+<td>The Forgotten Tower
+</td></tr>
+<tr>
+<td>The Outer Cloister and Barracks
+</td></tr>
+<tr>
+<td>The Jail, Inner Cloister, and Cathedral
+</td></tr>
+<tr>
+<td>The Catacombs
+</td></tr>
+<tr>
+<td>The Cow Level
+</td></tr>
+<tr>
+<td>The Rocky Waste and The Stony Tomb
+</td></tr>
+<tr>
+<td>The Dry Hills and The Halls of the Dead
+</td></tr>
+<tr>
+<td>The Far oasis and The Maggot Lair
+</td></tr>
+<tr>
+<td>The Lost City, Ancient Tunnels, and Claw Viper Temple
+</td></tr>
+<tr>
+<td>The Canyon of the Magi and Tal Rasha's Tomb
+</td></tr>
+<tr>
+<td>The Lut Gholein Sewers and The Palace Cellars
+</td></tr>
+<tr>
+<td>The Arcane Sanctuary
+</td></tr>
+<tr>
+<td>The Spider Forest, Arachnid Lair, and Spider Cavern
+</td></tr>
+<tr>
+<td>The Great Marsh and The Swampy Pit
+</td></tr>
+<tr>
+<td>The Flayer Jungle and The Flayer Dungeon
+</td></tr>
+<tr>
+<td>Lower Kurast and The Kurast Sewers
+</td></tr>
+<tr>
+<td>The Kurast Bazaar, Ruined Temple, and Disused Fane
+</td></tr>
+<tr>
+<td>Upper Kurast, The Forgotten Reliquary, and Forgotten Temple
+</td></tr>
+<tr>
+<td>Travincal, The Ruined Fane, and Disused Reliquary
+</td></tr>
+<tr>
+<td>The Durance of Hate
+</td></tr>
+<tr>
+<td>The Outer Steppes and The Plains of Despair
+</td></tr>
+<tr>
+<td>The City of the Damned and The River of Flame
+</td></tr>
+<tr>
+<td>Chaos Sanctuary
+</td></tr>
+<tr>
+<td>The Bloody Foothills and The Frigid Highlands
+</td></tr>
+<tr>
+<td>The Arreat Plateau, Crystalline Passage, and Frozen River
+</td></tr>
+<tr>
+<td>The Glacial Trail, Drifter Cavern, and Frozen Tundra
+</td></tr>
+<tr>
+<td>The Ancients' Way and The Icy Cellar
+</td></tr>
+<tr>
+<td>Nihlathak's Temple
+</td></tr>
+<tr>
+<td>Abaddon, The Pit of Acheron, and The Infernal Pit
+</td></tr>
+<tr>
+<td>The Worldstone Keep and Throne of Destruction
+</td></tr></tbody></table>
+<ul><li>Increased size of Abaddon, Pit of Acheron, and The Infernal Pit (by ~66.6%)</li>
+<li>Abaddon, Pit of Acheron, and Infernal Pit monster type amount increased from 3 to 5</li>
+<li>Abaddon, Pit of Acheron, and Infernal Pit unique monster count increased from 4-5 to 6-9</li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Settings_Menu_Updates">Settings Menu Updates</h3></div>
+<ul><li>Moved the settings that were previously in the loot filter window into the existing D2 settings menu</li></ul>
+<ul><li>The sound effects and music volume sliders will now work independent of each other
+<ul><li>Previously if you lowered the sound effect volume it would also lower the music volume</li></ul></li>
+<li>The sound effects and music volume sliders now move in increments of 1% instead of 5%</li>
+<li>Added a slider for the main menu music</li></ul>
+<ul><li>Added new hotkeys:
+<ul><li>D2GL Screen</li>
+<li>Show Item Quantity</li>
+<li>Tooltip Screenshot</li>
+<li>Transmute</li>
+<li>Gamble Refresh</li>
+<li>Filter Level [0-12]</li></ul></li>
+<li>The Escape key will now go back one screen, rather than close the entire settings menu</li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Loot_Filter">Loot Filter</h3></div>
+<ul><li><code>EQUIPPED</code> will now match on any piece of equipped gear, regardless of owner</li></ul>
+<ul><li>The maximum number of filter levels has been increased from 9 to 12</li></ul>
+<ul><li>The filter selected in the launcher will now be loaded first, and will fallback to the loot.filter file if that fails</li></ul>
+<ul><li>The hardcoded "Show Stat Ranges" hotkey (previously Ctrl) has been removed and can now be bound in the settings menu</li>
+<li>The Ctrl + R hotkey to reload the loot filter has been removed</li></ul>
+<ul><li>Fixed an issue where the color codes could sometimes be truncated improperly</li></ul>
+<ul><li>Fixed the text offsets in the Join Game screen</li></ul>
+<ul><li>Fixed a potential underflow with item descriptions</li></ul>
+<ul><li>Performance improvements for variable substitutions</li></ul>
+<ul><li>The corrupted <span class="d2-red">*</span> will now always show on corrupted items (previously it required stat ranges to be enabled)</li></ul>
+<ul><li>"Always Show Items" will now be auto-disabled under certain situations to prevent item text from bleeding through other game screens</li></ul>
+<ul><li>Added the option to alias input and output conditions</li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Bug_Fixes">Bug Fixes</h3></div>
+<ul><li>Fixed a bug which could stop map monsters from properly spawning</li></ul>
+<ul><li>Fixed a bug which caused fortified map bosses to drop double loot
+<ul><li>Note: We made fortified map bosses have a 25% chance to drop double loot since they have fortified stats</li></ul></li></ul>
+<ul><li>Fixed a bug which would sometimes cause the Help button to keep reappearing</li></ul>
+<ul><li>Fixed a bug which caused F10 &amp; F11 to not work with quick casting</li></ul>
+<ul><li>Prevent <b>all</b> ambient sounds from playing too often (lag reduction)
+<ul><li>Note: Hopefully this will reduce lag within parties and during mapping</li></ul></li></ul>
+<ul><li>Fixed a bug that prevented single player character statistics commands and auras from working</li></ul>
+<ul><li>Guest ghost monsters from map affixes will now properly drop loot</li></ul>
+<ul><li>Fixed Lightning Enchant releasing more projectiles than it should</li></ul>
+<ul><li>Fixed a bug with Druid shapeshift which would cause them to immediately un-shapeshift</li></ul>
+<ul><li>Fixed a bug which caused items to overlap the health and mana globes</li></ul>
+<ul><li>Fixed a bug that caused necromancer and druid summons to apply melee splash damage on a missed attack</li></ul>
+<ul><li>Fixed a bug that caused Holy Sword to work in shapeshift forms (it now properly functions the same as weapon block)</li>
+<li>Fixed a bug that allowed Holy Sword and Weapon Block to exceed 75% when combined with item stats</li></ul>
+<ul><li>"And more..."</li></ul>
+<p><br />
+</p>
+<div class="mw-heading mw-heading3"><h3 id="D2GL">D2GL</h3></div>
+<ul><li>Common settings like HD Cursor, HD Text, Motion Prediction, Item Quantity, and Minimap can now be changed in the in-game settings menu</li>
+<li>A new hotkey has been added to open the D2GL settings menu. This can be bound in the Configure Controls settings menu (Ctrl + O has not been removed)</li>
+<li>A hotkey has been added to toggle Item Quantity</li>
+<li>A hotkey has been added to allow copying game tooltips to your clipboard (items, skills, etc)
+<ul><li>This also requires HD Text to be enabled</li></ul></li></ul>
+<ul><li>Fixed an issue that caused the quantity display to bleed through the gold dialog box</li>
+<li>Fixed an issue that caused the gold display to bleed through the belt inventory slots</li></ul>
+<ul><li>Fixed an issue which caused the screenshot hotkey to create duplicate screenshots</li></ul>
+<ul><li>Fixed an issue which would cause the D2GL minimap to be blank</li></ul>
+<ul><li>Fixed a bug which could cause odd ground effects while Motion Prediction was enabled</li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Launcher">Launcher</h3></div>
+<ul><li>Added an integration of the Filterbird web app to preview filters in the launcher <br /><span typeof="mw:File"><a href="/wiki/File:Loot_Filter_Launcher_Preview1.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/1/12/Loot_Filter_Launcher_Preview1.png/300px-Loot_Filter_Launcher_Preview1.png" decoding="async" loading="lazy" width="300" height="225" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/thumb/1/12/Loot_Filter_Launcher_Preview1.png/450px-Loot_Filter_Launcher_Preview1.png 1.5x, //static.wikitide.net/projectdiablo2wiki/thumb/1/12/Loot_Filter_Launcher_Preview1.png/600px-Loot_Filter_Launcher_Preview1.png 2x" /></a></span><br /><span typeof="mw:File"><a href="/wiki/File:Loot_Filter_Launcher_Preview2.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/0/05/Loot_Filter_Launcher_Preview2.png/300px-Loot_Filter_Launcher_Preview2.png" decoding="async" loading="lazy" width="300" height="225" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/thumb/0/05/Loot_Filter_Launcher_Preview2.png/450px-Loot_Filter_Launcher_Preview2.png 1.5x, //static.wikitide.net/projectdiablo2wiki/thumb/0/05/Loot_Filter_Launcher_Preview2.png/600px-Loot_Filter_Launcher_Preview2.png 2x" /></a></span></li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Maps">Maps</h3></div>
+<ul><li>Added a new Tier 2 map <b>Skovos Stronghold</b> (Made by Alma)</li></ul>
+<ul><li>Added a new Tier 2 map <b>Demon Road</b> (Made by Borq)</li></ul>
+<ul><li>Developer Notes Regarding New Maps
+<ul><li>We're going to be trying something new with the two new maps that is being called "New Map Rotation". <br />What this means is that when a new map is added to the mod it will be added with no immunities <br />so that all players can partake in it followed by it being shuffled into the immunity pool on its second season. If this works out well, it may be something we try again with other newly added maps.</li></ul></li></ul>
+<ul><li>Map bosses now have melee splash</li></ul>
+<ul><li>Warlord of Blood
+<ul><li>Now drops 2-3 corrupted uniques instead of 1</li>
+<li>Warlord of Blood's attack damage reduced by 25%</li></ul></li></ul>
+<ul><li>Base experience from non-unique maps reduced by ~15% (With the following exceptions)
+<ul><li><b>Sanatorium</b> experience reduced by ~25%</li>
+<li><b>Kehjistan Marketplace</b> experience reduced by ~30%</li>
+<li><b>Ashen Plains</b> experience reduced by ~5%</li></ul></li></ul>
+<ul><li><b>Pandamonium Citadel</b> boss health reduced from 6000 to 5000</li></ul>
+<div class="mw-heading mw-heading4"><h4 id="Map_Events">Map Events</h4></div>
+<ul><li>Horazon Event now "sunders" the map that is created, preventing monsters' natural resistances from exceeding 75%
+<ul><li>Will first reduce the elemental resistances of all the monsters within the map by -25% and Physical/Magic resists by 15%</li>
+<li>e.g. A monster at 80% native fire resist will drop to 55%</li>
+<li>e.g. A monster at 100% or more will get capped at 75%</li>
+<li>Champion modifiers (Fire Enchanted/Stoneskin/etc) are added after the above effects</li></ul></li></ul>
+<div class="mw-heading mw-heading4"><h4 id="Dungeons">Dungeons</h4></div>
+<ul><li>Dungeon monsters now drop twice as much loot</li>
+<li>Reduced elemental immune monsters' resistances from 165% to 145%</li>
+<li>Reduced physical and magic immune monsters' resistances from 140 to 120</li>
+<li>Dungeon bosses' rune drop rate increased by 20%</li>
+<li>The final dungeon boss now drops twice as much loot</li></ul>
+<ul><li>Horadrim Scarab
+<ul><li>Drop rate from map bosses increased by 40%</li>
+<li>Drop rate from Shadow of Mendeln event increased by 100%</li>
+<li>Drop rate from Uber Ancients increased by 200%</li></ul></li>
+<li>Drop rate from dungeon bosses increased by 200%</li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Mercenaries">Mercenaries</h3></div>
+<ul><li>Act 1
+<ul><li>Reduced level 1 base damage</li>
+<li>Reduced base damage scaling</li></ul></li>
+<li>Physical Mercenary
+<ul><li>Slow Movement now caps at level 6 instead of 25</li>
+<li>Magic Arrow now shoots one projectile instead of 5</li></ul></li>
+<li>Strafe max level reduced f rom 31 to 23</li>
+<li>Reworked ability level scaling</li></ul>
+<ul><li>Act 2
+<ul><li>Reduced base damage scaling slightly</li></ul></li></ul>
+<ul><li>Act 3
+<ul><li>Reworked ability level scaling to make Ironwolf mercenaries weaker at early levels and similar strength at end game</li>
+<li>Fire and Lightning mercenaries' damage increased slightly at end game</li>
+<li>Cold mercenary damage slightly reduced at end game</li>
+<li>Reduced elemental mastery +% damage and pierce bonuses</li>
+<li>Removed the ability to equip daggers</li></ul></li>
+<li>A legendary hero Zinthros may now be hired in Act 3</li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Ubers">Ubers</h3></div>
+<ul><li>Uber Ancients
+<ul><li>Rune drop rate increased by 20%</li>
+<li>Uber Ancients' damage decreased</li>
+<li>Uber Madawc ground lightning now has next hit delay</li>
+<li>Uber Korlic's Holy Freeze range reduced from 12 to 8</li>
+<li>Uber Korlic's Holy Freeze slow reduced from -50% to -20%</li>
+<li>Uber Ancients now have 40% more health</li></ul></li></ul>
+<ul><li>Uber fights no longer require level 80 to enter, but you cannot gain experience below level 80 from these encounters</li></ul>
+<ul><li>A new uber with a unique reward will be launched with Season 10</li></ul>
+<ul><li>Some minor changes and fixes for Diablo Clone and Rathma uber fights</li>
+<li>Diablo Clone bone spirits no longer have acceleration</li></ul>
+<div class="mw-heading mw-heading2"><h2 id="CLASS_BALANCE">CLASS BALANCE</h2></div>
+<div class="mw-heading mw-heading3"><h3 id="Amazon">Amazon</h3></div>
+<ul><li>Cold Arrow
+<ul><li>Synergies reduced from 20% to 17%</li>
+<li>Maximum arrow count now caps at 12</li></ul></li></ul>
+<ul><li>Fire Arrow
+<ul><li>Synergies reduced from 21% to 18%</li>
+<li>Maximum arrow count now caps at 14</li></ul></li></ul>
+<ul><li>Immolation Arrow
+<ul><li>Synergies reworked and rebalanced to now affect both the fire explosion damage and the fire damage over time instead of one or the other</li>
+<li>Level 1-28+ fire explosion damage scaling reduced by ~20%</li>
+<li>Level 1-28+ fire damage over time scaling increased by ~20%</li></ul></li></ul>
+<ul><li>Multiple Shot
+<ul><li>The 3 middle arrows now proc effects instead of the middle 2</li>
+<li>Level 1 Enhanced Damage bonus increased from +30% to +40%</li>
+<li>Enhanced Damage bonus per level increased f rom +8% to +10%</li></ul></li></ul>
+<ul><li>Charged Strike
+<ul><li>Now gains an additional charged bolt every 3 levels instead of every 5</li>
+<li>Maximum charged bolt count now caps at 12</li>
+<li>Lightning Fury synergy removed</li>
+<li>Power Strike synergy increased from 5% to 8%</li>
+<li>Lightning Strike synergy increased from 5% to 8%</li></ul></li></ul>
+<ul><li>Lightning Strike
+<ul><li>Synergies reduced from 9% to 8%</li></ul></li></ul>
+<ul><li>Strafe
+<ul><li>Penetrate synergy increased from 10% to 12%</li></ul></li></ul>
+<ul><li>Decoy
+<ul><li>Fixed a bug that was causing stats to not properly apply (e.g. Critical Strike, etc)</li></ul></li></ul>
+<ul><li>Magic Arrow
+<ul><li>Synergies increased from +18% to +20%</li></ul></li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Assassin">Assassin</h3></div>
+<ul><li>Phoenix Strike
+<ul><li>Fists of Fire initial meteor damage synergy reduced from 16% to 14%</li>
+<li>Claws of Thunder synergy reduced from 14% to 10%</li>
+<li>Blades of Ice synergy reduced from 14% to 10%</li>
+<li>Now properly shows +% elemental damage bonuses in its tooltip</li></ul></li></ul>
+<ul><li>Chain Lightning Sentry
+<ul><li>Synergies reduced from 15% to 13%</li></ul></li></ul>
+<ul><li>Wake of Fire
+<ul><li>Level 28+ scaling reduced from 26-31 to 22-26</li></ul></li></ul>
+<ul><li>Fireblast
+<ul><li>Synergies increased from 15% to 18%</li></ul></li></ul>
+<ul><li>Shockweb
+<ul><li>Synergies increased from 15% to 17%</li></ul></li></ul>
+<ul><li>Fade
+<ul><li>Resists bonus scaling reworked
+<ul><li>Now provides +15% resist at level 1, gainst +2% resists per level from levels 1-8 and +1% per level from levels 8+</li></ul></li>
+<li>Curse duration reduction cap increased from +20% to +30%</li>
+<li>Physical Damage Reduction reduced from +1% every 2 levels to +1% every 3 levels</li></ul></li></ul>
+<ul><li>Psychic Hammer
+<ul><li>Synergies increased from +15% to +20%</li></ul></li></ul>
+<ul><li>Mind Blast
+<ul><li>Now gains increased area of effect with consecutive casts (up to 3 stacks)</li></ul></li></ul>
+<ul><li>Cobra Strike
+<ul><li>Second charge life and mana steal per level increased from +5% to +10%</li></ul></li></ul>
+<ul><li>Fists of Fire
+<ul><li>Fixed several damage bugs
+<ul><li>No longer incorrectly carries weapon damage on its elemental attacks</li>
+<li>Now properly applies elemental damage on several attacks</li></ul></li>
+<li>Charge 1 level 16-22 scaling increased from 6-7 to 10-15</li>
+<li>Charge 1 level 22-28 scaling increased from 10-11 to 18-27</li>
+<li>Charge 1 level 28+ scaling increased from 14-15 to 26-39</li>
+<li>Phoenix Strike synergy replaced with Dragon Flight</li>
+<li>Now properly shows +% Fire Damage bonuses in its tooltip</li></ul></li></ul>
+<ul><li>Dragon Talon
+<ul><li>Base Enhanced Damage bonus increased from +30% to +50%</li>
+<li>Enhanced Damage per level increased from +20% to +25%</li>
+<li>Dragon Tail synergy increased from +18% to +22%</li>
+<li>Dragon Flight synergy increased from +18% to +22%</li></ul></li></ul>
+<ul><li>Dragon Claw
+<ul><li>Synergies increased from +14% to +20%</li></ul></li></ul>
+<ul><li>Claws of Thunder
+<ul><li>Third charge reworked to send down bolts of lightning at enemies struck by the charged bolts</li>
+<li>Third charge charged bolts now always pierce enemies</li>
+<li>Phoenix Strike synergy replaced with Dragon Claw</li>
+<li>Now properly shows +% Lightning Damage bonuses in its tooltip</li></ul></li></ul>
+<ul><li>Blades of Ice
+<ul><li>Charge 2 and charge 3 attacks have been completely reworked</li>
+<li>Phoenix Strike synergy replaced with Tiger Strike</li>
+<li>Now properly shows +% Cold Damage bonuses in its tooltip</li></ul></li></ul>
+<ul><li>Shadow Warrior
+<ul><li>Fixed a bug that was causing stats to not properly apply</li></ul></li></ul>
+<ul><li>Shadow Master
+<ul><li>Fixed a bug that was causing stats to not properly apply</li></ul></li></ul>
+<ul><li>Blade Dance
+<ul><li>Base Enhanced Damage from +80% to +40%</li>
+<li>Base Enhanced Damage per level reduced from +8% to +5%
+<ul><li>Note: We wanted to maintain the power of Blade Dance assassins but transition that power away from raw physical damage and more into the poison thematic</li></ul></li></ul></li></ul>
+<ul><li>Venom
+<ul><li>Synergies increased from +10% to +12%</li></ul></li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Barbarian">Barbarian</h3></div>
+<ul><li>Battle Cry
+<ul><li>Duration increased from 8 to 12 seconds</li></ul></li></ul>
+<ul><li>War Cry
+<ul><li>Howl synergy increased from 15% to 16%</li>
+<li>Battle Cry synergy increased from 15% to 16%</li></ul></li></ul>
+<ul><li>Berserk
+<ul><li>-% Physical Damage Reduction penalty while berserking now caps at -10% from -20%</li>
+<li>-% Defense penalty reduced from -100% to -25%</li>
+<li>Enhanced Damage per level increased from +18% to +20%</li></ul></li></ul>
+<ul><li>Concentrate
+<ul><li>Attack Rating per level bonus increased from +15% to +20%</li>
+<li>Bash synergy increased from +20% to +25%</li>
+<li>Battle Command synergy increased from +20% to +25%</li></ul></li></ul>
+<ul><li>Double Swing
+<ul><li>Base Enhanced Damage bonus increased from 20% to 25%</li>
+<li>Enhanced Damage bonus per level increased from +20% to +25%</li>
+<li>Attack Rating bonus per level increased from +12% to +15%</li></ul></li></ul>
+<ul><li>Frenzy
+<ul><li>Double Swing synergy increased from +15% to +20%</li>
+<li>Stun synergy increased from +15% to +20%</li>
+<li>Attack Rating bonus per level increased from +10% to +12%</li>
+<li>Base Attack Rating bonus increased from +20% to +30%</li></ul></li></ul>
+<ul><li>Whirlwind
+<ul><li>Fixed a bug that was causing Whirlwind's range to cap at a range adder of 2</li>
+<li>Changed Whirlwind to prioritize targeting the closest enemy</li></ul></li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Druid">Druid</h3></div>
+<ul><li>Hunger
+<ul><li>Deadly Strike bonus changed to Open Wounds chance and Open Wounds damage
+<ul><li>Hunger now has Maul as a synergy</li></ul></li></ul></li></ul>
+<ul><li>Maul
+<ul><li>Damage per charge increased from +40% to +50%</li></ul></li></ul>
+<ul><li>Werewolf
+<ul><li>Base Enhanced Damage bonus reduced from +30% to +20%</li>
+<li>Enhanced Damage bonus per level reduced from +8% to +4%</li></ul></li></ul>
+<ul><li>Fury
+<ul><li>Enhanced Damage per level reduced from +10% to +8%</li>
+<li>Feral Rage synergy reduced from +8% to +6%</li></ul></li></ul>
+<ul><li>Shockwave
+<ul><li>Tornado synergy removed</li>
+<li>Werebear synergy increased f rom 18% to 22%</li>
+<li>Twister synergy increased from 18% to 22%</li>
+<li>Base damage increased f rom 8-14 to 10-16</li>
+<li>Level 1-8 scaling increased from 2-3 to 3-4</li>
+<li>Level 8-16 scaling increased from 4-6 to 6-8</li>
+<li>Level 16-22 scaling increased from 16-18 to 18-20</li>
+<li>Level 22-28 scaling increased from 26-28 to 32-34</li>
+<li>Level 28+ scaling increased from 36-38 to 48-50</li></ul></li></ul>
+<ul><li>Summon Spirit Wolf
+<ul><li>Summon Grizzly synergy removed</li>
+<li>Werewolf synergy removed</li>
+<li>Summon Spirit Wolf level 1-8 scaling reduced from 3-3 to 2-2</li>
+<li>Summon Spirit Wolf level 8-16 scaling reduced from 4-4 to 3-3</li>
+<li>Summon Spirit Wolf level 16-22 scaling reduced from 5-5 to 4-4</li>
+<li>Summon Spirit Wolf level 22-28 scaling reduced from 6-6 to 5-5</li>
+<li>Summon Spirit Wolf level 28+ scaling reduced from 7-7 to 6-6</li>
+<li>Base run speed increased by 20%</li></ul></li></ul>
+<ul><li>Summon Dire Wolf
+<ul><li>Summon Grizzly synergy removed</li>
+<li>Werewolf synergy removed</li>
+<li>Raven synergy increased from 4% to 6%</li>
+<li>Summon Spirit Wolf synergy increased from 4% to 6%</li>
+<li>Level 28+ damage scaling increased from 7-7 to 8-8</li>
+<li>Base run speed increased by 20%</li></ul></li></ul>
+<ul><li>Summon Grizzly
+<ul><li>Grizzly +% health bonus per level increased from +2% to +8%</li>
+<li>Maximum resists increased from 80% to 85%</li>
+<li>Summon Dire Wolf synergy removed</li>
+<li>Werebear synergy removed</li>
+<li>Summon Grizzly level 1-8 scaling increased from 3-3 to 7-7</li>
+<li>Summon Grizzly level 8-16 scaling increased from 4-4 to 9-9</li>
+<li>Summon Grizzly level 16-22 scaling increased from 5-5 to 11-11</li>
+<li>Summon Grizzly level 22-28 scaling increased from 6-6 to 14-14</li>
+<li>Summon Grizzly level 28+ scaling increased from 7-7 to 17-17</li></ul></li></ul>
+<ul><li>Fire Claws
+<ul><li>Level 8-16 scaling increased from 3-4 to 4-5</li>
+<li>Level 16-22 scaling increased from 5-6 to 6-7</li>
+<li>Level 22-28 scaling increased from 7-8 to 8-9</li>
+<li>Level 28+ scaling increased from 9-10 to 10-11</li></ul></li></ul>
+<ul><li>Poison Creeper
+<ul><li>Can now be hit by AoE damage and projectiles (They will still not be targeted by monsters)</li>
+<li>Now has a 1 second casting cooldown</li></ul></li></ul>
+<ul><li>Solar Creeper
+<ul><li>Can now be hit by AoE damage and projectiles (They will still not be targeted by monsters)</li>
+<li>Now has a 1 second casting cooldown</li></ul></li></ul>
+<ul><li>Carrion Vine
+<ul><li>Can now be hit by AoE damage and projectiles (They will still not be targeted by monsters)</li>
+<li>Now has a 1 second casting cooldown</li></ul></li></ul>
+<ul><li>Twister
+<ul><li>Level 28+ scaling increased from 27.5-28.5 to 30.5-31.5</li></ul></li></ul>
+<ul><li>Tornado
+<ul><li>Level 22-28 scaling increased from +24-27 to 26-28</li>
+<li>Level 28+ scaling increased from 28-30 to 30-32</li></ul></li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Necromancer">Necromancer</h3></div>
+<ul><li>Bone Spear
+<ul><li>Hitbox size increased from 1 to 3</li></ul></li></ul>
+<ul><li>Bone Armor
+<ul><li>Now gains +10% defense per hard point while active</li></ul></li></ul>
+<ul><li>Blood Golem
+<ul><li>Synergies reduced from 15% to 12%
+<ul><li>Note: All 5 blood golems may now stack their bleed on a single target with the Open Wounds/poison changes</li></ul></li>
+<li>Added lesser melee splash (previously had no splash)</li></ul></li></ul>
+<ul><li>Clay Golem
+<ul><li>Now has a 20% chance of Crushing Blow</li></ul></li></ul>
+<ul><li>Fire Golem
+<ul><li>Fixed a bug that was causing Fire Golem's Holy Fire aura to not gain synergy damage</li>
+<li>Rebalanced damage values completely</li>
+<li>Added lesser melee splash (previously had no splash)</li></ul></li></ul>
+<ul><li>Poison Nova
+<ul><li>Synergies reduced from 12% to 10%</li></ul></li></ul>
+<ul><li>Amplify Damage
+<ul><li>Fixed radius incorrectly capping at 12 yards instead of 14</li></ul></li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Paladin">Paladin</h3></div>
+<ul><li>Smite
+<ul><li>Base Enhanced Damage increased from +40% to +75%</li>
+<li>Enhanced Damage per level increased from +20% to +25%</li>
+<li>Now gains Crushing Blow efficiency per level</li>
+<li>Now has 5% chance of Crushing Blow at level 1 and gains +1% per base point</li></ul></li></ul>
+<ul><li>Charge
+<ul><li>Fixed several bugs</li>
+<li>Improved functionality</li>
+<li>Now properly uses attack speed during swing animation. Move speed unaffected</li></ul></li></ul>
+<ul><li>Zeal
+<ul><li>Enhanced Damage per level increased from +20% to +25%</li>
+<li>Attack Rating per level increased from +14% to +20%</li>
+<li>Base Enhanced Damage bonus increased from +20% to +30%</li></ul></li></ul>
+<ul><li>Vengeance
+<ul><li>Synergies now apply to both flat elemental damage from items as well as applying to the flat skill damage</li>
+<li>Base chain chance increased from +20% to +25%</li>
+<li>Maximum chain chance increased from 90% to 95%</li>
+<li>Chain distance increased from 5 to 7</li>
+<li>Explosion AoE increased from 5 to 7</li>
+<li>Max chain distance increased from 24 to 30</li></ul></li></ul>
+<ul><li>Holy Sword
+<ul><li>Enhanced Damage to Demons/Undead per level reduced from +10% per level to +7%</li>
+<li>Now functions like Holy Shield and c an be prebuffed. Holy Sword will stay active without a two-handed sword equipped but will only apply its bonuses when a two-handed sword is equipped</li></ul></li></ul>
+<ul><li>Holy Bolt
+<ul><li>Synergies increased from +9% to +10%</li></ul></li></ul>
+<ul><li>Sanctuary
+<ul><li>Might synergy increased from +8% to +9%</li>
+<li>Blessed Aim synergy increased from +8% to +9%</li>
+<li>Holy Sword synergy increased from +8% to +9%</li>
+<li>Radius increased by 12.5%</li></ul></li></ul>
+<ul><li>Thorns
+<ul><li>Now provides 15% chance to apply Open Wounds at level 1</li>
+<li>Now gains +1% chance to apply Open Wounds every 3 levels</li>
+<li>Now provides Open Wounds damage</li>
+<li>Half of Thorn's reflect damage has been converted to Open Wounds damage</li>
+<li>Thorns now grants additional Open Wounds damage to the aura provider</li></ul></li></ul>
+<ul><li>Conviction
+<ul><li>Reduced the level 1 radius of Conviction by 18%</li></ul></li></ul>
+<ul><li>Cleansing Aura
+<ul><li>Now provides +5% Curse Resistance at level 1 and an additional +1% for every 2 levels</li></ul></li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Sorceress">Sorceress</h3></div>
+<ul><li>Blizzard
+<ul><li>Cooldown reduced from 1 second to .9 seconds</li></ul></li></ul>
+<ul><li>Teleport
+<ul><li>Level 1-16 scaling reduced from -2% damage penalty to -1%</li>
+<li>Damage minimum penalty now increased from -0% to -15%</li></ul></li></ul>
+<ul><li>Energy Shield
+<ul><li>No longer removed when reaching 0 mana</li></ul></li></ul>
+<ul><li>Frost Nova
+<ul><li>Synergies reduced from 7% to 6%</li>
+<li>Level 16-22 scaling reduced from 12.5-13 to 12-12.5</li>
+<li>Level 22-28 scaling reduced from 18-18.5 to 15-15.5</li>
+<li>Level 28+ scaling reduced from 22.5-23 to 17.5-18</li></ul></li></ul>
+<ul><li>Nova
+<ul><li>Level 1-8 scaling increased from 5-7 to 6-8</li>
+<li>Level 9-15 scaling reduced from 8-11 to 7-10</li>
+<li>Level 22-28 scaling reduced from 9-12 to 8-11</li>
+<li>Level 28+ scaling reduced from 9-12 to 6-9</li>
+<li>Range reduced from 13 to 12</li></ul></li></ul>
+<ul><li>Inferno
+<ul><li>Level 1-8 scaling increased from 1-2 to 2-3</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="ITEMS">ITEMS</h2></div>
+<ul><li>Runesword
+<ul><li>Maximum socket count increased from 4 to 5</li></ul></li></ul>
+<ul><li>Cryptic Sword
+<ul><li>Maximum socket count increased from 4 to 5</li></ul></li></ul>
+<ul><li>Hyperion Spear
+<ul><li>Maximum socket count increased from 3 to 6</li></ul></li></ul>
+<ul><li>War Spear
+<ul><li>Maximum socket count increased from 3 to 4</li></ul></li></ul>
+<ul><li>Bardiche/Lochaber Axe/Ogre Axe
+<ul><li>Range adder increased from 3 to 4</li></ul></li></ul>
+<ul><li>Voulge/Bill/Colossus Voulge
+<ul><li>Range adder increased from 3 to 4</li></ul></li></ul>
+<ul><li>Scythe/Battle Scythe/Thresher
+<ul><li>Range adder increased from 3 to 4</li></ul></li></ul>
+<ul><li>Poleaxe/Partizan/Cryptic Axe
+<ul><li>Range adder increased from 3 to 4</li></ul></li></ul>
+<ul><li>Large Shield
+<ul><li>Smite damage increased from [2-4] to [3-6]</li></ul></li></ul>
+<ul><li>Kite Shield
+<ul><li>Smite damage increased from [2-5] to [4-11]</li></ul></li></ul>
+<ul><li>Tower Shield
+<ul><li>Smite damage increased from [1-5] to [5-23]</li></ul></li></ul>
+<ul><li>Gothic Shield
+<ul><li>Smite damage increased from [2-5] to [4-11]</li></ul></li></ul>
+<ul><li>Bone Shield
+<ul><li>Smite damage increased from [3-6] to [5-10]</li></ul></li></ul>
+<ul><li>Spiked Shield
+<ul><li>Smite damage increased from [5-9] to [9-16]</li></ul></li></ul>
+<ul><li>Rondache
+<ul><li>Smite damage increased from [2-8] to [3-9]</li></ul></li></ul>
+<ul><li>Heraldic Shield
+<ul><li>Smite damage increased from [3-9] to [4-14]</li></ul></li></ul>
+<ul><li>Aerin Shield
+<ul><li>Smite damage increased from [4-10] to [7-16]</li></ul></li></ul>
+<ul><li>Crown Shield
+<ul><li>Smite damage increased from [4-12] to [7-20]</li></ul></li></ul>
+<ul><li>Defender
+<ul><li>Smite damage increased from [8-12] to [10-15]</li></ul></li></ul>
+<ul><li>Round Shield
+<ul><li>Smite damage increased from [7-14] to [11-23]</li></ul></li></ul>
+<ul><li>Scutum
+<ul><li>Smite damage increased from [11-15] to [16-22]</li></ul></li></ul>
+<ul><li>Dragon Shield
+<ul><li>Smite damage increased from [15-24] to [17-28]</li></ul></li></ul>
+<ul><li>Pavise
+<ul><li>Smite damage increased from [10-17] to [24-32]</li></ul></li></ul>
+<ul><li>Ancient Shield
+<ul><li>Smite damage increased from [12-16] to [18-30]</li></ul></li></ul>
+<ul><li>Grim Shield
+<ul><li>Smite damage increased from [14-20] to [19-28]</li></ul></li></ul>
+<ul><li>Akaran Targe</li>
+<li>Smite damage increased from [12-16] to [13-17]</li></ul>
+<ul><li>Akaran Rondache
+<ul><li>Smite damage increased from [15-20] to [17-22]</li></ul></li></ul>
+<ul><li>Protector Shield
+<ul><li>Smite damage increased from [18-24] to [20-26]</li></ul></li></ul>
+<ul><li>Gilded Shield
+<ul><li>Smite damage increased from [20-28] to [21-30]</li></ul></li></ul>
+<ul><li>Royal Shield
+<ul><li>Base block chance reduced from 25% to 23%</li></ul></li></ul>
+<ul><li>Heater
+<ul><li>Smite damage increased from [16-30] to [29-54]</li></ul></li></ul>
+<ul><li>Luna
+<ul><li>Smite damage increased from [17-29] to [31-53]</li></ul></li></ul>
+<ul><li>Hyperion
+<ul><li>Smite damage increased from [14-32] to [26-59]</li></ul></li></ul>
+<ul><li>Monarch
+<ul><li>Smite damage increased from [12-34] to [22-63]</li></ul></li></ul>
+<ul><li>Ward
+<ul><li>Base block chance increased from 30% to 32%</li>
+<li>Smite damage increased from [11-35] to [21-68]</li></ul></li></ul>
+<ul><li>Aegis
+<ul><li>Base block chance increased from 38% to 46%</li>
+<li>Smite damage increased from [18-28] to [37-57]</li></ul></li></ul>
+<ul><li>Troll Nest
+<ul><li>Smite damage increased from [24-38] to [35-55]</li></ul></li></ul>
+<ul><li>Blade Barrier
+<ul><li>Smite damage increased from [26-40] to [40-60]</li></ul></li></ul>
+<ul><li>Sacred Targe
+<ul><li>Base block chance reduced from 30% to 25%</li>
+<li>Defense reduced from [126-158] to [109-136]</li></ul></li></ul>
+<ul><li>Sacred Rondache
+<ul><li>Base block chance reduced from 28% to 27%</li>
+<li>Defense reduced from [138-164] to [130-155]</li></ul></li></ul>
+<ul><li>Kurast Shield
+<ul><li>Base block chance increased from 25% to 29%</li>
+<li>Defense increased from [154-172] to [166-185]</li></ul></li></ul>
+<ul><li>Zakarum Shield
+<ul><li>Base block chance increased from 22% to 31%</li>
+<li>Defense increased from [169-193] to [185-214]</li></ul></li></ul>
+<ul><li>Vortex Shield
+<ul><li>Base block chance increased from 19% to 32%</li>
+<li>Defense increased from [182-225] to [205-243]</li></ul></li></ul>
+<ul><li>Crossbow animation speeds updated (below numbers are in frames)
+<ul><li>Roughly reduced the difference between bows and crossbows by half</li></ul></li></ul>
+<table class="wikitable">
+<tbody><tr>
+<th></th>
+<th>Bow</th>
+<th>Vanilla XBow</th>
+<th>New XBow (roughly)
+</th></tr>
+<tr>
+<td>Amazon</td>
+<td>14</td>
+<td>20</td>
+<td>17 (-15%)
+</td></tr>
+<tr>
+<td>Assassin</td>
+<td>16</td>
+<td>21</td>
+<td>18 (-15%)
+</td></tr>
+<tr>
+<td>Barbarian</td>
+<td>15</td>
+<td>20</td>
+<td>17 (-15%)
+</td></tr>
+<tr>
+<td>Druid</td>
+<td>16</td>
+<td>20</td>
+<td>18 (-10%)
+</td></tr>
+<tr>
+<td>Necromancer</td>
+<td>18</td>
+<td>20</td>
+<td>18 (-10%)
+</td></tr>
+<tr>
+<td>Paladin</td>
+<td>16</td>
+<td>20</td>
+<td>18 (-10%)
+</td></tr>
+<tr>
+<td>Sorceress</td>
+<td>17</td>
+<td>20</td>
+<td>18 (-10%)
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading3"><h3 id="Affixes">Affixes</h3></div>
+<ul><li>Amplify Damage proc radius increased from 9 to 14</li>
+<li>Weaken proc radius increased from 12 to 17</li>
+<li>Iron Maiden proc radius increased from 12 to 17</li>
+<li>Life Tap proc radius increased from 6 to 11</li>
+<li>Decrepify proc radius increased from 12 to 17</li>
+<li>Lower Resist proc radius increased from 9 to 14</li></ul>
+<ul><li>Added new affix "Sizzling"
+<ul><li>Spawns on bows, crossbows, scepters, crystal-based swords, orbs, claws, and staves</li>
+<li>Spawns on level 10-29 items</li>
+<li>Grants -[2-4]% to Enemy Fire Resistance (staves will roll -[3-6]% instead)</li></ul></li></ul>
+<ul><li>Added new affix "Singeing"
+<ul><li>Spawns on bows, crossbows, scepters, crystal-based swords, orbs, claws, and staves</li>
+<li>Spawns on level 30-59 items</li>
+<li>Grants -[4-6]% to Enemy Fire Resistance (staves will roll -[6-10]% instead)</li></ul></li></ul>
+<ul><li>Added new affix "Infernal"
+<ul><li>Spawns on bows, crossbows, scepters, crystal-based swords, orbs, claws, and staves</li>
+<li>Spawns on level 60+ items</li>
+<li>Grants -[6-10]% to Enemy Fire Resistance (staves will roll -[10-15]% instead)</li></ul></li></ul>
+<ul><li>Added new affix "Frigid"
+<ul><li>Spawns on bows, crossbows, scepters, crystal-based swords, orbs, claws, and staves</li>
+<li>Spawns on level 10-29 items</li>
+<li>Grants -[2-4]% to Enemy Cold Resistance (staves will roll -[3-6]% instead)</li></ul></li></ul>
+<ul><li>Added new affix "Frostbitten"
+<ul><li>Spawns on bows, crossbows, scepters, crystal-based swords, orbs, claws, and staves</li>
+<li>Spawns on level 30-59 items</li>
+<li>Grants -[4-6]% to Enemy Cold Resistance (staves will roll -[6-10]% instead)</li></ul></li></ul>
+<ul><li>Added new affix "Subzero"
+<ul><li>Spawns on bows, crossbows, scepters, crystal-based swords, orbs, claws, and staves</li>
+<li>Spawns on level 60+ items</li>
+<li>Grants -[6-10]% to Enemy Cold Resistance (staves will roll -[10-15]% instead)</li></ul></li></ul>
+<ul><li>Added new affix "Crackling"
+<ul><li>Spawns on javelins, scepters, crystal-based swords, orbs, claws, and staves</li>
+<li>Spawns on level 10-29 items</li>
+<li>Grants -[2-4]% to Enemy Lightning Resistance (staves and two-handed Amazon spears will roll -[3-6]% instead)</li></ul></li></ul>
+<ul><li>Added new affix "Jolting"
+<ul><li>Spawns on javelins, scepters, crystal-based swords, orbs, claws, and staves</li>
+<li>Spawns on level 30-59 items</li>
+<li>Grants -[4-6]% to Enemy Lightning Resistance (staves and two-handed Amazon spears will roll -[6-10]% instead)</li></ul></li></ul>
+<ul><li>Added new affix "Surging"
+<ul><li>Spawns on javelins, scepters, crystal-based swords, orbs, claws, and staves</li>
+<li>Spawns on level 60+ items</li>
+<li>Grants -[6-10]% to Enemy Lightning Resistance (staves and two-handed Amazon spears will roll -[10-15]% instead)</li></ul></li></ul>
+<ul><li>Added a new affix "Decaying"
+<ul><li>Spawns on javelins, wands, and claws</li>
+<li>Spawns on level 10-29 items</li>
+<li>Grants -[2-4]% to Enemy Poison Resistance</li></ul></li></ul>
+<ul><li>Added a new affix "Festering"
+<ul><li>Spawns on javelins, wands, and claws</li>
+<li>Spawns on level 30-59 items</li>
+<li>Grants -[4-6]% to Enemy Poison Resistance</li></ul></li></ul>
+<ul><li>Added a new affix "Necrotic"
+<ul><li>Spawns on javelins, wands, and claws</li>
+<li>Spawns on level 60+ items</li>
+<li>Grants -[6-10]% to Enemy Poison Resistance</li></ul></li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Corruptions">Corruptions</h3></div>
+<ul><li>Sockets
+<ul><li>Armor socket chances changed from 18%/5%/2% (1/2/3 sockets) to 12%/7%/6% (1/2/3 sockets)</li>
+<li>One-handed weapon socket chances changed from 10%/8%/4%/3% (1/2/3/4 sockets) to 12%/7%/6% (2/3/4 sockets)</li>
+<li>One-handed weapons minimum socket roll increased from 1 to 2</li>
+<li>Two-handed weapon socket chances changed from 6%/5.5%/4.5%/4%/3%/2% (1/2/3/4/5/6 sockets) to 7.5%/7%/6%/4.5% (3/4/5/6 sockets)</li>
+<li>Two-handed weapons minimum socket roll increased from 1 to 3</li></ul></li></ul>
+<ul><li>Weapons
+<ul><li>+[100-250] Attack Rating increased to +[150-250]</li>
+<li>+[200-300] Attack Rating replaced with -[40-60] to Target Defense per Hit</li>
+<li>-[5-10]% to enemy elemental resistance mods increased to -[7-10]%</li></ul></li></ul>
+<ul><li>Quivers
+<ul><li>10% Reduced Curse Duration replaced with 10% Curse Resistance</li>
+<li>+[20-40] Health increased to +[30-40]</li></ul></li></ul>
+<ul><li>Helm
+<ul><li>+[10-20] Replenish Life increased to +[20-30]</li></ul></li></ul>
+<ul><li>Gloves
+<ul><li>+[10-15]% Regenerate Mana increased to +[20-30]%</li>
+<li>+[2-4] to Mana after each Kill increased to +[3-4]</li></ul></li></ul>
+<ul><li>Shield
+<ul><li>[15-25]% Regenerate Mana replaced with +[30-40] Life</li>
+<li>+[22-30]% All Resist reduced to +[20-25]%</li>
+<li>+6% Physical Damage Reduction increased to +[6-8]%</li></ul></li></ul>
+<ul><li>Ring
+<ul><li>+[2-3]% Physical Damage Reduction increased to +3%</li>
+<li>+[20-40] Life increased to +[30-40]</li>
+<li>+[5-10] to Strength/Dexterity/Vitality/Energy increased to +[7-10]</li></ul></li></ul>
+<ul><li>Chests
+<ul><li>+6% Physical Damage Reduction increased to +3%</li>
+<li>+[15-20] All Resist increased to +[20-25]</li>
+<li>+[15-25]% Regenerate Mana replaced with +[30-40] Mana</li></ul></li></ul>
+<ul><li>Amulets
+<ul><li>Tier 2 Replenish Life mod removed</li>
+<li>Tier 3 10% Increased Chance of Blocking moved to Tier 2</li>
+<li>Added +10% Curse Resistance corruption to Tier 3</li>
+<li>+[1-2]% Maximum Resistances increased to +2%</li>
+<li>All Resistances +[5-10]% increased to +[7-10]%</li>
+<li>+[5-8] All Stats increased to +[6-8]</li></ul></li></ul>
+<ul><li>Belt
+<ul><li>+[5-10] to Strength/Dexterity/Vitality/Energy increased to +[7-10]</li>
+<li>+[1-2]% to All Maximum Resistances increased to +2%</li>
+<li>10% Reduced Curse Duration increased to +20%</li>
+<li>+[2-3]% Physical Damage Reduction increased to +[3-4]%</li></ul></li></ul>
+<ul><li>Boots
+<ul><li>10% Reduced Curse Duration increased to 20%</li>
+<li>Now properly spawn with their Tier 2 10% Faster Block Rate corruption</li>
+<li>10% Faster Run/Walk increased to +15%</li>
+<li>+[2-3]% Physical Damage Reduction increased to +[3-4]%</li></ul></li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Uniques">Uniques</h3></div>
+<ul><li>Titan's Grip
+<ul><li>Added a new unique <a href="/wiki/Gloves#Titan&#39;s_Grip" title="Gloves">Titan's Grip</a></li></ul></li></ul>
+<ul><li>Wraithskin
+<ul><li>Added a new unique <a href="/wiki/Chests#Wraithskin" title="Chests">Wraithskin</a></li></ul></li></ul>
+<ul><li>Twilight's Reflection
+<ul><li>Added a new unique <a href="/wiki/Shields#Twilight&#39;s_Reflection" title="Shields">Twilight's Reflection</a></li></ul></li></ul>
+<ul><li>Denmother
+<ul><li>Added a new unique <a href="/wiki/Helms#Denmother" title="Helms">Denmother</a></li></ul></li></ul>
+<ul><li>Ebonbane
+<ul><li>Added a new unique <a href="/wiki/Class_Weapons#Ebonbane" title="Class Weapons">Ebonbane</a></li></ul></li></ul>
+<ul><li>Shatterblade
+<ul><li>Added a new unique <a href="/wiki/Daggers#Shatterblade" title="Daggers">Shatterblade</a></li></ul></li></ul>
+<ul><li>Dragonscale
+<ul><li><a href="/wiki/Dragonscale" class="mw-redirect" title="Dragonscale">Dragonscale</a> has been reworked</li></ul></li></ul>
+<ul><li>Guardian Angel
+<ul><li>+1 to Paladin Skills replaced with +1 to All Skills</li></ul></li></ul>
+<ul><li>Uldyssian's Awakening
+<ul><li>"Energy  Shield while equipped" will now have the proper absorb efficiency</li>
+<li>Level [28-30] Energy Shield while Equipped increased to level 30</li>
+<li>+0.5 Minimum Damage per Energy  increased to +1</li>
+<li>-10% Maximum Health removed</li>
+<li>Added +30% Increased Mana</li>
+<li>Added +[3-4] to Amazon Skills</li></ul></li></ul>
+<ul><li>Tempest
+<ul><li>"Energy Shield while Equipped" will now have the proper absorb efficiency</li></ul></li></ul>
+<ul><li>Hawkmail
+<ul><li>+[2-3] to Ravens (Druid Only) replaced with +[2-3] to Ravens (oskill)</li></ul></li></ul>
+<ul><li>Sparking Mail
+<ul><li>[1-30] to Lightning Damage increased to [1-45]</li></ul></li></ul>
+<ul><li>Venom Ward
+<ul><li>+[45-75]% Poison Resist reduced to +[40-60]%</li>
+<li>+10% Maximum Poison Resist changed to +[5-8]%</li>
+<li>-[5-15]% to Enemy Poison Resistance reduced to -[6-12]%</li></ul></li></ul>
+<ul><li>Heavenly Garb
+<ul><li>Level 1 Sanctuary aura now rolls between levels [2-4]</li></ul></li></ul>
+<ul><li>Spirit Forge
+<ul><li>+[10-25]% Fire Resistance increased to +[20-30]%</li></ul></li></ul>
+<ul><li>Toothrow
+<ul><li>[260-350] Open Wounds Damage per Second increased to [300-350]</li></ul></li></ul>
+<ul><li>Crow Caw
+<ul><li>+[20-30]% Chance to Pierce increased to +30%</li>
+<li>+30 to Dexterity reduced to +[20-30]</li>
+<li>+15% Increased Attack Speed increased to +20%</li></ul></li></ul>
+<ul><li>Duriel's Shell
+<ul><li>+1 Life per Character Level increased to +[1-1.5] Life per Character Level</li></ul></li></ul>
+<ul><li>Que-Hegan's Wisdom
+<ul><li>+[15-25] Energy increased to +[20-30]</li>
+<li>+[1-2] to All Skills reduced to +1</li>
+<li>+3 to Mana After each Kill increased to +[3-5]</li></ul></li></ul>
+<ul><li>Corpsemourn
+<ul><li>12% Chance to Reanimate as Returned reduced to 5%</li>
+<li>Now rolls between level [30-40] Corpse Explosion (oskill)</li></ul></li></ul>
+<ul><li>Ormus Robes
+<ul><li>+40% Faster Cast Rate reduced to +30%</li>
+<li>+[12-15]% elemental damage rolls reduced to +[10-15]%</li>
+<li>Ormus proc skill level reworked to <code>BASE - ((SKILL_REQ -6)/6)</code></li>
+<li>Cooldown-based skills proc chances have been reduced to 66% of the rate of other skills</li></ul></li></ul>
+<ul><li>Steel Carapace
+<ul><li>[220-250]% Enhanced Defense increased to [250-280]%</li></ul></li></ul>
+<ul><li>Dark Abyss
+<ul><li>+2 to All Skills reduced to +1</li>
+<li>Added -20% Requirements</li>
+<li>+[3-4] to Life After each Kill increased to +[4-6]</li>
+<li>+[3-4] to Mana After each Kill increased to +[4-6]</li></ul></li></ul>
+<ul><li>Wall of the Eyeless
+<ul><li>+[2-5] to Mana After each Kill increased to +[3-5]</li></ul></li></ul>
+<ul><li>Radament's Sphere
+<ul><li>5% Chance to Cast Level 35 Poison Nova when Struck increased to 12%</li>
+<li>+30% Increased Chance of Blocking increased to +35%</li></ul></li></ul>
+<ul><li>Medusa's Gaze
+<ul><li>+[25-40]% Faster Cast Rate increased to +[30-40]%</li></ul></li></ul>
+<ul><li>Darkforce Spawn
+<ul><li>+[1-2] to Curses increased to +[2-3]</li>
+<li>+[1-2] to Summons increased to +[2-3]</li></ul></li></ul>
+<ul><li>Homunculus
+<ul><li>+[3-5] to Mana After each Kill increased to +5</li>
+<li>+[25-35] All Resistances increased to +[30-40]</li></ul></li></ul>
+<ul><li>Boneflame
+<ul><li>+20% Faster Run/Walk increased to +30%</li></ul></li></ul>
+<ul><li>Vampire Gaze
+<ul><li>+[6-8]% Life Stolen per Hit increased to +[6-10]%</li>
+<li>+[6-8]% Mana Stolen per Hit increased to +[6-10]%</li>
+<li>+[15-20]% Physical Damage Reduced increased to +[15-25]%</li></ul></li></ul>
+<ul><li>Blackhorn's Face
+<ul><li>+15% Lightning Resist increased to +[20-30]%</li></ul></li></ul>
+<ul><li>Crown of Thieves
+<ul><li>+[30-65]% Better Chance of Getting Magic Items increased to +[40-65]%</li></ul></li></ul>
+<ul><li>Andariel's Visage
+<ul><li>+20% Increased Attack Speed increased to +30%</li>
+<li>+10% Maximum Poison Resist reduced to +8%</li></ul></li></ul>
+<ul><li>Giant Skull
+<ul><li>+[40-80]% Enhanced Damage increased to +[60-80]%</li></ul></li></ul>
+<ul><li>Nightwing's Veil
+<ul><li>+[8-15]% to Cold Skill Damage increased to +[10-15]%</li></ul></li></ul>
+<ul><li>Crown of Ages
+<ul><li>+[1-3] Sockets increased to +[2-3] Sockets</li></ul></li></ul>
+<ul><li>Kira's Guardian
+<ul><li>+[25-45]% All Resistances reduced to +[25-40]%</li></ul></li></ul>
+<ul><li>Wolfhowl
+<ul><li>+[3-5] to Feral Rage increased to +[4-6]</li>
+<li>+[3-5] to Werewolf increased to +[4-6]</li>
+<li>+[8-15] to Strength increased to +[10-15]</li>
+<li>+[8-15] to Dexterity increased to +[10-15]</li>
+<li>+[8-15] to Summon Dire Wolf (oskill) increased to +[12-15]</li></ul></li></ul>
+<ul><li>Raekor's Virtue
+<ul><li>+[2-5]% Mana Stolen per Hit increased to +5-8%</li>
+<li>+[15-25] to Dexterity increased to +[20-30]</li></ul></li></ul>
+<ul><li>Spirit Keeper
+<ul><li>+[6-10] to Lightning Absorb reduced to +[4-6]</li>
+<li>+10% to Maximum Poison Resist reduced to +[5-8]%</li></ul></li></ul>
+<ul><li>Ursa's Nightmare
+<ul><li>You cannot life steal when above 65% Maximum Life reduced to 60%
+<ul><li>Note: This should make the final breakpoint of melee splash more accessible as melee splash breakpoints are every 20%</li></ul></li>
+<li>+[20-30]% Maximum Health increased to +[25-35]%</li></ul></li></ul>
+<ul><li>Overlord's Helm
+<ul><li>-[10-15]% to Enemy Physical Resistance reduced to -10%</li>
+<li>+20 to Strength increased to +[20-30]</li></ul></li></ul>
+<ul><li>Magefist
+<ul><li>+[10-25]% Regenerate Mana increased to +[15-25]%</li></ul></li></ul>
+<ul><li>Dracul's Grasp
+<ul><li>+[10-20] to Strength increased to +[20-30]</li></ul></li></ul>
+<ul><li>Hotspur
+<ul><li>+[5-10]% to Maximum Fire Resistance reduced to +[4-6]%</li>
+<li>45% Fire Resistance reduced to +[20-30]%</li></ul></li></ul>
+<ul><li>Treads of Cthon
+<ul><li>+[10-20]% Chance to Pierce increased to +20%</li></ul></li></ul>
+<ul><li>Infernostride
+<ul><li>15% Chance to Cast Level 16 Blaze when Struck increased to 18%</li></ul></li></ul>
+<ul><li>Gore Rider
+<ul><li>+15% Deadly Strike increased to +[15-20]%</li></ul></li></ul>
+<ul><li>Shadow Dancer
+<ul><li>+[15-25] to Dexterity increased to +[20-30]</li>
+<li>-20% Requirements increased to -25%</li></ul></li></ul>
+<ul><li>Razortail
+<ul><li>+15 to Dexterity increased to +[15-20]</li>
+<li>+15 to Defense increased to +50</li></ul></li></ul>
+<ul><li>Gloom's Trap
+<ul><li>+10% Faster Cast Rate increased to +[10-20]%</li></ul></li></ul>
+<ul><li>Arachnid Mesh
+<ul><li>+[15-20]% Faster Cast Rate reduced to +[10-20]%</li></ul></li></ul>
+<ul><li>Band of Skulls
+<ul><li>Physical Damage Taken Reduced by [10-15]% reduced to 10%</li></ul></li></ul>
+<ul><li>Nokozan Relic
+<ul><li>+10% to Maximum Fire Resist reduced to +[4-8]%</li>
+<li>+[25-50]% Fire Resist reduced to +[20-35]%</li></ul></li></ul>
+<ul><li>Crescent Moon
+<ul><li>+[1-2] to Cold Skills increased to +2</li></ul></li></ul>
+<ul><li>The Cat's Eye
+<ul><li>+20% Increased Attack Speed increased to +30%</li></ul></li></ul>
+<ul><li>Wisp Projector
+<ul><li>+[10-15]% Better Chance of Getting Magic Items reverted back to +[10-20]%</li></ul></li></ul>
+<ul><li>Hellslayer
+<ul><li>+25 Life removed</li>
+<li>Added -[25-35]% to Enemy Fire Resistance</li></ul></li></ul>
+<ul><li>Death Cleaver
+<ul><li>Added +5% Maximum Deadly Strike Chance</li></ul></li></ul>
+<ul><li>Headstriker
+<ul><li>+1% Deadly Strike per Level reduced to +0.75%</li>
+<li>Added +[10-15]% Maximum Deadly Strike Chance</li></ul></li></ul>
+<ul><li>Razor's Edge
+<ul><li>+50% Deadly Strike reduced to +40%</li>
+<li>+50% Chance of Open Wounds increased to +60%</li></ul></li></ul>
+<ul><li>Jade Talon
+<ul><li>+[1-2] to Martial Arts increased to +[2-3]</li>
+<li>+[1-2] to Shadow Disciplines increased to +[2-3]</li></ul></li></ul>
+<ul><li>Boneslayer Blade
+<ul><li>+[8-12] to Zeal (oskill) increased to +[10-12]</li>
+<li>65% Chance to Cast Level 30 Holy Bolt when Struck changed to 20% Chance to Cast Level 30 Holy Bolt on Striking</li></ul></li></ul>
+<ul><li>Stormrider
+<ul><li>10% Chance to Cast Level 25 Chain Lightning on Striking increased to 14%</li></ul></li></ul>
+<ul><li>Mageslayer
+<ul><li>Level [3-6] Concentration Aura removed</li>
+<li>Added +[10-15]% Physical Damage Reduction</li>
+<li>Added +[10-25] Damage</li></ul></li></ul>
+<ul><li>Windforce
+<ul><li>+5 to Dexterity increased to +20</li>
+<li>8% Chance to Cast Level 35 Twister increased to 12%</li>
+<li>+1.625 Maximum Damage per Level increased to +2</li></ul></li></ul>
+<ul><li>Hellrack
+<ul><li>+[2-5] Sockets increased to +[3-5]</li></ul></li></ul>
+<ul><li>Skull Collector
+<ul><li>8% Chance to Cast Level 12 Bone Armor on Casting changed to 2% Chance to Cast Level 25 Bone Armor on Casting</li></ul></li></ul>
+<ul><li>Stalker's Cull
+<ul><li>+[280-330%] Enhanced Damage reduced to +[230-280]%</li></ul></li></ul>
+<ul><li>Brimstone Rain
+<ul><li>-[10-15]% to Enemy Physical Resistance reduced to -10%</li></ul></li></ul>
+<ul><li>Zerae's Resolve
+<ul><li>Level 25-30 Holy Shock while Equipped increased to Level 30</li>
+<li>+[240-285]%  Enhanced Damage increased to +[270-315]%</li></ul></li></ul>
+<ul><li>Lycander's Flank
+<ul><li>+[10-20]% Physical Damage Reduction increased to +[15-20]%</li></ul></li></ul>
+<ul><li>Heaven's Light
+<ul><li>+[1-3] Sockets increased to +[2-3]</li></ul></li></ul>
+<ul><li>Zakarum's Hand
+<ul><li>+[2-3] to Holy Shock removed</li>
+<li>+[2-3] to Holy Freeze removed</li>
+<li>Added +[2-3] to Offensive Auras</li></ul></li></ul>
+<ul><li>Demon Machine
+<ul><li>+[33-66] Maximum Damage removed</li>
+<li>+[185-225]% Enhanced Damage increased to +[265-315]%</li></ul></li></ul>
+<ul><li>Athena's Wrath
+<ul><li>+[200-230]%  Enhanced Damage increased to +[220-260]%</li></ul></li></ul>
+<ul><li>Spirit Shroud
+<ul><li>Magic Damage Reduced by [11-17] reverted back to [7-11]</li></ul></li></ul>
+<ul><li>Patriarch
+<ul><li>+[280-320]% Enhanced Damage reduced to +[260-290]%</li></ul></li></ul>
+<ul><li>Earthshaker
+<ul><li>+[3-4] to Elemental Skills reduced to +[2-4]</li></ul></li></ul>
+<ul><li>Executioner's Justice
+<ul><li>+[270-320]% Enhanced Damage increased to +[285-335]%</li></ul></li></ul>
+<ul><li>Valkyrie Wing
+<ul><li>+[20-40]% Enhanced Damage increased to +[40-60]%</li></ul></li></ul>
+<ul><li>Rockfleece
+<ul><li>+[10-20]% Physical Damage Reduction reduced to +[10-15]%</li>
+<li>Physical Damage Reduced by [10-15] reduced to [5-10]</li></ul></li></ul>
+<ul><li>Horizon's Tornado
+<ul><li>Added 15% Chance to Cast Level 28 Twister on Casting</li></ul></li></ul>
+<ul><li>Stone Crusher
+<ul><li>-20 to Monster Defense per Hit increased to -75</li>
+<li>+[220-260]% Enhanced Damage increased to +[230-260]%</li></ul></li></ul>
+<ul><li>Earth Shifter
+<ul><li>12% Chance to Cast Level 28 Volcano on Casting removed</li>
+<li>Added 8% Chance to Cast Level 25 Volcano on Kill</li>
+<li>+7 to Elemental Skills (Druid Only) removed</li>
+<li>Added +[3-4] to Fire Skills</li>
+<li>+80% Faster Cast Rate reduced to +60%</li></ul></li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Runewords">Runewords</h3></div>
+<ul><li>Infinity
+<ul><li>50% Chance to Cast Level 20 Lightning on Kill changed to 25% Chance to Cast Level 20 Chain Lightning on Striking (Spear/Polearm Only)</li>
+<li>15% Chance to Cast Level 20 Lightning on Casting changed to 15% Chance to Cast Level 20 Chain Lightning on Casting (Staves Only)</li></ul></li></ul>
+<ul><li>Innocence
+<ul><li>Now attacks at the proper frame rate equal to the base frame rate attack speed of Blade Shield</li>
+<li>Fixed a bug that would allow Innocence to attack faster than intended</li></ul></li></ul>
+<ul><li>Prudence
+<ul><li>+30% Faster Cast Rate increased to +40%</li></ul></li></ul>
+<ul><li>Rampage
+<ul><li>+[110-135]% Enhanced Damage increased to +[120-145]%</li></ul></li></ul>
+<ul><li>Death
+<ul><li>+[300-355]% Enhanced Damage reduced to +[275-320]%</li></ul></li></ul>
+<ul><li>Peace
+<ul><li>+[1-2] to Amazon Skills reduced to +1</li></ul></li></ul>
+<ul><li>Zenith
+<ul><li>Can now be made in two-handed swords</li>
+<li>Level [8-12] Salvation Aura increased to Level [10-12]</li>
+<li>+[200-300]% Enhanced Damage increased to +[225-300]%</li></ul></li></ul>
+<ul><li>Leaf
+<ul><li>+3 to Inferno (Sorceress Only) reduced to +[1-2]</li></ul></li></ul>
+<ul><li>Rapture
+<ul><li>Added a new 6 socket hammer runeword <a href="/wiki/RWWeapons#Rapture" title="RWWeapons">Rapture</a></li></ul></li></ul>
+<ul><li>Purity
+<ul><li>Added a new 3 socket polearm/spear/staff/bow/crossbow runeword <a href="/wiki/RWWeapons#Purity" title="RWWeapons">Purity</a></li></ul></li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Set_Items">Set Items</h3></div>
+<ul><li>Tal Rasha's Guardianship
+<ul><li>Magic Damage Taken Reduced by [10-17] increased to [12-18]</li>
+<li>[50-80]% Better Chance of Getting Magic Items increased to [60-90]%</li></ul></li></ul>
+<ul><li>Trang-Oul's Scales
+<ul><li>+[1-2] to Blood Warp (Necromancer Only) increased to +[2-3]</li></ul></li></ul>
+<ul><li>Natalya's Shadow
+<ul><li>+1 to Life per Character Level increased to +1.5</li></ul></li></ul>
+<ul><li>Berserker's Hauberk
+<ul><li>+3.5% Enhanced Damage per Level (Complete Set/3 piece) reduced to +3%</li></ul></li></ul>
+<ul><li>Berserker's Hatchet
+<ul><li>+1 to Barbarian Skills (Complete Set/3 pieces) replaced with +1 Maximum Damage per Level</li></ul></li></ul>
+<ul><li>Infernal Spire
+<ul><li>Re-added +150% Enhanced Damage to Undead</li></ul></li></ul>
+<ul><li>Death's Touch
+<ul><li>+25% Enhanced Damage increased to +[60-90]%</li></ul></li></ul>
+<ul><li>Death's Hand
+<ul><li>75% Poison Length Reduction reduced to 45%</li></ul></li></ul>
+<ul><li>Civerb's Ward
+<ul><li>+[21-22] to Mana (with Civerb's Icon) replaced with +10% Physical Damage Reduction (with Civerb's Icon)</li></ul></li></ul>
+<ul><li>Cathan's Seal
+<ul><li>+10 to Maximum Damage (4 items) changed to (3 items)</li></ul></li></ul>
+<ul><li>Angelic Sickle
+<ul><li>Added +12 to Maximum Damage</li></ul></li></ul>
+<ul><li>Milabrega's Rod
+<ul><li>12% Chance to Cast Level 6 Frost Nova on Striking (3 items) changed to (2 items)</li></ul></li></ul>
+<ul><li>Milabrega's Robe
+<ul><li>+100% Enhanced Defense (2 items) is no longer a set bonus and is now a natural stat on the item and rolls [60-100]%</li>
+<li>14% Chance to Cast Level 5 Frost Nova on Striking (3 items) changed to (2 items)</li></ul></li></ul>
+<ul><li>Tancred's Spine
+<ul><li>+[20-30]% Enhanced Damage increased to +[30-45]%</li></ul></li></ul>
+<ul><li>Tancred's Weird
+<ul><li>Added 1-15 Lightning Damage</li></ul></li></ul>
+<ul><li>Wilhelm's Pride
+<ul><li>+100% Damage to Demons (3 items) increased to +150%</li></ul></li></ul>
+<ul><li>Magnus's Skin
+<ul><li>+100% Damage to Undead (3 items) increased to +150%</li></ul></li></ul>
+<ul><li>Dark Adherent
+<ul><li>Added 5% Chance to Cast Level 18 Bone Armor when Struck (3 items)</li>
+<li>+[24-34] Fire Resistance increased to +[40-55]</li></ul></li></ul>
+<ul><li>Naj's Puzzler
+<ul><li>[6-45] Lightning Damage increased to [6-450]</li></ul></li></ul>
+<ul><li>Griswold's Legacy (Complete Set Bonus)
+<ul><li>+30% Faster Hit Recovery removed</li></ul></li></ul>
+<ul><li>Griswold's Honor
+<ul><li>+2 to Defensive Skills (2 items) set bonus is no longer a set bonus and is now a natural stat on the item</li>
+<li>Added +30% Faster Hit Recovery (2 items) set bonus</li></ul></li></ul>
+<ul><li>Immortal King's Stone Crusher
+<ul><li>+[150-200]% Enhanced Damage increased to +[175-225]%</li>
+<li>+[150-200]% Damage to Demons increased to +[175-225]%</li>
+<li>+[150-200]% Damage to Undead increased to +[175-225]%</li>
+<li>Once again has Indestructible (currently bugs when ethereal and will not be fixed this season, so this is a temporary solution)</li></ul></li></ul>
+<ul><li>M'avina's True Sight
+<ul><li>+15% to Fire Skill Damage reduced to +5% (Complete Set)</li></ul></li></ul>
+<ul><li>M'avina's Icy Clutch
+<ul><li>+15% to Cold Skill Damage reduced to +5% (Complete Set)</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="PVP">PVP</h2></div>
+<ul><li>Added PvP charms to the PvP arena vendors that can be purchased with gold
+<ul><li>These are roughly mid-rolled charms that only work while you are within the arena</li></ul></li></ul>
+<ul><li>Added a PvP modifier tome in the PvP arenas
+<ul><li>Note: This tome can be interacted with to see the modifiers applied to skills within the PvP arena</li></ul></li></ul>
+<ul><li>PvP maps from Akara will now auto-stack</li>
+<li>Disabled pierce in the PvP arena</li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Normal/Nightmare_PvP_Modifiers"><span id="Normal.2FNightmare_PvP_Modifiers"></span>Normal/Nightmare PvP Modifiers</h3></div>
+<ul><li>Amazon
+<ul><li>Cold Arrow: 100% -&gt; 150%</li>
+<li>Fire Arrow: 100% -&gt; 150%</li>
+<li>Ice Arrow: 175% -&gt; 200%</li>
+<li>Freezing Arrow: 175% -&gt; 200%</li>
+<li>Lightning Bolt: 85% -&gt; 80%</li>
+<li>Plague Javelin: 85% -&gt; 90%</li></ul></li></ul>
+<ul><li>Assassin:
+<ul><li>Blade Sentinel: 75% -&gt; 85%</li></ul></li></ul>
+<ul><li>Barbarian:
+<ul><li>Whirlwind: 75% -&gt; 70%</li></ul></li></ul>
+<ul><li>Druid:
+<ul><li>Poison Creeper: 80% -&gt; 15%</li></ul></li></ul>
+<ul><li>Sorceress:
+<ul><li>Blizzard: 145% -&gt; 100%</li>
+<li>Charged Bolt: 185% -&gt; 170%</li>
+<li>Combustion: 80% -&gt; 50%</li>
+<li>Frost Nova: 165% -&gt; 185%</li>
+<li>Fire Ball: 95% -&gt; 90%</li>
+<li>Fire Bolt: 95% -&gt; 75%</li>
+<li>Ice Barrage: 175% -&gt; 190%</li>
+<li>Ice Bolt: 135% -&gt; 110%</li>
+<li>Inferno: 114% -&gt; 125%</li>
+<li>Lightning: 200% -&gt; 180%</li>
+<li>Nova: 150% -&gt; 180%</li></ul></li></ul>
+<ul><li>Paladin:
+<ul><li>Holy Light: 100% -&gt; 15%</li></ul></li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Adjusted_PvP_Modifiers">Adjusted PvP Modifiers</h3></div>
+<ul><li>Blade Sentinel: 60% -&gt; 75%</li>
+<li>Blade Fury: 60% -&gt; 75%</li>
+<li>Holy Light: 100% -&gt; 15%</li>
+<li>Zeal: 75% -&gt; 85%</li>
+<li>Tornado: 50% -&gt; 40%</li>
+<li>Poison Creeper: 80% -&gt; 15%</li>
+<li>Whirlwind: 110% -&gt; 95%</li>
+<li>Ice Bolt: 135% -&gt; 145%</li>
+<li>Ice Blast: 135% -&gt; 145%</li>
+<li>Glacial Spike: 135% -&gt; 145%</li>
+<li>Frost Nova: 125% -&gt; 140%</li>
+<li>Frozen Orb: 115% -&gt; 130%</li>
+<li>Fire Wall: 100% -&gt; 120%</li>
+<li>Nova: 140% -&gt; 150%</li>
+<li>Lightning: 180% -&gt; 200%</li>
+<li>Plague Javelin: 40% -&gt; 55%</li>
+<li>Magic Arrow: 100% -&gt; 130%</li>
+<li>Ice Arrow: 120% -&gt; 150%</li>
+<li>Freezing Arrow: 130% -&gt; 160%</li>
+<li>Immolation Arrow: 135% -&gt; 155%</li></ul>
+<div class="mw-heading mw-heading2"><h2 id="PATCHES">PATCHES</h2></div>
+<div class="mw-heading mw-heading3"><h3 id="Season_10_Patch_1_(2025-10-26)"><span id="Season_10_Patch_1_.282025-10-26.29"></span>Season 10 Patch 1 (2025-10-26)</h3></div>
+<ul><li>Reduced the damage of the Arreat Battlefield boss</li>
+<li>Modified new uber material drop rates slightly</li></ul>
+<ul><li>Fixed locked inventory preventing players from giving their mercenary potions</li>
+<li>Fixed an issue with the hotkey for Show Items not working</li>
+<li>Fixed an issue with Black Soulstone not dropping from Uber Tristram</li>
+<li>Fixed an issue with Cow King's set transform animation sometimes crashing players</li>
+<li>Fixed an issue with Horazon Map event sunder modifiers sometimes working incorrectly</li>
+<li>Fixed an issue where River of Flame was not properly getting corrupted as Corrupted Zone</li>
+<li>Fixed an issue where Diablo's Lightning attack dealt 0 damage</li>
+<li>Fixed an issue with Fortified map bosses not getting their extra 25% chance to drop an additional droptable</li>
+<li>Fixed Tower Shield having incorrect armor and smite damage values</li>
+<li>Fixed Pavise having incorrect armor and smite damage values</li>
+<li>Fixed Phoenix Strike displaying incorrect synergy values on the tooltip</li></ul>
+<p>---
+</p><p>A bloodstained parchment was found on the corpse of a holy man. It reads:<br />
+<i>Fresh meat, demonic to the bone<br />
+Where seeds of corruption have sown.<br />
+Awaken Hell's flames on those who are free,<br />
+the Shadow of Hatred shall come for thee.</i>
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Season_10_Patch_#2_(2024-10-29)"><span id="Season_10_Patch_.232_.282024-10-29.29"></span>Season 10 Patch #2 (2024-10-29)</h3></div>
+<ul><li>Fixed dungeon monsters having Season 9 resistance values</li>
+<li>Fixed Horadrim Scarabs not getting the proper drop rate increase from Uber Ancients and the Shadown of Mendeln event</li>
+<li>Holy Shield and Holy Sword are now properly removed when entering uber arenas</li>
+<li>Fixed Uber Ancients and dungeon bosses rune drop rate being lower than intended</li>
+<li>Fixed the Cow King set turning you into a cow instead of a Hell Bovine</li>
+<li>Fixed the Demon Road and Ashen Plains bosses being stunnable</li>
+<li>Desecrated amulets now have their missing special twist</li>
+<li>Reduced the health of Lucion's portals by ~17%</li>
+<li>Reduced the stun duration from Lucion's Anguished Mothers from 2 seconds to 1 second</li>
+<li>Fixed a bug that caused ground effects in the Lucion fight to not display their proper locations</li>
+<li>Fixed a bug that allowed mercenaries to enter the Lucion arena</li>
+<li>Enabled Lucion kills in the kill statistics</li>
+<li>Reduced the amount of tracked meteors in Diablo Clone</li>
+<li>Disabled non-targeted meteors from spawning during the nova phase</li>
+<li>Attempted to increase the friends list capacity from 40 to 75</li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Season_10_Patch_#3_(2024-11-02)"><span id="Season_10_Patch_.233_.282024-11-02.29"></span>Season 10 Patch #3 (2024-11-02)</h3></div>
+<ul><li>Fixed Zhar's Sanctum and Warlord of Blood maps having much higher density than intended</li>
+<li>Reduced the chance for Cantors to cast Blizzard in Zhar's Sanctum</li>
+<li>Fixed Bone Armor removing Chilling Armor and Shiver Armor</li>
+<li>Disabled Bone Spirits during the nova phase on Diablo Clone</li>
+<li>Reduced the explosion size of Diablo Clone's meteors from 5 to 3</li>
+<li>Fixed a crash that can happen when desecrating amulets</li>
+<li>Made server improvements to help with the "Account already logged in" issue.</li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Season_10_Patch_#4_(2024-11-09)"><span id="Season_10_Patch_.234_.282024-11-09.29"></span>Season 10 Patch #4 (2024-11-09)</h3></div>
+<ul><li>Several maintenance  fixes</li>
+<li>Removed melee splash from map bosses</li>
+<li>Fixed hardcore Tier 2 Lucion auras not being account-wide</li></ul>
+</td></tr></tbody></table></div>

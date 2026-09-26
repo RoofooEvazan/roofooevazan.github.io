@@ -1,0 +1,708 @@
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="mw-heading mw-heading1"><h1 id="Game_errors_&amp;_crashes"><span id="Game_errors_.26_crashes"></span>Game errors &amp; crashes</h1></div>
+<div class="mw-heading mw-heading2"><h2 id="Unhandled_Exception:_ACCESS_VIOLATION_(c0000005)"><span id="Unhandled_Exception:_ACCESS_VIOLATION_.28c0000005.29"></span>Unhandled Exception: ACCESS_VIOLATION (c0000005)</h2></div>
+<p><b>This is a generic, catch-all error and is not a Project Diablo 2 only issue.  Nearly all other Diablo II mods have had some users suffer from this problem. You can also read the <a rel="nofollow" class="external text" href="https://us.battle.net/support/en/article/27703?flowTrackingId">D2R page</a> which mentions the same issue with a few steps to address it too. </b>
+</p><p><b>The issue does not affect everyone, only some people ever run into this issue.  For some it has appeared after their first time playing, and for others it has come up after many seasons with no prior issues.</b>
+</p><p><b>Try each of these one at a time and test the game after.  Don't change them all at once</b>
+</p><p><br />
+</p>
+<ol><li>Reboot your computer as a first step and see if it goes away.  This is all it is for some people.  Try rebooting 4-5 times even.
+<ul><li><b>Note: Shutting down is not the same as rebooting.  Only a reboot will fully clear out certain portions of Windows.</b></li></ul>
+<dl><dd><br /></dd></dl></li>
+<li>If you are using PlugY, make sure you are not mixing -3dfx and -w options in the shortcut and/or PlugY.ini file.  Remove one or the other.
+<dl><dd><br /></dd></dl></li>
+<li>Make sure you have an exception/exclusion created in your anti-virus (likely Windows Defender) for the entire Diablo II folder. <b>See: <a href="#How-to_create_an_exception_in_Windows_Security/Defender">#How-to create an exception in Windows Security/Defender</a></b>
+<ul><li>This is part of the normal install process so you should have it anyways.  If you get to the last option and end up changing the installation folder, you will need to update this.</li></ul>
+<dl><dd><br /></dd></dl></li>
+<li>Create overrides for the <b>ASLR</b> protection settings in Windows Exploit Protection for the <b>Diablo II.exe</b> and <b>Game.exe</b> files inside of the <b>ProjectD2</b> folder.
+<ol><li>Go to <b>Settings -&gt; Windows Security -&gt; App &amp; browser control -&gt; Exploit protection -&gt; Exploit protection settings.</b></li>
+<li>Click on <b>Program settings</b>, click the <b>Plus (+)</b>, select “<b>Choose exact file path</b>” and select the <b>Game.exe</b> file in the <b>ProjectD2</b> folder, <b>NOT</b> the base <b>Diablo II</b> folder.</li>
+<li><b>There are two ASLR exclusions.</b> At a minimum, these must be overridden but you can also do all of them as well.</li>
+<li><b>Make sure to check the override and that the switch is set to Off</b>
+<dl><dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:WindowsExploitProtectionProgramExclusion.png" class="mw-file-description" title="Windows Exploit Protection Program Exclusion"><img alt="Windows Exploit Protection Program Exclusion Window" src="//static.wikitide.net/projectdiablo2wiki/f/f1/WindowsExploitProtectionProgramExclusion.png" decoding="async" loading="lazy" width="844" height="589" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:WindowsExploitProtectionProgramExclusion_Override.png" class="mw-file-description" title="Windows Exploit Protection Program Exclusion - Mandatory ASLR"><img alt="Windows Exploit Protection Program Exclusion - Mandatory ASLR" src="//static.wikitide.net/projectdiablo2wiki/6/6a/WindowsExploitProtectionProgramExclusion_Override.png" decoding="async" loading="lazy" width="539" height="248" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:WindowsExploitProtectionProgramExclusionBottom-upASLROverride.png" class="mw-file-description" title="Windows Exploit Protection Override - Bottom-up ASLR"><img alt="Windows Exploit Protection Override - Bottom-up ASLR" src="//static.wikitide.net/projectdiablo2wiki/4/41/WindowsExploitProtectionProgramExclusionBottom-upASLROverride.png" decoding="async" loading="lazy" width="532" height="247" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd></dl></li>
+<li><b>Once again, make sure to check the override and that the switch is set to Off, exactly as it shows in the images above.</b></li>
+<li>Repeat for <b>Diablo II.exe</b> as well as <b>PlugY.exe</b> if you are using it.</li>
+<li><b>Reboot your computer.  DO NOT SKIP THIS</b>
+<dl><dd><br /></dd></dl></li></ol></li>
+<li>If you still receive the error or a new one whether at the same or different spot, go back to the previous step but apply every override.
+<ol><li>Pay careful attention to the checkboxes and toggles to make sure they match the images above (checked and toggled off).</li>
+<li>Reboot again
+<dl><dd><br /></dd></dl></li></ol></li>
+<li><b>See: <a href="#How-to_run_the_game_with_different_compatibility_settings">#How-to run the game with different compatibility settings</a></b></li>
+<li>This could be due to sound device issues.  <b>See: <a href="#Crash_due_to_sound_issues">#Crash due to sound issues</a></b></li>
+<li>This could be due to display drivers issues.  <b>See: <a rel="nofollow" class="external text" href="https://us.battle.net/support/en/article/31024">page</a></b> for steps. Windows Update does not always automatically update the display drivers. Check the Nvidia or AMD software/website to check if there are newer display drivers.
+<dl><dd><br /></dd></dl></li>
+<li><b>AMD GPUs only:</b> Some users have reported issues with particular versions of AMD GPU drivers. A good test for this is to try booting the game in ddraw mode. If ddraw works, this can be an indicator that an AMD driver is to blame. A good next step is to try rolling back your AMD drivers, rebooting, and seeing if you can start the game in 3dfx. Sometimes rolling back and then redoing the update to the latest driver again can resolve the issue as well.
+<dl><dd><br /></dd></dl></li>
+<li>If the issue is still not resolved, backup your Save folder and any other files you want to keep (you can just make a copy of the entire Diablo II folder) and then perform a clean reinstall (properly uninstall Diablo 2 and any PD2 Launchers), and delete the Diablo II folder if it still exists.  See the <b><a href="#How-to_install_Project_Diablo_2">#How-to install Project Diablo 2</a></b> guide.
+<ul><li><b>Again, make sure to backup anything you may want to keep (save files, loot filters, etc).  Please read and follow the instructions closely.</b></li>
+<li>If you have any questions, please ask on Discord in the the <b><a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/770081262982529064">#tech-support</a></b> channel.</li></ul></li></ol>
+<div class="mw-heading mw-heading2"><h2 id="Halt_error">Halt error</h2></div>
+<ol><li>Make sure you have an English version of Diablo 2 + LoD installed. <b>See: <a href="#How-to_install_Project_Diablo_2">#How-to install Project Diablo 2</a></b> for links and information on downloading the proper installer.</li>
+<li>Try changing loot filters -- this is harder to test unless you can consistently reproduce the error.</li>
+<li>If you have tried using any Glide wrappers (such as Sven's) you may need to remove it or perform a reinstall of the game and launcher.</li>
+<li>Your installation may be corrupt.  Reinstall everything (Diablo II and the launcher) and make sure you have an exception created.  <b>See: <a href="#How-to_install_Project_Diablo_2">#How-to install Project Diablo 2</a></b></li>
+<li>This could be due to sound device issues.  <b>See: <a href="#Crash_due_to_sound_issues">#Crash due to sound issues</a></b></li>
+<li>If it happens during Rathma or other specific encounters, use the <b><a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/802993961827696640">#create-ticket</a></b> channel on Discord to report the issue.  The ticket will have information about logs you can submit.</li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Failed_to_load_ProjectDiablo.dll">Failed to load ProjectDiablo.dll</h2></div>
+<ol><li><b>See: <a href="#Problems_with_the_PD2_Launcher">#Problems with the PD2 Launcher</a></b></li>
+<li><b>Make a backup of anything you may want to keep (save files, loot filters, etc).</b></li>
+<li>Perform a clean reinstall (properly uninstall Diablo 2 and any PD2 Launchers), and delete the Diablo II folder if it still exists.  See the <b><a href="#How-to_install_Project_Diablo_2">#How-to install Project Diablo 2</a></b> guide.
+<ul><li><b>Please read and follow the instructions closely.</b></li>
+<li>If you have any questions, please ask on Discord in the the <b><a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/770081262982529064">#tech-support</a></b> channel.</li></ul></li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Crash_when_changing_acts">Crash when changing acts</h2></div>
+<ol><li>Remove the -ns (no sound) argument from your game shortcut.</li>
+<li>Check your system sound settings.  If you do not have any active sound output devices, it is the same as using the -ns option.
+<ul><li>Connect or enable a sound device for the game to use.  You can mute the game volume in-game or through the system's sound mixer.</li>
+<li>If you don't have one then you will simply have to deal with the problem until you can add or enable a device.</li></ul></li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Crash_when_creating_or_joining_games">Crash when creating or joining games</h2></div>
+<ol><li><b>See: <a href="#Halt_error">#Halt error</a></b></li>
+<li><b>See: <a href="#Unhandled_Exception:_ACCESS_VIOLATION_(c0000005)">#Unhandled Exception: ACCESS_VIOLATION (c0000005)</a></b></li>
+<li><b>See: <a href="#Crash_due_to_sound_issues">#Crash due to sound issues</a></b></li>
+<li>Make sure you have an exception in Defender or other anti-virus. <b>See: <a href="#How-to_create_an_exception_in_Windows_Security/Defender">#How-to create an exception in Windows Security/Defender</a></b></li>
+<li>Try compatibility mode.  <b>See: <a href="#How-to_run_the_game_with_different_compatibility_settings">#How-to run the game with different compatibility settings</a></b></li>
+<li>Your installation may be corrupt and you'll need to reinstall.  <b>See: <a href="#How-to_install_Project_Diablo_2">#How-to install Project Diablo 2</a></b>
+<ul><li>Try installing to a non-default location (as mentioned in the install guide)</li>
+<li>Try reinstalling with enGB (English EU) version of both the Diablo 2 + Expansion installers instead of enUS (as mentioned in the install guide)</li></ul></li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Crash_when_joining_games_but_able_to_create_them">Crash when joining games but able to create them</h2></div>
+<p><b>Try these one at a time and re-test joining a game.  You do not need to make all of these changes all at once.</b>
+</p>
+<ol><li>Make sure you have an exception in Defender or other anti-virus. <b>See: <a href="#How-to_create_an_exception_in_Windows_Security/Defender">#How-to create an exception in Windows Security/Defender</a></b></li>
+<li>Try compatibility mode.  <b>See: <a href="#How-to_run_the_game_with_different_compatibility_settings">#How-to run the game with different compatibility settings</a></b></li>
+<li>Create an override for the <b>Validate Heap Integrity</b> protection in <b>Windows Exploit Protection</b> for the <b>Diablo II.exe</b> and <b>Game.exe</b> files inside of the <b>ProjectD2</b> folder.
+<ol><li>Go to <b>Settings -&gt; Windows Security -&gt; App &amp; browser control -&gt; Exploit protection -&gt; Exploit protection settings.</b></li>
+<li>Click on <b>Program settings</b>, click the <b>Plus (+)</b>, select “<b>Choose exact file path</b>” and select the <b>Game.exe</b> file in the <b>ProjectD2</b> folder, <b>NOT</b> the base <b>Diablo II</b> folder.</li>
+<li><b>Make sure to check the override and that the switch is set to Off</b>
+<dl><dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:WindowsExploitProtectionProgramExclusion.png" class="mw-file-description" title="Windows Exploit Protection Program Exclusion"><img alt="Windows Exploit Protection Program Exclusion Window" src="//static.wikitide.net/projectdiablo2wiki/f/f1/WindowsExploitProtectionProgramExclusion.png" decoding="async" loading="lazy" width="844" height="589" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:WindowsExploitProtectionProgramExclusionValidateHeapIntegrityOverride.png" class="mw-file-description" title="Windows Exploit Protection Program - Validate Heap Integrity"><img alt="Windows Exploit Protection Program - Validate Heap Integrity" src="//static.wikitide.net/projectdiablo2wiki/f/f5/WindowsExploitProtectionProgramExclusionValidateHeapIntegrityOverride.png" decoding="async" loading="lazy" width="532" height="247" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd></dl></li>
+<li><b>Once again, make sure to check the override and that the switch is set to Off, exactly as it shows in the images above.</b></li>
+<li>Repeat for <b>Diablo II.exe</b> as well as <b>PlugY.exe</b> if you are using it.</li>
+<li><b>Reboot your computer.  DO NOT SKIP THIS</b>
+<dl><dd><br /></dd></dl></li></ol></li>
+<li>Your installation may be corrupt and you'll need to reinstall.  <b>See: <a href="#How-to_install_Project_Diablo_2">#How-to install Project Diablo 2</a></b>
+<ul><li>Try installing to a non-default location (as mentioned in the install guide)</li>
+<li>Try reinstalling with enGB (English EU) version of both the Diablo 2 + Expansion installers instead of enUS (as mentioned in the install guide)</li>
+<li><b>If you change the installation folder, you will need to update any exceptions or overrides you have made</b></li></ul></li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Crash_when_looking_at_skills">Crash when looking at skills</h2></div>
+<ol><li>Make sure you are using an English (US or EU) version of the game.  <b>See: <a href="#How-to_install_Project_Diablo_2">#How-to install Project Diablo 2</a></b></li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Crash_when_looking_at_items">Crash when looking at items</h2></div>
+<ol><li>Make sure you are using an English (US or EU) version of the game.  <b>See: <a href="#How-to_install_Project_Diablo_2">#How-to install Project Diablo 2</a></b></li>
+<li>The loot filter you are using likely has an error in it, try a different one to see if it still happens.</li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Crash/error_when_viewing_the_Item_menu_in_the_in-game_Settings_screen"><span id="Crash.2Ferror_when_viewing_the_Item_menu_in_the_in-game_Settings_screen"></span>Crash/error when viewing the Item menu in the in-game Settings screen</h2></div>
+<p>This happens when you disable your loot filter and your Filter level is set to anything but 1.  Manually setting it back to 1 fixes it and you should be able to interact with the menu again.  After you load your filter again you can set the level back to what it was.
+</p>
+<ol><li>Close out of Diablo II and the Launcher.</li>
+<li>Go to into the ProjectD2 directory and open "ProjectDiablo.cfg" in notepad or another text editor.</li>
+<li>Look for the line beginning with "Filter Level:" and set it to "Filter Level: 1"</li>
+<li>Save the file and try the Settings/Item menu again</li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Crash_when_launching_game_with_SGD2FreeResolution.json_error">Crash when launching game with SGD2FreeResolution.json error</h2></div>
+<ol><li>Locate the <b>SGD2FreeResolution.json</b> in your <b>ProjectD2</b> folder and delete it.</li>
+<li>Run the Launcher again and press Play to update</li>
+<li>If that does not work, reinstall the PD2 Launcher -- you may have to delete the ProjectD2 folder to clear out any issues.  Backup any filters/files if needed.</li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Crash_due_to_sound_issues">Crash due to sound issues</h2></div>
+<p>If you have no sound devices listed in Windows and/or sound devices with driver issues you may have <b>Unhandled Exception</b> or <b>Halt</b> game crashes.
+</p>
+<ol><li>Check your Windows Sound Settings and make sure you have a valid output device selected.  If you have none, try plugging in a USB headset or another sound device.</li>
+<li>Check your Device Manager for any sound devices that may have issues -- they will typically have an exclamation on them.  You may need to resolve any issues with those devices.</li>
+<li>If you are unable to fix the problem, you can try creating a shortcut to <b>Game.exe</b> in the <b>ProjectD2</b> folder and adding the <b>-ns</b> argument to the target to set "No Sound"
+<ul><li>This will likely cause you to <a href="#Crash_when_changing_acts">#Crash when changing acts</a> and if playing single player, can prevent you from completing the act.</li></ul></li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="CD-ROM_drive_error">CD-ROM drive error</h2></div>
+<p>This is due to Anti-virus, Windows Security, Compatibility Mode or a corrupt install -- or a combination of them.  The guides below include the various exceptions and overrides that typically correct the issue.
+</p>
+<ol><li><b>See: <a href="#How-to_run_the_game_with_different_compatibility_settings">#How-to run the game with different compatibility settings</a></b></li>
+<li><b>See: <a href="#How-to_create_an_exception_in_Windows_Security/Defender">#How-to create an exception in Windows Security/Defender</a></b></li>
+<li><b>See: <a href="#Unhandled_Exception:_ACCESS_VIOLATION_(c0000005)">#Unhandled Exception: ACCESS_VIOLATION (c0000005)</a></b></li>
+<li><b>See: <a href="#Crash_when_joining_games_but_able_to_create_them">#Crash when joining games but able to create them</a></b></li>
+<li><b>See: <a href="#How-to_install_Project_Diablo_2">#How-to install Project Diablo 2</a></b></li></ol>
+<div class="mw-heading mw-heading2"><h2 id="Unable_to_enter_game,_generic_bad_file/inventory_data"><span id="Unable_to_enter_game.2C_generic_bad_file.2Finventory_data"></span>Unable to enter game, generic bad file/inventory data</h2></div>
+<p>You likely have one or more items that have been updated in a season and are not compatible.  These changes are always explained well in advance on Discord in the <b><a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/725189841314250782">#announcements</a></b> channel.  
+</p><p><b>It is up to you to check for any changes like these.  The PD2 team will not fix any stash or character that is no-longer playable other than to delete them.</b>
+</p><p><br />
+<b>Offline (Single Player/Plugy) Options</b>
+</p>
+<ol><li>Backup your saves and Diablo II folder in-case you need to start over</li>
+<li>Try the character converter utility <b><a rel="nofollow" class="external free" href="https://github.com/BetweenWalls/PD2-Converter">https://github.com/BetweenWalls/PD2-Converter</a></b>
+<dl><dd><ul><li><b>Make sure to convert your character files and your PlugY stash file.</b></li></ul></dd></dl></li>
+<li>If the converter doesn't work, check the pinned comments on Discord in the <b><a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/770081262982529064">#tech-support</a></b> channel to see if there is a method to roll-back your version
+<ol><li>If one exists, attempt to roll-back your version and then load each character and remove all items that were announced to be incompatible.
+<dl><dd><ul><li><b>You need to go through both the character and mercenary and every personal and shared stash tab.</b></li></ul></dd></dl></li>
+<li>Once you have removed all affected items, update to the latest version through the Launcher and make sure your Launcher version is the latest</li>
+<li>Repeat this process as needed until you remove all affected items</li></ol></li>
+<li>If no method is available or they do not solve the issue, your options are to:
+<ol><li>Continue to use your non-updated copy until a method is available (not always possible)</li>
+<li>Make a copy of your installation and saves to fix later and play with a fresh characters/stash</li>
+<li>Not play and wait for a possible method that works</li>
+<li>Delete all affected characters and/or your stash file and start from new</li></ol></li></ol>
+<p><br />
+<b>Online (non-Ladder) Options</b>
+</p>
+<ol><li><b>For Season 8 read this -&gt; <a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/725189841314250782/1154819777584439367">#announcements</a></b></li>
+<li>Create a new, non-Ladder character and attempt to create a game</li>
+<li>If you are able to create a game then your shared stash doesn't contain affected items.  You will have to delete any characters that receive the error.</li>
+<li>If you receive the same error with a fresh character then your shared stash contains incompatible items and will not be able to use any non-Ladder characters.
+<ol><li>You will need to <b><a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/802993961827696640">#create-ticket</a></b> on Discord and request that your shared stash be deleted.  You will lose all items in your shared stash.</li>
+<li>After your stash has been cleared, you can try each character again.  If you still receive the error then an affected item is on that character either worn, in inventory or stash and will have to be deleted.</li></ol></li></ol>
+<div class="mw-heading mw-heading1"><h1 id="Performance_&amp;_graphical_issues"><span id="Performance_.26_graphical_issues"></span>Performance &amp; graphical issues</h1></div>
+<div class="mw-heading mw-heading2"><h2 id="Choppy_FPS_while_playing_online_or_offline_with_DDraw_graphics">Choppy FPS while playing online or offline with DDraw graphics</h2></div>
+<ol><li>Reboot</li>
+<li>If you have a laptop and hybrid graphics (integrated + dedicated gpu) <b>See: <a href="#Poor_performance_with_hybrid_graphics">#Poor performance with hybrid graphics</a></b></li>
+<li>If the Launcher Options for Show Window Borders is enabled, try turning it off.</li>
+<li>Reset the settings by closing out of the game and launcher and delete the <b>ddraw.ini</b> file in the <b>ProjectD2</b> folder.</li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Strange_graphics_when_moving_with_Motion_Prediction_enabled">Strange graphics when moving with Motion Prediction enabled</h2></div>
+<ol><li>In the Diablo 2 in-game Video Options (ESC Menu), change the Lighting Quality to Medium or High</li>
+<li>Also try turning Perspective Off in the same options menu</li></ol>
+<div class="mw-heading mw-heading2"><h2 id="Strange_color_shifts">Strange color shifts</h2></div>
+<ol><li>Open the D2GL settings menu (CTRL+o)</li>
+<li>On the Graphics tab disable <b>FXAA</b></li>
+<li>Update your video card drivers if possible</li>
+<li>If you are using a laptop see <a href="#Poor_performance_with_hybrid_graphics">#Poor performance with hybrid graphics</a> if applicable
+<dl><dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:Fxaa_colors.PNG" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/6/65/Fxaa_colors.PNG" decoding="async" loading="lazy" width="1056" height="535" class="mw-file-element" /></a></span></dd></dl></li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Poor_performance_with_hybrid_graphics">Poor performance with hybrid graphics</h2></div>
+<p>If you have an integrated and dedicated video card (common in laptops) the game may be using the wrong video card.  The steps below are for creating an override for the game to force it to use the dedicated video card.  
+</p>
+<ol><li>Expand the section below for your make of video card and follow the steps</li>
+<li>In some cases Windows 10/11 will override your video card drivers.  You can also follow the <b>Windows 10/11 Graphics Settings</b> below to also set an additional override for the game.</li>
+<li>You will need to restart the game and sometimes your computer</li>
+<li>You can also adjust any performance settings in your video card's driver settings for the game, separate from your global settings.  You may need to play with various in-game and video card setting to find what works best for you</li>
+<li><b>Also see: <a href="#Poor_performance_with_3dfx_graphics_mode">#Poor performance with 3dfx graphics mode</a></b></li></ol>
+<table class="non-table mw-collapsible mw-collapsed">
+<caption><b>For Nvidia GPUs --&gt;&gt;</b>
+</caption>
+<tbody><tr>
+<td>
+<ol><li>Open the Nvidia Control Panel and go into the Manage 3D Settings section
+<dl><dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:NvidiaControlPanelProgramOverride.png" class="mw-file-description" title="Nvidia Control Panel"><img alt="Nvidia Control Panel" src="//static.wikitide.net/projectdiablo2wiki/c/cb/NvidiaControlPanelProgramOverride.png" decoding="async" loading="lazy" width="711" height="448" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd></dl></li>
+<li>Click on the Program Settings tab</li>
+<li>Click the Add button and find Diablo II in the list.
+<dl><dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:NvidiaControlPanelProgramOverride_AddProgram.png" class="mw-file-description" title="Nvidia Control Panel Add Program"><img alt="Nvidia Control Panel Add Program" src="//static.wikitide.net/projectdiablo2wiki/a/a4/NvidiaControlPanelProgramOverride_AddProgram.png" decoding="async" loading="lazy" width="469" height="210" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd></dl></li>
+<li>Hover over the program and make sure the path is to Game.exe in the ProjectD2 folder, not the base Diablo II folder or any other location</li>
+<li>If you don't see it in the list, click the Browse button and navigate to Game.exe in the ProjectD2 folder to add it</li>
+<li>Click Add Selected Program</li>
+<li>Change the preferred graphics processor to your dedicated card instead of Auto-Select or Integrated.</li>
+<li>Save the changes.</li></ol>
+</td></tr></tbody></table>
+<table class="non-table mw-collapsible mw-collapsed">
+<caption><b>For AMD GPUs --&gt;&gt;</b>
+</caption>
+<tbody><tr>
+<td>
+<ol><li>Follow this guide: <a rel="nofollow" class="external free" href="https://www.amd.com/en/support/kb/faq/dh-017">https://www.amd.com/en/support/kb/faq/dh-017</a></li></ol>
+</td></tr></tbody></table>
+<table class="non-table mw-collapsible mw-collapsed">
+<caption><b>Other GPU and/or Windows 10/11 Graphics Settings --&gt;&gt;</b>
+</caption>
+<tbody><tr>
+<td>
+<ol><li>Open the Graphics Settings options by going to Settings -&gt; Display -&gt; Graphics</li>
+<li>Click <b>Add</b> and locate <b>Game.exe</b> in your <b>ProjectD2</b> folder
+<dl><dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:WindowsGraphicsSettings.png" class="mw-file-description" title="Windows Graphics Settings"><img alt="Windows Graphics Settings" src="//static.wikitide.net/projectdiablo2wiki/9/96/WindowsGraphicsSettings.png" decoding="async" loading="lazy" width="533" height="534" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:WindowsGraphicsSettings_Browse.png" class="mw-file-description" title="Windows Graphics Settings - Browse"><img alt="Windows Graphics Settings - Browse" src="//static.wikitide.net/projectdiablo2wiki/c/cd/WindowsGraphicsSettings_Browse.png" decoding="async" loading="lazy" width="638" height="366" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd></dl></li>
+<li>Click <b>Diablo II</b> in the <b>app list</b> and then the <b>Options</b> button.  Make sure the path is to the correct <b>Game.exe</b> in the <b>ProjectD2</b> folder.
+<dl><dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:WindowsGraphicsSettings_AppOptions.png" class="mw-file-description" title="Windows Graphics Settings - App Options"><img alt="Windows Graphics Settings - App Options" src="//static.wikitide.net/projectdiablo2wiki/4/48/WindowsGraphicsSettings_AppOptions.png" decoding="async" loading="lazy" width="474" height="153" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd></dl></li>
+<li>Select the <b>High Performance</b> option which should list your dedicated GPU</li>
+<li>Click <b>Save</b>
+<dl><dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:WindowsGraphicsSettings_AppPreferences.png" class="mw-file-description" title="Windows Graphics Settings - App Options"><img alt="Windows Graphics Settings - App Options" src="//static.wikitide.net/projectdiablo2wiki/a/ab/WindowsGraphicsSettings_AppPreferences.png" decoding="async" loading="lazy" width="398" height="394" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd></dl></li></ol>
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading2"><h2 id="Poor_performance_with_3dfx_graphics_mode">Poor performance with 3dfx graphics mode</h2></div>
+<ol><li>If you only have an integrated or very old video card, you may have to switch to ddraw in the Launcher Options</li>
+<li>If you have hybrid (integrated + dedicated) graphics see: <b><a href="#Poor_performance_with_hybrid_graphics">#Poor performance with hybrid graphics</a></b>
+<ul><li><b>Also try the "Other Graphics" option in the link above even if you don't have hybrid graphics</b> or an Nvidia/AMD card.  Sometimes Windows will override the driver settings.</li></ul></li>
+<li>Even on high-end setups, uncapped or "ultra" settings can cause inconsistent performance which can lead to stuttering or more desync.  Try the following settings in the 3dfx menu (ctrl+o):
+<ul><li>FXAA off</li>
+<li>V-Sync off</li>
+<li>Max FPS = 60</li>
+<li>Shader = Bilinear (1-pass) or XBRZ-Freescale (1-pass) -- or any other 1-pass shader.</li></ul></li>
+<li>Change the power settings in the OS/video drivers to High/Max Performance</li>
+<li>Try adjusting other in-game or gpu software settings.</li>
+<li>Update your video card drivers</li>
+<li>If you are unable to resolve the issue, you may have something else on your system affecting the game's performance such as an OSD (on screen display) or audio software or anything else really.</li>
+<li>You can also ask on Discord in the <b><a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/770081262982529064">#tech-support</a></b> channel.</li></ol>
+<div class="mw-heading mw-heading2"><h2 id="Slow_mouse_movement_with_3dfx_graphics_enabled">Slow mouse movement with 3dfx graphics enabled</h2></div>
+<ol><li>In the advanced in-game settings (CTRL+O) try turning off FXAA and/or the HD Cursor setting.</li>
+<li>Try turning off v-sync in the same options.</li>
+<li>As a workaround, if you have more advanced mouse software you can also try creating a profile for the game with a higher DPI setting.</li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Black_screen_and/or_mouse_cursor_stuck_in_corner"><span id="Black_screen_and.2For_mouse_cursor_stuck_in_corner"></span>Black screen and/or mouse cursor stuck in corner</h2></div>
+<ol><li>Try turning off any On-Screen Display (OSD) or capture software you may have running:
+<ul><li>Geforce Experience</li>
+<li>AMD Catalyst</li>
+<li>AMD Adrenaline</li>
+<li>GPU Tweak</li>
+<li>MSI Afterburner</li>
+<li>OBS</li>
+<li>etc.</li></ul></li>
+<li>Delete the <b>UI.ini</b> file in the <b>ProjectD2</b> folder and launch the game again</li>
+<li>Try turning off the HD Cursor in the 3dfx menu (ctrl+o)</li>
+<li>Try switching to ddraw and creating a game then back to 3dfx
+<ul><li>If this fixes the issue, your resolution might be off.  If so:
+<ul><li>Switch to Windowed mode (ctrl+o) or ALT+Enter and then back to fullscreen</li>
+<li>You may need to update your in-game res.  <b>See: <a href="#Game_resolution_options_missing_and/or_crash_when_changing_resolution_in_game">#Game resolution options missing and/or crash when changing resolution in game</a></b></li></ul></li></ul></li>
+<li>Try forcing Diablo II to run with the proper video card with the link below
+<ul><li>This can sometimes be applicable even if you only have a single video card.  Try the <b>"Other GPU"</b> option at a minimum.</li>
+<li><b>See: <a href="#Poor_performance_with_hybrid_graphics">#Poor performance with hybrid graphics</a></b></li></ul></li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading1"><h1 id="In-game_issues">In-game issues</h1></div>
+<div class="mw-heading mw-heading2"><h2 id="Stash_tabs_not_working">Stash tabs not working</h2></div>
+<ol><li>Close out of the game and launcher.</li>
+<li>If you are on a laptop with hybrid graphics first do this: <b><a href="#Poor_performance_with_hybrid_graphics">#Poor performance with hybrid graphics</a></b> and then try your stash tabs again.</li>
+<li>Try changing your graphics mode to ddraw in the Launcher Options as a temporary workaround
+<ul><li>If you are able to use both 3dfx and ddraw, try changing modes and testing in game then switch back and test again.</li></ul></li>
+<li>Try changing your in-game resolution (ESC menu -&gt; Video) a couple times
+<ul><li>If your game crashes see: <b><a href="#Game_resolution_options_missing_and/or_crash_when_changing_resolution_in_game">#Game resolution options missing and/or crash when changing resolution in game</a></b></li></ul></li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Game_resolution_options_missing_and/or_crash_when_changing_resolution_in_game"><span id="Game_resolution_options_missing_and.2For_crash_when_changing_resolution_in_game"></span>Game resolution options missing and/or crash when changing resolution in game</h2></div>
+<ol><li>Do not try to change the setting quickly, wait 1-2 seconds between each, longer if needed</li>
+<li>These may seem strange however each method can give a different number of resolution options so you may have to try all of the following:
+<ul><li>Try clicking on the resolution setting to change it</li>
+<li>Try using the arrow keys to select the setting and then the left/right arrow keys to change it</li>
+<li>Try using the arrow keys to select the setting and then press enter to change it</li></ul></li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="You_have_music/ambient_sound_but_no_other_game_sounds"><span id="You_have_music.2Fambient_sound_but_no_other_game_sounds"></span>You have music/ambient sound but no other game sounds</h2></div>
+<ol><li>Try changing your surround sound settings on your sound card.</li>
+<li>Try changing your sound output device to another (headset, monitor, speakers, etc).</li>
+<li>Try running in ddraw and windowed mode (-w) from the Launcher options.</li>
+<li>Try Compatibility mode if it is not already turned on.  <b>See: <a href="#How-to_run_the_game_with_different_compatibility_settings">#How-to run the game with different compatibility settings</a></b></li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Can’t_click_on_in-game_Settings_button"><span id="Can.E2.80.99t_click_on_in-game_Settings_button"></span>Can’t click on in-game Settings button</h2></div>
+<ol><li>Make sure you are using CTRL+Click and not just regular clicking.</li>
+<li>Try switching graphics modes (3dfx or ddraw) in the Launcher Options</li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading1"><h1 id="Installation_&amp;_other_guides"><span id="Installation_.26_other_guides"></span>Installation &amp; other guides</h1></div>
+<div class="mw-heading mw-heading2"><h2 id="How-to_install_Project_Diablo_2">How-to install Project Diablo 2</h2></div>
+<ul><li>Project Diablo 2 is a free mod but it requires a legitimate install of Legacy Diablo 2 and Lord of Destruction <b>(not Resurrected)</b> from Blizzard.  If you do not own a copy or need to purchase a new copy, use the links below.</li></ul>
+<p><br />
+</p>
+<ul><li><b>Illegitimate cd-keys will result in the banning of your account.</b>  This will not be reversed but you are allowed to properly purchase a new copy and create a new account.</li></ul>
+<dl><dd><dl><dd><a rel="nofollow" class="external free" href="https://us.shop.battle.net/en-us/product/diablo-ii">https://us.shop.battle.net/en-us/product/diablo-ii</a></dd>
+<dd><a rel="nofollow" class="external free" href="https://us.shop.battle.net/en-us/product/diablo-ii-lord-of-destruction">https://us.shop.battle.net/en-us/product/diablo-ii-lord-of-destruction</a></dd></dl></dd></dl>
+<p><br />
+</p>
+<ul><li>If you already own the game you can use this link to check your keys. If you have Physical copies go to Account Overview to Redeem your cd-keys and download the digital installers.</li></ul>
+<dl><dd><dl><dd><a rel="nofollow" class="external free" href="https://account.battle.net/games#classic-game-accounts">https://account.battle.net/games#classic-game-accounts</a></dd></dl></dd></dl>
+<p><br />
+</p>
+<ul><li><b>You must use an English installer.</b>  To select the <b>enUS (English US)</b>, click the small gear icon next to the game's download link.  You can also try the <b>enGB (English EU)</b> version which has fixed some additional issues for others.</li></ul>
+<dl><dd><dl><dd><a rel="nofollow" class="external free" href="https://www.blizzard.com/en-us/download/">https://www.blizzard.com/en-us/download/</a></dd></dl></dd></dl>
+<p><br />
+</p>
+<ul><li>If you are having trouble with selecting an English installer on Blizzard's download page, below are direct links to the Downloaders from Blizzard's website:</li></ul>
+<dl><dd><b>English US (enUS) installer</b>
+<dl><dd><b><a rel="nofollow" class="external free" href="https://us.battle.net/download/getLegacy?product=D2DV&amp;locale=enUS&amp;os=WIN">https://us.battle.net/download/getLegacy?product=D2DV&amp;locale=enUS&amp;os=WIN</a></b></dd>
+<dd><b><a rel="nofollow" class="external free" href="https://us.battle.net/download/getLegacy?product=D2XP&amp;locale=enUS&amp;os=WIN">https://us.battle.net/download/getLegacy?product=D2XP&amp;locale=enUS&amp;os=WIN</a></b></dd></dl></dd></dl>
+<dl><dd><b>English EU (enGB) installer</b>
+<dl><dd><b><a rel="nofollow" class="external free" href="https://us.battle.net/download/getLegacy?product=D2DV&amp;locale=enGB&amp;os=WIN">https://us.battle.net/download/getLegacy?product=D2DV&amp;locale=enGB&amp;os=WIN</a></b></dd>
+<dd><b><a rel="nofollow" class="external free" href="https://us.battle.net/download/getLegacy?product=D2XP&amp;locale=enGB&amp;os=WIN">https://us.battle.net/download/getLegacy?product=D2XP&amp;locale=enGB&amp;os=WIN</a></b></dd></dl></dd></dl>
+<p><br />
+As a general tip, it is typically better to install Diablo II, ProjectD2 (and games in general) outside of a protected folder (C:\Program Files, C:\Program Files (x86), C:\Users) to prevent various issues.  Your Desktop, Documents, and other user folders are in C:\Users, don't use them.
+</p><p>Example: C:\Games\&lt;name of game&gt;.  For this guide we will be using "C:\Games\Diablo II" as the install location.
+</p><p><br />
+</p>
+<ol><li>Make sure you have a legal purchased copy of Diablo II and Lord of Destruction as stated above.</li>
+<li>Download the Diablo II and Lord of Destruction game clients from the link above.</li>
+<li>Download and Install  .NET 6.0 framework: <a rel="nofollow" class="external free" href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.29-windows-x86-installer">https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.29-windows-x86-installer</a></li>
+<li>Download the PD2 Launcher from <a rel="nofollow" class="external free" href="https://www.projectdiablo2.com">https://www.projectdiablo2.com</a></li>
+<li>Install Diablo II and when prompted, change the installation directory to C:\Games – <b>the installation path should update to C:\Games\Diablo II – if not, create the Games or Games\Diablo II folder and try again.</b></li>
+<li>Install the Lord of Destruction expansion.  It should automatically detect the Diablo II installation folder.
+<dl><dd><b>----- IMPORTANT ------</b></dd></dl></li>
+<li>Create an exception in your anti-virus for the <b>Diablo II</b> folder.  <b>See: <a href="#How-to_create_an_exception_in_Windows_Security/Defender">#How-to create an exception in Windows Security/Defender</a></b></li>
+<li><b>If you had any other previous Exceptions made from other guides and troubleshooting, makes sure to update them to the folder path you've just installed to.</b>
+<dl><dd><b>----- IMPORTANT ------</b></dd></dl></li>
+<li>Install the PD2 Launcher – browse to the location you installed Diablo II (C:\Games\Diablo II in this example) if it does not find it automatically.</li>
+<li><b>Optional:</b> Set the game to run in compatibility mode.  <b>See: <a href="#How-to_run_the_game_with_different_compatibility_settings">#How-to run the game with different compatibility settings</a></b></li>
+<li>Run the PD2 Launcher and press Play to automatically install any updates and launch the game.</li></ol>
+<div class="mw-heading mw-heading2"><h2 id="How-to_install_Project_Diablo_2_on_Linux_using_Lutris">How-to install Project Diablo 2 on Linux using Lutris</h2></div>
+<p><br />
+<b>Online installer from Lutris</b>
+<br />
+<b>PREREQUISITES:</b>
+</p>
+<ul><li>Lutris installed</li>
+<li>Wine installed
+<ul><li>Not all versions will work equally. Known working versions: wine-ge-8-26-x86_64 (Redhat, SteamOS, Mint)</li></ul></li></ul>
+<p><br />
+Click Install for the Wine Battle.net US version Installer for ProjectD2 on Lutris page <a rel="nofollow" class="external free" href="https://lutris.net/games/project-diablo-2/">https://lutris.net/games/project-diablo-2/</a>
+</p>
+<ol><li>Select the path where you want the wine prefix to be created. The rest of the steps will run within this new folder.</li>
+<li>Game files are downloaded directly from Blizzard servers, but P2P network seems to not work.</li>
+<li>Install Diablo 2 &amp; Diablo 2: LOD
+<ul><li>Accept EULA</li>
+<li>Enter valid key</li>
+<li>OK installation destination directory default C:\Program File (x86)\Diablo II</li>
+<li>Click Back and Exit installer</li></ul></li>
+<li>Install patch ( LODPatch_114d.exe)
+<ul><li>Click OK to install patch</li>
+<li>Game will automatically launch. You can close the game normally. If you are encountering a black screen use ALT+F4 or tap ESC several times to close the game.</li></ul></li>
+<li>Install .net6 (click Install then once Installation was successful click Close)
+<ul><li>Added environment variables to resolve an issue recognizing .net6 is installed. (July 10, 2025)</li></ul></li>
+<li>Install PD2Launcher.exe to location default C:\Program Files (x86)\Diablo II\ProjectD2
+<ul><li>When asked to visit site select Yes if you don't already have a Project Diablo 2 account. If you accidentally select No and need to register: <a rel="nofollow" class="external free" href="https://www.projectdiablo2.com/register">https://www.projectdiablo2.com/register</a></li>
+<li>If the screen was black then disable DXVK from the game's runner configuration</li></ul></li>
+<li>Click Play on Project Diablo 2 in Lutris to open the PD2Launcher. When opening for the first time you may be prompted with Update dialog. Click OK on each Update dialog that appears until you reach the Project Diablo 2 menu with the button that switches from "Updating..." to "Play".</li>
+<li>Clicking "Play" inside the PD2Launcher should open the modded version of the game.
+<ul><li>If clicking the button changes it to "Updating" then "Play" without opening the game try closing the Launcher, change the Wine runner in the Lutris settings and try again.</li></ul></li>
+<li>Once the game opens, you may need to use ALT+TAB to change focus so you can minimize the PD2 launcher since it may stay over the top of the game.</li></ol>
+<p><br />
+<b>Manual Install</b>
+<br />
+<b>PREREQUISITES:</b>
+</p>
+<ul><li>Blizzard Installers: <b>See: <a href="#How-to_install_Project_Diablo_2">#How-to install Project Diablo 2</a></b></li>
+<li>Lutris installed</li>
+<li>Wine installed
+<ul><li>Not all versions will work equally. One known working version is lutris-GE-Proton7-43-x86_64</li></ul></li></ul>
+<p><br />
+</p>
+<ol><li>Open <b>Lutris</b> and add a configuration for the game.
+<ol><li>From the <b>Lutris</b> window, click the <b>plus (+) icon</b> in top left corner and select <b>Add locally installed game</b>.
+<dl><dd><br /></dd>
+<dd><span typeof="mw:File"><a href="/wiki/File:Lutris_1.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/e/eb/Lutris_1.png/400px-Lutris_1.png" decoding="async" loading="lazy" width="400" height="265" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/thumb/e/eb/Lutris_1.png/600px-Lutris_1.png 1.5x, //static.wikitide.net/projectdiablo2wiki/thumb/e/eb/Lutris_1.png/800px-Lutris_1.png 2x" /></a></span></dd>
+<dd><br /></dd></dl></li>
+<li>Enter a name for the game such as <b>PD2</b>.</li>
+<li>Select <b>Wine</b> as the <b>Runner</b></li>
+<li>Click the the <b>Game options</b> tab and enter or browse to a path for where you want to store the Wine prefix.  You may need to create the folder you want to use.
+<ul><li>The <b>Path</b> can be anything but the <b>recommended</b> setting is <b>/home/&lt;user&gt;/Games/&lt;name from step above&gt;</b> e.g. <b>/home/tomcik/Games/PD2/</b></li></ul></li>
+<li>Choose <b>64-bit</b> for the <b>Prefix architecture</b>.
+<dl><dd><br /></dd>
+<dd><span typeof="mw:File"><a href="/wiki/File:Lutris_2.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/1/19/Lutris_2.png/400px-Lutris_2.png" decoding="async" loading="lazy" width="400" height="306" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/thumb/1/19/Lutris_2.png/600px-Lutris_2.png 1.5x, //static.wikitide.net/projectdiablo2wiki/thumb/1/19/Lutris_2.png/800px-Lutris_2.png 2x" /></a></span><span typeof="mw:File"><a href="/wiki/File:Lutris_3.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/3/3b/Lutris_3.png/400px-Lutris_3.png" decoding="async" loading="lazy" width="400" height="306" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/thumb/3/3b/Lutris_3.png/600px-Lutris_3.png 1.5x, //static.wikitide.net/projectdiablo2wiki/thumb/3/3b/Lutris_3.png/800px-Lutris_3.png 2x" /></a></span></dd>
+<dd><br /></dd></dl></li>
+<li>Click <b>Save</b>.
+<dl><dd><br /></dd></dl></li></ol></li>
+<li>Manually run the <b>Diablo II</b> installation files in this new prefix
+<ol><li>Select the new game you created in <b>Lutris</b></li>
+<li>Click the arrow button on the bottom of the <b>Lutris window</b></li>
+<li>Select <b>Run EXE inside Wine prefix</b>
+<dl><dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:Lutris_4.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/d/d7/Lutris_4.png" decoding="async" loading="lazy" width="208" height="271" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd></dl></li>
+<li>When prompted, browse to the installer file for <b>Diablo II</b> and select it to open it</li>
+<li>Follow the installation steps as you would in Windows
+<ul><li>The installation path can be the default location (C:\Program Files\Diablo II).  It shouldn't cause any problems.</li>
+<li>When you run the installer file for first time in the wine prefix it will be configured. <b>If you receive any prompts about wine-gecko and wine-mono</b>, choose <b>Yes</b></li></ul>
+<dl><dd><br /></dd></dl></li></ol></li>
+<li><b>All of the previous steps for manually running the installation files and completing the install need to be done for each installer</b>
+<ul><li>Diablo II</li>
+<li>Diablo II: Lord of Destruction</li>
+<li>PD2 Launcher</li></ul>
+<dl><dd><br /></dd></dl></li>
+<li>Configure game executable
+<ol><li><b>After</b> completing the above steps for <b>all three installers</b>, right-click the new game you created in <b>Lutris</b> (PD2) and choose <b>Configure'</b>.</li>
+<li>Go to the <b>Game options tab</b> and click <b>Browse</b> next to the <b>Executable setting</b></li>
+<li>Locate the <b>PD2Launcher.exe</b> file (installed in the Diablo II\ProjectD2 folder) and select it
+<dl><dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:Lutris_5.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/c/ca/Lutris_5.png" decoding="async" loading="lazy" width="384" height="411" class="mw-file-element" /></a></span><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:Lutris_6.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/1/18/Lutris_6.png" decoding="async" loading="lazy" width="844" height="358" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd></dl></li>
+<li>Go to the <b>Runner options tab</b> and select the desired version from the <b>Wine version</b> box
+<dl><dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:Lutris_wine_version.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/c/c4/Lutris_wine_version.png" decoding="async" loading="lazy" width="852" height="277" class="mw-file-element" /></a></span></dd></dl>
+<ul><li>Additional versions can be installed from the main window while hovering your mouse over Wine in the sidebar
+<dl><dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:Lutris_install_wine_versions.png" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/9/9c/Lutris_install_wine_versions.png" decoding="async" loading="lazy" width="227" height="210" class="mw-file-element" /></a></span></dd></dl></li></ul>
+<dl><dd><br /></dd></dl></li>
+<li>Click <b>Save</b> in top right corner of the <b>Configure</b> window
+<dl><dd><br /></dd></dl></li></ol></li>
+<li>Run <b>PD2</b> by double clicking on it in the <b>Lutris</b> main window or select it and click <b>Play</b> at the bottom</li></ol>
+<p><br />
+<b>COMMON ISSUES:</b>
+</p>
+<ol><li>No text in EULA window during D2/LoD installation
+<ul><li><b>Wine-gecko</b> is missing in the wine prefix.  If it is missing, then during the steps to execute the launchers, <b>Lutris</b> will ask if you want install it, choose <b>Yes</b>.
+<dl><dd><br /></dd></dl></li></ul></li>
+<li>Launcher does not start
+<ul><li>Try using a different Wine version (the latest isn't always the greatest here)
+<dl><dd><br /></dd></dl></li></ul></li>
+<li>Error 'OpenGL loader failed' after clicking play in launcher using 3dfx
+<ul><li>You need to install 32bit libGL.so.1.
+<ul><li>For Debian based distributions (Debian, Ubuntu, Pop!_OS, etc) you can use the command
+<dl><dd><code>sudo apt install libgl1-mesa-dri:i386 libgl1:i386 libgl1-mesa-glx:i386</code></dd></dl></li>
+<li>For Arch based distributions (Arch, Manjaro, Endeavour, etc) you can use the command
+<dl><dd><code>sudo pacman -S libglvnd lib32-libglvnd</code></dd></dl></li>
+<li>For other distributions, you will need to Google what the equivalent commands/methods/packages are needed to install it</li></ul></li></ul></li></ol>
+<div class="mw-heading mw-heading2"><h2 id="How_To_Install_Project_Diablo_2_On_Your_Steam_Deck!_(Using_Steam’s_Proton)"><span id="How_To_Install_Project_Diablo_2_On_Your_Steam_Deck.21_.28Using_Steam.E2.80.99s_Proton.29"></span>How To Install Project Diablo 2 On Your Steam Deck! (Using Steam’s Proton)</h2></div>
+<p>Great video from Travic showing how to run Project Diablo 2 on Steam Deck, without needing a Windows PC.
+<br />
+<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=UOBXDjf6NLQ">https://www.youtube.com/watch?v=UOBXDjf6NLQ</a>
+<br /><br />
+</p>
+<dl><dt>Prerequisites</dt></dl>
+<ul><li>Steam Deck on latest SteamOS (3.6+)</li>
+<li>Own a copy of Diablo 2 and Diablo 2 LoD (Lord of Destruction)
+<ul><li>Purchase on the Blizzard Battle.net website ( <a rel="nofollow" class="external free" href="https://us.shop.battle.net/en-us/family/diablo-ii#classic-game">https://us.shop.battle.net/en-us/family/diablo-ii#classic-game</a> )</li></ul></li>
+<li>Optional: USB-C hub + mouse/keyboard for Desktop Mode</li></ul>
+<p><br />
+</p>
+<ol><li>. Switch to Desktop Mode
+<ol><li>Press the <b>Steam</b> button → Power → <i>Switch to Desktop</i></li>
+<li>Wait for KDE to load (and plug in your hub if using one)</li></ol></li>
+<li>Install ProtonTricks
+<ol><li>Open Discover (blue shopping-bag icon)</li>
+<li>Search for and Install <b>ProtonTricks</b>.</li></ol></li>
+<li>Download Diablo 2 downloader, Diablo 2 Lord of Destruction downloader, and Project Diablo 2 Installer
+<ul><li>These files from Blizzard/Battle.net are actually download apps that will be used to get the installers later in this guide</li></ul>
+<ol><li>Diablo 2 &amp; Diablo 2 LOD Downloaders: <a rel="nofollow" class="external free" href="https://us.support.blizzard.com/en/article/13867?flowTrackingId">https://us.support.blizzard.com/en/article/13867?flowTrackingId</a></li>
+<li>PD2 Installer (<a rel="nofollow" class="external free" href="https://www.projectdiablo2.com/">https://www.projectdiablo2.com/</a>)</li></ol></li>
+<li>Download installers for Diablo 2 and Diablo 2 LoD using Blizzard download apps
+<ul><li>Open Dolphin</li>
+<li>Navigate to where you saved the Downloader_Diablo2_enUS.exe
+<ul><li>Right-click the Downloader_Diablo2_enUS.exe and Click Add to Steam</li></ul></li>
+<li>Open Steam then the Library</li>
+<li>Find Downloader_Diablo2_enUS.exe
+<ul><li>Right-click and open Properties
+<ul><li>Click Compatability</li>
+<li>Click Force the use of a specific Steam Play compatibility tool</li>
+<li>Select Proton 9.0-4 ( or similar ) and close</li></ul></li>
+<li>Click Play to run the Downloader</li>
+<li>Choose a destination directory (ex: /home/deck/Downloads) and click OK</li></ul></li>
+<li>Navigate to where you saved the Downloader_Diablo2_Lord_of_Destruction_enUS.exe
+<ul><li>Right-click the downloader</li>
+<li>Click Open with Protontricks Launcher</li>
+<li>Find and click Non-Steam Shortcut for: Downloader_Diablo2_enUS.exe and click OK</li>
+<li>Choose a destination directory (ex: /home/deck/Downloads) and click OK</li>
+<li>The installers will auto-launch. Just close close the installer and downloader once they are done downloading.</li></ul></li></ul></li>
+<li>Install Diablo 2
+<ul><li>Navigate to the Downloads folder (or other folder) where you saved the Installer earlier.</li>
+<li>Open D2-1.14b-Install-enUS folder</li>
+<li>Right-click Installer.exe and Add to Steam</li>
+<li>Open Steam then the Library</li>
+<li>Find the Installer.exe you added.
+<ul><li>Right-click and open Properties
+<ul><li>Click Compatability</li>
+<li>Click Force the use of a specific Steam Play compatibility tool</li>
+<li>Select Proton 9.0-4 ( or similar ) and close</li></ul></li>
+<li>Click Play to run the Installer
+<ul><li>Click Install Diablo II</li>
+<li>Accept EULA to proceed</li>
+<li>Enter a Name and valid Diablo II CD-Key then click OK</li>
+<li>Choose an Installation Directory (ex: Z:\home\deck\battle.net\Games\Diablo II) and click OK</li>
+<li>Once installed click the "X" to close the installer.</li></ul></li></ul></li></ul></li>
+<li>Install Diablo 2 LOD
+<ul><li>Open Steam then the Library</li>
+<li>Find the Installer.exe you added.
+<ul><li>Right-click and open Properties</li>
+<li>Shortcut
+<ul><li>Target click Browse: Change to the LOD installer (Ex: /home/deck/Downloads/D2LOD-1.14b-Installer-enUS/Installer.exe)</li>
+<li>Start In click Browse: change to LOD installer folder (ex:/home/deck/Downloads/D2LOD-1.14b-Installer-enUS )</li></ul></li>
+<li>Click Play to run the Installer
+<ul><li>Click Install Diablo II - LOD</li>
+<li>Accept EULA to proceed</li>
+<li>Enter a Name and valid Diablo II CD-Key then click OK</li>
+<li>Once installed click the "X" to close the installer.</li></ul></li></ul></li></ul></li>
+<li>Install Project Diablo 2 launcher
+<ul><li>Open Steam then the Library</li>
+<li>Find the Installer.exe you added.
+<ul><li>Right-click and open Properties</li>
+<li>Shortcut
+<ul><li>Target click Browse: changed to ProjectD2Installer.exe (Ex: /home/deck/Downloads/ProjectD2Installer.exe)</li>
+<li>Start In click Browse: change to folder where ProjectD2Installer.exe is (ex:/home/deck/Downloads/ )</li></ul></li>
+<li>Click Play to run the Installer
+<ul><li>When prompted to visit the website and create an account select No. You can register later at <a rel="nofollow" class="external free" href="https://projectdiablo2.com/register">https://projectdiablo2.com/register</a></li>
+<li>When .Net Error appears, click No. We are going to fix this in a second.</li></ul></li></ul></li>
+<li>Open Steam then the Library</li>
+<li>Find the Installer.exe you added.
+<ul><li>Right-click and Manage -&gt; Remove non-Steam game from your library</li></ul></li></ul></li>
+<li>Add Project Diablo 2 to Steam
+<ul><li>Open Dolphin</li>
+<li>Navigate to the ProjectD2 folder where you installed (ex: /home/deck/battle.net/Games/Diablo II/ProjectD2)</li>
+<li>Right-click PD2Launcher.exe and Add to Steam</li>
+<li>Open Steam then the Library</li>
+<li>Find PD2Launcher.exe
+<ul><li>Right-click and open Properties
+<ul><li>Click Compatability</li>
+<li>Click Force the use of a specific Steam Play compatibility tool</li>
+<li>Select Proton 9.0-4 ( or similar ) and close\</li>
+<li>Optional: Rename the shortcut</li></ul></li></ul></li>
+<li>Try to play it. It is important we launch it once.
+<ul><li>.net error will open again. Click No</li></ul></li>
+<li>Open ProtonTricks
+<ul><li>Look for the Non-Steam shortcut: PD2Launcher.exe or whatever you named the shortcut to earlier. Click that and click OK</li>
+<li>Select the default wineprefix and click OK</li>
+<li>Select Install a Windows DLL or component and click OK</li>
+<li>Checkmark dotnetdesktop6 ok click OK
+<ul><li>The installer will run twice. Click installer and walk through it both times.</li></ul></li>
+<li>Close ProtonTricks</li></ul></li>
+<li>Now you should be able to click Play and play the game!</li></ul></li></ol>
+<p>Enjoy demon-slaying on the go!
+</p>
+<div class="mw-heading mw-heading2"><h2 id="How-to_install_PlugY">How-to install PlugY</h2></div>
+<p><b>If you have characters from prior seasons, make a backup of your Diablo II folder and saves before updating anything</b>
+</p><p><b>Related: <a href="#Unable_to_enter_game,_generic_bad_file/inventory_data">#Unable to enter game, generic bad file/inventory data</a></b>
+</p>
+<ol><li><b>Read First:</b> <a rel="nofollow" class="external free" href="https://github.com/TDLofCC/PD2-PlugY">https://github.com/TDLofCC/PD2-PlugY</a> (Forked from the OG <a rel="nofollow" class="external free" href="https://github.com/xkanzeon/PD2-PlugY">https://github.com/xkanzeon/PD2-PlugY</a>)</li>
+<li>Video installation guide: <a rel="nofollow" class="external free" href="https://streamable.com/yhjhvs">https://streamable.com/yhjhvs</a></li>
+<li><b>Optional:</b> Set PlugY to run in compatibility mode.  <b>See: <a href="#How-to_run_the_game_with_different_compatibility_settings">#How-to run the game with different compatibility settings</a></b> and also do this for the <b>plugy.exe</b> file that should be in the ProjectD2 folder.  For some people, this will speed up loading times but doesn't work for everyone.</li>
+<li>To change between new and old (3dfx and ddraw) graphics option:
+<ol><li>Open the Plugy.ini file in the ProjectD2 folder</li>
+<li>Locate the line starting with Params= and either add -3dfx to use 3dfx or delete it to use ddraw</li>
+<li>You can also change the shortcut for Plugy and add/remove -3dfx to the end of the Target.  Don't mix this with the Plugy.ini method.
+<dl><dd><br /></dd>
+<dd><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:Plugy3dfxDDraw.png" class="mw-file-description" title="Plugy Shortcut and ini settings"><img alt="Plugy Shortcut and ini settings" src="//static.wikitide.net/projectdiablo2wiki/9/92/Plugy3dfxDDraw.png" decoding="async" loading="lazy" width="580" height="268" class="mw-file-element" /></a></span></dd>
+<dd><br /></dd></dl></li></ol>
+<ul><li><b>Note: you can not mix -3dfx and -w options in your shortcut or PlugY.ini file.</b></li>
+<li><b>As of Season 11:</b> If you still want to use PlugY, you MUST create a shortcut to PlugY.exe, right-click on it and go to Properties, and then in the Target field set "C:/your/path/to/PlugY.exe" -plugy -3dfx, note the new -plugy parameter.</li></ul></li></ol>
+<div class="mw-heading mw-heading2"><h2 id="How-to_create_an_exception_in_Windows_Security/Defender"><span id="How-to_create_an_exception_in_Windows_Security.2FDefender"></span>How-to create an exception in Windows Security/Defender</h2></div>
+<p><b>Also See: <a href="#Security_warning_with_PD2_Launcher">#Security warning with PD2 Launcher</a></b>
+</p><p>Below are guides from Microsoft on how to create an exception.  A <b>folder</b> exception for the entire <b>Diablo II</b> folder should be created to avoid certain issues.
+</p>
+<ol><li><dl><dd><b>Windows 10:</b> <a rel="nofollow" class="external free" href="https://support.microsoft.com/en-us/windows/add-an-exclusion-to-windows-security-811816c0-4dfd-af4a-47e4-c301afe13b26#ID0EBF=Windows_10">https://support.microsoft.com/en-us/windows/add-an-exclusion-to-windows-security-811816c0-4dfd-af4a-47e4-c301afe13b26#ID0EBF=Windows_10</a></dd>
+<dd><b>Windows 11:</b> <a rel="nofollow" class="external free" href="https://support.microsoft.com/en-us/windows/add-an-exclusion-to-windows-security-811816c0-4dfd-af4a-47e4-c301afe13b26#ID0EBF=Windows_11">https://support.microsoft.com/en-us/windows/add-an-exclusion-to-windows-security-811816c0-4dfd-af4a-47e4-c301afe13b26#ID0EBF=Windows_11</a></dd>
+<dd><br /></dd></dl></li>
+<li><b>If you are using a different anti-virus or firewall solution, you will need to look through the settings or find other documentation for creating any exceptions if the links below do not help.</b>
+<ul><li><b>AVG:</b> <a rel="nofollow" class="external free" href="https://support.avg.com/SupportArticleView?l=en&amp;urlname=avg-antivirus-scan-exclusions">https://support.avg.com/SupportArticleView?l=en&amp;urlname=avg-antivirus-scan-exclusions</a></li>
+<li><b>BitDefender:</b> <a rel="nofollow" class="external free" href="https://www.bitdefender.com/consumer/support/answer/13427/">https://www.bitdefender.com/consumer/support/answer/13427/</a></li>
+<li><b>ESET:</b> <a rel="nofollow" class="external free" href="https://support.eset.com/en/kb2769-exclude-files-or-folders-from-scanning-in-eset-windows-home-products">https://support.eset.com/en/kb2769-exclude-files-or-folders-from-scanning-in-eset-windows-home-products</a></li>
+<li><b>Kaspersky:</b> <a rel="nofollow" class="external free" href="https://support.kaspersky.com/help/Kaspersky/Win21.5/en-US/227390.htm">https://support.kaspersky.com/help/Kaspersky/Win21.5/en-US/227390.htm</a></li>
+<li><b>McAfee:</b> <a rel="nofollow" class="external free" href="https://www.mcafee.com/support/?page=shell&amp;shell=article-view&amp;articleId=TS102056">https://www.mcafee.com/support/?page=shell&amp;shell=article-view&amp;articleId=TS102056</a>
+<ul><li><b>** IMPORTANT NOTE **</b> Some versions of McAfee will remove your exception anytime an excluded file is updated.  You may need to add this exception again anytime PD2 is updated.</li></ul></li>
+<li><b>Norton:</b> <a rel="nofollow" class="external free" href="https://support.norton.com/sp/en/us/home/current/solutions/v3672136">https://support.norton.com/sp/en/us/home/current/solutions/v3672136</a></li>
+<li><b>Sophos:</b> <a rel="nofollow" class="external free" href="https://support.home.sophos.com/hc/en-us/articles/115005499966-Setting-Scan-Exceptions">https://support.home.sophos.com/hc/en-us/articles/115005499966-Setting-Scan-Exceptions</a></li></ul>
+<dl><dd><br /></dd></dl></li>
+<li>Again, if possible, make sure to create the exception for the entire folder, not just one file.</li></ol>
+<div class="mw-heading mw-heading2"><h2 id="How-to_run_the_game_with_different_compatibility_settings">How-to run the game with different compatibility settings</h2></div>
+<ol><li><b>Open</b> the <b>ProjectD2</b> folder, <b>NOT</b> the base <b>Diablo II</b> folder, and locate the <b>Game.exe</b> and <b>Diablo II.exe</b> files.</li>
+<li><b>Right click</b> the file and select <b>Properties</b>.</li>
+<li>Under the <b>Compatibility tab</b>, click the <b>Change settings for all users</b> button
+<ol><li>Check the box and set the <b>Compatibility Mode</b> to <b>Windows XP (Service Pack 3)</b></li>
+<li>Check the box to <b>Run this program as an administrator</b></li>
+<li>Click OK on both windows to save the changes</li></ol></li>
+<li>Repeat for the other file.</li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading1"><h1 id="Launcher_issues">Launcher issues</h1></div>
+<div class="mw-heading mw-heading2"><h2 id="Nothing_happens_when_running_the_PD2_Launcher">Nothing happens when running the PD2 Launcher</h2></div>
+<p>As of Season 9, the PD2 Launcher uses the .NET 6.0 framework. This means the .NET 6.0 Desktop Runtime is needed for it to function. This is basically a Microsoft library (similar to DirectX for games), and can be downloaded directly from Microsoft here: <a rel="nofollow" class="external free" href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.35-windows-x86-installer">https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.35-windows-x86-installer</a>
+</p>
+<table class="non-table mw-collapsible mw-collapsed">
+<caption><b>Script Install Method</b>
+</caption>
+<tbody><tr>
+<td>
+<p>Microsoft also supplies a script that can be used for installing anything .NET related <a rel="nofollow" class="external text" href="https://learn.microsoft.com/en-us/dotnet/core/install/windows#install-with-powershell">here</a>
+</p><p>This <i>may</i> be better in some cases, but generally has the same end effect
+</p><p>A simple usage of this script would be <code>dotnet-install.ps1 -Runtime windowsdesktop -Channel 6.0 -Architecture x86</code> to get the correct version for the PD2 Launcher
+</p>
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading2"><h2 id="Could_not_find_game.exe">Could not find game.exe</h2></div>
+<p>If you press Play in the launcher and get an error message "could not find game.exe" it means the game.exe file is not in your PD2 folder.  This can happen if you turn off auto-updates in launcher Options before hitting Play for the first time.  Normally, Play triggers a check for updates which installs game content files including game.exe on first run.
+</p><p><span class="mw-default-size" typeof="mw:File/Frameless"><a href="/wiki/File:Pd2-launch-error.jpg" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/thumb/5/56/Pd2-launch-error.jpg/300px-Pd2-launch-error.jpg" decoding="async" loading="lazy" width="300" height="204" class="mw-file-element" srcset="//static.wikitide.net/projectdiablo2wiki/thumb/5/56/Pd2-launch-error.jpg/450px-Pd2-launch-error.jpg 1.5x, //static.wikitide.net/projectdiablo2wiki/thumb/5/56/Pd2-launch-error.jpg/600px-Pd2-launch-error.jpg 2x" /></a></span>
+</p><p>To fix, enable auto-updates in launcher Options and hit Play.  That will install game.exe and other needed files to run the game.  After that, you can disable auto-updates again.
+</p><p>If you already ran PD2 successfully in the past, then game.exe is missing for another reason.  It could be related to anti-virus / file quarantining.  Check other parts of this guide for anti-virus settings.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Problems_with_the_PD2_Launcher">Problems with the PD2 Launcher</h2></div>
+<ol><li>Reboot your computer.</li>
+<li>Make sure you are using the latest version of the PD2 Launcher from <a rel="nofollow" class="external text" href="https://www.projectdiablo2.com/">projectdiablo2.com</a>.  Press Play to update and verify the version shown on the launcher is the latest</li>
+<li>Make sure you are running the PD2 Launcher as an administrator</li>
+<li>Make sure your anti-virus / firewall / anti-malware / ad-blocker is not blocking the launcher.
+<ol><li>You may need to manually unblock and/or create exceptions for the Launcher and the Diablo II and/or ProjectD2 folder.</li>
+<li>Look through your anti-virus (Defender or otherwise) for a detection.  If it did block something you need to mark it as allowed/safe and restore the file.</li>
+<li>Make sure you have an exception created.  <b>See: <a href="#How-to_create_an_exception_in_Windows_Security/Defender">#How-to create an exception in Windows Security/Defender</a></b></li></ol></li>
+<li>Uninstall the PD2 Launcher and reinstall with the latest version from <a rel="nofollow" class="external text" href="https://www.projectdiablo2.com/">projectdiablo2.com</a></li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Security_warning_with_PD2_Launcher">Security warning with PD2 Launcher</h2></div>
+<p>Windows Security/Defender (and other anti-virus/malware solutions) will sometimes trigger a false positive with one or more components of ProjectD2.  While the team does try to submit the files to Microsoft and other companies to prevent this, they do still happen.  
+</p><p>To prevent these from happening, you can create an exception/exclusion in your anti-virus for the entire Diablo II folder where PD2 is installed.  <b>See: <a href="#How-to_create_an_exception_in_Windows_Security/Defender">#How-to create an exception in Windows Security/Defender</a></b>
+</p><p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Empty_list_of_loot_filters_in_launcher">Empty list of loot filters in launcher</h2></div>
+<ol><li>If you've been changing filters frequently in a short period of time, you may have reached <a rel="nofollow" class="external text" href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-unauthenticated-users">GitHub's hourly request limit</a>. Try again later.</li>
+<li>Make sure TLS 1.2 is enabled in the Windows Internet Options / Browser settings.
+<ul><li><b>See: <a rel="nofollow" class="external free" href="https://knowledge.digicert.com/general-information/enabling-tls-1-1-and-tls-1-2-on-web-browsers">https://knowledge.digicert.com/general-information/enabling-tls-1-1-and-tls-1-2-on-web-browsers</a></b></li></ul></li>
+<li>See: <b><a href="#Problems_with_the_PD2_Launcher">#Problems with the PD2 Launcher</a></b></li>
+<li>If you are unable to resolve the issue, you can manually download a filter you like from <a href="/wiki/Item_Filtering" title="Item Filtering">Item Filtering</a> and place it in the ProjectD2 folder.  The file must be named loot.filter or you can replace the default.filter with yours.</li>
+<li>You can also create a local copy of any filter that will not be automatically updated (useful if you want to make your own edits)
+<ol><li>Create a folder in the <b>ProjectD2\filters\local</b> named whatever you want e.g. <b>ProjectD2\filters\local\MyFilter</b></li>
+<li>Place a copy of the filter you downloaded into that folder</li>
+<li>From the Launcher, you can select <b>local</b> in the <b>Item Filter Profiles</b> and you should see and be able to select the local copies of any filters you've added</li>
+<li><b>Reminder:</b> local filters will not automatically update when you press Play on the launcher, you will have to update them manually.</li></ol></li></ol>
+<div class="mw-heading mw-heading1"><h1 id="Battle.net_&amp;_other_Network_issues"><span id="Battle.net_.26_other_Network_issues"></span>Battle.net &amp; other Network issues</h1></div>
+<div class="mw-heading mw-heading2"><h2 id="Failed_to_join_game">Failed to join game</h2></div>
+<p>In addition to "Failed to join game", error messages may also include "Lost Connection to Battle.net", "Your Account is Already Logged In", "Server Down", or "Please Wait".
+</p><p>The server "shard" you were logged into likely crashed. The realm server still has your character and stash tagged as in a game because the crashing server could not log you out. The realm will not allow the character/stash into a "second" game at the same time. Because the shared stash is used by all characters in a "mode" (HC Ladder | SC Ladder | HC Non-ladder | SC Non-ladder), any characters within the same mode <b>may</b> also experience the FTJ issue. Other "modes" may be affected as well.
+</p><p>You can try creating games on different game servers. If you continue to receive the same error then it is likely that the game server you were originally in crashed. 
+</p><p>The <i><b>only</b></i> sure fix is to wait for the game server to complete its scheduled restart and report that you are not logged into it. There's no way to check when this is going to happen, but a general estimate can be based on the time the server said it had left when you created your game. This can range from several minutes to 4 hours.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Unable_to_connect_to_Battle.net">Unable to connect to Battle.net</h2></div>
+<ol><li>The servers are down.  Check the <b><a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/725189841314250782">#announcements</a></b> channel on Discord for any issues or maintenance updates.</li>
+<li>Your antivirus and/or firewall is blocking the game.</li>
+<li>You or your ISP or somewhere between your ISP and the PD2 servers are having network issues.</li>
+<li>If the error message states you were banned, <b>do not</b> discuss this in any channel.  Read the <b><a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/725193331998589018">#pd2-rules</a></b>.</li>
+<li>Use the <b><a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/802993961827696640">#create-ticket</a></b> channel on Discord to check on your account status.</li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Can’t_connect_to_the_realm,_port_6112_error"><span id="Can.E2.80.99t_connect_to_the_realm.2C_port_6112_error"></span>Can’t connect to the realm, port 6112 error</h2></div>
+<ol><li>If your account name begins with or ends with an underscore ( _ ) this will prevent you from connecting.  Either create a new account or use the <b><a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/802993961827696640">#create-ticket</a></b> channel in Discord to open a ticket about your account.</li>
+<li>Your antivirus or firewall is blocking the game. <b>See: <a href="#How-to_create_an_exception_in_Windows_Security/Defender">#How-to create an exception in Windows Security/Defender</a></b></li>
+<li>You will need to use the #create-ticket channel in Discord to open a ticket to check on your account and find out any additional information.  <b>Mods will not discuss this in chat or DMs.</b></li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading1"><h1 id="Other">Other</h1></div>
+<div class="mw-heading mw-heading2"><h2 id="Offline_characters_missing_after_playing_Diablo_2_Resurrected">Offline characters missing after playing Diablo 2 Resurrected</h2></div>
+<ol><li>Locate the D2R save game location.
+<ul><li><b>%USERPROFILE%\Saved Games\Diablo II Resurrected</b> is the default location</li>
+<li>If nothing is there, the saves are either gone forever or you may have a different save location.</li>
+<li>You can try searching your computer for &lt;charname&gt;.d2s</li></ul></li>
+<li>If you are able to locate them, now locate the Diablo II save location.
+<ul><li>The normal location should be in the <b>Save</b> folder where you installed Diablo II, not the ProjectD2 folder and not the D2R folder.
+<dl><dd>You can also look in:</dd></dl>
+<ul><li><b>%USERPROFILE%\Saved Games\Diablo II</b></li>
+<li><b>%USERPROFILE%\Documents\Saved Games\Diablo II</b></li>
+<li><b>%USERPROFILE%\Documents\My Games\Diablo II</b></li>
+<li>Check the registry in <b>Computer\HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II</b> and look at the paths for <b>Save Path</b> and <b>NewSavePath</b></li>
+<li>If you are still unsure, create a new test character and look in all above locations, you should see a &lt;charname&gt;.d2s file and/or do a search for *.d2s files.</li></ul></li></ul></li>
+<li>Once you are able to locate the save files (including _LOD_SharedStashSave if you use PlugY) copy or move them back to the original Save folder.</li>
+<li>Open up the game to see if they are restored.  If D2R modified the files in any way, the characters are likely unrecoverable.</li>
+<li>Make regular backups of your stuff.</li>
+<li>You can set a custom save path for your characters in the <b>PlugY.ini</b> file located in the <b>ProjectD2</b> folder</li></ol>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Other_error_solutions">Other error solutions</h2></div>
+<p>If you still can't resolve the issue, please ask on Discord in the <b><a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/770081262982529064">#tech-support</a></b> channel
+</p></div>

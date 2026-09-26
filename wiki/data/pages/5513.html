@@ -1,0 +1,658 @@
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr">
+<div class="mw-heading mw-heading1"><h1 id="Season_12_Suffering_-_November_28th_2025">Season 12 Suffering - November 28th 2025</h1></div>
+<table class="non-table mw-collapsible mw-collapsed">
+<caption>Patch Notes S12
+</caption>
+<tbody><tr>
+<td>
+<p><a rel="nofollow" class="external text" href="https://www.reddit.com/r/ProjectDiablo2/comments/1p8eg34/project_diablo_2_season_12_suffering_patch_notes/">Reddit Thread</a>)
+</p><p><span class="mw-default-size" typeof="mw:File"><a href="/wiki/File:Season_12.gif" class="mw-file-description"><img src="//static.wikitide.net/projectdiablo2wiki/7/7e/Season_12.gif" decoding="async" loading="lazy" width="482" height="272" class="mw-file-element" /></a></span>
+</p>
+<div class="mw-heading mw-heading2"><h2 id="General_Changes">General Changes</h2></div>
+<ul><li>Added a button to upgrade rejuvenation potions and flawless gems directly in the stash.
+<ul><li>This is a quality of life change to skip having to do cube recipes.</li></ul></li>
+<li>Added the ability to search items in the stash:
+<ul><li>The search allows for searching ANY text contained on the item (name, stats, etc).</li>
+<li>Supports regex.</li>
+<li>Ctrl + F as hotkey for searching.</li>
+<li>This also displays which tabs contain the searched item.</li></ul></li>
+<li>Shrine buffs are now removed on entering maps.
+<ul><li>This was changed because people complained about the EXP shrine meta.</li></ul></li>
+<li>Anya now rewards 3 tier 1 maps instead of 1.</li>
+<li>Increased drop chance of T1 maps in corrupted zones.</li>
+<li>Increased the maximum amount of times a missile using the +% change to pierce mod could pierce from 4 to 10.</li>
+<li>Split the sound options into multiple sliders for complete customization.</li>
+<li>Added an "Autosync" feature to the options menu.
+<ul><li>This will automatically resync the player with the server at a fixed interval if the player is desynced beyond a certain value.</li></ul></li>
+<li>Added an in-game command ".show-ui" that toggles showing all the UI or not.
+<ul><li>Note: This is somewhat hacky and not intended for normal gameplay, it's purely for getting screen recordings without the UI. Most players will NOT want to use this.</li></ul></li>
+<li>Added an in-game command ".set-cursor [0-39]".
+<ul><li>Note: Anything other than 0 will draw a small colored box (in various styles and colors).</li>
+<li>".set-cursor 0" will reset this.</li></ul></li>
+<li>Reworked melee splash:
+<ul><li>It now rolls damage and checks for resistances on each monster it hits independently instead of being based on the initial target.</li>
+<li>All effects applied by attacks are now carried with melee splash with the exception of "On Hit" and "On Striking" proc effects (On Hit/Striking did not apply in the previous iteration either so this has only increased the amount of effects that can be applied via splash).</li></ul></li>
+<li>Reduced Talic's whirlwind damage.</li>
+<li>Socket recipes for normal quality items now work on arrows (arrows use the shield recipe).</li>
+<li>Socket recipes now work on superior items.</li>
+<li>When using the socket recipe for normal quality items on helmets, shields or chests they will now roll between 1-3 (helmets) or 1-4 (shields/chests) instead of rolling 1-6 and defaulting to the max possible socket amount when rolling above it.</li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Bug_Fixes">Bug Fixes</h2></div>
+<ul><li>Fixed an issue causing +% elemental damage stats from not increasing flat added elemental damage on ranged attacks.</li>
+<li>Fix the crash from hovering skills while an "X skill while equipped" aura item is equipped.</li>
+<li>Shadow Master is now correctly gaining strength.</li>
+<li>Fixed Blade Fury animation cancelling.</li>
+<li>Fixed an issue with Artic Blast and Inferno channeling.</li>
+<li>Fixed Uber health overflowing in higher player counts.</li>
+<li>Fixed an issue with unique/set item generation through cube recipes using the name of the item (single player mod fix).</li>
+<li>Fixed a client crash for players using controller when pressing LB/L1 after joining a new game.</li>
+<li>Fixed an issue with the aim assist setting not saving properly on controller.</li>
+<li>Fixed some controller joysticks not fully matching the direction pushed.</li>
+<li>Fixed item text flickering with long descriptions and item help text turned on.</li>
+<li>Fixed an issue with Right-Click Equip sometimes getting "stuck" on cursor when equipping to an empty slot with an item that the player does not meet requirements for.</li>
+<li>Added an option to turn Right Click Equip on or off.
+<ul><li>Go to Esc -&gt; Options -&gt; PD2 Options -&gt; Controls.</li></ul></li>
+<li>Fixed controller D-Pad item movement not working in stash/NPC trade until the cursor is moved.</li>
+<li>Fixed a crash related to the new unique Void map.</li>
+<li>Fixed an issue with resistance modifiers being calculated twice for melee splash damage.</li>
+<li>Fixed an issue where maps would sometimes turn into a broken Ruined Citadel map after a cube recipe.</li>
+<li>Fixed player characters sometimes displaying the incorrect items or missing their heads in the lobby screens.</li>
+<li>Fixed <span class="d2-green">Poison</span>/Open Wounds damaging Uber bosses while they are immune.</li>
+<li>Fixed some map bosses having the incorrect level.</li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Loot_Filter">Loot Filter</h2></div>
+<ul><li>Added new Path of Exile drop sounds.</li>
+<li>Added a new function to play drop notification sounds.
+<ul><li>These sounds will always play through the "Item Drops" sound channel.</li></ul></li>
+<li>Added the ".playsound [sound-id]" chat command (to help loot filter creators).</li>
+<li>Added %BASENAME% keyword (thanks segnis).
+<ul><li><a rel="nofollow" class="external text" href="https://github.com/Project-Diablo-2/BH/pull/69">Details and examples.</a></li></ul></li>
+<li>Added REROLLALVL &amp; %REROLLALVL% keywords (thanks segnis).
+<ul><li><a rel="nofollow" class="external text" href="https://github.com/Project-Diablo-2/BH/pull/71">Details and examples.</a></li></ul></li>
+<li>Added TRUE or FALSE keywords (thanks segnis).
+<ul><li><a rel="nofollow" class="external text" href="https://github.com/Project-Diablo-2/BH/pull/72">Details and examples.</a></li></ul></li>
+<li>Added MISC which will flag all items in misc.txt.
+<ul><li>Note: misc.txt now has the normcode/ubercode/ultracode columns like weapons.txt and armor.txt. This means NORM will not also filter items in misc.txt so make sure your filters are updated to handle this.</li></ul></li>
+<li>Added JEWELRY, CHARM and QUIVER conditions.</li>
+<li>Added BUYPRICE and %BUYPRICE%.</li>
+<li>Added SELLPRICE and %SELLPRICE% (alias of PRICE).</li>
+<li>Added more location-based conditions:
+<ul><li>MERC.</li>
+<li>INVENTORY.</li>
+<li>CUBE.</li>
+<li>STASH.</li>
+<li>GROUND.</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="PVP">PVP</h2></div>
+<ul><li>The following skills have had their In-Arena PVP modifiers changed:
+<ul><li><a href="/wiki/All_Druid_Skills#Armageddon" title="All Druid Skills">Armageddon</a>: <span class="d2-red">Fire</span> damage 100% -&gt; 30% LLD, 100% -&gt;&gt; 35% HLD</li>
+<li><a href="/wiki/All_Barbarian_Skills#Double_Swing" title="All Barbarian Skills">Double Swing</a>: 200% -&gt; 100%</li>
+<li><a href="/wiki/All_Barbarian_Skills#Frenzy" title="All Barbarian Skills">Frenzy</a>: 200% -&gt; 100%</li>
+<li><a href="/wiki/All_Sorceress_Skills#Combustion" title="All Sorceress Skills">Combustion</a>: 50% -&gt; 35%</li>
+<li><a href="/wiki/All_Amazon_Skills#Power_Strike" title="All Amazon Skills">Power Strike</a>: <span class="d2-yellow">Lightning</span> 17% -&gt; 100%, <span class="d2-white">Physical</span> 100% -&gt; 17%</li>
+<li><a href="/wiki/All_Amazon_Skills#Strafe" title="All Amazon Skills">Strafe</a>: 65% -&gt; 40%</li>
+<li><a href="/wiki/All_Amazon_Skills#Magic_Arrow" title="All Amazon Skills">Magic Arrow</a>: 100% -&gt; 60%</li>
+<li><a href="/wiki/All_Druid_Skills#Shock_Wave" title="All Druid Skills">Shock Wave</a>: 175% -&gt; 120%</li>
+<li><a href="/wiki/All_Assassin_Skills#Wake_of_Inferno" title="All Assassin Skills">Wake of Inferno</a>: 100% -&gt; 70%</li>
+<li><a href="/wiki/All_Assassin_Skills#Dragon_Talon" title="All Assassin Skills">Dragon Talon</a>: 100% -&gt; 80%</li>
+<li><a href="/wiki/All_Assassin_Skills#Death_Sentry" title="All Assassin Skills">Death Sentry</a>: 100% -&gt; 80%</li>
+<li><a href="/wiki/All_Paladin_Skills#Holy_Bolt" title="All Paladin Skills">Holy Bolt</a>: 65% -&gt; 40%</li>
+<li><a href="/wiki/All_Paladin_Skills#Holy_Light" title="All Paladin Skills">Holy Light</a>: 15% -&gt; 5%</li>
+<li><a href="/wiki/All_Druid_Skills#Maul" title="All Druid Skills">Maul</a>: 150% -&gt; 100%</li>
+<li><a href="/wiki/All_Necromancer_Skills#Bone_Spear" title="All Necromancer Skills">Bone Spear</a>: 40% -&gt; 35%</li>
+<li><a href="/wiki/All_Necromancer_Skills#Teeth" title="All Necromancer Skills">Teeth</a>: 30% -&gt; 20%</li>
+<li><a href="/wiki/All_Barbarian_Skills#Double_Throw" title="All Barbarian Skills">Double Throw</a>: 115% -&gt; 100%</li>
+<li><a href="/wiki/All_Barbarian_Skills#Berserk" title="All Barbarian Skills">Berserk</a>: 115% -&gt; 100%</li>
+<li><a href="/wiki/All_Sorceress_Skills#Charged_Bolt" title="All Sorceress Skills">Charged Bolt</a>: 170% -&gt; 130%</li>
+<li><a href="/wiki/All_Sorceress_Skills#Frost_Nova" title="All Sorceress Skills">Frost Nova</a>: 185% -&gt; 150%</li>
+<li><a href="/wiki/All_Sorceress_Skills#Lightning" title="All Sorceress Skills">Lightning</a>: 180% -&gt; 140%</li>
+<li><a href="/wiki/All_Amazon_Skills#Jab" title="All Amazon Skills">Jab</a>: 80% -&gt; 50%</li></ul></li>
+<li><a href="/wiki/All_Barbarian_Skills#Double_Throw" title="All Barbarian Skills">Double Throw</a>: Bounce removed in arena.</li>
+<li><a href="/wiki/All_Necromancer_Skills#Bone_Spear" title="All Necromancer Skills">Bone Spear</a>: Hitbox size reduced by 33% (from 3 to 2).</li>
+<li><a href="/wiki/All_Sorceress_Skills#Lightning" title="All Sorceress Skills">Lightning</a>: Hitbox size reduced by 33% (from 3 to 2).</li>
+<li>Fixed multiple issues with PVP modifiers not applying to certain missiles and area damage.</li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Maps">Maps</h2></div>
+<ul><li>Added new unique map called City of Ureh, created by Alma (item code: T56).</li>
+<li>This map makes monsters drop socketed items and the boss will always drop a socketed unique.
+<ul><li>Note: Currently this rolls between min and max socket count but will follow the same ruleset as puzzleboxes on launch.</li></ul></li>
+<li><a href="/wiki/Maps#Zhar&#39;s_Sanctum" title="Maps">Zhar's Sanctum</a>:
+<ul><li>Mini bosses now have a 50% chance to drop skill charms on death.</li></ul></li>
+<li><a href="/wiki/Maps#Imperial_Palace" title="Maps">Imperial Palace</a>:
+<ul><li>Reduced the experience bonus found on the map.</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Map_Events">Map Events</h2></div>
+<ul><li>Horazon Event:
+<ul><li>Now sunders the monsters resistances to 0.</li>
+<li>Now drops 6 maps on death.</li>
+<li>10% chance to drop a unique map.</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Ubers">Ubers</h2></div>
+<ul><li>Tier 0 Diablo Clone, Rathma and Lucion now have three portals.</li>
+<li>Tier 0 Diablo Clone, Rathma and Lucion now have increased health (damage, absorb and other stats remain unchanged).</li>
+<li>Entering an additional tier 0 portal will heal the boss by 20% (any phases cleared will not be triggered again).</li>
+<li>Entering a tier 0 portal will grant a temporary invulnerability to the player.</li>
+<li><a href="/wiki/Monsters#Rathma_and_Mendeln" title="Monsters">Rathma</a>:
+<ul><li>Fixed outer ring <span class="d2-green">poison</span> damage radius not properly dealing damage.</li>
+<li>Fixed later waves having fewer monsters than intended.</li>
+<li>Fixed fissure skeletons spawning outside the arena.</li></ul></li>
+<li><a href="/wiki/Monsters#Lucion" title="Monsters">Lucion</a>:
+<ul><li>All Lucion attacks ignore 2/3rd of your current block rate (includes weapon block/parry).
+<ul><li>Lucion's minions are still blocked at full block rate.</li></ul></li>
+<li>Fixed a safe spot in the Lucion arena.</li></ul></li>
+<li><a href="/wiki/Monsters#Diablo-Clone" title="Monsters">Diablo Clone</a>:
+<ul><li>Fixed invisible fire.
+<ul><li>Ground fire is always synced between server/client but the bone spirits might occasionally desync. The fire will not be invisible and it will be where it is on your screen.</li></ul></li>
+<li>Fixed Diablo Clone entering the nova phase while the skeletons are still alive.</li>
+<li>Reduced the threat provided by the tormented souls in the Diablo Clone fight (this will cause summons/minions to attack them less often).</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Amazon">Amazon</h2></div>
+<ul><li><a href="/wiki/All_Amazon_Skills#Multiple_Shot" title="All Amazon Skills">Multiple Shot</a>:
+<ul><li>Enhanced damage per level bonus reduced from 5% to 3%.</li></ul></li>
+<li><a href="/wiki/All_Amazon_Skills#Exploding_Arrow" title="All Amazon Skills">Exploding Arrow</a>:
+<ul><li>Reworked: Monsters hit from the initial arrow now create smaller explosions behind them.</li></ul></li>
+<li><a href="/wiki/All_Amazon_Skills#Strafe" title="All Amazon Skills">Strafe</a>:
+<ul><li>Synergy reduced from 12% to 10%.</li></ul></li>
+<li><a href="/wiki/All_Amazon_Skills#Lightning_Fury" title="All Amazon Skills">Lightning Fury</a>:
+<ul><li>Pierce limit increased from 4 to 6.</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Assassin">Assassin</h2></div>
+<ul><li><a href="/wiki/All_Assassin_Skills#Blade_Fury" title="All Assassin Skills">Blade Fury</a>:
+<ul><li>Now requires the +% chance to pierce stat in order to pierce.</li>
+<li>Synergies reduced from 15% to 10%.</li>
+<li>Weapon damage reduced from 100% to 75% (was 85% during beta).</li></ul></li>
+<li><a href="/wiki/All_Assassin_Skills#Blade_Sentinel" title="All Assassin Skills">Blade Sentinel</a>:
+<ul><li>Weapon damage increased from 75% -&gt; 100%.</li>
+<li>Added flat damage scaling reduced from 1/2/3/4/5 -&gt; 1/1/2/3/4.</li>
+<li>Added flat damage synergy reduced from 15% -&gt; 12%.</li>
+<li>Improved tooltip to explain AoE damage.</li></ul></li>
+<li><a href="/wiki/All_Assassin_Skills#Chain_Lightning_Sentry" title="All Assassin Skills">Chain Lightning Sentry</a>:
+<ul><li>Maximum chains increased from 5 to 7.</li></ul></li>
+<li><a href="/wiki/All_Assassin_Skills#Wake_of_Fire" title="All Assassin Skills">Wake of Fire</a>:
+<ul><li>Range increased by 25%.</li></ul></li>
+<li><a href="/wiki/All_Assassin_Skills#Death_Sentry" title="All Assassin Skills">Death Sentry</a>:
+<ul><li>AoE radius increased from 12 yards to 14.</li>
+<li>Synergies increased from 8% to 9%.</li></ul></li>
+<li><a href="/wiki/All_Assassin_Skills#Venom" title="All Assassin Skills">Venom</a>:
+<ul><li>Synergies increased from 12% to 14%.</li>
+<li>Now properly gains damage bonuses from +% poison damage sources with ranged attacks.</li></ul></li>
+<li><a href="/wiki/Item_Skills#Blade_Dance" title="Item Skills">Blade Dance</a>:
+<ul><li>Now deals damage every 5th frame instead of every 4th.</li>
+<li>Base enhanced damage reduced from 40% to 30%.</li>
+<li>Enhanced damage per level reduced from 5% to 4%.</li></ul></li>
+<li><a href="/wiki/All_Assassin_Skills#Blades_of_Ice" title="All Assassin Skills">Blades of Ice</a>:
+<ul><li>Synergies increased from 15% to 17%.</li>
+<li>Third stage missile count increased from 8 to 10.</li>
+<li>Third stage base damage increased from 11-26 to 24-32.</li>
+<li>Third stage level 1-8 scaling increased from 6-8 to 8-12.</li>
+<li>Third stage level 8-16 damage scaling increased from 9-11 to 13-17.</li>
+<li>Third stage level 16-22 damage scaling increased from 20-22 to 27-36.</li>
+<li>Third stage level 22-28 damage scaling increased from 32-33 to 33-44.</li>
+<li>Third stage level 28+ damage scaling increased from 44-44 to 44-59.</li></ul></li>
+<li><a href="/wiki/All_Assassin_Skills#Claws_of_Thunder" title="All Assassin Skills">Claws of Thunder</a>:
+<ul><li>Third stage charged bolt hitbox size increased from 1 to 2.</li></ul></li>
+<li><a href="/wiki/All_Assassin_Skills#Dragon_Flight" title="All Assassin Skills">Dragon Flight</a>:
+<ul><li>Now has its cooldown reduced with soft points going from 2 seconds (base) to 1 second (at level 24).</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Barbarian">Barbarian</h2></div>
+<ul><li><a href="/wiki/All_Barbarian_Skills#War_Cry" title="All Barbarian Skills">War Cry</a>:
+<ul><li><a href="/wiki/All_Barbarian_Skills#Howl" title="All Barbarian Skills">Howl</a> synergy increased from 16% to 17%.</li>
+<li><a href="/wiki/All_Barbarian_Skills#Battle_Cry" title="All Barbarian Skills">Battle Cry</a> synergy increased from 16% to 17%.</li>
+<li><a href="/wiki/All_Barbarian_Skills#Taunt" title="All Barbarian Skills">Taunt</a> synergy increased from 12% to 13%.</li>
+<li><a href="/wiki/All_Barbarian_Skills#Shout" title="All Barbarian Skills">Shout</a> synergy increased from 12% to 13%.</li>
+<li><a href="/wiki/All_Barbarian_Skills#Battle_Command" title="All Barbarian Skills">Battle Command</a> synergy increased from 12% to 13%.</li>
+<li><a href="/wiki/All_Barbarian_Skills#Battle_Orders" title="All Barbarian Skills">Battle Orders</a> synergy increased from 12% to 13%.</li>
+<li>Range increased every 4 levels instead of 7.</li>
+<li>Range caps max radius at level 28.</li></ul></li>
+<li><a href="/wiki/All_Barbarian_Skills#Leap_Attack" title="All Barbarian Skills">Leap Attack</a>:
+<ul><li>Synergies increased from 8% to 10%.</li>
+<li>Enhanced damage per level increased from 4% to 6%.</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Druid">Druid</h2></div>
+<ul><li><a href="/wiki/All_Druid_Skills#Tornado" title="All Druid Skills">Tornado</a>:
+<ul><li>Now reduces Gust's current cooldown by 0.25 seconds on cast.</li></ul></li>
+<li><a href="/wiki/All_Druid_Skills#Twister" title="All Druid Skills">Twister</a>:
+<ul><li>Now reduces Gust's current cooldown by 0.25 seconds on cast.</li></ul></li>
+<li><a href="/wiki/All_Druid_Skills#Volcano" title="All Druid Skills">Volcano</a>:
+<ul><li>Synergies reduced from 10% to 9%.</li></ul></li>
+<li><a href="/wiki/All_Druid_Skills#Maul" title="All Druid Skills">Maul</a>:
+<ul><li>Enhanced damage bonus scaling reduced from 50% to 40%.</li></ul></li>
+<li><a href="/wiki/All_Druid_Skills#Werebear" title="All Druid Skills">Werebear</a>:
+<ul><li>Enhanced damage bonus per level reduced from 20% to 15%.</li></ul></li>
+<li><a href="/wiki/All_Druid_Skills#Hunger" title="All Druid Skills">Hunger</a>:
+<ul><li>Synergies increased from 16% to 20%.</li></ul></li>
+<li><a href="/wiki/All_Druid_Skills#Fissure" title="All Druid Skills">Fissure</a>:
+<ul><li>Synergies increased from 10% to 12%.</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Necromancer">Necromancer</h2></div>
+<ul><li><a href="/wiki/All_Necromancer_Skills#Teeth" title="All Necromancer Skills">Teeth</a>:
+<ul><li>Base mana cost reduced from 2 to 1.5.</li>
+<li>Mana cost per level increase has been reduced from 0.5 to 0.375.</li></ul></li>
+<li><a href="/wiki/All_Necromancer_Skills#Amplify_Damage" title="All Necromancer Skills">Amplify Damage</a>:
+<ul><li>-% to enemy <span class="d2-white">physical</span> resistance no longer caps at 60% (value is uncapped).</li>
+<li>Base duration increased from 4 seconds to 6.</li></ul></li>
+<li><a href="/wiki/All_Necromancer_Skills#Lower_Resist" title="All Necromancer Skills">Lower Resist</a>:
+<ul><li>-% to enemy elemental resistances no longer caps at 65% (value is uncapped).</li></ul></li>
+<li><a href="/wiki/All_Necromancer_Skills#Terror" title="All Necromancer Skills">Terror</a>:
+<ul><li>Base movement speed reduction increased from -10% to -15%.</li></ul></li>
+<li><a href="/wiki/All_Necromancer_Skills#Confuse" title="All Necromancer Skills">Confuse</a>:
+<ul><li>Base attack speed bonus increased from +10% to +50%.</li>
+<li>Now gains +10% increased attack speed per soft point instead of +10% per base point.</li>
+<li>Radius no longer increases with levels.</li></ul></li>
+<li><a href="/wiki/All_Necromancer_Skills#Decrepify" title="All Necromancer Skills">Decrepify</a>:
+<ul><li>Fixed base movement speed reduction starting at -11% instead of -10%.</li>
+<li>Base duration increased from 4 seconds to 6.</li></ul></li>
+<li><a href="/wiki/All_Necromancer_Skills#Iron_Maiden" title="All Necromancer Skills">Iron Maiden</a>:
+<ul><li>Base duration increased from 6 seconds to 10.</li></ul></li>
+<li><a href="/wiki/All_Necromancer_Skills#Weaken" title="All Necromancer Skills">Weaken</a>:
+<ul><li>-% to enemy defense no longer caps at 60% (value is uncapped).</li></ul></li>
+<li><a href="/wiki/All_Necromancer_Skills#Corpse_Explosion" title="All Necromancer Skills">Corpse Explosion</a>:
+<ul><li>No longer requires line of sight to cast.</li></ul></li>
+<li><a href="/wiki/All_Necromancer_Skills#Dim_Vision" title="All Necromancer Skills">Dim Vision</a>:
+<ul><li>Base attack rating debuff values reduced from -50 to -40.</li>
+<li>-15 to enemy attack rating per level reduced to -10.</li>
+<li><a href="/wiki/All_Necromancer_Skills#Curse_Mastery" title="All Necromancer Skills">Curse Mastery</a> synergy -10 to enemy attack rating reduced to -5.</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Paladin">Paladin</h2></div>
+<ul><li><a href="/wiki/All_Paladin_Skills#Fist_of_the_Heavens" title="All Paladin Skills">Fist of the Heavens</a>:
+<ul><li>Level 22-28 scaling increased from 11-23 to 12-24.</li>
+<li>Level 28+ scaling increased to 15-30 to 17-32.</li></ul></li>
+<li><a href="/wiki/All_Paladin_Skills#Holy_Bolt" title="All Paladin Skills">Holy Bolt</a>:
+<ul><li>Level 28+ scaling increased from 26-28 to 27-29.</li></ul></li>
+<li><a href="/wiki/All_Paladin_Skills#Sacrifice" title="All Paladin Skills">Sacrifice</a>:
+<ul><li>Increased maximum radius cap by 20%.</li>
+<li>Sacrifice now reaches max radius at level 24 instead of level 40.</li></ul></li>
+<li><a href="/wiki/All_Paladin_Skills#Joust" title="All Paladin Skills">Joust</a>:
+<ul><li>Base cooldown increased from 3.5 seconds to 4.</li>
+<li>Cooldown now reduces with soft points reaching 1.5 seconds at level 25.</li></ul></li>
+<li><a href="/wiki/All_Paladin_Skills#Holy_Light" title="All Paladin Skills">Holy Light</a>:
+<ul><li>Updated Holy Light visual effect.</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Sorceress">Sorceress</h2></div>
+<ul><li><a href="/wiki/All_Sorceress_Skills#Blizzard" title="All Sorceress Skills">Blizzard</a>:
+<ul><li>Now deals AoE damage at each projectile impact point.</li></ul></li>
+<li><a href="/wiki/All_Sorceress_Skills#Shiver_Armor" title="All Sorceress Skills">Shiver Armor</a>:
+<ul><li>Gives +10% faster block rate, +2% per base level.</li>
+<li>No longer requires Ice Blast pre-requirement.</li></ul></li>
+<li><a href="/wiki/All_Sorceress_Skills#Chilling_Armor" title="All Sorceress Skills">Chilling Armor</a>:
+<ul><li>Gives +5% successful chance to block, +1% per base level.</li></ul></li>
+<li><a href="/wiki/All_Sorceress_Skills#Chain_Lightning" title="All Sorceress Skills">Chain Lightning</a>:
+<ul><li>Now reaches maximum chains (14) at level 31 instead of level 45.</li>
+<li>Synergies increased from 6% to 8%.</li></ul></li>
+<li><a href="/wiki/All_Sorceress_Skills#Lightning" title="All Sorceress Skills">Lightning</a>:
+<ul><li>Synergies increased from 6% to 8%.</li></ul></li>
+<li><a href="/wiki/All_Sorceress_Skills#Combustion" title="All Sorceress Skills">Combustion</a>:
+<ul><li>Cooldown reduced from 3 seconds to 2.5.</li></ul></li>
+<li><a href="/wiki/All_Sorceress_Skills#Nova" title="All Sorceress Skills">Nova</a>:
+<ul><li>Area of effect radius increased from 12 to 14.</li></ul></li>
+<li><a href="/wiki/All_Sorceress_Skills#Frost_Nova" title="All Sorceress Skills">Frost Nova</a>:
+<ul><li>Area of effect radius reduced from 14 to 12.</li></ul></li>
+<li><a href="/wiki/All_Sorceress_Skills#Enchant_Fire" title="All Sorceress Skills">Enchant Fire</a>:
+<ul><li>Now properly gains damage bonuses from +% <span class="d2-red">fire</span> damage sources with ranged attacks.</li></ul></li>
+<li><a href="/wiki/All_Sorceress_Skills#Cold_Enchant" title="All Sorceress Skills">Cold Enchant</a>:
+<ul><li>Now properly gains damage bonuses from +% <span class="d2-blue">cold</span> damage sources with ranged attacks.</li></ul></li>
+<li><a href="/wiki/All_Sorceress_Skills#Fire_Bolt" title="All Sorceress Skills">Fire Bolt</a>:
+<ul><li>Now deals AoE damage in a small radius on impact.</li></ul></li>
+<li><a href="/wiki/All_Sorceress_Skills#Ice_Bolt" title="All Sorceress Skills">Ice Bolt</a>:
+<ul><li>Now deals AoE damage in a small radius on impact.</li></ul></li>
+<li><a href="/wiki/All_Sorceress_Skills#Ice_Blast" title="All Sorceress Skills">Ice Blast</a>:
+<ul><li>Missile size increased from 1 to 2.</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Items">Items</h2></div>
+<ul><li><a href="/wiki/Recipes#Rerolling_Stats" title="Recipes">Demonic Cube</a> drop rate in Hell difficulty has been increased by 60%.</li>
+<li>Arrows and bolts can now roll 1-2 sockets.</li>
+<li>Arrows and bolts now have a normal, exceptional and elite version (item codes - arrows: Aqv, Aqv2, Aqv3 / bolts: Cqv, Cqv2, Cqv3).</li>
+<li>Arrows now roll with flat maximum damage.</li>
+<li>Bolts now roll with <span class="d2-white">physical</span> pierce (-2%/-4%/-6%).</li>
+<li>Reduced the drop rate of quivers significantly.</li>
+<li>Crossbows no longer have <span class="d2-white">physical</span> pierce.
+<ul><li>Note: This has been migrated to bolts.</li></ul></li>
+<li>Stalagmite:
+<ul><li>Max socket count increased from 3 to 4.</li></ul></li>
+<li>Ber Rune:
+<ul><li><span class="d2-white">Physical</span> damage reduction increased from 5% to 6%.</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Affixes">Affixes</h2></div>
+<ul><li>Added faster cast rate prefixes to large charms (+3-4% / 5-6%).</li>
+<li>Added attack speed prefixes to large charms (+4-5% / 6-7%).</li>
+<li>Increased the spawn chance of 10/20% faster run walk mods on boots.</li>
+<li>Removed visceral mod from bows.</li>
+<li>Removed chance to flee prefixes from staves, orbs and wands.</li>
+<li>Removed all flat elemental damage affixes from staves, orbs and wands.</li>
+<li>Removed life and mana leech affixes from orbs and wands.</li>
+<li>Removed -requirements affixes from wands.</li>
+<li>Removed repairs durability affixes from orbs and wands.</li>
+<li>Removed all on hit/attack skill affixes from orbs and wands.</li>
+<li>Removed teleport charges affix from orbs.</li>
+<li>Increased the spawn rate of faster cast rate affixes on orbs, staves and clubs.</li>
+<li>Added new 4 - 8 LPK/MPK prefixes for staves, orbs and wands.</li>
+<li>Added new 3 tiers of +% <span class="d2-red">fire</span>/<span class="d2-blue">cold</span>/<span class="d2-yellow">lightning</span> damage to orbs and staves.</li>
+<li>Added new 3 tiers of +% <span class="d2-green">poison</span>/<span class="d2-gold">magic</span>/<span class="d2-red">fire</span> damage to wands.</li>
+<li>Added +5-10/10-20/20-30% mana regeneration as an affix for orbs and wands.</li>
+<li>Added +10-20/20-30/30-40% mana regeneration as an affix for staves.</li>
+<li>Added +5-10/10-20/20-30 life replenish as an affix for orbs and wands.</li>
+<li>Added +10-20/20-30/30-40 life replenish as an affix for staves.</li>
+<li>Added +1-2/3-5/6-9 strength as an affix for orbs, wands and staves.</li>
+<li>Added +3-5/6-9/10-15 dexterity as an affix for orbs and wands.</li>
+<li>Fixed +10% faster cast rate not spawning on high level circlets.</li>
+<li>Fixed +30-40% single element resistance affixes not properly spawning on shields.</li>
+<li>Reduced the shop price of several affixes.</li>
+<li>Fixed boots no longer rolling 10% faster hit recovery mod after ilvl 45.</li>
+<li>Added crafting  recipes for arrows (uses the same ingredients as shield recipes).
+<ul><li>Blood: 5-10% crushing blow, 10-20 life, 2-4% life stolen on hit.</li>
+<li>Caster: 5-10% faster cast rate, 10-20 mana, 2-4 mana after each kill.</li>
+<li>Hitpower: 5% chance to cast level 4 Frost Nova when struck, -10 to -20% target defense, knockback.</li>
+<li>Safety: magic damage reduced by 4-7, <span class="d2-white">physical</span> damage reduced by 4-7, 10% faster run/walk.</li>
+<li>Vampiric: 2-4% mana stolen per hit, 20-30% <span class="d2-green">poison</span> length reduction, replenish life +5-10.</li>
+<li>Bountiful: 5-10 vitality, 15-25% better chance of magic items, 20-30% extra gold from monsters.</li>
+<li>Brilliant: 5-10 all resists, 100-150 defense vs. missile, 10% faster hit recovery.</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Uniques">Uniques</h2></div>
+<ul><li><a href="/wiki/Helms#Andariel&#39;s_Visage" title="Helms">Andariel's Visage</a>:
+<ul><li>Level 3 Venom (20 charges) removed.</li>
+<li>+30% increased attack speed reduced to +20%.</li>
+<li>Added -6 to -10% to enemy <span class="d2-green">poison</span> resistance.</li>
+<li>15% chance to cast level 30 <a href="/wiki/All_Necromancer_Skills#Poison_Nova" title="All Necromancer Skills">Poison Nova</a> when struck increased to level 36.</li>
+<li>+70% <span class="d2-green">poison</span> resistance reduce to +50%.</li></ul></li>
+<li><a href="/wiki/Amulets#The_Cat&#39;s_Eye" title="Amulets">The Cat's Eye</a>:
+<ul><li>Added +20% chance to pierce.</li>
+<li>+100 defense removed.</li>
+<li>+30% increased faster run/walk now rolls to +20-30%.</li></ul></li>
+<li><a href="/wiki/Crossbows#Demon_Machine" title="Crossbows">Demon Machine</a>:
+<ul><li>15% chance to cast <a href="/wiki/All_Amazon_Skills#Multiple_Shot" title="All Amazon Skills">Multiple Shot</a> reduced to 10%.
+<ul><li>Note: This chance was made to offset the increased pierce cap which leads to more procs.</li></ul></li></ul></li>
+<li><a href="/wiki/Shields#Blackoak_Shield" title="Shields">Blackoak Shield</a>:
+<ul><li>Chilling Armor when equipped now grants +5% successful block chance.</li></ul></li>
+<li><a href="/wiki/Class_Weapons#Stalker&#39;s_Cull" title="Class Weapons">Stalker's Cull</a>:
+<ul><li><a href="/wiki/All_Assassin_Skills#Dragon_Flight" title="All Assassin Skills">Dragon Flight</a> cooldown reduction removed.</li>
+<li>+10% maximum deadly strike added.</li></ul></li>
+<li><a href="/wiki/Axes#Death_Cleaver" title="Axes">Death Cleaver</a>:
+<ul><li>+10% max deadly strike increased to +15%.</li></ul></li>
+<li><a href="/wiki/Helms#Halaberd&#39;s_Reign" title="Helms">Halaberd's Reign</a>:
+<ul><li>+2-3 to <a href="/wiki/All_Barbarian_Skills#Combat_Masteries" title="All Barbarian Skills">Combat Masteries</a> reduced to +2.</li>
+<li>+2-3 to <a href="/wiki/All_Barbarian_Skills#Battle_Orders" title="All Barbarian Skills">Battle Orders</a> reduced to +1-2.</li>
+<li>+2-3 to <a href="/wiki/All_Barbarian_Skills#Battle_Cry" title="All Barbarian Skills">Battle Cry</a> reduced to +1-2.</li></ul></li>
+<li><a href="/wiki/Gloves#Soul_Drainer" title="Gloves">Soul Drainer</a>:
+<ul><li>-5% to enemy <span class="d2-white">physical</span> resistance reduced to +4-5%.</li></ul></li>
+<li><a href="/wiki/Swords#Leoric&#39;s_Mithril_Bane" title="Swords">Leoric's Mithril Bane</a>:
+<ul><li><a href="/wiki/All_Paladin_Skills#Joust" title="All Paladin Skills">Joust</a> cooldown reduction increased from 0.5 to 0.75.</li>
+<li>Level requirement reduced from 72 to 68.</li></ul></li>
+<li><a href="/wiki/Maces#Stormlash" title="Maces">Stormlash</a>:
+<ul><li>30% chance to cast level 28 <a href="/wiki/All_Druid_Skills#Tornado" title="All Druid Skills">Tornado</a> increased to 35% chance to cast level 30 <a href="/wiki/All_Druid_Skills#Tornado" title="All Druid Skills">Tornado</a>.</li></ul></li>
+<li><a href="/wiki/Swords#Frostwind" title="Swords">Frostwind</a>:
+<ul><li>+2 to Cold skills increased to +2-3.</li>
+<li>+2-3 to <a href="/wiki/All_Druid_Skills#Arctic_Blast" title="All Druid Skills">Arctic Blast</a> o skill reduced to +2.</li></ul></li>
+<li><a href="/wiki/Daggers#Fleshripper" title="Daggers">Fleshripper</a>:
+<ul><li>Added +2 to <a href="/wiki/All_Assassin_Skills#Martial_Arts" title="All Assassin Skills">Martial Arts</a> (Assassin only).</li></ul></li>
+<li><a href="/wiki/Swords#Lightsabre" title="Swords">Lightsabre</a>:
+<ul><li>18% chance to cast level 28 <a href="/wiki/All_Sorceress_Skills#Chain_Lightning" title="All Sorceress Skills">Chain Lightning</a> on attack changed to 18% chance to cast level 35 <a href="/wiki/All_Sorceress_Skills#Lightning" title="All Sorceress Skills">Lightning</a> on attack.
+<ul><li>Note: This is because Chain Lightning procs are bugged and do not deal damage (Lord of Destruction bug).</li></ul></li></ul></li>
+<li><a href="/wiki/Spears#Viperfork" title="Spears">Viperfork</a>:
+<ul><li>+50% increased attack speed increased to +60%.</li></ul></li>
+<li><a href="/wiki/Polearms#Athena&#39;s_Wrath" title="Polearms">Athena's Wrath</a>:
+<ul><li>Added you may summon +3-4 additional <a href="/wiki/All_Druid_Skills#Summon_Spirit_Wolf" title="All Druid Skills">Spirit Wolves</a>.</li>
+<li>+2-3 to Summoning skills reduced to +2.</li></ul></li>
+<li><a href="/wiki/Polearms#Tomb_Reaver" title="Polearms">Tomb Reaver</a>:
+<ul><li>+2-4 sockets increased to 3-5.</li></ul></li>
+<li><a href="/wiki/Swords#The_Grandfather" title="Swords">Grandfather</a>:
+<ul><li>Self repair durability removed.</li>
+<li>+200-260% enhanced damage to +180-240%.</li></ul></li>
+<li><a href="/wiki/Staves#Ribcracker" title="Staves">Ribcracker</a>:
+<ul><li>+100 defense removed.</li>
+<li>+30% faster cast rate removed.</li>
+<li>No longer gains faster cast rate when upgraded.</li>
+<li>Added +10-25% crushing blow efficiency.</li></ul></li>
+<li><a href="/wiki/Staves#Skull_Collector" title="Staves">Skull Collector</a>:
+<ul><li>+10-20 to mana after each kill reduced to +10-15.</li></ul></li>
+<li><a href="/wiki/Class_Weapons#Zerae&#39;s_Resolve" title="Class Weapons">Zerae's Resolve</a>:
+<ul><li>+6-8 to <a href="/wiki/All_Paladin_Skills#Joust" title="All Paladin Skills">Joust</a> reduced to +5.
+<ul><li>Note: This is to offset Joust cooldown reduction scaling with soft points now.</li></ul></li></ul></li>
+<li><a href="/wiki/Class_Weapons#Whispering_Mirage" title="Class Weapons">Whispering Mirage</a>:
+<ul><li>+180-240% enhanced damage reduced to +160-220%.</li></ul></li>
+<li><a href="/wiki/Helms#Veil_of_Steel" title="Helms">Veil of Steel</a>:
+<ul><li>+60-100% enhanced damage reduced to +160-220%.</li></ul></li>
+<li><a href="/wiki/Chests#Wraithskin" title="Chests">Wraithskin</a>:
+<ul><li>+40-50% curse resistance reduced to +30-40%.</li>
+<li>-5% maximum life removed.</li></ul></li>
+<li><a href="/wiki/Shields#Boneflame" title="Shields">Boneflame</a>:
+<ul><li>+3 to Necromancer skill levels now rolls +2-3.</li></ul></li>
+<li><a href="/wiki/Shields#Sacred_Totem" title="Shields">Sacred Totem</a>:
+<ul><li>+2 to Necromancer skills increased to +2-3.</li>
+<li>+2-3 to <a href="/wiki/All_Necromancer_Skills#Lower_Resist" title="All Necromancer Skills">Lower Resist</a> reduced to +2.</li>
+<li>+2-3 to <a href="/wiki/All_Necromancer_Skills#Amplify_Damage" title="All Necromancer Skills">Amplify Damage</a> reduced to +2.</li></ul></li>
+<li><a href="/wiki/Shields#Skywarden" title="Shields">Skywarden</a>:
+<ul><li>+1-2 to Paladin skills increased to +2.</li>
+<li>+2 to <a href="/wiki/All_Paladin_Skills#Offensive_Auras" title="All Paladin Skills">Offensive Auras</a> reduced to +1-2.</li></ul></li>
+<li><a href="/wiki/Gloves#Steelrend" title="Gloves">Steelrend</a>:
+<ul><li>Attackers take damage of 250 removed.</li>
+<li>Added +5-10% crushing blow efficiency.</li>
+<li>+20-30% crushing blow reduced to +10-20%.</li></ul></li>
+<li><a href="/wiki/Boots#Marrowwalk" title="Boots">Marrowwalk</a>:
+<ul><li>+1-2 to <a href="/wiki/All_Necromancer_Skills#Skeleton_Mastery" title="All Necromancer Skills">Skeleton Mastery</a> (Necromancy only) changed to o skill.</li></ul></li>
+<li><a href="/wiki/Belts#Siggard&#39;s_Staunch" title="Belts">Siggard's Staunch</a>:
+<ul><li>+5-10% increased maximum life reduced +5-8%.</li></ul></li>
+<li>Added a new TC87 bow called "Crackleshot".</li>
+<li>Added a new roster of unique arrows and quivers:
+<ul><li><a href="/wiki/Quivers#Balefire" title="Quivers">Balefire</a></li>
+<li><a href="/wiki/Quivers#Swiftwind_Needle" title="Quivers">Swiftwind Needle</a></li>
+<li><a href="/wiki/Quivers#Tombsong" title="Quivers">Tombsong</a></li>
+<li><a href="/wiki/Quivers#Aetherwing" title="Quivers">Aetherwing</a></li>
+<li><a href="/wiki/Quivers#Basilisk&#39;s_Quill" title="Quivers">Basilisk's Quill</a></li>
+<li><a href="/wiki/Quivers#Doom&#39;s_Finger" title="Quivers">Doom's Finger</a></li>
+<li><a href="/wiki/Quivers#Ramfodder" title="Quivers">Ramfodder</a></li>
+<li><a href="/wiki/Quivers#Anvilguard_Strap" title="Quivers">Anvilguard Strap</a></li>
+<li><a href="/wiki/Quivers#Shatterhead" title="Quivers">Shatterhead</a></li>
+<li><a href="/wiki/Quivers#Abyssal_Ward" title="Quivers">Abyssal Ward</a></li>
+<li><a href="/wiki/Quivers#Bannerlord&#39;s_Call" title="Quivers">Bannerlord's Call</a></li>
+<li><a href="/wiki/Quivers#Frozen_Sorrow" title="Quivers">Frozen Sorrow</a>
+<ul><li>Note: Frozen Sorrow is a TC87 drop.</li></ul></li></ul></li>
+<li>Added a rare chance for the following items to drop as anniversary edition skin (these were selected by a community draw):
+<ul><li>Stats remain otherwise unchanged, it's only a graphical chance and does not affect gameplay.</li>
+<li>Rarity differs per item, but generally quite rare.</li>
+<li>White Shaftstop chosen by Trembles.</li>
+<li>Crystal Red Stormshield chosen by Hypodon.</li>
+<li>Bright White Shako chosen by A3322.</li>
+<li>Black Fenris chosen by Biddys.</li>
+<li>Crystal Red Mang Song chosen by Adman.</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Runewords">Runewords</h2></div>
+<ul><li><a href="/wiki/RWWeapons#Wind" title="RWWeapons">Wind</a> runeword:
+<ul><li>Fixed Wind not working correctly in staves.</li></ul></li>
+<li>Added a new runeword "<a href="/wiki/RWQuivers#Ancient&#39;s_Foresight" title="RWQuivers">Ancient's Foresight</a>" for 2 socket quivers.</li>
+<li>Added a new runeword "<a href="/wiki/RWQuivers#Ancient&#39;s_Scripture" title="RWQuivers">Ancient's Scripture</a>" for 2 socket quivers.</li>
+<li>Added a new runeword "<a href="/wiki/RWQuivers#Echo" title="RWQuivers">Echo</a>" for 2 socketed throwing weapons, javelins and quivers.
+<ul><li>Note: The quiver variant differs from the throwing weapon/javelin variant.</li></ul></li></ul>
+<div class="mw-heading mw-heading2"><h2 id="Credits">Credits</h2></div>
+<ul><li>Mod developers:
+<ul><li>Canight</li>
+<li>Elmegaard</li>
+<li>Synthetic</li>
+<li>Aerlynn</li>
+<li>Anbucyrus</li>
+<li>Madinsane</li>
+<li>SenpaiSomething</li></ul></li>
+<li>Art:
+<ul><li>Avunaos</li>
+<li>Lazarus</li>
+<li>Lurix</li>
+<li>Nephretes</li>
+<li>Alma</li>
+<li>Arlynn</li></ul></li>
+<li>Website:
+<ul><li>HalfCrimp</li>
+<li>Art.Damage</li>
+<li>Lippershey</li>
+<li>GreatGrievance</li></ul></li>
+<li>Launcher:
+<ul><li>Alphabot</li>
+<li>Equa1ity</li>
+<li>Vilyanare</li>
+<li>JNebeker</li></ul></li>
+<li>Map making:
+<ul><li>Paul Siramy</li>
+<li>Map tools</li>
+<li>Karvarousku</li>
+<li>Aerlynn</li>
+<li>Indio</li>
+<li>KillerNate</li>
+<li>Error</li>
+<li>Gimli[Hc]</li>
+<li>FreakClub</li>
+<li>Borq</li>
+<li>Toadflax</li>
+<li>Alma</li></ul></li>
+<li>Moderators:
+<ul><li>Cory</li>
+<li>Sajb</li>
+<li>Drantho</li>
+<li>Hastan</li>
+<li>HellzAlien</li>
+<li>WizSpike</li>
+<li>Ztaziz</li>
+<li>Kamanji</li>
+<li>Xes</li>
+<li>Reaxis</li>
+<li>Hoohah</li>
+<li>Majuus</li>
+<li>Onion</li>
+<li>Zinthros</li>
+<li>Ezraeil</li>
+<li>TobieeR</li>
+<li>Gelara</li>
+<li>NEOSUIT</li>
+<li>Laumi</li>
+<li>Sniff</li>
+<li>Kablooey Krebs</li>
+<li>Kade</li>
+<li>Demise</li></ul></li>
+<li>Wiki:
+<ul><li>BetweenWalls</li>
+<li>Gasior</li>
+<li>Kustos</li>
+<li>Meeps</li>
+<li>Naomi</li></ul></li>
+<li>Loot filters:
+<ul><li>Wolfie</li>
+<li>Kryszard</li>
+<li>BetweenWalls</li>
+<li>Kassahi</li>
+<li>eqN</li>
+<li>Dreamerbg</li>
+<li>Erazure</li>
+<li>Hiimfilter</li>
+<li>Adevdh</li>
+<li>Pillla</li>
+<li>Dauracul</li>
+<li>Talrasha125</li>
+<li>Theirateseagoer</li>
+<li>Kanzeon</li>
+<li>Imtheantinoob</li>
+<li>Exiledagain</li>
+<li>Segnis</li></ul></li>
+<li>D2Template:
+<ul><li>Devurandom</li>
+<li>Mir Drualga</li>
+<li>Planqi</li>
+<li>Whist</li>
+<li>Olivierverville</li></ul></li>
+<li>SlashDiabloHD:
+<ul><li>Mir Drualga</li></ul></li>
+<li>CNC-DDraw:
+<ul><li>Bayaraa</li></ul></li>
+<li>Shaders:
+<ul><li>Libretro Community</li></ul></li>
+<li>BH:
+<ul><li>Arolds</li>
+<li>Dschu012</li>
+<li>JimmyTheJ</li>
+<li>Lamerman</li>
+<li>Mir Drualga</li>
+<li>Planqi</li>
+<li>Slayergod13</li>
+<li>Youbetterdont</li>
+<li>Jascen</li></ul></li>
+<li>PvPGN:
+<ul><li>Celetuiw</li>
+<li>Cen1</li>
+<li>D1zzy</li>
+<li>HarpyWar</li>
+<li>Pelish</li>
+<li>Plisskenwat</li>
+<li>RElesgoe</li></ul></li>
+<li>Without the research and findings from many at Phrozen Keep this project would not have been possible. Special thanks to ressources, advice or findings from:
+<ul><li>FearedBliss</li>
+<li>Firehawk</li>
+<li>Jarulf</li>
+<li>Kingpin</li>
+<li>Meanski</li>
+<li>Misiek1294</li>
+<li>Necrolis</li>
+<li>Stargazer</li>
+<li>dav92</li>
+<li>cla$$ics</li>
+<li>EmaEstagram</li>
+<li>Thanatos</li>
+<li>Beko</li>
+<li>Disturb</li>
+<li>Ya Lee</li>
+<li>Nefarius</li>
+<li>Ogodei</li>
+<li>Rob</li>
+<li>Whist</li>
+<li>Lady Isabelle</li>
+<li>Alpha</li>
+<li>Sir Xavius</li>
+<li>Gimli[HC]</li>
+<li>I_Burner</li>
+<li>Incandescent One</li>
+<li>Incandescence</li></ul></li>
+<li>Thanks to everyone who played, tested and contributed to this mod's development. And thanks to everyone who developed the original game.</li></ul>
+<p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="PATCHES">PATCHES</h2></div>
+<div class="mw-heading mw-heading3"><h3 id="Season_12_Patch_1_-_November_29th_2025">Season 12 Patch 1 - November 29th 2025</h3></div>
+<ul><li>Maintenance fixes.</li>
+<li>Fixed <a href="/wiki/Class_Weapons#Armageddon&#39;s_Blade" title="Class Weapons">Armageddon's Blade</a> spawning with <a href="/wiki/Class_Weapons#Thunderstroke" title="Class Weapons">Thunderstroke</a>'s stats.</li>
+<li>Reduced arrow drop rate.</li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Season_12_Patch_2_-_December_15th_2025">Season 12 Patch 2 - December 15th 2025</h3></div>
+<ul><li>Fixed some abilities not being able to interact with doors when on left click.</li>
+<li>Fixed chance to cast on casting procs being able to proc themselves in some cases.</li>
+<li>Fixed some chance to cast on casting effects not working properly (for example some cooldown spells could not properly proc cooldown spells of the same type e.g. meteor).</li>
+<li>Fixed some proc effects not visually showing.</li>
+<li>Fixed Tier 1 and Tier 2 bosses not having the proper difficulty.</li>
+<li>Fixed <a href="/wiki/Recipes#Rerolling_Stats" title="Recipes">Demonic Cube</a> removing anniversary edition skins.</li>
+<li>Fixed <a href="/wiki/Steelrend" class="mw-redirect" title="Steelrend">Steelrend</a> showing incorrect defense values.</li>
+<li>Fixed Lord De Seis's seal sometimes not activating (note: in these cases De Seis will spawn in a different location than normal however this will only happen when a player is not nearby).</li>
+<li>Hopefully fixed maps sometimes turning into hand axes with certain cube recipes.</li>
+<li>Set loot filter drop sounds to always be prioritized first.</li>
+<li>Fixed Quivers not working with the Larzuk socket quest.</li>
+<li>Fixed Quivers not working with the Anya personalization quest.</li>
+<li>Fixed several corruption issues with Quivers.</li>
+<li>Fixed Tier 2 and Tier 3 maps not having a proper chance to turn into a unique map.</li>
+<li>Fixed not being able to corrupt a map into the new <a href="/wiki/Maps#City_of_Ureh" title="Maps">City of Ureh</a>.</li></ul>
+<ul><li><a href="/wiki/Maps#City_of_Ureh" title="Maps">City of Ureh</a>
+<ul><li>Monsters have increased attack speed affix reduced from +80-100% to +40-60%.</li>
+<li>No longer rolls 10-20% monster rarity.</li>
+<li>Added +4-6% chance to drop armors and weapons.</li>
+<li>Increased the AI delay of the Hydras.</li>
+<li>Reduced the range of the Hydra's <a href="/wiki/All_Sorceress_Skills#Fire_Wall" title="All Sorceress Skills">Fire Wall</a> attack.</li>
+<li>Note: The affix changes will only apply to newly dropped City of Ureh maps however the monster changes will apply to previously dropped ones.</li></ul></li></ul>
+<div class="mw-heading mw-heading3"><h3 id="Season_12_Patch_3_-_February_12th_2026">Season 12 Patch 3 - February 12th 2026</h3></div>
+<ul><li>Fixed an issue with monster <a href="/wiki/Conviction" class="mw-redirect" title="Conviction">Conviction</a> negative resistances "sticking" to the player/mercenary when the conviction levels are equal.
+<ul><li>Now player <a href="/wiki/Conviction" class="mw-redirect" title="Conviction">Conviction</a> overrides monster conviction at the same level, otherwise higher level takes priority like normal:</li></ul></li>
+<li>Changed monster <a href="/wiki/Conviction" class="mw-redirect" title="Conviction">Conviction</a> scaling to from -30 -&gt; -95 at mon level 91+ to -27 -&gt; -75 at mon level 91+.</li>
+<li>Fixed <a href="/wiki/Lightning_Fury" class="mw-redirect" title="Lightning Fury">Lightning Fury</a> not hitting monsters unless targeted.</li>
+<li>Fixed a UI issue when hovering over the right-most edge of a row in the materials tab.</li>
+<li>Fixed an issue with some characters getting a Generic Bad File message when joining a game with a stash issue that can be seen from the PD2 website.</li>
+<li>Fixed Uber Boss (DClone, Rathma, Mendeln, Lucion) scaling HP for Tier 1 and Tier 2 fights.
+<ul><li>Previous patch, Lucion + minions, Rathma + Mendeln, were not scaling HP properly.</li></ul></li>
+<li>Fixed <a href="/wiki/Claw_and_Dagger_Mastery" class="mw-redirect" title="Claw and Dagger Mastery">Claw and Dagger Mastery</a> not applying to the main collision hit of Blade Sentinel:
+<ul><li>The flat added damage from the skill has <a href="/wiki/Claw_and_Dagger_Mastery" class="mw-redirect" title="Claw and Dagger Mastery">Claw and Dagger Mastery</a> applied on the collision hit but not on the AOE explosion.</li>
+<li>This results in the collision damage matching the character sheet 1:1 but the AOE deals slightly less damage (we'll update tooltip for this at some point).</li>
+<li>The AR in the character sheet is accurately applying <a href="/wiki/Claw_and_Dagger_Mastery" class="mw-redirect" title="Claw and Dagger Mastery">Claw and Dagger Mastery</a> already.</li></ul></li>
+<li>Fixed an issue with some Sorceress spells not properly firing from the player location with cast on casting procs.</li>
+<li>Fixed some server issues.</li>
+<li>Disabled the Cow King set transform.</li></ul>
+<div class="mw-heading mw-heading4"><h4 id="PVP_Changes">PVP Changes</h4></div>
+<ul><li>Added a base PVP modifier for damage dealt against player summons (currently set to 85%, this bypasses the normal base PVP modifier of that difficulty).</li>
+<li>Fixed an issue where occasionally a hardcore character dying in the PVP arena would have a bugged character.</li>
+<li>Changed <a href="/wiki/Shadow_Master" class="mw-redirect" title="Shadow Master">Shadow Master</a>/<a href="/wiki/Shadow_Warrior" class="mw-redirect" title="Shadow Warrior">Shadow Warrior</a> in PVP to apply an additional damage penalty to all skills they cast (this is applied on top of the base PVP modifier for that difficulty).</li>
+<li>Changed PVP skill modifiers based on player feedback:
+<ul><li><a href="/wiki/Blade_Sentinel" class="mw-redirect" title="Blade Sentinel">Blade Sentinel</a>: 60% -&gt; 25% (to adjust for claw/dagger mastery bug fix).</li>
+<li><a href="/wiki/Holy_Bolt" class="mw-redirect" title="Holy Bolt">Holy Bolt</a>: 40% -&gt; 50% LLD.</li>
+<li><a href="/wiki/Smite" class="mw-redirect" title="Smite">Smite</a>: 85% -&gt; 60% LLD.</li>
+<li><a href="/wiki/Charged_Bolt" class="mw-redirect" title="Charged Bolt">Charged Bolt</a>: 130% -&gt; 100% LLD.</li>
+<li><a href="/wiki/Blaze" class="mw-redirect" title="Blaze">Blaze</a>: 130% -&gt; 50% LLD.</li>
+<li><a href="/wiki/Fire_Wall" class="mw-redirect" title="Fire Wall">Fire Wall</a>: 90% -&gt; 60% LLD.</li>
+<li><a href="/wiki/Lightning" class="mw-redirect" title="Lightning">Lightning</a>: 140% -&gt; 120% LLD.</li>
+<li><a href="/wiki/Charged_Strike" class="mw-redirect" title="Charged Strike">Charged Strike</a>: 130% -&gt; 100% LLD.</li>
+<li><a href="/wiki/Concentrate" class="mw-redirect" title="Concentrate">Concentrate</a>: 100% -&gt; 50% Magic damage HLD.</li>
+<li><a href="/wiki/Raven" class="mw-redirect" title="Raven">Raven</a>: 100% -&gt; 60% HLD (to match LLD summon modifiers).</li>
+<li><a href="/wiki/Decoy" class="mw-redirect" title="Decoy">Decoy</a>: 100% -&gt; 30% HLD (to match LLD summon modifiers).</li>
+<li><a href="/wiki/Valkyrie" class="mw-redirect" title="Valkyrie">Valkyrie</a>: 100% -&gt; 70% HLD (to match LLD summon modifiers).</li>
+<li><a href="/wiki/Shadow_Master" class="mw-redirect" title="Shadow Master">Shadow Master</a>: An additional 33% applied on top of all skills LLD/HLD.</li>
+<li><a href="/wiki/Shadow_Warrior" class="mw-redirect" title="Shadow Warrior">Shadow Warrior</a>: An additional 10% applied on top of all skills LLD/HLD.</li></ul></li></ul>
+</td></tr></tbody></table></div>

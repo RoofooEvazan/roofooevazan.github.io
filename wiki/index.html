@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0906">
+<meta name="color-scheme" content="dark">
+<title>PD2 Wiki</title>
+<meta name="description" content="The Project Diablo 2 wiki, rebuilt for fast reading and searching on any device. Synced from wiki.projectdiablo2.com every day.">
+<meta property="og:title" content="PD2 Wiki">
+<meta property="og:description" content="The Project Diablo 2 wiki, rebuilt for fast reading and searching on any device.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22o%22%20cx%3D%22.5%22%20cy%3D%22.7%22%20r%3D%22.6%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%233a6ee0%22/%3E%3Cstop%20offset%3D%22.5%22%20stop-color%3D%22%231f3f8a%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23060e2a%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%20fill%3D%22url%28%23o%29%22%20stroke%3D%22%23b8974f%22%20stroke-width%3D%224%22/%3E%3Cellipse%20cx%3D%2224%22%20cy%3D%2220%22%20rx%3D%229%22%20ry%3D%225%22%20fill%3D%22%23fff%22%20opacity%3D%22.45%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<link rel="stylesheet" href="wiki.css">
+</head>
+<body>
+<script src="../assets/site-nav.js"></script>
+
+<div class="bar">
+  <div class="bar-in">
+    <button class="icon-btn menu-btn" type="button" aria-label="Browse pages" aria-controls="side" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg>
+    </button>
+    <a class="wordmark" href="#/"><span class="orb" aria-hidden="true"></span><span>PD2 Wiki</span></a>
+    <div class="search" role="search">
+      <div class="search-field">
+      <svg class="search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search runewords, skills, items…" autocomplete="off" spellcheck="false"
+        role="combobox" aria-expanded="false" aria-controls="q-results" aria-autocomplete="list" aria-label="Search the wiki">
+      <kbd class="search-kbd" aria-hidden="true">/</kbd>
+      </div>
+      <div class="results" id="q-results" role="listbox" hidden></div>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="side" id="side" aria-label="Wiki pages">
+    <div class="side-head">
+      <input id="side-filter" type="search" placeholder="Filter pages" aria-label="Filter the page list" autocomplete="off">
+      <button class="icon-btn side-close" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <nav class="side-nav" id="side-nav"></nav>
+  </aside>
+  <div class="scrim" hidden></div>
+
+  <main class="main" id="main" tabindex="-1">
+    <div class="loading">Loading the wiki…</div>
+  </main>
+
+  <aside class="toc-rail" id="toc-rail" aria-label="On this page"></aside>
+</div>
+
+<div class="lightbox" hidden><img alt=""><button class="icon-btn" type="button" aria-label="Close image">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+<button class="to-top" type="button" aria-label="Back to top" hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 6-6 6 6"/></svg></button>
+
+<script src="merc.js"></script>
+<script src="wiki.js"></script>
+</body>
+</html>

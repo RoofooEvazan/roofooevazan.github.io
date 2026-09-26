@@ -1,0 +1,76 @@
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr"><p><br />
+</p><p><br />
+</p>
+<table class="wikitable" style="margin:auto">
+<tbody><tr>
+<td><i>This article is marked as a stub, meaning it is incomplete or out of date. You can help Project Diablo 2 Wiki by adding missing information, or updating it.</i><br />
+<p><span style="color:#B18D62"><i>Reason: Many old bugs listed here are (probably) fixed; in general if it isn't marked "S11" don't assume it still is a bug</i></span>
+</p>
+</td></tr></tbody></table>
+<p><br />
+This page lists errors, unintended behavior, and glitches found in PD2. Some major vanilla bugs are also listed. Also see: <a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/781105003535400991">#known-bugs</a> discord channel
+</p><p>For help with crashes or other game issues, see the <a href="/wiki/Support_FAQ" title="Support FAQ">Support FAQ</a> or the <a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/770081262982529064">#tech-support</a> discord channel.
+</p>
+
+<div class="mw-heading mw-heading2"><h2 id="Non-Vanilla">Non-Vanilla</h2></div>
+<p><span class="emphasis"><i>Bugs introduced in PD2 due to new features</i></span>
+</p><p><b>General Bugs:</b>
+</p>
+<ul><li><a href="/wiki/Recipes#Gem_&amp;_Rune_Recipes" title="Recipes">Flawless gems</a> can only be promoted to perfect gems while in their <i>stacked</i> form.</li>
+<li>In some cases, having two equipment items of the same type within the cube when using a recipe which only requires one, one of those items may be destroyed.</li>
+<li>When attempting to connect while too many players are active, players may be presented with a dialogue box showing their position in a queue. This is misleading since the queue system is not used - players will need to connect manually instead. This may take several attempts, especially if the server they've selected is at its limit and others are also trying to join it. If other servers are acceptable, try using one of them temporarily instead.</li>
+<li>Occasionally, some parts of the <a href="/wiki/Maps#Demon_Road" title="Maps">Demon Road</a> Map cannot be walked/ran through and line of sight skills cannot be cast through them.</li>
+<li>(S11) <a href="/wiki/Monsters#Diablo_Clone" title="Monsters">Diablo Clone</a> Nova can go through pillars.</li></ul>
+<p><b>Bugs for Specific Skills or Equipment:</b>
+</p>
+<ul><li><a href="/wiki/Revive" class="mw-redirect" title="Revive">Revives'</a> own summon/sentry abilities (e.g. hydras cast by revived council members) don't grant player experience or quest progress if they kill enemies.</li>
+<li>Being in <a href="/wiki/Whirlwind" class="mw-redirect" title="Whirlwind">Whirlwind</a> (<a href="/wiki/Blade_Dance" title="Blade Dance">Blade Dance</a>) animation when leveling up on assassin locks up your animation.</li>
+<li>Hydras spawned from the <a href="/wiki/Dragon_(Chest)" class="mw-redirect" title="Dragon (Chest)">Dragon</a> runeword (chest) are only staying up for ~1 second before despawning if trigged by whirlwind.</li>
+<li>Fire Resist aura from <a href="/wiki/Flickering_Flame" class="mw-redirect" title="Flickering Flame">Flickering Flame</a> on merc reduces max res back to 75 on paladin.</li>
+<li>Heart of the Wolverine (from <a href="/wiki/Wisp_Projector" class="mw-redirect" title="Wisp Projector">Wisp Projector</a>) despawns when you level up.</li>
+<li>Some items in the <a href="/wiki/Elite#Immortal_King" title="Elite">Immortal King</a> set have their set bonuses displayed in blue (like normal attributes) rather than in green.</li>
+<li>Ethereal versions of <a href="/wiki/Elite#Immortal_King&#39;s_Stone_Crusher" title="Elite">Immortal King's Stone Crusher</a> may display the incorrect damage (missing the set bonus) depending on the order of the set items being equipped.</li>
+<li>(S11) The <a href="/wiki/Conviction" class="mw-redirect" title="Conviction">Conviction</a> debuff can apply to the Player/Mercenary even if the source is dead.</li></ul>
+<div id="BH"></div><p><b>BH-Related Bugs:</b>
+</p><ul><li>Attribute ranges on tooltips are sometimes incorrect
+<ul><li>When multiple sources add the same attribute, only a single source's attribute range is shown rather than a combined range. Examples:
+<ul><li>The 50% Damage to Undead automod for blunt weapons isn't included in the attribute's range.</li>
+<li>Crafted items will display the standard attribute range (e.g. rolled affixes) without taking into account the attribute range from predetermined affixes.</li>
+<li>When a runeword adds the same attribute as one of its runes, the attribute range doesn't include values from the rune. Example: <a href="/wiki/Chains_of_Honor" class="mw-redirect" title="Chains of Honor">Chains of Honor</a> shows [35-45] all res in-game but is actually [50-60] since Um adds +15</li></ul>
+<dl><dd><span class="omod">List of attribute sources: prefixes, suffixes, automods, superior affixes, predetermined crafting affixes, corruptions, socketed gems/runes/jewels, pointmods</span></dd></dl></li>
+<li>When an item has a "hybrid" affix with multiple attributes, each attribute range is still treated separately which can result in inaccurate/ambiguous comparisons. Example:
+<ul><li>A Fine Small Charm adds +[1-3] damage &amp; +[10-20] AR but the attribute range for AR shows [2-36] in-game since the Bronze/Iron/Steel affixes can add that much AR (but of course those affixes don't add any damage)</li></ul></li>
+<li>The attribute range may only reference affixes which are possible for rare items so some higher magic-only affixes won't have accurate ranges</li></ul></li>
+<li>Some items have their <a href="/wiki/Item_Filtering#Colors" title="Item Filtering">default color</a> built into <b>%NAME%</b>, so their color won't change unless their name is rewritten completely.</li></ul>
+<p>Note that attribute ranges and lootfilters are handled by <a rel="nofollow" class="external text" href="https://github.com/Project-Diablo-2/BH">PD2's open-source version of BH</a>, which anyone may submit improvements for. The discord's <a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/771820538502971402">#lootfilter</a> channel may be a good place to learn more about it if you have questions, since devs and editors often frequent the channel and discuss BH-related changes there.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Singleplayer-Only_Bugs">Singleplayer-Only Bugs</h3></div>
+<ul><li>PlugY: Having too many maps in a stash page can cause crashes if that page is the most recently visited stash page
+<dl><dd><span class="omod">Fix: Reduce the number of maps stored per page, or switch to another page before leaving the stash</span></dd></dl></li>
+<li>PlugY: Having gold in the shared stash can cause issues such as preventing oskills from working correctly
+<dl><dd><span class="omod">Fix: Remove all gold from the shared stash, or disable the shared gold feature in the config file</span></dd></dl></li>
+<li>PlugY: The "toggle stash" button may be set to the wrong stash upon loading until interacting with the current stash - this happens if the most recent stash interaction prior to saving/exiting involved using a PlugY stash button instead of manipulating an item in the stash
+<dl><dd><span class="omod">Workaround: Add or remove an item from the stash prior to saving/exiting (this also fixes the button at any time if it's set wrong)</span></dd></dl></li>
+<li>PlugY: Stash navigation may be buggy if the stash pages are empty - the navigation will appear to jump between the wrong pages, but it is actually just displaying the wrong page numbers for all pages between the first page (page 1) and the first index (page 10)
+<dl><dd><span class="omod">Fix: Put an item on page 10 or higher and save/exit</span></dd></dl></li></ul>
+<p>For all singleplayer differences, see: <a href="/wiki/Singleplayer" title="Singleplayer">Singleplayer</a>
+</p><p><br />
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Vanilla">Vanilla</h2></div>
+<p><span class="emphasis"><i>Bugs found in vanilla and PD2</i></span>
+</p>
+<ul><li>Multiple corpse bug - rejoining a game with more than one corpse will result in only the highest value corpse being carried over and items on all other corpses being lost</li>
+<li>Corpse limit bug - only ~15 corpses can exist simultaneously, so if a player dies while wearing gear and at the corpse limit, the gear will be lost even without rejoining a game</li>
+<li>Strength bug - if stat requirements of equipped items are only met via the stats granted by those items, the gear won't be visible to other players; this may also contribute to losing items when there are multiple corpses or there isn't enough inventory space to store unequippable items when recovering them from a corpse</li></ul>
+<dl><dd><span class="omod">When recovering items from a corpse, they are re-equipped in the following order: helm, amulet, chest, left weapon/offhand, right weapon/offhand, left ring, right ring, belt, boots, gloves</span></dd></dl>
+<ul><li>Broken-offhand-whirlwind (BOW) bug - when dual-wielding and using whirlwind, if the offhand weapon is broken (0 durability) and has 1 gemmed socket (to prevent it from disappearing), the mainhand weapon is used as both the mainhand <i>and</i> offhand weapons</li>
+<li>Failed-to-Join (FTJ) bug</li>
+<li><a href="/wiki/Monsters#Bloodwitch_the_Wild" title="Monsters">Blood Witch</a> sometimes doesn't spawn in Halls of the Dead</li></ul>
+<p>For a more complete list of vanilla bugs, see wikis dedicated to vanilla. <a rel="nofollow" class="external text" href="https://www.theamazonbasin.com/wiki/index.php?title=Diablo_II">The Amazon Basin</a> wiki does an especially good job, with bugs typically written in red in their relevant categories. Another example is this <a rel="nofollow" class="external text" href="https://us.forums.blizzard.com/en/d3/t/bugproblem-list-for-devs-what-to-fix-for-d2r/30490">list of 200+ bugs</a> that focuses on what should be fixed for D2: Resurrected.
+</p><p>For bugs fixed in PD2, see <a href="/wiki/General_Changes#Bug_Fixes" title="General Changes"> General Changes</a>.
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Not_Bugs">Not Bugs</h2></div>
+<p>These are not considered to be bugs but have been explicitly posted in #known-bugs to avoid support tickets being opened about them.
+</p>
+<ul><li>(S11) Some stats only apply to your main hand while dual wielding and will not be added together in the advanced stats screen.</li>
+<li>(S11) The <a href="/wiki/Maps#Map_Events" title="Maps">Key Map Event</a> does not guarantee 6 keys, as the drop rate may vary.</li></ul></div>

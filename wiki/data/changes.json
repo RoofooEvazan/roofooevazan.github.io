@@ -1,0 +1,36 @@
+[
+ {
+  "date": "2026-09-26T23:49:39.336Z",
+  "added": [
+   "Patch:Season 14"
+  ],
+  "updated": [
+   {
+    "title": "Main Page",
+    "edited": "2026-09-26T23:43:02Z",
+    "summary": ""
+   },
+   {
+    "title": "Patch Notes",
+    "edited": "2026-09-26T23:42:18Z",
+    "summary": "dev stream 2, added scaffolding for s14"
+   },
+   {
+    "title": "Patch:Season 13",
+    "edited": "2026-09-26T23:47:25Z",
+    "summary": "/* Season 13 Betrayal - April 24th 2026 */"
+   },
+   {
+    "title": "Recent Patch Notes",
+    "edited": "2025-08-31T00:54:58Z",
+    "summary": "Old page"
+   }
+  ],
+  "removed": []
+ },
+ {
+  "date": "2026-09-26T23:31:08.405Z",
+  "initial": 196,
+  "sheet": true
+ }
+]

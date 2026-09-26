@@ -1,0 +1,1765 @@
+<div class="mw-content-ltr mw-parser-output" lang="en" dir="ltr"><p>This is an article that attempts to explain how to parse data in the MagicPrefix and MagicSuffix data text files that are packed in the MPQ files.
+</p><p>Most of the information has been documented at <a rel="nofollow" class="external text" href="https://d2mods.info/forum/kb/viewarticle?a=445">The Phrozen Keep</a>
+</p>
+<div class="mw-heading mw-heading2"><h2 id="Column_Headers">Column Headers</h2></div>
+<table class="wikitable mw-collapsible mw-collapsed">
+<tbody><tr>
+<th>Column Header</th>
+<th>Meaning
+</th></tr>
+<tr>
+<td>name</td>
+<td>Name of the prefix or suffix.
+</td></tr>
+<tr>
+<td>*comment</td>
+<td>This appears to be an identifier or index.
+</td></tr>
+<tr>
+<td>version</td>
+<td>Determines which game version these affixes are working in.
+<ul><li>0: Old game version affixes.</li>
+<li>1: Affixes working in Diablo II and Lord of Destruction.</li>
+<li>100: Affixes exclusives to Lord of Destruction.</li></ul>
+</td></tr>
+<tr>
+<td>spawnable</td>
+<td>A boolean that controls whenever or not this affix can be picked by the randomizer that assigns affixes to magic and rare items.
+<ul><li>0: Cannot be picked, but can still be used in cube recipes.</li>
+<li>1: Can be picked.</li></ul>
+</td></tr>
+<tr>
+<td>rare</td>
+<td>A boolean that controls whenever or not this affix can be picked by the randomizer when assigning affixes to a rare item.
+<ul><li>0: Cannot appear on rare items (magic only).</li>
+<li>1: Can appear on rare and magic items.</li></ul>
+</td></tr>
+<tr>
+<td>level</td>
+<td>The quality level (qLvl) of this affix, for this affix to be available on an item, that item must have an item level (iLvl) of at least this amount. The iLvl is equal to the level of the monster that drops the item, or the generation level (for vendors). The iLvl of an item is further influenced by the magic lvl field in Weapons.txt,Armor.txt and Misc.txt.
+</td></tr>
+<tr>
+<td>maxlevel</td>
+<td>Controls the point at which this affix will no longer appear on items. Say we have a Level of 10 and a MaxLevel of 15, then the affix will only appear on items with a iLvl of 10-15, whereas it will never appear on items with iLvls 1-9 and 16-99. This is the easiest way to get those crappy low-level affixes of higher level drops to ensure that those are useful.
+</td></tr>
+<tr>
+<td>levelreq</td>
+<td>The general level requirement that your character must meet before he can use an item that has this affix.
+</td></tr>
+<tr>
+<td>classspecific</td>
+<td>Seems to affect items that grant levels to class skill trees. Assumed to be a fix to an earlier vanilla Diablo II or Lord of Destruction version bug.
+</td></tr>
+<tr>
+<td>class</td>
+<td>This field controls the character class for whom the class specific level requirement appears.
+</td></tr>
+<tr>
+<td>classlevelreq</td>
+<td>The level requirement your character must meet before he can use an item with this affix if his class is the class specified in the Class column. So lets say Class is Ama and normal LevelReq is 20 while ClassLevelReq is 25. Then an Amazon will be able to use this item at cLvl 20 while all other classes would need to be cLvl 25.
+</td></tr>
+<tr>
+<td>frequency</td>
+<td>It controls the probability of this affix being picked by the randomizer within its affix group. In classic days, the game simply rolled a random on all available affixes, ever since v08 they are using this field (badly), which leads to the crappy rare items we see today. Lets say we have 5 affixes inside a group with Frequencies of 1, 5, 10, 50 and 100, then the chance for each of these to appear in case the game selects an affix from this group is: 1/166, 5/166, 10/166, 50/166 and 100/166 (~1%, 3%, 6%, 30% and 60%). In short, the chance for an affix to appear is frequency/total_frequency. This field can hold values from 0 to 255. 0 will effectively make the affix never appear (unless accessed by a cube recipe, but see under Spawnable).
+</td></tr>
+<tr>
+<td>group</td>
+<td>The group an affix is assigned to. The game cannot pick more then one affix from each group, this is used to prevent an item from spawning say with Ferocious and Cruel at the same time. (be aware that you can put affixes in MagicSuffix, MagicPrefix and AutoMagic in the same group, thus having prefix A never spawn together with suffix B). A blank field obviously puts the affix in group 0, this is not a bug.
+</td></tr>
+<tr>
+<td>mod1code</td>
+<td>The modifier(s) granted by this affix. This is an ID pointer from PROPERTIES.txt.
+</td></tr>
+<tr>
+<td>mod1param</td>
+<td>The parameter passed to the associated modifier. Whenever a modifier uses the parameter or not depends on the modifier, see Properties.txt.
+</td></tr>
+<tr>
+<td>mod1min</td>
+<td>The minimum value passed to the associated modifier. Whenever, and if so how, the modifier uses this value depends on the modifier, see Properties.txt.
+</td></tr>
+<tr>
+<td>mod1max</td>
+<td>The maximum value passed to the associated modifier. Whenever, and if so how, the modifier uses this value depends on the modifier, see Properties.txt.
+</td></tr>
+<tr>
+<td>mod2code</td>
+<td>The modifier(s) granted by this affix. This is an ID pointer from PROPERTIES.txt.
+</td></tr>
+<tr>
+<td>mod2param</td>
+<td>The parameter passed to the associated modifier. Whenever a modifier uses the parameter or not depends on the modifier, see Properties.txt.
+</td></tr>
+<tr>
+<td>mod2min</td>
+<td>The minimum value passed to the associated modifier. Whenever, and if so how, the modifier uses this value depends on the modifier, see Properties.txt.
+</td></tr>
+<tr>
+<td>mod2max</td>
+<td>The maximum value passed to the associated modifier. Whenever, and if so how, the modifier uses this value depends on the modifier, see Properties.txt.
+</td></tr>
+<tr>
+<td>mod3code</td>
+<td>The modifier(s) granted by this affix. This is an ID pointer from PROPERTIES.txt.
+</td></tr>
+<tr>
+<td>mod3param</td>
+<td>The parameter passed to the associated modifier. Whenever a modifier uses the parameter or not depends on the modifier, see Properties.txt.
+</td></tr>
+<tr>
+<td>mod3min</td>
+<td>The minimum value passed to the associated modifier. Whenever, and if so how, the modifier uses this value depends on the modifier, see Properties.txt.
+</td></tr>
+<tr>
+<td>mod3max</td>
+<td>The maximum value passed to the associated modifier. Whenever, and if so how, the modifier uses this value depends on the modifier, see Properties.txt.
+</td></tr>
+<tr>
+<td>transform</td>
+<td>A boolean that controls whenever or not this affix will alter the color of the item it appears on.
+<ul><li>0: Not changing color.</li>
+<li>1: Changing the color based on <b>transformcolor</b>.</li></ul>
+</td></tr>
+<tr>
+<td>transformcolor</td>
+<td>An ID pointer from Colors.txt, this determines what color the modifier will give this item when the Transform boolean is true.
+</td></tr>
+<tr>
+<td>itype1-itype7</td>
+<td>These fields are ID pointers to ItemTypes.txt that control what item types this affix can appear on. The affix can appear on all item types that inherit the item type in this field. So putting 'armo' in here will make it appear on all armor (etc).
+</td></tr>
+<tr>
+<td>etype1-etype5</td>
+<td>These fields are ID pointers to ItemTypes.txt that control what item types this affix will never appear on. The affix will not appear on any item type that inherits this item type. So putting 'armo' here would prevent it from showing up on all armor (etc).
+</td></tr>
+<tr>
+<td>divide</td>
+<td>This does not work the way the name suggests (the fields are all filled with 0), if it works at all that is, it doesn't appear to work in ItemStatCost so it probably doesn't here either. But if it did work like that other column is supposed to work, this controls the percentage the price is reduced by in 1024th. Where 1024 equals 100%.
+</td></tr>
+<tr>
+<td>multiply</td>
+<td>The price of the item is multiplied by this value when this affix is present on it. In 1024ths.
+</td></tr>
+<tr>
+<td>add</td>
+<td>The hard amount that is added to the price of this item when this affix is present on it.
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading2"><h2 id="mod#code_Values"><span id="mod.23code_Values"></span>mod#code Values</h2></div>
+<table class="wikitable mw-collapsible mw-collapsed">
+<tbody><tr>
+<th>Code</th>
+<th>Modifier
+</th></tr>
+<tr>
+<td>ac</td>
+<td>+X Defense
+</td></tr>
+<tr>
+<td>ac-miss
+</td></tr>
+<tr>
+<td>ac-hth
+</td></tr>
+<tr>
+<td>red-dmg</td>
+<td>Physical Damage Taken Reduced by X
+</td></tr>
+<tr>
+<td>red-dmg%</td>
+<td>Physical Damage Taken Reduced by X%
+</td></tr>
+<tr>
+<td>ac%</td>
+<td>+X% Enhanced Defense
+</td></tr>
+<tr>
+<td>red-mag</td>
+<td>Magic Damage Taken Reduced by X
+</td></tr>
+<tr>
+<td>str</td>
+<td>+X to Strength
+</td></tr>
+<tr>
+<td>dex</td>
+<td>+X to Dexterity
+</td></tr>
+<tr>
+<td>vit</td>
+<td>+X to Vitality
+</td></tr>
+<tr>
+<td>enr</td>
+<td>+X to Energy
+</td></tr>
+<tr>
+<td>mana</td>
+<td>+X to Mana
+</td></tr>
+<tr>
+<td>mana%</td>
+<td>
+</td></tr>
+<tr>
+<td>hp</td>
+<td>+X to Life
+</td></tr>
+<tr>
+<td>hp%</td>
+<td>
+</td></tr>
+<tr>
+<td>att</td>
+<td>+X to Attack Rating
+</td></tr>
+<tr>
+<td>block</td>
+<td>X% Increased Chance of Blocking
+</td></tr>
+<tr>
+<td>cold-min</td>
+<td>+X Minimum Cold Damage (min value of +X-Y Cold Damage)
+</td></tr>
+<tr>
+<td>cold-max</td>
+<td>+X Maximum Cold Damage (max value of +X-Y Cold Damage)
+</td></tr>
+<tr>
+<td>cold-len</td>
+<td>Chilled for X Seconds (hidden status duration component of +X-Y Cold Damage)
+</td></tr>
+<tr>
+<td>fire-min</td>
+<td>+X Minimum Fire Damage (part of +X-Y Fire Damage)
+</td></tr>
+<tr>
+<td>fire-max</td>
+<td>+X Maximum Fire Damage (part of +X-Y Fire Damage)
+</td></tr>
+<tr>
+<td>ltng-min</td>
+<td>+X Minimum Lightning Damage (part of +X-Y Lightning Damage)
+</td></tr>
+<tr>
+<td>ltng-max</td>
+<td>+X Maximum Lightning Damage (part of +X-Y Lightning Damage)
+</td></tr>
+<tr>
+<td>pois-min</td>
+<td>+X Minimum Poison Damage (part of +X Poison Damage Over Y Seconds)
+</td></tr>
+<tr>
+<td>pois-max</td>
+<td>+X Maximum Poison Damage (part of +X Poison Damage Over Y Seconds)
+</td></tr>
+<tr>
+<td>pois-len</td>
+<td>Poisoned for X Seconds (poison status duration component of +X Poison Damage Over Y Seconds)
+</td></tr>
+<tr>
+<td>dmg-min</td>
+<td>+X to Minimum Damage
+</td></tr>
+<tr>
+<td>dmg-max</td>
+<td>+X to Maximum Damage
+</td></tr>
+<tr>
+<td>dmg%</td>
+<td>X% Enhanced Damage
+</td></tr>
+<tr>
+<td>dmg-to-mana</td>
+<td>X% Damage Taken Gained as Mana when Hit
+</td></tr>
+<tr>
+<td>res-fire</td>
+<td>Fire Resist +%
+</td></tr>
+<tr>
+<td>res-fire-max</td>
+<td>+% to Maximum Fire Resist
+</td></tr>
+<tr>
+<td>res-ltng</td>
+<td>Lightning Resist +%
+</td></tr>
+<tr>
+<td>res-ltng-max</td>
+<td>+% to Maximum Lightning Resist
+</td></tr>
+<tr>
+<td>res-cold</td>
+<td>Cold Resist +%
+</td></tr>
+<tr>
+<td>res-cold-max</td>
+<td>+% to Maximum Cold Resist
+</td></tr>
+<tr>
+<td>res-mag</td>
+<td>
+</td></tr>
+<tr>
+<td>res-mag-max</td>
+<td>
+</td></tr>
+<tr>
+<td>res-pois</td>
+<td>Poison Resist +%
+</td></tr>
+<tr>
+<td>res-pois-max</td>
+<td>+% to Maximum Poison Resist
+</td></tr>
+<tr>
+<td>res-all</td>
+<td>All Resistances +%
+</td></tr>
+<tr>
+<td>res-all-max</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-fire%</td>
+<td>Fire Absorb X%
+</td></tr>
+<tr>
+<td>abs-fire</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-ltng%</td>
+<td>Lightning Absorb X%
+</td></tr>
+<tr>
+<td>abs-ltng</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-mag%</td>
+<td>Magic Absorb X%
+</td></tr>
+<tr>
+<td>abs-mag</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-cold%</td>
+<td>Cold Absorb X%
+</td></tr>
+<tr>
+<td>abs-cold</td>
+<td>
+</td></tr>
+<tr>
+<td>dur</td>
+<td>
+</td></tr>
+<tr>
+<td>dur%</td>
+<td>
+</td></tr>
+<tr>
+<td>regen</td>
+<td>Replenish Life +X
+</td></tr>
+<tr>
+<td>thorns</td>
+<td>Attacker Takes Damage of X
+</td></tr>
+<tr>
+<td>swing1</td>
+<td>+X% Increased Attack Speed
+</td></tr>
+<tr>
+<td>swing2</td>
+<td>+X% Increased Attack Speed
+</td></tr>
+<tr>
+<td>swing3</td>
+<td>+X% Increased Attack Speed
+</td></tr>
+<tr>
+<td>gold%</td>
+<td>% Extra Gold from Monsters
+</td></tr>
+<tr>
+<td>mag%</td>
+<td>% Better Chance of Getting Magic Items
+</td></tr>
+<tr>
+<td>knock</td>
+<td>Knockback
+</td></tr>
+<tr>
+<td>regen-stam</td>
+<td>Heal Stamina Plus X%
+</td></tr>
+<tr>
+<td>regen-mana</td>
+<td>
+</td></tr>
+<tr>
+<td>stam</td>
+<td>
+</td></tr>
+<tr>
+<td>time</td>
+<td>
+</td></tr>
+<tr>
+<td>manasteal</td>
+<td>X% Mana Stolen per Hit
+</td></tr>
+<tr>
+<td>lifesteal</td>
+<td>X% Life Stolen per Hit
+</td></tr>
+<tr>
+<td>ama</td>
+<td>+X to Amazon Skill Levels
+</td></tr>
+<tr>
+<td>pal</td>
+<td>+X to Paladin Skill Levels
+</td></tr>
+<tr>
+<td>nec</td>
+<td>+X to Necromancer Skill Levels
+</td></tr>
+<tr>
+<td>sor</td>
+<td>+X to Sorceress Skill Levels
+</td></tr>
+<tr>
+<td>bar</td>
+<td>+X to Barbarian Skill Levels
+</td></tr>
+<tr>
+<td>herb</td>
+<td>
+</td></tr>
+<tr>
+<td>light</td>
+<td>+X to Light Radius
+</td></tr>
+<tr>
+<td>color</td>
+<td>
+</td></tr>
+<tr>
+<td>ease</td>
+<td>Requirements -X%
+</td></tr>
+<tr>
+<td>move1</td>
+<td>X% Faster Run/Walk
+</td></tr>
+<tr>
+<td>move2</td>
+<td>X% Faster Run/Walk
+</td></tr>
+<tr>
+<td>move3</td>
+<td>X% Faster Run/Walk
+</td></tr>
+<tr>
+<td>balance1</td>
+<td>+X% Faster Hit Recovery
+</td></tr>
+<tr>
+<td>balance2</td>
+<td>+X% Faster Hit Recovery
+</td></tr>
+<tr>
+<td>balance3</td>
+<td>+X% Faster Hit Recovery
+</td></tr>
+<tr>
+<td>block1</td>
+<td>+X% Faster Block Rate
+</td></tr>
+<tr>
+<td>block2</td>
+<td>+X% Faster Block Rate
+</td></tr>
+<tr>
+<td>block3</td>
+<td>+X% Faster Block Rate
+</td></tr>
+<tr>
+<td>cast1</td>
+<td>+X% Faster Cast Rate
+</td></tr>
+<tr>
+<td>cast2</td>
+<td>+X% Faster Cast Rate
+</td></tr>
+<tr>
+<td>cast3</td>
+<td>+X% Faster Cast Rate
+</td></tr>
+<tr>
+<td>res-pois-len</td>
+<td>Poison Length Reduced by X%
+</td></tr>
+<tr>
+<td>dmg</td>
+<td>
+</td></tr>
+<tr>
+<td>howl</td>
+<td>Hit Causes Monster to Flee X%
+</td></tr>
+<tr>
+<td>stupidity</td>
+<td>
+</td></tr>
+<tr>
+<td>ignore-ac</td>
+<td>Ignore Target's Defense
+</td></tr>
+<tr>
+<td>reduce-ac</td>
+<td>
+</td></tr>
+<tr>
+<td>noheal</td>
+<td>Prevent Monster Heal
+</td></tr>
+<tr>
+<td>half-freeze</td>
+<td>Half Freeze Duration
+</td></tr>
+<tr>
+<td>att%</td>
+<td>X% Bonus to Attack Rating
+</td></tr>
+<tr>
+<td>dmg-ac</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-demon</td>
+<td>+X% Damage to Demons
+</td></tr>
+<tr>
+<td>dmg-undead</td>
+<td>+X% Damage to Undead
+</td></tr>
+<tr>
+<td>att-demon</td>
+<td>+X to Attack Rating against Demons
+</td></tr>
+<tr>
+<td>att-undead</td>
+<td>+X to Attack Rating against Undead
+</td></tr>
+<tr>
+<td>throw</td>
+<td>
+</td></tr>
+<tr>
+<td>fireskill</td>
+<td>+X to Fire Skills
+</td></tr>
+<tr>
+<td>allskills</td>
+<td>+X to All Skills
+</td></tr>
+<tr>
+<td>light-thorns</td>
+<td>
+</td></tr>
+<tr>
+<td>freeze</td>
+<td>
+</td></tr>
+<tr>
+<td>openwounds</td>
+<td>X% Chance of Open Wounds
+</td></tr>
+<tr>
+<td>crush</td>
+<td>X% Chance of Crushing Blow
+</td></tr>
+<tr>
+<td>kick</td>
+<td>
+</td></tr>
+<tr>
+<td>mana-kill</td>
+<td>+X to Mana after each Kill
+</td></tr>
+<tr>
+<td>demon-heal</td>
+<td>
+</td></tr>
+<tr>
+<td>bloody</td>
+<td>
+</td></tr>
+<tr>
+<td>deadly</td>
+<td>X% Deadly Strike
+</td></tr>
+<tr>
+<td>slow</td>
+<td>
+</td></tr>
+<tr>
+<td>nofreeze</td>
+<td>
+</td></tr>
+<tr>
+<td>stamdrain</td>
+<td>
+</td></tr>
+<tr>
+<td>reanimate</td>
+<td>
+</td></tr>
+<tr>
+<td>pierce</td>
+<td>+X% Chance to Pierce
+</td></tr>
+<tr>
+<td>magicarrow</td>
+<td>
+</td></tr>
+<tr>
+<td>explosivearrow</td>
+<td>
+</td></tr>
+<tr>
+<td>Expansion</td>
+<td>Note: Doesn't appear to be a modifier, just a section marker in the file.
+</td></tr>
+<tr>
+<td>dru</td>
+<td>+X to Druid Skill Levels
+</td></tr>
+<tr>
+<td>ass</td>
+<td>+X to Assassin Skill Levels
+</td></tr>
+<tr>
+<td>skill</td>
+<td>+X to [Skill] ([Class] Only)
+</td></tr>
+<tr>
+<td>skilltab</td>
+<td>+X to [Class Skill Tree]
+</td></tr>
+<tr>
+<td>aura</td>
+<td>
+</td></tr>
+<tr>
+<td>att-skill</td>
+<td>X% Chance to Cast Level Y [Skill] on Attack
+</td></tr>
+<tr>
+<td>hit-skill</td>
+<td>X% Chance to Cast Level Y [Skill] on Striking
+</td></tr>
+<tr>
+<td>gethit-skill</td>
+<td>X% Chance to Cast Level Y [Skill] when Struck
+</td></tr>
+<tr>
+<td>gembonus</td>
+<td>
+</td></tr>
+<tr>
+<td>regen-dur</td>
+<td>
+</td></tr>
+<tr>
+<td>fire-fx</td>
+<td>
+</td></tr>
+<tr>
+<td>ltng-fx</td>
+<td>
+</td></tr>
+<tr>
+<td>sock</td>
+<td>Socketed (X)
+</td></tr>
+<tr>
+<td>dmg-fire</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-ltng</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-mag</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-cold</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-pois</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-throw</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-norm</td>
+<td>
+</td></tr>
+<tr>
+<td>ac/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>ac%/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>hp/lvl</td>
+<td>+X to Life (+X per Level)
+</td></tr>
+<tr>
+<td>mana/lvl</td>
+<td>+X to Mana (+X per Level)
+</td></tr>
+<tr>
+<td>dmg/lvl</td>
+<td>+X to Maximum Damage (+X per Level)
+</td></tr>
+<tr>
+<td>dmg%/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>str/lvl</td>
+<td>+X to Strength (X per Level)
+</td></tr>
+<tr>
+<td>dex/lvl</td>
+<td>+X to Dexterity (X per Level)
+</td></tr>
+<tr>
+<td>enr/lvl</td>
+<td>+X to Energy (X per Level)
+</td></tr>
+<tr>
+<td>vit/lvl</td>
+<td>+X to Vitality (X per Level)
+</td></tr>
+<tr>
+<td>att/lvl</td>
+<td>+X to Attack Rating (X per Level)
+</td></tr>
+<tr>
+<td>att%/lvl</td>
+<td>X% Bonus to Attack Rating (X% per Level)
+</td></tr>
+<tr>
+<td>dmg-cold/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-fire/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-ltng/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-pois/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>res-cold/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>res-fire/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>res-ltng/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>res-pois/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-cold/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-fire/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-ltng/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-pois/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>thorns/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>gold%/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>mag%/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>regen-stam/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>stam/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-dem/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-und/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>att-dem/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>att-und/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>crush/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>wounds/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>kick/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>deadly/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>gems%/lvl</td>
+<td>
+</td></tr>
+<tr>
+<td>rep-dur</td>
+<td>Repairs X Durability in Y Seconds
+</td></tr>
+<tr>
+<td>rep-quant</td>
+<td>
+</td></tr>
+<tr>
+<td>stack</td>
+<td>
+</td></tr>
+<tr>
+<td>item%</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-slash</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-slash%</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-crush</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-crush%</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-thrust</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-thrust%</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-slash</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-crush</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-thrust</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-slash%</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-crush%</td>
+<td>
+</td></tr>
+<tr>
+<td>abs-thrust%</td>
+<td>
+</td></tr>
+<tr>
+<td>ac/time</td>
+<td>
+</td></tr>
+<tr>
+<td>ac%/time</td>
+<td>
+</td></tr>
+<tr>
+<td>hp/time</td>
+<td>
+</td></tr>
+<tr>
+<td>mana/time</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg/time</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg%/time</td>
+<td>
+</td></tr>
+<tr>
+<td>str/time</td>
+<td>
+</td></tr>
+<tr>
+<td>dex/time</td>
+<td>
+</td></tr>
+<tr>
+<td>enr/time</td>
+<td>
+</td></tr>
+<tr>
+<td>vit/time</td>
+<td>
+</td></tr>
+<tr>
+<td>att/time</td>
+<td>
+</td></tr>
+<tr>
+<td>att%/time</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-cold/time</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-fire/time</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-ltng/time</td>
+<td>
+</td></tr>
+<tr>
+<td>dmg-pois/time</td>
+<td>
+</td></tr>
+<tr>
+<td>res-cold/time</td>
+<td>
+</td></tr>
+<tr>
+<td>res-fire/time</td>
+<td>
+</td></tr>
+<tr>
+<td>res-ltng/time</td>
+<td>
+</td></tr>
+<tr>
+<td>res-pois/time
+</td></tr>
+<tr>
+<td>abs-cold/time
+</td></tr>
+<tr>
+<td>abs-fire/time
+</td></tr>
+<tr>
+<td>abs-ltng/time
+</td></tr>
+<tr>
+<td>abs-pois/time
+</td></tr>
+<tr>
+<td>gold%/time
+</td></tr>
+<tr>
+<td>mag%/time
+</td></tr>
+<tr>
+<td>regen-stam/time
+</td></tr>
+<tr>
+<td>stam/time
+</td></tr>
+<tr>
+<td>dmg-dem/time
+</td></tr>
+<tr>
+<td>dmg-und/time
+</td></tr>
+<tr>
+<td>att-dem/time
+</td></tr>
+<tr>
+<td>att-und/time
+</td></tr>
+<tr>
+<td>crush/time
+</td></tr>
+<tr>
+<td>wounds/time
+</td></tr>
+<tr>
+<td>kick/time
+</td></tr>
+<tr>
+<td>deadly/time
+</td></tr>
+<tr>
+<td>gems%/time
+</td></tr>
+<tr>
+<td>pierce-fire
+</td></tr>
+<tr>
+<td>pierce-ltng
+</td></tr>
+<tr>
+<td>pierce-cold
+</td></tr>
+<tr>
+<td>pierce-pois
+</td></tr>
+<tr>
+<td>dmg-mon
+</td></tr>
+<tr>
+<td>dmg%-mon
+</td></tr>
+<tr>
+<td>att-mon
+</td></tr>
+<tr>
+<td>att%-mon
+</td></tr>
+<tr>
+<td>ac-mon
+</td></tr>
+<tr>
+<td>ac%-mon
+</td></tr>
+<tr>
+<td>indestruct
+</td></tr>
+<tr>
+<td>charged
+</td></tr>
+<tr>
+<td>extra-fire
+</td></tr>
+<tr>
+<td>extra-ltng
+</td></tr>
+<tr>
+<td>extra-cold
+</td></tr>
+<tr>
+<td>extra-pois
+</td></tr>
+<tr>
+<td>extra-magi
+</td></tr>
+<tr>
+<td>dmg-elem
+</td></tr>
+<tr>
+<td>dmg-elem-min
+</td></tr>
+<tr>
+<td>dmg-elem-max
+</td></tr>
+<tr>
+<td>all-stats
+</td></tr>
+<tr>
+<td>addxp
+</td></tr>
+<tr>
+<td>heal-kill
+</td></tr>
+<tr>
+<td>cheap
+</td></tr>
+<tr>
+<td>rip
+</td></tr>
+<tr>
+<td>att-mon%
+</td></tr>
+<tr>
+<td>dmg-mon%
+</td></tr>
+<tr>
+<td>kill-skill
+</td></tr>
+<tr>
+<td>death-skill
+</td></tr>
+<tr>
+<td>levelup-skill
+</td></tr>
+<tr>
+<td>skill-rand
+</td></tr>
+<tr>
+<td>fade
+</td></tr>
+<tr>
+<td>levelreq
+</td></tr>
+<tr>
+<td>ethereal
+</td></tr>
+<tr>
+<td>oskill
+</td></tr>
+<tr>
+<td>state
+</td></tr>
+<tr>
+<td>randclassskill3
+</td></tr>
+<tr>
+<td>splash
+</td></tr>
+<tr>
+<td>corrupt
+</td></tr>
+<tr>
+<td>corruptnum
+</td></tr>
+<tr>
+<td>heroed
+</td></tr>
+<tr>
+<td>randclassskill2
+</td></tr>
+<tr>
+<td>coldskill
+</td></tr>
+<tr>
+<td>ltngskill
+</td></tr>
+<tr>
+<td>poisskill
+</td></tr>
+<tr>
+<td>magskill
+</td></tr>
+<tr>
+<td>velocity%
+</td></tr>
+<tr>
+<td>mapdefense
+</td></tr>
+<tr>
+<td>map-mon-fireres
+</td></tr>
+<tr>
+<td>map-play-fireres
+</td></tr>
+<tr>
+<td>map-play-mag-gold%
+</td></tr>
+<tr>
+<td>map-glob-density
+</td></tr>
+<tr>
+<td>map-play-addxp
+</td></tr>
+<tr>
+<td>map-glob-arealevel
+</td></tr>
+<tr>
+<td>map-glob-monsterrarity
+</td></tr>
+<tr>
+<td>map-mon-fire-min
+</td></tr>
+<tr>
+<td>map-mon-fire-max
+</td></tr>
+<tr>
+<td>map-mon-ltng-min
+</td></tr>
+<tr>
+<td>map-mon-ltng-max
+</td></tr>
+<tr>
+<td>map-mon-mag-min
+</td></tr>
+<tr>
+<td>map-mon-mag-max
+</td></tr>
+<tr>
+<td>map-mon-dmg-cold
+</td></tr>
+<tr>
+<td>map-mon-dmg-pois
+</td></tr>
+<tr>
+<td>map-mon-extra-fire
+</td></tr>
+<tr>
+<td>map-mon-extra-ltng
+</td></tr>
+<tr>
+<td>map-mon-extra-cold
+</td></tr>
+<tr>
+<td>map-mon-extra-pois
+</td></tr>
+<tr>
+<td>map-mon-att-cast-speed
+</td></tr>
+<tr>
+<td>map-mon-att-pierce
+</td></tr>
+<tr>
+<td>map-mon-ac%
+</td></tr>
+<tr>
+<td>map-mon-abs-fire%
+</td></tr>
+<tr>
+<td>map-mon-abs-ltng%
+</td></tr>
+<tr>
+<td>map-mon-abs-mag%
+</td></tr>
+<tr>
+<td>map-mon-abs-cold%
+</td></tr>
+<tr>
+<td>map-mon-red-dmg
+</td></tr>
+<tr>
+<td>map-mon-velocity%
+</td></tr>
+<tr>
+<td>map-mon-regen
+</td></tr>
+<tr>
+<td>map-mon-lifesteal-hp%
+</td></tr>
+<tr>
+<td>map-mon-balance1
+</td></tr>
+<tr>
+<td>map-mon-hp%
+</td></tr>
+<tr>
+<td>map-mon-openwounds
+</td></tr>
+<tr>
+<td>map-mon-crush
+</td></tr>
+<tr>
+<td>map-mon-curseresist-hp%
+</td></tr>
+<tr>
+<td>map-play-ac%
+</td></tr>
+<tr>
+<td>map-play-balance1
+</td></tr>
+<tr>
+<td>map-play-block
+</td></tr>
+<tr>
+<td>map-play-regen
+</td></tr>
+<tr>
+<td>map-mon-pierce-fire
+</td></tr>
+<tr>
+<td>map-mon-pierce-ltng
+</td></tr>
+<tr>
+<td>map-mon-pierce-cold
+</td></tr>
+<tr>
+<td>map-mon-pierce-pois
+</td></tr>
+<tr>
+<td>map-play-res-all
+</td></tr>
+<tr>
+<td>map-play-res-all-max
+</td></tr>
+<tr>
+<td>map-mon-ed%
+</td></tr>
+<tr>
+<td>map-mon-splash
+</td></tr>
+<tr>
+<td>rep-charge
+</td></tr>
+<tr>
+<td>leapspeed
+</td></tr>
+<tr>
+<td>maxcurse
+</td></tr>
+<tr>
+<td>randelemskill
+</td></tr>
+<tr>
+<td>curse-res
+</td></tr>
+<tr>
+<td>heal-hit
+</td></tr>
+<tr>
+<td>randclassskill1
+</td></tr>
+<tr>
+<td>map-mon-phys-as-extra-ltng
+</td></tr>
+<tr>
+<td>map-mon-phys-as-extra-cold
+</td></tr>
+<tr>
+<td>map-mon-phys-as-extra-fire
+</td></tr>
+<tr>
+<td>map-mon-phys-as-extra-pois
+</td></tr>
+<tr>
+<td>map-mon-phys-as-extra-mag
+</td></tr>
+<tr>
+<td>map-glob-add-mon-doll
+</td></tr>
+<tr>
+<td>map-glob-add-mon-succ
+</td></tr>
+<tr>
+<td>map-glob-add-mon-vamp
+</td></tr>
+<tr>
+<td>map-glob-add-mon-cow
+</td></tr>
+<tr>
+<td>map-glob-add-mon-horde
+</td></tr>
+<tr>
+<td>map-glob-add-mon-ghost
+</td></tr>
+<tr>
+<td>extra-bonespears
+</td></tr>
+<tr>
+<td>extra-revives
+</td></tr>
+<tr>
+<td>extra-spirits
+</td></tr>
+<tr>
+<td>pierce-phys
+</td></tr>
+<tr>
+<td>immune-prop
+</td></tr>
+<tr>
+<td>map-mon-deadlystrike
+</td></tr>
+<tr>
+<td>map-mon-cannotbefrozen
+</td></tr>
+<tr>
+<td>map-play-fasterattackrate
+</td></tr>
+<tr>
+<td>map-play-fastercastrate
+</td></tr>
+<tr>
+<td>map-mon-skillondeath
+</td></tr>
+<tr>
+<td>map-play-maxhp-percent
+</td></tr>
+<tr>
+<td>map-play-maxmana-percent
+</td></tr>
+<tr>
+<td>map-play-damageresist
+</td></tr>
+<tr>
+<td>map-play-velocitypercent
+</td></tr>
+<tr>
+<td>map-mon-pierce-all
+</td></tr>
+<tr>
+<td>map-mon-nofreeze-hp%
+</td></tr>
+<tr>
+<td>map-play-swing-cast
+</td></tr>
+<tr>
+<td>map-play-hp%-mp%
+</td></tr>
+<tr>
+<td>map-play-speed-all
+</td></tr>
+<tr>
+<td>map-play-mag
+</td></tr>
+<tr>
+<td>map-play-gold
+</td></tr>
+<tr>
+<td>infinityspeed
+</td></tr>
+<tr>
+<td>silence-fhr-ias
+</td></tr>
+<tr>
+<td>gust-reduction
+</td></tr>
+<tr>
+<td>extra-skele-war
+</td></tr>
+<tr>
+<td>extra-skele-mage
+</td></tr>
+<tr>
+<td>extra-hydra
+</td></tr>
+<tr>
+<td>extra-valk
+</td></tr>
+<tr>
+<td>plague-fcr-pierce
+</td></tr>
+<tr>
+<td>joust-reduction
+</td></tr>
+<tr>
+<td>grims-extra-skele-mage
+</td></tr>
+<tr>
+<td>map-play-lightradius
+</td></tr>
+<tr>
+<td>blood-warp-life-reduction
+</td></tr>
+<tr>
+<td>map-glob-add-mon-souls
+</td></tr>
+<tr>
+<td>map-glob-add-mon-fetish
+</td></tr>
+<tr>
+<td>dclone-clout
+</td></tr>
+<tr>
+<td>maxlevel-clout
+</td></tr>
+<tr>
+<td>dev-clout
+</td></tr>
+<tr>
+<td>extra-skele-archer
+</td></tr>
+<tr>
+<td>extra-golem
+</td></tr>
+<tr>
+<td>dye
+</td></tr>
+<tr>
+<td>socketed-text
+</td></tr>
+<tr>
+<td>inc-splash-radius
+</td></tr>
+<tr>
+<td>ias-frw
+</td></tr>
+<tr>
+<td>rathma-clout
+</td></tr>
+<tr>
+<td>cast-skill</td>
+<td>X% Chance to Cast Level Y [Skill] on Casting
+</td></tr>
+<tr>
+<td>dragonflight-reduction
+</td></tr>
+<tr>
+<td>dmg%/eth
+</td></tr>
+<tr>
+<td>corpseexplosion-radius
+</td></tr>
+<tr>
+<td>mirrored
+</td></tr>
+<tr>
+<td>dmg%/missinghp%
+</td></tr>
+<tr>
+<td>lifesteal-cap
+</td></tr>
+<tr>
+<td>splash%/missinghp%
+</td></tr>
+<tr>
+<td>eaglehorn-raven
+</td></tr>
+<tr>
+<td>map-glob-skirmish-mode
+</td></tr>
+<tr>
+<td>map-mon-dropjewelry
+</td></tr>
+<tr>
+<td>map-mon-dropweapons
+</td></tr>
+<tr>
+<td>map-mon-droparmor
+</td></tr>
+<tr>
+<td>map-mon-dropcrafting
+</td></tr>
+<tr>
+<td>map-glob-extra-boss
+</td></tr>
+<tr>
+<td>map-glob-add-mon-shriek
+</td></tr>
+<tr>
+<td>map-force-event
+</td></tr>
+<tr>
+<td>uber-difficulty
+</td></tr>
+<tr>
+<td>deep-wounds</td>
+<td>+X Open Wounds Damage per Second
+</td></tr>
+<tr>
+<td>map-mon-dropcharms
+</td></tr>
+<tr>
+<td>map-glob-dropcorrupted
+</td></tr>
+<tr>
+<td>curse-effectiveness
+</td></tr>
+<tr>
+<td>map-glob-boss-dropskillers
+</td></tr>
+<tr>
+<td>map-glob-boss-dropcorruptedunique
+</td></tr>
+<tr>
+<td>equipped-skill
+</td></tr>
+<tr>
+<td>mindmg/energy
+</td></tr>
+<tr>
+<td>map-glob-boss-dropfacet
+</td></tr>
+<tr>
+<td>map-mon-dropjewels
+</td></tr>
+<tr>
+<td>es-efficiency
+</td></tr>
+<tr>
+<td>sorc-skill-rand-ctc
+</td></tr>
+<tr>
+<td>str-and-vit
+</td></tr>
+<tr>
+<td>block-skill
+</td></tr>
+<tr>
+<td>map-glob-sundermonsters
+</td></tr>
+<tr>
+<td>crit-skill
+</td></tr>
+<tr>
+<td>pierce-skill
+</td></tr>
+<tr>
+<td>desecrate
+</td></tr>
+<tr>
+<td>desecratenum
+</td></tr>
+<tr>
+<td>extra-grizzly
+</td></tr>
+<tr>
+<td>no-wolves
+</td></tr>
+<tr>
+<td>max-deadly
+</td></tr>
+<tr>
+<td>extra-shadow
+</td></tr>
+<tr>
+<td>extra-spiritwolf
+</td></tr>
+<tr>
+<td>joust-reduction-zeraes
+</td></tr>
+<tr>
+<td>map-glob-boss-dropubermats
+</td></tr>
+<tr>
+<td>map-glob-boss-droppuzzlebox
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading2"><h2 id="transformcolor_Values">transformcolor Values</h2></div>
+<table class="wikitable mw-collapsible mw-collapsed">
+<tbody><tr>
+<th>Color</th>
+<th>Code
+</th></tr>
+<tr>
+<td>White</td>
+<td>whit
+</td></tr>
+<tr>
+<td>Light Grey</td>
+<td>lgry
+</td></tr>
+<tr>
+<td>Dark Grey</td>
+<td>dgry
+</td></tr>
+<tr>
+<td>Black</td>
+<td>blac
+</td></tr>
+<tr>
+<td>Light Blue</td>
+<td>lblu
+</td></tr>
+<tr>
+<td>Dark Blue</td>
+<td>dblu
+</td></tr>
+<tr>
+<td>Crystal Blue</td>
+<td>cblu
+</td></tr>
+<tr>
+<td>Light Red</td>
+<td>lred
+</td></tr>
+<tr>
+<td>Dark Red</td>
+<td>dred
+</td></tr>
+<tr>
+<td>Crystal Red</td>
+<td>cred
+</td></tr>
+<tr>
+<td>Light Green</td>
+<td>lgrn
+</td></tr>
+<tr>
+<td>Dark Green</td>
+<td>dgrn
+</td></tr>
+<tr>
+<td>Crystal Green</td>
+<td>cgrn
+</td></tr>
+<tr>
+<td>Light Yellow</td>
+<td>lyel
+</td></tr>
+<tr>
+<td>Dark Yellow</td>
+<td>dyel
+</td></tr>
+<tr>
+<td>Light Gold</td>
+<td>lgld
+</td></tr>
+<tr>
+<td>Dark Gold</td>
+<td>dgld
+</td></tr>
+<tr>
+<td>Light Purple</td>
+<td>lpur
+</td></tr>
+<tr>
+<td>Dark Purple</td>
+<td>dpur
+</td></tr>
+<tr>
+<td>Orange</td>
+<td>oran
+</td></tr>
+<tr>
+<td>Bright White</td>
+<td>bwht
+</td></tr></tbody></table></div>
