@@ -20,6 +20,26 @@
     try { return await window.PD2Guide.load(); }
     catch (e) { root.innerHTML = `<div class="error"><b>Couldn't load this page.</b><br>${P().esc(e.message)}</div>`; return null; }
   }
+  // Level-3 headings and what follows them become one-line toggles.
+  const foldSubs = box => {
+    for (const w of [...box.querySelectorAll(':scope > .mw-heading3')]) {
+      const h = w.querySelector('h3');
+      const d = document.createElement('details');
+      d.className = 'lld-sub';
+      d.id = h.id;
+      h.removeAttribute('id');
+      d.innerHTML = `<summary>${P().esc(h.textContent.trim())}</summary>`;
+      let n = w.nextElementSibling;
+      while (n && !n.matches('.mw-heading2, .mw-heading3')) { const next = n.nextElementSibling; d.appendChild(n); n = next; }
+      w.replaceWith(d);
+    }
+  };
+  const openTo = id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    for (let d = el.closest('details'); d; d = d.parentElement?.closest('details')) d.open = true;
+    el.scrollIntoView({ block: 'start' });
+  };
   const scrollTo = anchor => { if (anchor) requestAnimationFrame(() => document.getElementById(anchor)?.scrollIntoView({ block: 'start' })); };
 
   async function render(root, path, anchor) {
@@ -35,7 +55,8 @@
       const f = { cls: CLASSES.includes(p.get('cls')) ? p.get('cls') : '', q: p.get('q') || '' };
       const rows = V.diffs.map(d => ({ ...d, _s: strip(`${d.name} ${d.cls} ${d.type} ${d.diff} ${d.group || ''}`) }));
       root.innerHTML = `${head('skills', 'Skills in PvP')}
-        <div class="wiki lead">${V.multIntro}</div>
+        <p class="lead">Against players, skills deal a share of their damage: 16% / 12% / 6% in Normal / Nightmare / Hell, except the skills below, which use their own multipliers.</p>
+        <details class="about"><summary>How PvP damage multipliers work</summary><div class="wiki">${V.multIntro}</div></details>
         <div class="filters"><div class="frow">${searchBox('pq', f.q, 'Search skills, e.g. Bone Spear, stun, auto-aim')}</div>
           <div class="chips">${['', ...CLASSES].map(c => `<button type="button" class="chip${c === f.cls ? ' on' : ''}" data-c="${c}">${c || 'All classes'}</button>`).join('')}</div></div>
         <div class="pvp-box"></div>
@@ -47,11 +68,10 @@
         const ts = f.q.toLowerCase().split(/\s+/).filter(Boolean);
         const list = rows.filter(r => (!f.cls || r.cls === f.cls) && ts.every(t => r._s.includes(t)));
         const groups = [...CLASSES, ''].map(c => [c, list.filter(r => (r.cls || '') === c)]).filter(([, l]) => l.length);
-        box.innerHTML = groups.map(([c, l]) => `<section class="info-card"><h2 class="home-h">${esc(c || 'Other')}</h2>
-          <div class="tw"><table class="restable pvp-t"><thead><tr><th>Skill</th><th title="Share of the skill's PvP damage in Normal and Nightmare">Norm/NM %</th><th title="Share of the skill's PvP damage in Hell">Hell %</th><th>Type</th><th>Plays differently</th></tr></thead>
-          <tbody>${l.map(r => `<tr><td>${r.anchor && r.cls ? `<a href="#/skills/${r.cls}/${encodeURIComponent(r.anchor)}">${esc(r.name)}</a>` : esc(r.name)}${r.group ? ` <small class="dim">${esc(r.group)}</small>` : ''}</td>
-            <td>${pct(r.nm)}</td><td>${pct(r.hell)}</td><td>${r.type ? `<span class="omod">${esc(r.type)}</span>` : ''}</td><td class="wiki pvp-diff">${r.diff || ''}</td></tr>`).join('')}</tbody></table></div></section>`).join('')
-          || '<div class="empty">No skills match.</div>';
+        box.innerHTML = groups.length ? `<div class="tw"><table class="restable pvp-t"><thead><tr><th>Skill</th><th title="Share of the skill's PvP damage in Normal and Nightmare">Norm/NM %</th><th title="Share of the skill's PvP damage in Hell">Hell %</th><th>Type</th><th>Plays differently</th></tr></thead>
+          <tbody>${groups.map(([c, l]) => `<tr class="zact"><th colspan="5">${esc(c || 'Other')} <small>${l.length}</small></th></tr>${l.map(r => `<tr><td>${r.anchor && r.cls ? `<a href="#/skills/${r.cls}/${encodeURIComponent(r.anchor)}">${esc(r.name)}</a>` : esc(r.name)}${r.group ? ` <small class="dim">${esc(r.group)}</small>` : ''}</td>
+            <td>${pct(r.nm)}</td><td>${pct(r.hell)}</td><td>${r.type ? `<span class="omod">${esc(r.type)}</span>` : ''}</td><td class="wiki pvp-diff">${r.diff || ''}</td></tr>`).join('')}`).join('')}</tbody></table></div>`
+          : '<div class="empty">No skills match.</div>';
         for (const el of $$('.wiki', box)) enhanceFragment(el, P().byId(V.page));
       };
       draw();
@@ -65,7 +85,7 @@
       });
       let t;
       $('#pq', root).addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { f.q = e.target.value.trim(); sync(); draw(); }, 150); });
-      for (const el of $$('.lead', root)) enhanceFragment(el, P().byId(V.page));
+      for (const el of $$('.about .wiki', root)) enhanceFragment(el, P().byId(V.page));
       return;
     }
 
@@ -78,8 +98,16 @@
         ${L.topics.map(t => `<section class="info-card lld" id="${esc(t.anchor)}"><h2 class="home-h">${esc(t.title)}</h2><div class="wiki">${t.html}</div></section>`).join('')}
         <p class="muted">Tournaments, arena rules and each skill's PvP numbers are on the <a href="#/pvp">other PvP tabs</a>.</p>
         ${attrib(L.page)}`;
-      for (const el of $$('.wiki', root)) enhanceFragment(el, P().byId(L.page));
-      scrollTo(anchor);
+      for (const el of $$('.wiki', root)) { enhanceFragment(el, P().byId(L.page)); foldSubs(el); }
+      root.addEventListener('click', e => {
+        const a = e.target.closest('.lld-jump a');
+        if (!a) return;
+        const id = decodeURIComponent(a.getAttribute('href').split('#').pop());
+        e.preventDefault();
+        openTo(id);
+        history.replaceState(null, '', '#/pvp/lld#' + encodeURIComponent(id));
+      });
+      if (anchor) requestAnimationFrame(() => openTo(anchor));
       return;
     }
 
@@ -108,7 +136,7 @@
     root.innerHTML = `<nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Wiki</a><span aria-hidden="true">›</span><span>Mechanics</span></nav>
       <h1 class="page-title">Abbreviations &amp; Slang</h1>
       <p class="lead">${esc(X.intro || 'Common slang and abbreviations used in Project Diablo 2 and Diablo II.')} Type a term like <i>BO</i> or <i>Tal</i>, or search the meanings.</p>
-      ${X.colors.length ? `<div class="gl-colors wiki">${X.colors.map(c => `<span class="gl-color"><b class="${esc(c.cls)}">${esc(c.name)}</b><span>${esc(c.what)}</span></span>`).join('')}</div>` : ''}
+      ${X.colors.length ? `<details class="about gl-key"><summary>Item and damage colors: ${X.colors.map(c => `<b class="${esc(c.cls)}">${esc(c.name)}</b>`).join(' · ')}</summary><div class="gl-colors wiki">${X.colors.map(c => `<span class="gl-color"><b class="${esc(c.cls)}">${esc(c.name)}</b><span>${esc(c.what)}</span></span>`).join('')}</div></details>` : ''}
       <div class="filters gl-bar"><div class="frow">${searchBox('gq', q0, 'Search abbreviations, e.g. CtA, BO, pierce')}</div>
         <nav class="chips gl-az" aria-label="Jump to letter">${letters.map(l => `<a class="chip" href="#gl-${esc(l)}" data-l="${esc(l)}">${esc(l)}</a>`).join('')}</nav></div>
       <div class="gl-box"></div>

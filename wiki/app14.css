@@ -527,3 +527,28 @@ h3.pn-title{font-size:14.5px}
   .cr-img img{width:40px;height:40px}
 }
 @media (min-width:1100px){.nsec .nlist{columns:2;column-gap:28px}.nsec .nlist > li{break-inside:avoid}}
+
+/* ---------- PvP: one skills table; LLD subsections fold ---------- */
+.pvp-t tr.zact th{position:static;text-align:left!important;padding:.45em .6em .3em;background:var(--void);color:var(--gold);font-family:var(--font-display);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-top:1px solid var(--edge-hi)}
+.pvp-t tr.zact th small{font-family:var(--font-body);letter-spacing:0;color:var(--dim);text-transform:none}
+.pvp-t td{padding-top:.25em;padding-bottom:.25em;font-size:14px}
+.pvp-t .pvp-diff{font-size:13.5px}
+.lld-sub{margin:4px 0;border:1px solid var(--edge);background:var(--void);scroll-margin-top:calc(var(--bar-h) + 12px)}
+.lld-sub > summary{cursor:pointer;list-style:none;padding:6px 12px;font-weight:600;color:var(--gold-hi)}
+.lld-sub > summary::-webkit-details-marker{display:none}
+.lld-sub > summary::before{content:"+";display:inline-block;width:14px;color:var(--gold);font-family:var(--font-display)}
+.lld-sub[open] > summary::before{content:"−"}
+.lld-sub[open] > summary{border-bottom:1px solid var(--edge)}
+.lld-sub > :not(summary){margin-left:12px;margin-right:12px}
+.lld-sub > :last-child{margin-bottom:8px}
+
+/* ---------- glossary: tighter, three columns on wide screens ---------- */
+.gl-key{margin:0 0 8px}
+.gl-key > summary{font-size:13.5px}
+.gl-key > summary b{font-weight:600}
+.gl-key .gl-colors{margin:0;border:0}
+.gl-sec{margin-bottom:4px}
+.gl-l{margin:8px 0 2px;font-size:14px}
+.gl > div{padding:2px 0;gap:8px;font-size:14px}
+.gl dt{min-width:0}
+@media (min-width:1300px){.gl{grid-template-columns:repeat(3,minmax(0,1fr))}}
