@@ -244,6 +244,7 @@ async function main() {
     if (ex.items.length < 300) throw new Error(`only ${ex.items.length} items found`);
     await put(join(OUT, 'items.json'), JSON.stringify({ items: ex.items, sets: ex.sets }) + '\n');
     for (const [cls, data] of Object.entries(ex.skills)) await put(join(OUT, 'skills', `${cls}.json`), JSON.stringify(data) + '\n');
+    if (ex.skillChanges?.classes.length >= 5) await put(join(OUT, 'skills', 'changes.json'), JSON.stringify(ex.skillChanges) + '\n');
     if (ex.maps?.maps.length > 10) await put(join(OUT, 'maps.json'), JSON.stringify(ex.maps) + '\n');
     if (ex.cube?.recipes?.recipes.length > 30 && ex.cube?.crafts?.crafts.length > 20) await put(join(OUT, 'cube.json'), JSON.stringify(ex.cube) + '\n');
     if (ex.world?.zones?.zones.length > 60 && ex.world?.monsters?.bosses.length > 5) await put(join(OUT, 'world.json'), JSON.stringify(ex.world) + '\n');

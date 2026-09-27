@@ -1,7 +1,7 @@
 /* Crafting & Cube, from data/cube.json (built from the Recipes, Crafting and Corruptions pages).
  *   #/cube?grp=…&sec=…&rune=…&q=…        every Horadric Cube recipe
  *   #/cube/crafting?type=Blood&slot=Ring  crafted items: recipe + stats
- *   #/cube/corruptions?type=Weapon        corruption outcomes by item type
+ *   #/cube/corruptions?type=Weapon        corruption outcomes by item type (Amulet adds desecration)
  *   #/cube/guide                          how crafting works, comparison chart
  */
 (() => {
@@ -181,9 +181,27 @@
       <div class="corr">${type.cols.map((c, i) => `<section class="corr-col r${i}">
         <header><b>${esc(c.label)}</b>${c.chance != null ? `<span>${c.chance}% of modifier rolls</span>` : ''}</header>
         <ul class="istats">${c.mods.map(m => `<li>${m.replace(/<br\s*\/?>/g, ' · ')}</li>`).join('')}</ul></section>`).join('')}</div>` : ''}
+      ${desecration(type)}
       ${others.map(b => `<section class="info-card" id="${esc(b.anchor)}"><h2 class="home-h">${esc(b.title)}</h2><div class="wiki">${b.html}</div></section>`).join('')}
       ${foot(K.page)}`;
-    for (const el of root.querySelectorAll('.wiki')) enhanceFragment(el, P().byId(K.page));
+    for (const el of root.querySelectorAll('.wiki')) enhanceFragment(el, P().byId(el.closest('.desec') ? data.desecration.page : K.page));
+  }
+
+  // Desecration (Season 10+): a second corruption on an already corrupted amulet, after Lucion.
+  function desecration(type) {
+    const { esc } = P();
+    const D = data.desecration;
+    if (!D || !D.mods.length) return '';
+    if (type?.name !== 'Amulet') return `<a class="callout desec-link" href="${url('cube/corruptions', { type: 'Amulet' })}#Desecration"><span><b>Desecration</b><span>Corrupted amulets can be corrupted a second time after killing Lucion.</span></span></a>`;
+    const warn = D.notes.find(n => /^warning/i.test(n));
+    const rest = D.notes.filter(n => n !== warn && !/depends on the tier/i.test(n));
+    return `<section class="info-card desec" id="Desecration"><h2 class="home-h">Desecration <small>second corruption on amulets</small></h2>
+      <div class="wiki">${rest.map(n => `<p>${n}</p>`).join('')}</div>
+      <div class="desec-grid">
+        <div><h3 class="sub-h">Possible modifiers</h3><ul class="istats">${D.mods.map(m => `<li>${esc(m)}</li>`).join('')}</ul></div>
+        ${D.chances.length ? `<div><h3 class="sub-h">Success chance by Lucion tier</h3><ul class="desec-odds">${D.chances.map(c => `<li><span>${esc(c.tier)}</span><i style="--w:${c.pct}%"></i><b>${c.pct}%</b></li>`).join('')}</ul></div>` : ''}
+      </div>
+      ${warn ? `<p class="warnbox wiki">${warn.replace(/^WARNING:\s*/i, '<b>It can brick the amulet.</b> ')}</p>` : ''}</section>`;
   }
 
   function guide(root) {

@@ -1,0 +1,54 @@
+/* Skill changes, item skills, PvP, glossary, desecration. Palette variables only, so every theme applies. */
+.seg-x{border-left:1px solid var(--edge)!important}
+.items-intro{margin-bottom:6px}
+.skill-vs{margin:12px 0 14px;padding:10px 14px;border-left:3px solid var(--gold);background:color-mix(in srgb,var(--gold) 7%,transparent)}
+.skill-vs h3{margin:0 0 6px;font-family:var(--font-display);font-size:13px;letter-spacing:.04em;color:var(--gold-hi)}
+.skill-vs ul{margin:0 0 6px;padding-left:18px}
+.skill-vs p{margin:6px 0}
+.skill-vs .more{font-size:14px}
+.skill-req .wiki{display:inline}
+
+.chg{display:grid;gap:0;border:1px solid var(--edge);background:var(--void);margin-bottom:10px}
+.chg-row{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:4px 14px;padding:8px 12px;border-bottom:1px solid var(--edge)}
+.chg-row:last-child{border-bottom:0}
+.chg-name{font-weight:600;color:var(--gold-hi)}
+a.chg-name:not([href]){color:var(--text)}
+.chg-row ul{margin:0;padding-left:18px}
+.chg-row li{margin:1px 0}
+.chg-t td{text-align:left!important;vertical-align:top}
+
+.pvp-t td{vertical-align:top}
+.pvp-t td:nth-child(2),.pvp-t td:nth-child(3){white-space:nowrap}
+.pvp-t td i{font-style:normal;color:var(--dim);padding:0 1px}
+.pvp-t .pvp-diff{text-align:left!important;min-width:220px;color:var(--muted)}
+.pvp-t small,.dim{color:var(--dim)}
+.pvp-tiles{margin-bottom:16px}
+.lld-jump{margin:4px 0 14px}
+.lld-jump b{font-weight:600;color:var(--gold-hi)}
+.lld{scroll-margin-top:calc(var(--bar-h) + 12px)}
+.lld .wiki dl{margin:.2em 0 .6em}
+
+.gl-colors{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:4px 16px;margin:0 0 14px;padding:10px 14px;border:1px solid var(--edge);background:var(--panel)}
+.gl-color{display:flex;gap:8px;min-width:0;font-size:14px}
+.gl-color b{flex:none;min-width:74px;font-weight:600}
+.gl-color span{color:var(--muted)}
+.gl-bar{margin-bottom:6px}
+.gl-az{gap:3px;margin-top:6px}
+.gl-az .chip{padding:2px 8px;min-width:30px;justify-content:center}
+.gl-sec{scroll-margin-top:calc(var(--bar-h) + 12px);margin-bottom:10px}
+.gl-l{margin:14px 0 6px;font-family:var(--font-display);font-size:18px;color:var(--gold-hi);border-bottom:1px solid var(--edge)}
+.gl{margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(360px,100%),1fr));gap:0 20px}
+.gl > div{display:grid;grid-template-columns:minmax(80px,auto) minmax(0,1fr);gap:10px;padding:5px 0;border-bottom:1px solid var(--edge);min-width:0}
+.gl dt{font-weight:700;color:var(--gold-hi);word-break:break-word}
+.gl dd{margin:0;color:var(--text)}
+
+.desec-link{margin:14px 0}
+.desec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:10px 24px}
+.desec-odds{list-style:none;margin:0;padding:0}
+.desec-odds li{display:grid;grid-template-columns:70px minmax(0,1fr) 44px;align-items:center;gap:10px;padding:5px 0}
+.desec-odds i{display:block;height:10px;background:linear-gradient(90deg,var(--gold) var(--w),var(--edge) var(--w))}
+.desec-odds b{text-align:right;color:var(--gold-hi)}
+
+@media (max-width:640px){
+  .chg-row{grid-template-columns:minmax(0,1fr)}
+}

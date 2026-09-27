@@ -336,16 +336,34 @@ export async function extract(pages, dir) {
   about.bugs = await extractBugs(await doc('Bugs'), targets);
   about.seasons = await extractSeasons(await doc('Seasons'), await doc('Season 13'), targets);
 
+  const itemSkills = await extractItemSkills(await doc('Item Skills'), targets);
+  if (itemSkills?.trees[0].skills.length) skills.Items = itemSkills;
+  const treeDocs = [];
+  for (const p of pages) if (/^This page lists \w+ skills from/i.test(p.intro || '')) treeDocs.push(await doc(p.title));
+  mapTreePages(treeDocs, skills, targets);
+  const skillChanges = await extractSkillChanges(await doc('Skill Changes'), skills, targets);
+  cube.desecration = await extractDesecration(await doc('Desecration'), targets);
+  for (const [title, route] of [['Item-Only Skills', 'skills/Items'], ['Formula Info', 'filters/Formulas']]) { const p = byTitle.get(title); if (p) targets[`${p.id}#`] = route; }
+  const strays = [];
+  for (const p of pages) if (p.len < 1200 || /may refer to|candidate for deletion/i.test(p.intro || '')) strays.push(await doc(p.title));
+  mapStragglers(strays, items, targets);
+  for (const { page } of strays) {
+    const s = skills.Items?.trees[0].skills.find(x => x.name === page.title);
+    if (s && !targets[`${page.id}#`]) targets[`${page.id}#`] = `skills/Items/${s.anchor}`;
+  }
+
   const skillIndexAll = Object.values(skills).flatMap(c => c.trees.flatMap(t => t.skills.map(k => ({ c: c.cls, n: k.name, a: k.anchor }))));
   const help = await extractHelp(await doc('FAQ'), await doc('Support FAQ'), targets);
   const guides = await extractGuides(await doc('Links'), pages, doc, skillIndexAll, targets);
   const breakpoints = await extractBreakpoints(await doc('Breakpoints'), targets);
+  const pvp = await extractPvp(await doc('PvP Changes'), await doc('Low Level Dueling'), skillIndexAll, targets);
+  const lexicon = await extractLexicon(await doc('Lexicon of Abbreviations'), targets);
 
   const filters = await extractFilters(await doc('Item Filtering'), await doc('Customization'), targets);
   const fi = byTitle.get('Filter Info');
   if (fi) targets[`${fi.id}#`] = 'filters/list';
 
-  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs, classAttrs, qlvl, newItems, cosmetics, general, balance, about }, guide: { help, guides, breakpoints }, filters };
+  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs, classAttrs, qlvl, newItems, cosmetics, general, balance, about }, guide: { help, guides, breakpoints, pvp, lexicon }, filters, skillChanges };
 }
 
 // ---------- maps ----------
@@ -1672,4 +1690,248 @@ async function extractSeasons(r, s13, targets) {
   targets[`${page.id}#`] = 'about/seasons';
   if (s13) targets[`${s13.page.id}#`] = 'patches/s13';
   return { page: page.id, seasons, info };
+}
+
+// ---------- remaining pages: skill trees, item skills, skill changes, PvP, glossary ----------
+// One skill's block under its heading: icon, description, level, prerequisites, then the body.
+function readSkill(w, hd) {
+  let img = '', desc = '', lvl = null, reqSkills = [], reqItems = '';
+  const body = [];
+  for (const el of sectionAfter(w, hd.level, false)) {
+    if (el.matches('.skill-image') && !img) { img = fixUrl(el.querySelector('img')?.getAttribute('src')); continue; }
+    if (el.matches('.skill-info') && !desc) {
+      for (const li of el.querySelectorAll('li')) {
+        const t = text(li);
+        if (/^Description:/i.test(t)) desc = t.replace(/^Description:\s*/i, '');
+        else if (/^Required Level:/i.test(t)) lvl = num(t);
+        else if (/^Required Skills:/i.test(t)) reqSkills = t.replace(/^Required Skills:\s*/i, '').split(',').map(s => s.replace(/\[\d+\]/, '').trim()).filter(s => s && !/^none$/i.test(s));
+        else if (/^Required Items?:/i.test(t)) { const b = li.querySelector('b'); if (b) b.remove(); reqItems = clean(li.innerHTML).replace(/^:\s*/, ''); }
+      }
+      continue;
+    }
+    if (el.matches('p') && el.querySelector('.expand-or-collapse-all-button')) continue;
+    body.push(clean(el.outerHTML));
+  }
+  return { name: hd.text, anchor: hd.id, img, desc, lvl, reqSkills, reqItems, body: body.join('') };
+}
+
+// Per-tree pages ("Cold Spells") repeat what the class's All Skills page holds.
+function mapTreePages(docs, skills, targets) {
+  const norm = s => s.toLowerCase().replace(/\s*\([^)]*\)/g, '').replace(/\b(skills?|spells?|tree)\b/g, '').replace(/[^a-z]+/g, ' ').trim();
+  for (const { page, d } of docs) {
+    const m = text(d.querySelector('.mw-parser-output > p')).match(/^This page lists (\w+) skills from the (.+?) skill tree/i);
+    const cls = m && skills[m[1]] ? m[1] : null;
+    if (!cls) continue;
+    const tree = skills[cls].trees.find(t => norm(t.name) === norm(m[2])) || skills[cls].trees.find(t => norm(page.title).startsWith(norm(t.name)));
+    targets[`${page.id}#`] = `skills/${cls}${tree ? '/' + tree.anchor : ''}`;
+    const known = new Set(skills[cls].trees.flatMap(t => t.skills.map(s => s.anchor)));
+    for (const w of d.querySelectorAll('.mw-heading')) {
+      const hd = headingOf(w);
+      if (hd && known.has(hd.id)) targets[`${page.id}#${hd.id}`] = `skills/${cls}/${hd.id}`;
+    }
+  }
+}
+
+async function extractItemSkills(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const skills = [];
+  for (const w of d.querySelectorAll('.mw-heading')) {
+    const hd = headingOf(w);
+    if (!hd || hd.level !== 2) continue;
+    skills.push(readSkill(w, hd));
+    targets[`${page.id}#${hd.id}`] = `skills/Items/${hd.id}`;
+  }
+  targets[`${page.id}#`] = 'skills/Items';
+  const before = [];
+  for (let n = d.querySelector('.mw-parser-output')?.firstElementChild; n && !n.matches('.mw-heading'); n = n.nextElementSibling) if (n.matches('p') && text(n)) before.push(n);
+  const intro = before.map(p => clean(p.innerHTML).replace(/^(<br ?\/?>\s*)+/, '')).join(' ');
+  return { cls: 'Items', page: page.id, intro: intro ? `<p>${intro}</p>` : '', trees: [{ name: 'Item-only skills', anchor: 'Item_Skills', skills }] };
+}
+
+const tableOf = t => {
+  const g = grid(t);
+  const head = g[0].every(c => c.tagName === 'TH') ? g.shift().map(text) : [];
+  return { caption: text(t.querySelector('caption')), head, rows: g.map(r => r.map(htmlOf)) };
+};
+const stubNote = d => {
+  const box = [...d.querySelectorAll('table')].find(t => /marked as a stub|candidate for deletion/i.test(text(t)));
+  const reason = box ? (text(box).match(/Reason:\s*(.+)$/i) || [])[1] || '' : '';
+  if (box) box.remove();
+  return reason;
+};
+
+async function extractSkillChanges(r, skills, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const stub = stubNote(d);
+  const out = { page: page.id, stub, intro: '', onItems: [], classes: [] };
+  const anchorOf = (cls, name) => skills[cls]?.trees.flatMap(t => t.skills).find(s => s.name.toLowerCase() === name.toLowerCase())?.anchor || '';
+  const introP = [...d.querySelectorAll('.mw-parser-output > p')].find(p => /skill changes from the vanilla/i.test(text(p)));
+  if (introP) out.intro = clean(introP.innerHTML);
+  let cls = null, tree = null, block = null;
+  for (const el of flatten(d.querySelector('.mw-parser-output'))) {
+    const hd = headingOf(el);
+    if (hd) {
+      if (hd.level === 2 && CLASSES.includes(hd.text)) {
+        cls = { cls: hd.text, anchor: hd.id, trees: [] }; out.classes.push(cls); tree = block = null;
+        targets[`${page.id}#${hd.id}`] = `skills/changes?cls=${hd.text}`;
+      } else if (cls && hd.level === 3) {
+        tree = { name: hd.text.replace(/\s*\(.*\)$/, ''), anchor: hd.id, notes: [], skills: [] }; cls.trees.push(tree);
+        targets[`${page.id}#${hd.id}`] = `skills/changes?cls=${cls.cls}#${hd.id}`;
+      } else if (hd.level === 2) {
+        cls = tree = null; block = { title: hd.text, anchor: hd.id, notes: '', tables: [] }; out.onItems.push(block);
+        targets[`${page.id}#${hd.id}`] = `skills/changes#${hd.id}`;
+      } else if (hd.level === 1) targets[`${page.id}#${hd.id}`] = 'skills/changes';
+      continue;
+    }
+    if (block) {
+      if (el.matches('table')) block.tables.push(tableOf(el));
+      else if (text(el) && el !== introP) block.notes += clean(el.outerHTML);
+      continue;
+    }
+    if (!tree) continue;
+    if (el.matches('table')) {
+      for (const row of grid(el)) {
+        if (row.length < 2) continue;
+        const name = text(row[0]);
+        const changes = [...row[1].querySelectorAll('li')].filter(li => text(li) && !li.querySelector('li')).map(li => clean(li.innerHTML));
+        if (name && changes.length) tree.skills.push({ name, anchor: anchorOf(cls.cls, name), changes });
+      }
+    } else if (text(el)) tree.notes.push(clean(el.innerHTML));
+  }
+  targets[`${page.id}#`] = 'skills/changes';
+  return out;
+}
+
+// PvP Changes + Low Level Dueling
+async function extractPvp(r, lld, skillIndex, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const byName = new Map(skillIndex.map(s => [s.n.toLowerCase(), s]));
+  const out = { page: page.id, intro: '', sections: [], diffs: [], diffNotes: [], multIntro: '', mults: [], lld: null };
+  const introP = d.querySelector('.mw-parser-output > p');
+  if (introP) out.intro = clean(introP.innerHTML);
+  const bySkill = new Map();
+  const skill = name => {
+    const k = name.toLowerCase();
+    if (!bySkill.has(k)) { const s = byName.get(k); bySkill.set(k, { name: s?.n || name, cls: s?.c || '', anchor: s?.a || '', diff: '', nm: '', hell: '', type: '' }); }
+    return bySkill.get(k);
+  };
+  for (const w of d.querySelectorAll('.mw-heading')) {
+    const hd = headingOf(w);
+    if (!hd || hd.level !== 2) continue;
+    const els = sectionAfter(w, 2, false);
+    if (/skill differences/i.test(hd.text)) {
+      targets[`${page.id}#${hd.id}`] = 'pvp/skills';
+      for (const li of els.filter(e => e.matches('ul')).flatMap(u => [...u.querySelectorAll(':scope > li')])) {
+        const m = text(li).match(/^([^:]{2,40}):\s/);
+        if (m && byName.has(m[1].trim().toLowerCase())) {
+          const h = clean(li.innerHTML);
+          skill(m[1].trim()).diff = h.slice(h.indexOf(':') + 1).trim();
+        } else out.diffNotes.push(clean(li.innerHTML));
+      }
+      continue;
+    }
+    if (/damage multipliers/i.test(hd.text)) {
+      targets[`${page.id}#${hd.id}`] = 'pvp/skills';
+      out.multIntro = els.filter(e => !e.matches('table')).map(e => clean(e.outerHTML)).join('');
+      const t = els.find(e => e.matches('table'));
+      if (t) {
+        let cur = '';
+        for (const row of grid(t).slice(1)) {
+          if (row.length === 1) { cur = text(row[0]); continue; }
+          const name = text(row[0]).replace(/^[\s•]+/, '');
+          if (!name) continue;
+          const o = skill(name);
+          Object.assign(o, { nm: text(row[1]), hell: text(row[2]), type: text(row[3]) });
+          if (!o.cls && CLASSES.includes(cur)) o.cls = cur;
+          if (cur && !CLASSES.includes(cur)) o.group = cur;
+        }
+      }
+      continue;
+    }
+    targets[`${page.id}#${hd.id}`] = `pvp#${hd.id}`;
+    out.sections.push({ title: hd.text, anchor: hd.id, html: els.map(e => clean(e.outerHTML)).join('') });
+  }
+  out.diffs = [...bySkill.values()];
+  targets[`${page.id}#`] = 'pvp';
+  if (lld) {
+    const topics = [];
+    let intro = '';
+    for (const el of flatten(lld.d.querySelector('.mw-parser-output'))) {
+      const hd = headingOf(el);
+      if (hd) {
+        if (hd.level === 2) topics.push({ title: hd.text, anchor: hd.id, html: '', subs: [] });
+        else if (topics.length) { topics.at(-1).subs.push({ title: hd.text, anchor: hd.id, level: hd.level }); topics.at(-1).html += clean(el.outerHTML); }
+        targets[`${lld.page.id}#${hd.id}`] = `pvp/lld#${hd.id}`;
+        continue;
+      }
+      if (topics.length) topics.at(-1).html += clean(el.outerHTML);
+      else if (text(el)) intro += clean(el.outerHTML);
+    }
+    targets[`${lld.page.id}#`] = 'pvp/lld';
+    out.lld = { page: lld.page.id, intro, topics };
+  }
+  return out;
+}
+
+// Lexicon of Abbreviations: "Term: meaning" list items under letter headings.
+async function extractLexicon(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const stub = stubNote(d);
+  const colors = [], entries = [];
+  let letter = '';
+  for (const el of flatten(d.querySelector('.mw-parser-output'))) {
+    const hd = headingOf(el);
+    if (hd) { letter = hd.text; continue; }
+    if (!el.matches('ul') || !letter) continue;
+    for (const li of el.querySelectorAll(':scope > li')) {
+      if (/^colors$/i.test(letter)) {
+        const sp = li.querySelector('span[class^="d2"]');
+        const [name, what] = text(li).split(/\s*=\s*/);
+        colors.push({ cls: sp?.className || '', name, what: what || '' });
+        continue;
+      }
+      // Split at the first colon outside a tag.
+      const h = clean(li.innerHTML);
+      let depth = 0, at = -1;
+      for (let i = 0; i < h.length; i++) {
+        const c = h[i];
+        if (c === '<') depth++;
+        else if (c === '>') depth--;
+        else if (c === ':' && !depth) { at = i; break; }
+      }
+      if (at < 0) continue;
+      const term = h.slice(0, at).replace(/<[^>]+>/g, '').trim();
+      if (term) entries.push({ term, html: h.slice(at + 1).trim(), letter });
+    }
+  }
+  targets[`${page.id}#`] = 'glossary';
+  const intro = [...d.querySelectorAll('.mw-parser-output > p')].find(p => /slang and abbreviations/i.test(text(p)));
+  return { page: page.id, stub, intro: text(intro), colors, entries };
+}
+
+async function extractDesecration(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const notes = [...d.querySelectorAll('.mw-parser-output > p')].map(p => clean(p.innerHTML)).filter(Boolean);
+  const t = d.querySelector('table');
+  const mods = t ? [...t.querySelectorAll('td')].map(text).filter(Boolean) : [];
+  const chances = [...d.querySelectorAll('.mw-parser-output > ul > li')].map(li => text(li).match(/^(.+?):\s*(\d+)%/)).filter(Boolean).map(m => ({ tier: m[1], pct: +m[2] }));
+  targets[`${page.id}#`] = 'cube/corruptions?type=Amulet#Desecration';
+  return { page: page.id, notes, mods, chances };
+}
+
+// Short disambiguation or deletion-candidate pages named after a runeword go to it.
+function mapStragglers(docs, items, targets) {
+  for (const { page, d } of docs) {
+    if (targets[`${page.id}#`]) continue;
+    const t = text(d.querySelector('.mw-parser-output'));
+    if (!/may refer to|candidate for deletion/i.test(t) && page.len > 400) continue;
+    if (/skill/i.test(t.slice(0, 300))) continue;
+    const rws = items.filter(i => i.kind === 'runeword' && i.name === page.title);
+    if (rws.length) targets[`${page.id}#`] = rws.length > 1 ? `items?t=runeword&q=${encodeURIComponent(page.title)}` : `item/${rws[0].slug}`;
+  }
 }
