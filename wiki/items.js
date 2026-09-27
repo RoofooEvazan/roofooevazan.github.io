@@ -289,6 +289,8 @@
     const req = [it.req.lvl && `Level ${it.req.lvl}`, it.req.str && `${it.req.str} Str`, it.req.dex && `${it.req.dex} Dex`].filter(Boolean).join(' · ');
     const listHref = `#/items?t=${it.kind}${it.slot ? '&slot=' + encodeURIComponent(it.slot) : ''}`;
     const others = set ? set.items.filter(s => s !== it.slug).map(s => D.bySlug.get(s)).filter(Boolean) : [];
+    // Other uniques and sets on the same base (not runewords, whose "base" is a socket count).
+    const sameBase = it.kind === 'runeword' || !it.base ? [] : data.items.filter(o => o !== it && o.kind !== 'runeword' && baseName(o.base) === baseName(it.base));
 
     root.innerHTML = `
       <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Wiki</a><span aria-hidden="true">›</span><a href="#/items?t=${it.kind}">${esc(k.label)}</a><span aria-hidden="true">›</span><a href="${listHref}">${esc(it.slot)}</a></nav>
@@ -300,19 +302,18 @@
           ${runes(it)}
           ${infoLines.length ? `<ul class="tt-info">${infoLines.map(l => `<li><span>${esc(l.label)}</span> ${l.html}</li>`).join('')}</ul>` : ''}
           ${req ? `<div class="tt-req">Requires ${esc(req)}</div>` : ''}
-          <ul class="istats tt-stats">${it.stats.filter(s => s.st !== 'removed').map(s => statLi(s, true)).join('')}</ul>
-          <div class="tt-legend"><span class="st-new">New in PD2</span><span class="st-changed">Changed</span></div>
+          <ul class="istats tt-stats">${it.stats.map(s => s.st === 'removed' ? `<li class="st st-removed"><s>${esc(s.old || strip(s.html))}</s> <em class="tt-was">removed in PD2</em></li>`
+            : `<li class="st st-${s.st}">${s.html}${s.st === 'changed' && s.old ? `<em class="tt-was">was ${esc(s.old)}</em>` : ''}</li>`).join('')}</ul>
+          ${changes.length ? `<div class="tt-legend"><span class="st-new">New in PD2</span><span class="st-changed">Changed</span>${changes.some(s => s.st === 'removed') ? '<span class="st-removed">Removed</span>' : ''}</div>` : '<div class="tt-legend tt-same">Same stats as the original game</div>'}
         </div>
         <div class="iside">
-          ${changes.length ? `<section><h2 class="home-h">What PD2 changed</h2><ul class="diff">${changes.map(s => `
-            <li class="d-${s.st}">${s.st === 'new' ? `<em>Added</em><span class="nv">${s.html}</span>` : s.st === 'removed' ? `<em>Removed</em><s>${esc(s.old || '')}</s>` : `<em>Changed</em><s>${esc(s.old || '')}</s><span class="arrow" aria-hidden="true">→</span><span class="nv">${s.html}</span>`}</li>`).join('')}</ul></section>`
-            : `<section><h2 class="home-h">What PD2 changed</h2><p class="muted">Same stats as the original game.</p></section>`}
-          ${baseLines.length ? `<section><h2 class="home-h">Base item</h2><ul class="kv">${baseLines.map(l => `<li><span>${esc(l.label)}</span><b>${l.html}</b></li>`).join('')}</ul></section>` : ''}
+          ${baseLines.length ? `<section><h2 class="home-h">Base item${it.kind !== 'runeword' && it.base ? ` <a class="ibase" href="#/bases?kind=${it.slot === 'Weapon' ? 'Weapon' : 'Armor'}&q=${encodeURIComponent(baseName(it.base))}" data-hc="base:${esc(baseSlug(it.base))}">${esc(baseName(it.base))}</a>` : ''}</h2><ul class="kv kv2">${baseLines.map(l => `<li><span>${esc(l.label)}</span><b>${l.html}</b></li>`).join('')}</ul></section>` : ''}
+          ${sameBase.length ? `<section><h2 class="home-h">Also on ${esc(baseName(it.base))}</h2><p class="also">${sameBase.map(o => `<a href="#/item/${o.slug}" class="${kindOf(o).cls}">${esc(o.name)}</a>`).join('')}</p></section>` : ''}
           ${set ? `<section><h2 class="home-h">${esc(set.name)}</h2>
             ${others.length ? `<div class="mini">${others.map(o => `<a href="#/item/${o.slug}" class="${kindOf(o).cls}">${o.img ? `<img src="${esc(o.img)}" alt="" loading="lazy">` : ''}<span><b>${esc(o.name)}</b><i>${esc(o.base)}</i></span></a>`).join('')}</div>` : ''}
             ${set.bonuses.length ? `<h3 class="sub-h">Set bonuses</h3><ul class="istats">${set.bonuses.map(s => statLi(s, true)).join('')}</ul>` : ''}
             <a class="more-link" href="#/items?t=set&set=${set.slug}">Whole set →</a></section>` : ''}
-          ${it.notes ? `<section><h2 class="home-h">Notes</h2><div class="wiki inote">${it.notes}</div></section>` : ''}
+          ${it.notes ? `<section><h2 class="home-h">Notes</h2><div class="wiki inote">${it.notes.replace(/^\s*<p>\s*<b>Notes?:?<\/b>\s*<\/p>/i, '')}</div></section>` : ''}
           <p class="attrib">From <a href="${page ? wikiUrl(page.title, it.anchor) : '#'}" target="_blank" rel="noopener">${esc(page?.title || 'the PD2 Wiki')}</a> on the Project Diablo 2 Wiki, shared under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</p>
         </div>
       </div>`;
@@ -320,6 +321,9 @@
     const side = root.querySelector('.iside');
     window.PD2Patches?.historyHtml(it.name).then(h => { if (h && side.isConnected) side.querySelector('.attrib').insertAdjacentHTML('beforebegin', h); });
   }
+
+  const baseName = n => String(n || '').replace(/\s*\([^)]*\)\s*$/, '');
+  const baseSlug = n => baseName(n).toLowerCase().replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
   // ---------- item entries inside ordinary pages ----------
   // Replaces each wiki item block (heading, picture, info box, Before/After table) with

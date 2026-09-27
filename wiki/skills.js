@@ -47,6 +47,7 @@
       ${classTabs(cls)}
       ${isItems && d.intro ? `<div class="wiki lead items-intro">${d.intro}</div>` : ''}
       <div class="tree-tabs" role="tablist"${d.trees.length < 2 ? ' hidden' : ''}>${d.trees.map(t => `<button type="button" role="tab" class="seg${t.name === activeTree ? ' on' : ''}" data-tree="${esc(t.name)}" aria-selected="${t.name === activeTree}">${esc(t.name)}</button>`).join('')}</div>
+      <div class="sk-layout${sel ? ' has-sel' : ''}">
       <div class="trees" style="--tiers:${tiers.length}">
         ${d.trees.map(t => `<section class="tree${t.name === activeTree ? ' on' : ''}" data-tree="${esc(t.name)}">
           <h2>${esc(t.name)}</h2>
@@ -58,7 +59,8 @@
           }).join('')}</div>
         </section>`).join('')}
       </div>
-      <div id="skill-detail">${sel ? '' : `<p class="hint">Pick a skill to see what it does, its synergies and its numbers at any level.</p>`}</div>
+      <div id="skill-detail">${sel ? '' : `<p class="hint">Pick a skill to see what it does, its synergies and its numbers at any level. Hover one for a quick look.</p>`}</div>
+      </div>
       ${d.intro && !isItems ? `<details class="cls-intro"><summary>${esc(cls)} attributes &amp; notes</summary><div class="wiki">${d.intro}</div></details>` : ''}
       <p class="tile-links">${isItems ? `<a href="#/skills/changes#OSkills">Class skills items grant →</a>` : `<a href="#/classes?cls=${cls}">Plan ${esc(cls)} stat points →</a><a href="#/guides?cls=${cls}">${esc(cls)} builds →</a>`}<a href="#/skills/changes${isItems ? '' : '?cls=' + cls}">What PD2 changed →</a></p>
       <p class="attrib">From <a href="${page ? wikiUrl(page.title) : '#'}" target="_blank" rel="noopener">${esc(page?.title || 'the PD2 Wiki')}</a> on the Project Diablo 2 Wiki, shared under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</p>`;
@@ -105,7 +107,8 @@
       for (const el of $$('.skill-vs .wiki', art)) enhanceFragment(el, byId(ch.page));
     });
     window.PD2Patches?.historyHtml(sel.name).then(h => { if (h && art.isConnected) art.insertAdjacentHTML('beforeend', h); });
-    if (anchor) requestAnimationFrame(() => det.scrollIntoView({ block: 'start', behavior: 'smooth' }));
+    // Side by side, the detail is already in view; stacked, bring it up.
+    if (anchor && getComputedStyle($('.sk-layout', root)).display !== 'grid') requestAnimationFrame(() => det.scrollIntoView({ block: 'start', behavior: 'smooth' }));
   }
 
   // What PD2 changed about one skill, and which items grant it as an oskill or aura.
