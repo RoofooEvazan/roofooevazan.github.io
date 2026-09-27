@@ -32,6 +32,8 @@
     else if (type === 'craft') p = window.PD2Cube?.craftTip(arg);
     else if (type === 'affix') p = window.PD2Affixes?.tip(arg);
     else if (type === 'faq') p = window.PD2Guide?.faqTip(arg);
+    else if (type === 'build') p = window.PD2Guide?.buildTip(arg);
+    else if (type === 'lfilter') p = window.PD2Filters?.filterTip(arg);
     p = Promise.resolve(p).catch(() => '');
     cache.set(key, p);
     return p;

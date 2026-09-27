@@ -87,9 +87,10 @@
     };
     let hits = [], shown = 0;
     const row = c => {
-      const meaning = Object.entries(c.f).map(([k, v]) => `<span class="fk">${esc(k)}</span> ${v}`).join('<br>');
-      return `<tr><td class="fc">${c.codes.map(x => `<button type="button" class="code" data-copy="${esc(x)}" title="Copy">${esc(x)}</button>`).join('')}</td>
-        <td class="fm">${c.ctx ? `<span class="fctx">${esc(c.ctx)}</span>` : ''}${meaning}</td><td class="fs">${esc(c.sec)}</td></tr>`;
+      const meaning = Object.entries(c.f).map(([k, v]) => `<span class="fk">${esc(k)}</span> ${v}`).join(' ');
+      const color = /class="(d2-[a-z]+)"/.exec(c.f.Color || '')?.[1] || '';
+      return `<tr><td class="fc">${c.codes.map(x => `<button type="button" class="code${color ? ' wiki' : ''}" data-copy="${esc(x)}" title="Copy"><span class="${color}">${esc(x)}</span></button>`).join('')}</td>
+        <td class="fm">${c.ctx ? `<span class="fctx">${esc(c.ctx)}</span>` : ''}${meaning}</td><td class="fs" title="${esc(c.sec)}">${esc(c.sec.split(' › ').pop())}</td></tr>`;
     };
     const page = () => { body.insertAdjacentHTML('beforeend', hits.slice(shown, shown + 200).map(row).join('')); shown = Math.min(hits.length, shown + 200); more.hidden = shown >= hits.length; more.textContent = `Show more (${hits.length - shown} left)`; enhanceFragment(body, P().byId(data.page)); };
     const draw = () => {
@@ -121,16 +122,17 @@
 
   function list(root) {
     const { esc, $$, enhanceFragment } = P();
-    const card = x => `<article class="fcard${x.archived ? ' old' : ''}">
+    // One row per filter: name, author, last update and the start of its description.
+    const card = x => `<article class="frow-f${x.archived ? ' old' : ''}" data-hc="lfilter:${data.filters.indexOf(x)}">
       <h3>${x.href ? `<a href="${esc(x.href)}" target="_blank" rel="noopener">${esc(x.name)}</a>` : esc(x.name)}</h3>
-      <p class="fmeta">${[x.author && `by ${esc(x.author)}`, x.updated && `updated ${esc(x.updated)}`].filter(Boolean).join(' · ')}</p>
-      <div class="wiki">${x.desc}</div></article>`;
+      <span class="ff-by">${esc(x.author || '')}</span><span class="ff-up">${esc(x.updated || '')}</span>
+      <p class="ff-desc">${esc(String(x.desc || '').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&#0?39;/g, "'").replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim())}</p></article>`;
     root.innerHTML = `${head('list', 'Public Loot Filters')}${builder}
-      <h2 class="home-h">Current filters</h2><div class="fcards">${data.filters.filter(x => !x.archived).map(card).join('')}</div>
-      ${data.filters.some(x => x.archived) ? `<details class="about"><summary>Archived filters (${data.filters.filter(x => x.archived).length})</summary><div class="fcards">${data.filters.filter(x => x.archived).map(card).join('')}</div></details>` : ''}
+      <h2 class="home-h">Current filters <small>${data.filters.filter(x => !x.archived).length}</small></h2><div class="flist">${data.filters.filter(x => !x.archived).map(card).join('')}</div>
+      ${data.filters.some(x => x.archived) ? `<details class="about"><summary>Archived filters (${data.filters.filter(x => x.archived).length})</summary><div class="flist">${data.filters.filter(x => x.archived).map(card).join('')}</div></details>` : ''}
       <p class="muted">Install a filter from the launcher, or put a <code>loot.filter</code> file in your ProjectD2 folder. See the <a href="#/filters">filter guide</a> for in-game settings.</p>
       ${attrib(data.page)}`;
-    for (const el of $$('.fcard .wiki', root)) enhanceFragment(el, P().byId(data.page));
+    for (const el of $$('.frow-f .wiki', root)) enhanceFragment(el, P().byId(data.page));
   }
 
   function setup(root, anchor) {
@@ -150,5 +152,15 @@
     return data.codes.filter(c => c.codes.some(x => x.toLowerCase() === ql)).slice(0, n);
   }
 
-  window.PD2Filters = { load, render, search, get data() { return data; } };
+  // Hover card: a public filter's whole description.
+  async function filterTip(i) {
+    const { esc } = P();
+    await load();
+    const x = data.filters[+i];
+    if (!x) return '';
+    return `<div class="hc-lf"><b class="hc-name">${esc(x.name)}</b><span class="hc-sub">${[x.author && 'by ' + x.author, x.updated && 'updated ' + x.updated].filter(Boolean).map(esc).join(' · ')}</span>
+      <div class="hc-notes">${String(x.desc || '').replace(/<a\b[^>]*>|<\/a>/g, '')}</div></div>`;
+  }
+
+  window.PD2Filters = { load, render, search, filterTip, get data() { return data; } };
 })();

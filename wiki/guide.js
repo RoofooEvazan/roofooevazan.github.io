@@ -118,16 +118,18 @@
       </div>
       <div class="rcount" aria-live="polite"></div><div class="builds"></div>${attrib(G.page)}`;
     const box = $('.builds', root), count = $('.rcount', root);
+    // One line per build; the guide's intro and skill list are on the hover card.
+    lastBuilds = all;
     const card = b => {
       const cls = CLASSES.includes(b.cls) ? b.cls : '';
-      const where = b.page ? 'On this wiki' : b.host || 'Link';
-      return `<a class="build${b.page ? ' local' : ''}" ${linkOf(b)}>
-        <header>${cls ? `<span class="cls-orb cls-${cls.toLowerCase()}" aria-hidden="true">${cls[0]}</span>` : '<span class="cls-orb gen" aria-hidden="true">?</span>'}
-          <b>${esc(b.name)}</b></header>
-        <p class="bmeta">${[b.author && esc(b.author), b.season ? `Season ${b.season}` : b.date && esc(b.date), esc(where)].filter(Boolean).join(' · ')}${b.starter ? ' <em class="starter">Starter</em>' : ''}</p>
-        ${b.meta?.skills?.length ? `<p class="bskills">${b.meta.skills.map(s => `<span>${esc(s.n)}</span>`).join('')}</p>` : ''}
-        ${b.meta?.intro ? `<p class="bintro">${esc(b.meta.intro)}${b.meta.intro.length >= 240 ? '…' : ''}</p>` : ''}
-      </a>`;
+      const where = b.page ? 'Wiki' : b.host || 'Link';
+      return `<a class="brow${b.page ? ' local' : ''}" ${linkOf(b)} data-hc="build:${all.indexOf(b)}">
+        ${cls ? `<span class="cls-orb cls-${cls.toLowerCase()}" aria-hidden="true">${cls[0]}</span>` : '<span class="cls-orb gen" aria-hidden="true">?</span>'}
+        <span class="br-name"><b>${esc(b.name)}</b>${b.starter ? '<em class="starter">Starter</em>' : ''}</span>
+        <span class="br-skills">${(b.meta?.skills || []).slice(0, 3).map(s => esc(s.n)).join(' · ')}</span>
+        <span class="br-by">${esc(b.author || '')}</span>
+        <span class="br-s">${b.season ? `S${b.season}` : esc(b.date || '')}</span>
+        <span class="br-where w-${where === 'Wiki' ? 'wiki' : /YouTube/.test(where) ? 'yt' : 'web'}">${esc(where)}</span></a>`;
     };
     const draw = () => {
       const ts = f.q.toLowerCase().split(/\s+/).filter(Boolean);
@@ -136,12 +138,27 @@
         ts.every(t => b._s.includes(t))).sort((a, b) => (b.sort - a.sort) || a.name.localeCompare(b.name));
       count.textContent = `${hits.length} build${hits.length === 1 ? '' : 's'} & guide${hits.length === 1 ? '' : 's'}, newest season first`;
       const groups = f.cls ? [f.cls] : [...CLASSES, 'General'].filter(c => hits.some(b => b.cls === c));
-      box.innerHTML = groups.map(c => `<h2 class="home-h">${esc(c)}</h2><div class="bgrid">${hits.filter(b => b.cls === c).map(card).join('')}</div>`).join('')
+      box.innerHTML = groups.map(c => `<h2 class="home-h">${esc(c)} <small>${hits.filter(b => b.cls === c).length}</small></h2><div class="blist">${hits.filter(b => b.cls === c).map(card).join('')}</div>`).join('')
         || '<div class="empty">No builds match.</div>';
     };
     draw();
     let t;
     $('#gq', root).addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { f.q = e.target.value.trim(); history.replaceState(null, '', url(f)); draw(); }, 150); });
+  }
+
+  let lastBuilds = [];
+  async function buildTip(i) {
+    const { esc } = P();
+    const b = lastBuilds[+i];
+    if (!b) return '';
+    const m = b.meta;
+    const desc = m?.intro || String(b.desc || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    return `<div class="hc-build">
+      <b class="hc-name">${esc(b.name)}</b>
+      <span class="hc-sub">${[b.cls, b.author && 'by ' + b.author, b.season ? 'Season ' + b.season : b.date].filter(Boolean).map(esc).join(' · ')}</span>
+      ${m?.skills?.length ? `<div class="hc-lvl">Key skills</div><p class="hc-desc">${m.skills.map(s => esc(s.n)).join(', ')}</p>` : ''}
+      ${desc ? `<p class="hc-desc">${esc(desc.length > 300 ? desc.slice(0, 290).replace(/\s+\S*$/, '') + '…' : desc)}</p>` : ''}
+      <div class="hc-foot">${b.page ? `On this wiki${m?.words ? ` · about ${Math.max(1, Math.round(m.words / 230))} min read` : ''}` : `Opens ${esc(b.host || 'an outside site')}`}</div></div>`;
   }
 
   // A strip of facts above a wiki-hosted guide's page.
@@ -280,5 +297,5 @@
     return data.help.items.filter(i => i.q.toLowerCase().includes(ql)).slice(0, n);
   }
 
-  window.PD2Guide = { load, help, guides, guideHeader, breakpoints, search, faqTip, get data() { return data; } };
+  window.PD2Guide = { load, help, guides, guideHeader, breakpoints, search, faqTip, buildTip, get data() { return data; } };
 })();
