@@ -44,6 +44,11 @@ h1{margin:.35rem 0 0;font-family:var(--tri-display);font-weight:700;font-size:cl
 .byline{margin:.45rem 0 0;font-size:.86rem;letter-spacing:.02em;color:var(--tri-muted)}
 .byline a{color:inherit;text-decoration:underline dotted;text-underline-offset:.2em}
 .byline a:hover{color:var(--tri-gold)}
+.socials{display:inline-flex;align-items:center;gap:2px;margin-left:8px;vertical-align:middle}
+.byline .social{display:inline-grid;place-items:center;width:32px;height:32px;text-decoration:none;color:var(--tri-muted)}
+.byline .social:hover{color:var(--tri-gold)}
+.byline .social:focus-visible{outline:2px solid var(--tri-gold);outline-offset:1px}
+.social svg{width:18px;height:18px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.9))}
 .intro{max-width:660px;margin:1rem auto 0;font-size:1.12rem;color:var(--tri-fg)}
 .intro b{color:var(--tri-gold);font-weight:400}
 .rule{width:min(420px,80%);height:7px;margin:1.6rem auto 0;background:linear-gradient(var(--tri-accent) 0 4px,var(--tri-gold) 4px 7px);box-shadow:0 2px 8px rgba(0,0,0,.8)}
@@ -112,7 +117,10 @@ footer p{margin:4px 0}
 
 <header class="wrap on-plate">
   <h1>PD2 Hub</h1>
-  <p class="byline">by <a href="https://github.com/RoofooEvazan">RoofooEvazan</a></p>
+  <p class="byline">by <a href="https://github.com/RoofooEvazan">RoofooEvazan</a><span class="socials">
+    <a class="social" href="https://www.youtube.com/@RoofooEvazan" aria-label="RoofooEvazan on YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .6 12a31 31 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-4.8 31 31 0 0 0-.4-4.8zM9.7 15.1V8.9l5.5 3.1z"/></svg></a>
+    <a class="social" href="https://www.twitch.tv/roofooevazan" aria-label="RoofooEvazan on Twitch" title="Twitch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.3 2 3 5.4v13.8h4.7V22h2.6l2.7-2.8h3.8l5.2-5.2V2zm16 11.1-2.9 2.9h-4.8l-2.5 2.5V16H6.2V3.7h14.1zm-3-6.4h-1.7v5h1.7zm-4.8 0h-1.7v5h1.7z"/></svg></a>
+  </span></p>
   <p class="intro">Calculators and simulators for Project Diablo 2, built on <b>the game's own code</b>: the rules were reverse engineered from PD2's client files, and many were checked by running that code directly. Each tool shows how its numbers were found and what's still unverified.</p>
   <div class="rule" aria-hidden="true"></div>
 </header>
