@@ -315,10 +315,10 @@ h3.pn-title{font-size:15.5px}
 
 /* ---------- build directory: one line per build ---------- */
 .blist{display:flex;flex-direction:column;border:1px solid var(--edge);background:var(--panel);margin-bottom:6px}
-.brow{display:grid;grid-template-columns:22px minmax(0,1.6fr) minmax(0,1fr) minmax(0,130px) 38px 76px;align-items:center;gap:0 12px;padding:5px 10px;border-bottom:1px solid var(--edge);color:var(--text);text-decoration:none!important}
-.brow:last-child{border-bottom:0}
-.brow:hover{background:color-mix(in srgb,var(--gold) 6%,transparent)}
-.brow .cls-orb{width:20px;height:20px;font-size:11px;border-width:1px}
+a.brow{display:grid;grid-template-columns:22px minmax(0,1.6fr) minmax(0,1fr) minmax(0,130px) 38px 76px;align-items:center;gap:0 12px;padding:5px 10px;border-bottom:1px solid var(--edge);color:var(--text);text-decoration:none!important}
+a.brow:last-child{border-bottom:0}
+a.brow:hover{background:color-mix(in srgb,var(--gold) 6%,transparent)}
+a.brow .cls-orb{width:20px;height:20px;font-size:11px;border-width:1px}
 .br-name{display:flex;align-items:center;gap:8px;min-width:0}
 .br-name b{font-weight:600;color:var(--gold-hi);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .br-name .starter{flex:none;font-style:normal;font-size:11.5px;padding:0 5px;border:1px solid color-mix(in srgb,var(--new) 50%,transparent);color:var(--new)}
@@ -332,8 +332,8 @@ h3.pn-title{font-size:15.5px}
 .hc-build{max-width:360px}
 .hc-build .hc-name{display:block;font-size:15px}
 @media (max-width:760px){
-  .brow{grid-template-columns:20px minmax(0,1fr) auto;grid-template-areas:"o n s" ". k w";gap:1px 8px}
-  .brow .cls-orb{grid-area:o}.br-name{grid-area:n}.br-s{grid-area:s}.br-skills{grid-area:k}.br-where{grid-area:w;text-align:right}.br-by{display:none}
+  a.brow{grid-template-columns:20px minmax(0,1fr) auto;grid-template-areas:"o n s" ". k w";gap:1px 8px}
+  a.brow .cls-orb{grid-area:o}.br-name{grid-area:n}.br-s{grid-area:s}.br-skills{grid-area:k}.br-where{grid-area:w;text-align:right}.br-by{display:none}
 }
 
 /* ---------- loot filters: one-line codes, compact filter rows ---------- */
@@ -640,3 +640,14 @@ h3.pn-title{font-size:15.5px}
 .home-recent .charea{font-size:14px}
 .home-recent .more-link{display:inline-block;margin-top:10px;padding:6px 14px;border:1px solid var(--gold);color:var(--gold-hi);font-size:16px}
 .home-recent .more-link:hover{background:color-mix(in srgb,var(--gold) 12%,transparent)}
+/* Class buttons size to their names instead of two fixed columns. */
+.dir-cls{grid-template-columns:repeat(auto-fill,minmax(min(158px,100%),1fr))}
+.dir-cls a{min-width:0;white-space:nowrap}
+/* Room for the longest one-word skill names ("Concentration") at the larger text size. */
+@media (min-width:1180px){
+  .sk-layout{grid-template-columns:minmax(0,570px) minmax(0,1fr)}
+  .sk-layout .tier-skills{padding-left:5px;gap:4px}
+  .sk-layout .tier-lv{width:14px}
+}
+.skill-btn span{overflow-wrap:anywhere}
+.sres2 > li{min-width:0}.sres2 > li > a,.sres2 p,.sres2 .crumb{overflow-wrap:anywhere;min-width:0}
