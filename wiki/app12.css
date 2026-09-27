@@ -19,3 +19,26 @@
 .credit li{padding:1px 8px;border:1px solid var(--edge);background:var(--void);color:var(--text);font-size:14px}
 .thanks{margin:18px 0 0;padding:14px 18px;border-left:3px solid var(--gold);background:var(--panel);color:var(--muted)}
 .thanks p{margin:.3em 0}
+
+/* seasons timeline & known bugs */
+.tl{list-style:none;margin:0 0 20px;padding:0;border:1px solid var(--edge);background:var(--panel)}
+.tl li{display:grid;grid-template-columns:minmax(0,220px) 110px minmax(0,1fr);grid-template-areas:"name date bar" ". . note";gap:4px 14px;align-items:center;padding:8px 14px;border-bottom:1px solid var(--edge)}
+.tl li:last-child{border-bottom:0}
+.tl li.league{background:color-mix(in srgb,var(--edge) 25%,transparent)}
+.tl li.now{box-shadow:inset 3px 0 0 var(--gold)}
+.tl li.soon{opacity:.75}
+.tl-name{grid-area:name;display:flex;flex-direction:column;text-decoration:none!important}
+.tl-name b{font-family:var(--font-display);font-weight:400;font-size:12px;letter-spacing:.04em;color:var(--gold-hi)}
+.tl-name span{color:var(--text)}
+.tl li.league .tl-name b{color:var(--muted)}
+.tl-date{grid-area:date;color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+.tl-bar{grid-area:bar;display:flex;align-items:center;gap:10px;min-width:0}
+.tl-bar i{display:block;height:10px;background:var(--gold);flex:none;max-width:70%}
+.tl li.league .tl-bar i{background:var(--edge-hi)}
+.tl li.now .tl-bar i{background:var(--blood)}
+.tl-bar em{font-style:normal;color:var(--dim);font-size:13px;white-space:nowrap}
+.tl-note{grid-area:note;color:var(--muted);font-size:14px}
+.bugtag{float:right;margin-left:8px;font-style:normal;font-family:var(--font-display);font-size:10px;padding:0 6px;background:var(--gold);color:var(--void)}
+@media (max-width:640px){
+  .tl li{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name date" "bar bar" "note note"}
+}

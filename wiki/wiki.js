@@ -125,14 +125,14 @@
       ['How Crafting Works', '#/cube/guide'], 'Desecration'] },
     { name: 'Endgame', icon: 'map', links: [['Map Explorer', '#/maps'], ['Map Events', '#/maps/events'], ['Modifying Maps', '#/maps/modify'], ['Map Affixes', '#/maps/affixes'],
       ['Zones', '#/zones'], ['Monsters & Ubers', '#/monsters'], ['Mercenaries', '#/mercs'], ['Merc Weapon Compare', '#/' + MERC_ROUTE]] },
-    { name: 'Mechanics', icon: 'gear', links: [['Game Mechanics', '#/mechanics'], ['Crit & Leech Calculators', '#/mechanics/Critical_Damage'], ['Resistance Calculator', '#/mechanics/Reducing_Resistances'], ['Breakpoints', '#/breakpoints'], ['What PD2 Changed', '#/overview'], 'PvP Changes', 'Low Level Dueling', ['Abbreviations', 'Lexicon of Abbreviations'], 'Formula Info', 'Bugs'] },
+    { name: 'Mechanics', icon: 'gear', links: [['Game Mechanics', '#/mechanics'], ['Crit & Leech Calculators', '#/mechanics/Critical_Damage'], ['Resistance Calculator', '#/mechanics/Reducing_Resistances'], ['Breakpoints', '#/breakpoints'], ['What PD2 Changed', '#/overview'], 'PvP Changes', 'Low Level Dueling', ['Abbreviations', 'Lexicon of Abbreviations'], 'Formula Info', ['Known Bugs', '#/about/bugs']] },
     { name: 'Guides & Builds', icon: 'book', links: [['Build Directory', '#/guides'], ['Starter Builds', '#/guides?starter=1'], ['Community Links', '#/guides/links']] },
     { name: 'Patch Notes', icon: 'scroll', auto: 'seasons' },
     { name: 'Help', icon: 'help', links: [['Help Center', '#/help'], ['Game Crashes & Errors', '#/help?cat=Game%20errors%20%26%20crashes'], ['Loot Filters', '#/filters'], ['Filter Code Finder', '#/filters/codes'], ['Public Filters', '#/filters/list'], ['Game Setup & Config', '#/filters/setup'], ['Singleplayer', '#/about/singleplayer'], ['Rules', '#/about'], ['Credits', '#/about/credits']] },
     { name: 'More Pages', icon: 'list', auto: 'rest' },
   ];
   // Pages our own views replace; they stay reachable through search and A–Z.
-  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Item Bases|Runes|Mercenaries|Mercenary Skills|FAQ|Support FAQ|Breakpoints|Links|Item Filtering|Filter Info|Customization|Class Attributes|Item Quality Levels|New Items|Cosmetics|General Changes|Balance Changes|Singleplayer|Rules|Credits|Arrows|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
+  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Item Bases|Runes|Mercenaries|Mercenary Skills|FAQ|Support FAQ|Breakpoints|Links|Item Filtering|Filter Info|Customization|Class Attributes|Item Quality Levels|New Items|Cosmetics|General Changes|Balance Changes|Singleplayer|Rules|Credits|Arrows|Bugs|Seasons|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
 
   function buildSite() {
     const used = new Set();
@@ -162,7 +162,7 @@
     const today = new Date().toISOString().slice(0, 10);
     autos.seasons = [
       ...(S.index.seasons || []).map(x => ({ label: x.key === 'upcoming' ? 'Upcoming spoilers' : `Season ${x.n} · ${x.name}${x.iso > today ? ' (upcoming)' : ''}`, href: `#/patches/${x.key}`, route: `patches/${x.key}` })),
-      ...take(p => /^Seasons$|Balance Changes/.test(p.title)).map(p => ({ label: displayName(p), href: pageHref(p.title), id: p.id })),
+      { label: 'Season timeline', href: '#/about/seasons', route: 'about/seasons' },
     ];
     autos.rest = sortP(take(() => true));
     for (const p of S.index.pages) delete p._t;

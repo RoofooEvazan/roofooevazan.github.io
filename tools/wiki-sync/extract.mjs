@@ -333,6 +333,8 @@ export async function extract(pages, dir) {
   const general = await extractGeneralChanges(await doc('General Changes'), targets);
   const balance = await extractBalance(await doc('Balance Changes'), targets);
   const about = await extractAbout(await doc('Rules'), await doc('Singleplayer'), await doc('Credits'), await doc('Arrows'), targets);
+  about.bugs = await extractBugs(await doc('Bugs'), targets);
+  about.seasons = await extractSeasons(await doc('Seasons'), await doc('Season 13'), targets);
 
   const skillIndexAll = Object.values(skills).flatMap(c => c.trees.flatMap(t => t.skills.map(k => ({ c: c.cls, n: k.name, a: k.anchor }))));
   const help = await extractHelp(await doc('FAQ'), await doc('Support FAQ'), targets);
@@ -1601,4 +1603,73 @@ async function extractAbout(rules, sp, credits, arrows, targets) {
   }
   if (arrows) targets[`${arrows.page.id}#`] = 'items?t=unique&slot=Quiver';
   return out;
+}
+
+// ---------- known bugs & seasons ----------
+// Bugs: h2 sections (PD2 bugs, vanilla, not bugs), bold "Label:" groups, list items with
+// optional notes/fixes; "(S11)"-style tags mark bugs re-confirmed in a recent season.
+async function extractBugs(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const sections = [];
+  let sec = null, group = '', last = null, warning = '';
+  const warn = d.querySelector('table.wikitable');
+  if (warn) warning = text(warn.querySelector('span')) || '';
+  for (const el of flatten(d.querySelector('.mw-parser-output'))) {
+    const hd = headingOf(el);
+    if (hd) {
+      if (hd.level === 2) { sec = { title: hd.text, anchor: hd.id, blurb: '', bugs: [] }; sections.push(sec); group = ''; }
+      else group = hd.text;
+      targets[`${page.id}#${hd.id}`] = `about/bugs#${hd.id}`;
+      continue;
+    }
+    if (!sec) continue;
+    if (el.matches('p')) {
+      const b = el.querySelector('b');
+      if (b && text(el) === text(b)) { group = text(b).replace(/:$/, ''); continue; }
+      if (el.querySelector('.emphasis') && !sec.blurb) { sec.blurb = text(el); continue; }
+      if (text(el)) { if (last) last.more += clean(el.outerHTML); }
+      continue;
+    }
+    if (el.matches('ul')) {
+      for (const li of el.querySelectorAll(':scope > li')) {
+        const dl = li.querySelector(':scope > dl');
+        const note = dl ? clean(dl.innerHTML).replace(/<\/?dd>/g, ' ').trim() : '';
+        if (dl) dl.remove();
+        const t = text(li);
+        const tag = t.match(/\(S(\d{1,2})\)/i);
+        last = { group, html: clean(li.innerHTML), text: t, note, season: tag ? +tag[1] : null, more: '' };
+        sec.bugs.push(last);
+      }
+      continue;
+    }
+    if (el.matches('dl') && last) { last.note += (last.note ? ' ' : '') + clean(el.innerHTML).replace(/<\/?dd>/g, ' ').trim(); continue; }
+  }
+  targets[`${page.id}#`] = 'about/bugs';
+  return { page: page.id, warning, sections: sections.filter(s => s.bugs.length || s.blurb) };
+}
+
+async function extractSeasons(r, s13, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const seasons = [], info = [];
+  const table = [...d.querySelectorAll('table')].find(t => /season/i.test(text(t.querySelector('th'))));
+  if (table) {
+    for (const row of grid(table).slice(1)) {
+      const name = text(row[0]);
+      if (!name) continue;
+      const m = name.match(/^Season\s+(\d+)\s*[-–]\s*(.+)$/i);
+      seasons.push({ name, n: m ? +m[1] : null, title: m ? m[2] : name, start: text(row[1]), days: cellNum(row[2]), daysText: text(row[2]), details: htmlOf(row[3]), league: !m });
+    }
+  }
+  for (const w of d.querySelectorAll('.mw-heading')) {
+    const hd = headingOf(w);
+    if (!hd || hd.level !== 2) continue;
+    targets[`${page.id}#${hd.id}`] = /singleplayer/i.test(hd.text) ? 'about/singleplayer' : `about/seasons#${hd.id}`;
+    if (/timeline|singleplayer/i.test(hd.text)) continue;
+    info.push({ title: hd.text, anchor: hd.id, html: sectionAfter(w, 2).map(e => clean(e.outerHTML)).join('') });
+  }
+  targets[`${page.id}#`] = 'about/seasons';
+  if (s13) targets[`${s13.page.id}#`] = 'patches/s13';
+  return { page: page.id, seasons, info };
 }
