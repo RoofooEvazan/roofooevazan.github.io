@@ -118,21 +118,21 @@
   // and every page nobody lists here still shows up under "More pages".
   const SITE = [
     { name: 'Items', icon: 'items', links: [['Item Database', '#/items'], ['Uniques', '#/items?t=unique'], ['Set Items', '#/items?t=set'], ['Runewords', '#/items?t=runeword'],
-      ['Runes & Gems', 'Runes'], 'Item Bases', 'Item Affixes', 'Item Quality Levels', 'New Items', 'Cosmetics', 'Arrows'] },
+      ['Affix Finder', '#/affixes'], ['Runes & Gems', 'Runes'], 'Item Bases', 'Item Quality Levels', 'New Items', 'Cosmetics', 'Arrows'] },
     { name: 'Skills', icon: 'skills', links: [...['Amazon', 'Assassin', 'Barbarian', 'Druid', 'Necromancer', 'Paladin', 'Sorceress'].map(c => [c, `#/skills/${c}`]),
       ['Skill Changes', 'Skill Changes'], 'Mercenary Skills', ['Item-Only Skills', 'Item Skills'], 'Class Attributes'] },
     { name: 'Crafting & Cube', icon: 'craft', links: [['Cube Recipes', '#/cube'], ['Crafted Items', '#/cube/crafting'], ['Corruptions', '#/cube/corruptions'],
       ['How Crafting Works', '#/cube/guide'], 'Desecration'] },
     { name: 'Endgame', icon: 'map', links: [['Map Explorer', '#/maps'], ['Map Events', '#/maps/events'], ['Modifying Maps', '#/maps/modify'], ['Map Affixes', '#/maps/affixes'],
       ['Zones', '#/zones'], ['Monsters & Ubers', '#/monsters'], 'Mercenaries', ['Merc Weapon Compare', '#/' + MERC_ROUTE]] },
-    { name: 'Mechanics', icon: 'gear', links: ['Game Mechanics', 'Breakpoints', 'General Changes', 'Balance Changes', 'PvP Changes', 'Low Level Dueling', ['Abbreviations', 'Lexicon of Abbreviations'], 'Formula Info', 'Bugs'] },
+    { name: 'Mechanics', icon: 'gear', links: [['Game Mechanics', '#/mechanics'], ['Crit & Leech Calculators', '#/mechanics/Critical_Damage'], ['Resistance Calculator', '#/mechanics/Reducing_Resistances'], 'Breakpoints', 'General Changes', 'Balance Changes', 'PvP Changes', 'Low Level Dueling', ['Abbreviations', 'Lexicon of Abbreviations'], 'Formula Info', 'Bugs'] },
     { name: 'Guides & Builds', icon: 'book', auto: 'guides' },
     { name: 'Patch Notes', icon: 'scroll', auto: 'seasons' },
     { name: 'Help', icon: 'help', links: ['FAQ', 'Support FAQ', 'Item Filtering', 'Filter Info', 'Customization', 'Singleplayer', ['Links & Guides', 'Links'], 'Rules', 'Credits'] },
     { name: 'More Pages', icon: 'list', auto: 'rest' },
   ];
   // Pages our own views replace; they stay reachable through search and A–Z.
-  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
+  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
 
   function buildSite() {
     const used = new Set();
@@ -339,6 +339,17 @@
       return view(() => window.PD2World.zones(main, qs), 'zones', 'Zones · PD2 Wiki').then(restore);
     }
     if (path === 'monsters') return view(() => window.PD2World.monsters(main, anchor), 'monsters', 'Monsters · PD2 Wiki', !!anchor);
+    if (path === 'mechanics' || path.startsWith('mechanics/')) {
+      let t = path.slice(10);
+      return view(() => window.PD2Mech.render(main, t, anchor), 'mechanics' + (t ? '/' + t : ''), 'Game Mechanics · PD2 Wiki', !!anchor);
+    }
+    if (path === 'affixes' || path.startsWith('affixes?') || path.startsWith('affixes/')) {
+      const [p0, qs = ''] = raw.split('?');
+      const tab = p0.split('/')[1] || '';
+      return view(() => window.PD2Affixes.render(main, tab, qs), 'affixes', 'Item Affixes · PD2 Wiki').then(() => {
+        if (anchor) requestAnimationFrame(() => document.getElementById(anchor)?.scrollIntoView({ block: 'start' }));
+      });
+    }
     if (path.startsWith('map/')) return view(() => window.PD2Maps.detail(main, path.slice(4)), 'maps', 'Map · PD2 Wiki');
     if (path === 'patches' || path.startsWith('patches/')) {
       const k = path.split('/')[1] || '';
@@ -982,7 +993,7 @@
         ${tile('#/items?t=runeword', 'rune', 'Runewords', 'Filter by sockets, base and level', 'q-rw')}
         ${tile('#/items?ch=1&sort=changes', 'items', 'Changed in PD2', 'Items PD2 reworked the most')}
       </div>
-      <p class="tile-links">${['Runes', 'Item Bases', 'Item Affixes', 'New Items', 'Cosmetics'].map(t => pageLink(t, t === 'Runes' ? 'Runes & Gems' : '')).filter(Boolean).join('')}</p>
+      <p class="tile-links"><a href="#/affixes">Affix finder</a>${['Runes', 'Item Bases', 'New Items', 'Cosmetics'].map(t => pageLink(t, t === 'Runes' ? 'Runes & Gems' : '')).filter(Boolean).join('')}</p>
 
       <h2 class="home-h">Skills${skillsN ? ` <small>${skillsN}</small>` : ''}</h2>
       <div class="classes">${window.PD2Skills.CLASSES.map(c => `<a href="#/skills/${c}"><span class="cls-orb cls-${c.toLowerCase()}" aria-hidden="true">${c[0]}</span>${c}</a>`).join('')}</div>
@@ -995,7 +1006,7 @@
         ${tile('#/monsters', 'skull', 'Monsters & Ubers', 'Bosses, key holders and uber stats')}
         ${tile('#/zones', 'list', 'Zones', 'Every zone’s level, level 85 areas and immunities')}
         ${tile('#/' + MERC_ROUTE, 'merc', 'Merc Weapon Compare', 'Best Act 2 merc weapon for your IAS')}
-        ${tile(pageHref('Game Mechanics'), 'gear', 'Mechanics', 'Breakpoints, formulas and general changes')}
+        ${tile('#/mechanics', 'gear', 'Game Mechanics', 'Crit, leech, crushing blow and resistance calculators')}
         ${tile(pageHref('Patch Notes'), 'scroll', 'Patch Notes', 'Every season\u2019s changes')}
       </div>
 

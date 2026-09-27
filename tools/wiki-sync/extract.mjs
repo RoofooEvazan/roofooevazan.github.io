@@ -320,7 +320,10 @@ export async function extract(pages, dir) {
   const zones = await extractZones(await doc('Zones'), targets);
   const monsters = await extractMonsters(await doc('Monsters'), targets, zones);
 
-  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters } };
+  const mechanics = await extractMechanics(await doc('Game Mechanics'), targets);
+  const affixes = await extractAffixes(await doc('Item Affixes'), targets);
+
+  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes };
 }
 
 // ---------- maps ----------
@@ -829,4 +832,98 @@ async function extractMonsters(r, targets, zones) {
   }
   targets[`${page.id}#`] = 'monsters';
   return { page: page.id, bosses, info: info.filter(b => b.html), stats: statRows };
+}
+
+// ---------- game mechanics & item affixes ----------
+// Game Mechanics: one topic per h2, with its h3s inside.
+async function extractMechanics(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const topics = [];
+  let topic = null, intro = '';
+  for (const el of flatten(d.querySelector('.mw-parser-output'))) {
+    const hd = headingOf(el);
+    if (hd && hd.level <= 2) {
+      topic = { title: hd.text, anchor: hd.id, html: '', subs: [] };
+      topics.push(topic);
+      targets[`${page.id}#${hd.id}`] = `mechanics/${hd.id}`;
+      continue;
+    }
+    if (hd && topic) {
+      topic.subs.push({ title: hd.text, anchor: hd.id });
+      topic.html += `<h3 class="mech-sub" id="${hd.id}">${hd.text.replace(/</g, '&lt;')}</h3>`;
+      targets[`${page.id}#${hd.id}`] = `mechanics/${topic.anchor}#${hd.id}`;
+      continue;
+    }
+    if (!text(el) && !el.querySelector('img,math')) continue;
+    if (topic) topic.html += clean(el.outerHTML); else intro += clean(el.outerHTML);
+  }
+  targets[`${page.id}#`] = 'mechanics';
+  return { page: page.id, intro, topics };
+}
+
+// Item Affixes: every prefix/suffix table, the PD2 changes table, removed affixes,
+// base item quality levels (for the affix-level calculator) and the rules sections.
+async function extractAffixes(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const affixes = [], removed = [], bases = [], info = [];
+  const changes = new Map();
+  const range = t => { const m = String(t).match(/(\d+)(?:\s*-\s*(\d+))?/); return m ? [+m[1], m[2] ? +m[2] : null] : [null, null]; };
+  for (const table of d.querySelectorAll('table')) {
+    const cap = text(table.querySelector('caption'));
+    const g = grid(table);
+    if (!g.length) continue;
+    const head = g[0].map(c => text(c).toLowerCase());
+    const ci = k => head.findIndex(h => h === k || h.startsWith(k));
+    const m = cap.match(/^(Equipment|Jewel|Small Charm|Large Charm|Grand Charm) (Prefixes|Suffixes)$/i);
+    if (m) {
+      for (const row of g.slice(1)) {
+        if (!row[ci('affix')]) continue;
+        const [amin, amax] = range(text(row[ci('alvl')]));
+        const types = [...new Set(text(row[ci('item types')]).split(/,\s*|\s{2,}/).map(s => s.trim()).filter(Boolean))];
+        affixes.push({
+          id: +text(row[ci('id')]) || null, cat: m[1], ps: m[2][0].toUpperCase(),
+          name: text(row[ci('affix')]), attr: htmlOf(row[ci('attributes')]).replace(/<br\s*\/?>/g, ' · '),
+          types, amin, amax, rlvl: cellNum(row[ci('rlvl')]), freq: cellNum(row[ci('freq')]), group: cellNum(row[ci('group')]),
+        });
+      }
+      continue;
+    }
+    if (ci('changes') >= 0 && ci('affix') >= 0) {
+      for (const row of g.slice(1)) {
+        const key = `${text(row[ci('affix')])}|${text(row[ci('p/s')])[0] || ''}`;
+        changes.set(key, htmlOf(row[ci('changes')]));
+      }
+      continue;
+    }
+    if (ci('affix') >= 0 && head.some(h => /item type \(alvl\)/.test(h))) {
+      for (const row of g.slice(1)) removed.push({ name: text(row[ci('affix')]), ps: text(row[ci('p/s')]), attr: htmlOf(row[ci('attributes')]), where: text(row[head.findIndex(h => /item type/.test(h))]) });
+      continue;
+    }
+    if (/qlvls/i.test(cap)) {
+      const kind = cap.replace(/\s*qlvls/i, '');
+      for (const row of g.slice(1)) {
+        for (let i = 0; i < row.length - 1; i++) {
+          const nm = text(row[i]), q = text(row[i + 1]);
+          if (nm && /^\d+$/.test(q) && !/^\d+$/.test(nm)) {
+            const tier = /exceptional/i.test(head[i]) ? 'Exceptional' : /elite/i.test(head[i]) ? 'Elite' : /normal/i.test(head[i]) ? 'Normal' : '';
+            bases.push({ name: nm, qlvl: +q, kind, tier });
+          }
+        }
+      }
+    }
+  }
+  for (const a of affixes) { const c = changes.get(`${a.name}|${a.ps}`); if (c) a.change = c; }
+  // Rules sections (everything before the big tables), without those tables.
+  for (const w of d.querySelectorAll('.mw-heading')) {
+    const hd = headingOf(w);
+    if (!hd) continue;
+    targets[`${page.id}#${hd.id}`] = hd.level === 1 || /general|magic|rare|crafted|affix level|quality|item types/i.test(hd.text) ? `affixes/rules#${hd.id}` : 'affixes';
+    if (hd.level < 2 || !/magic items|rare items|crafted items|affix level|item types/i.test(hd.text)) continue;
+    const html = sectionAfter(w, hd.level).filter(e => !(e.matches('table') && e.querySelectorAll('tr').length > 12)).map(e => clean(e.outerHTML)).join('');
+    info.push({ title: hd.text, anchor: hd.id, html });
+  }
+  targets[`${page.id}#`] = 'affixes';
+  return { page: page.id, affixes, removed, bases, info };
 }
