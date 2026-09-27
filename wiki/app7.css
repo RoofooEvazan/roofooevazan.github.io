@@ -42,10 +42,10 @@
 .bp-ladder span{display:flex;flex-direction:column;align-items:center;min-width:48px;padding:4px 6px;border:1px solid var(--edge);border-radius:0;background:var(--void);color:var(--dim);font-size:12.5px;font-variant-numeric:tabular-nums}
 .bp-ladder span b{font-family:var(--font-display);font-weight:400;font-size:11px;color:var(--muted)}
 .bp-ladder span.on{border-color:var(--edge-hi);color:var(--text)}
-.bp-ladder span.cur{border-color:var(--gold);background:rgba(210,176,106,.12)}
+.bp-ladder span.cur{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 12%,transparent)}
 .bp-ladder span.cur b{color:var(--gold-hi)}
 .bp-table{font-size:13.5px}
-.bp-table tr.cur td{background:rgba(210,176,106,.08)}
+.bp-table tr.cur td{background:color-mix(in srgb,var(--gold) 8%,transparent)}
 .bp-table td.hit{background:var(--gold)!important;color:var(--void);font-weight:700}
 
 @media (max-width:640px){
