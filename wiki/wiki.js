@@ -128,11 +128,11 @@
     { name: 'Mechanics', icon: 'gear', links: [['Game Mechanics', '#/mechanics'], ['Crit & Leech Calculators', '#/mechanics/Critical_Damage'], ['Resistance Calculator', '#/mechanics/Reducing_Resistances'], ['Breakpoints', '#/breakpoints'], 'General Changes', 'Balance Changes', 'PvP Changes', 'Low Level Dueling', ['Abbreviations', 'Lexicon of Abbreviations'], 'Formula Info', 'Bugs'] },
     { name: 'Guides & Builds', icon: 'book', links: [['Build Directory', '#/guides'], ['Starter Builds', '#/guides?starter=1'], ['Community Links', '#/guides/links']] },
     { name: 'Patch Notes', icon: 'scroll', auto: 'seasons' },
-    { name: 'Help', icon: 'help', links: [['Help Center', '#/help'], ['Game Crashes & Errors', '#/help?cat=Game%20errors%20%26%20crashes'], 'Item Filtering', 'Filter Info', 'Customization', 'Singleplayer', 'Rules', 'Credits'] },
+    { name: 'Help', icon: 'help', links: [['Help Center', '#/help'], ['Game Crashes & Errors', '#/help?cat=Game%20errors%20%26%20crashes'], ['Loot Filters', '#/filters'], ['Filter Code Finder', '#/filters/codes'], ['Public Filters', '#/filters/list'], ['Game Setup & Config', '#/filters/setup'], 'Singleplayer', 'Rules', 'Credits'] },
     { name: 'More Pages', icon: 'list', auto: 'rest' },
   ];
   // Pages our own views replace; they stay reachable through search and A–Z.
-  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Item Bases|Runes|Mercenaries|Mercenary Skills|FAQ|Support FAQ|Breakpoints|Links|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
+  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Item Bases|Runes|Mercenaries|Mercenary Skills|FAQ|Support FAQ|Breakpoints|Links|Item Filtering|Filter Info|Customization|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
 
   function buildSite() {
     const used = new Set();
@@ -367,6 +367,12 @@
     if (path === 'mercs' || path.startsWith('mercs/')) {
       const k = path.split('/')[1] || '';
       return view(() => window.PD2Gear.mercs(main, k, anchor), 'mercs', 'Mercenaries · PD2 Wiki', !!anchor);
+    }
+    if (path === 'filters' || path.startsWith('filters/') || path.startsWith('filters?')) {
+      const [p0, qs = ''] = raw.split('?');
+      const seg = decodeURIComponent(p0.split('/')[1] || '');
+      const tab = ['codes', 'list', 'setup'].includes(seg) ? seg : '';
+      return view(() => window.PD2Filters.render(main, tab, tab ? '' : seg, qs, anchor), tab ? 'filters/' + tab : 'filters', 'Loot Filters · PD2 Wiki', !!anchor);
     }
     if (path === 'help' || path.startsWith('help?')) {
       const qs = raw.split('?')[1] || '';
@@ -765,6 +771,7 @@
     window.PD2World.load().catch(() => {});
     window.PD2Gear.load().catch(() => {});
     window.PD2Guide.load().catch(() => {});
+    window.PD2Filters.load().catch(() => {});
     if (S.search) return Promise.resolve(S.search);
     if (!S.searchLoading) {
       S.searchLoading = fetchJSON('data/search.json').then(list => {
@@ -877,6 +884,8 @@
       if (gear.length) html += '<div class="res-group">Runes &amp; bases</div>' + gear.map(g => g.kind === 'rune'
         ? `<a class="res" role="option" href="#/runes#${g.r.name.toLowerCase()}"><span class="res-ico">${g.r.img ? `<img src="${esc(g.r.img)}" alt="">` : ICONS.rune}</span><span><b>${esc(g.r.name)} Rune</b><span class="crumb">#${g.r.n} · level ${g.r.lvl ?? '?'}</span></span></a>`
         : `<a class="res" role="option" href="#/bases?kind=${encodeURIComponent(g.b.kind)}&q=${encodeURIComponent(g.b.name)}"><span class="res-ico">${ICONS.items}</span><span><b>${esc(g.b.name)}</b><span class="crumb">${esc([g.b.tier, g.b.type].filter(Boolean).join(' ') || g.b.kind)} base</span></span></a>`).join('');
+      const fcodes = window.PD2Filters.search(q, 3);
+      if (fcodes.length) html += '<div class="res-group">Filter codes</div>' + fcodes.map(c => `<a class="res" role="option" href="#/filters/codes?q=${encodeURIComponent(q)}"><span class="res-ico">${ICONS.list}</span><span><b>${esc(c.codes.join(' / '))}</b><span class="crumb">${esc(c.sec)}${c.ctx ? ' · ' + esc(c.ctx) : ''}</span></span></a>`).join('');
       const helps = window.PD2Guide.search(q, 3);
       if (helps.length) html += '<div class="res-group">Help</div>' + helps.map(h => `<a class="res" role="option" href="#/help#${h.id}"><span class="res-ico">${ICONS.help}</span><span><b>${esc(h.q)}</b><span class="crumb">${esc(h.cat)}</span></span></a>`).join('');
       const world = window.PD2World.search(q, 4);

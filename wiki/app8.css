@@ -1,0 +1,27 @@
+/* Loot filters & game setup — palette variables only, so Tristram and Chaos both apply. */
+.fcodes{font-size:14px}
+.fcodes td{vertical-align:top}
+.fcodes .fm,.fcodes th:nth-child(2){text-align:left}
+.fcodes .fc{white-space:nowrap}
+.code{display:inline-block;margin:0 4px 4px 0;padding:1px 8px;border:1px solid var(--edge-hi);border-radius:0;background:var(--void);color:var(--gold-hi);font:13px/1.5 ui-monospace,Consolas,monospace;cursor:copy}
+.code:hover{border-color:var(--gold)}
+.fk{font-family:var(--font-display);font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--dim);margin-right:4px}
+.fctx{display:inline-block;margin-bottom:2px;padding:0 6px;border:1px solid var(--edge);color:var(--muted);font-size:12.5px}
+.fctx + br{display:none}
+.fm .fctx{margin-right:6px}
+.fs{color:var(--dim);font-size:12.5px;white-space:nowrap}
+.copied{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:90;padding:8px 16px;border:1px solid var(--gold);background:var(--stone);color:var(--text);box-shadow:0 10px 30px rgba(0,0,0,.6)}
+.fcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:10px;margin-bottom:14px}
+.fcard{min-width:0;padding:12px 16px;border:1px solid var(--edge);border-radius:0;background:linear-gradient(180deg,var(--stone-2),var(--stone))}
+.fcard.old{opacity:.8}
+.fcard h3{margin:0 0 4px;font-size:16px}
+.fcard h3 a{color:var(--gold-hi)}
+.fmeta{margin:0 0 6px;color:var(--dim);font-size:13px}
+.fcard .wiki{font-size:14.5px;overflow-wrap:anywhere}
+@media (max-width:640px){
+  .fs{white-space:normal}
+  .fcodes .fc{white-space:normal}
+}
+#fsec{max-width:100%;min-width:0}
+.filters .fsel:has(#fsec){min-width:0;max-width:100%;flex:1 1 220px}
+.filters .fsel:has(#fsec) select{width:100%}

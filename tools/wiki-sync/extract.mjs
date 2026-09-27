@@ -332,7 +332,11 @@ export async function extract(pages, dir) {
   const guides = await extractGuides(await doc('Links'), pages, doc, skillIndexAll, targets);
   const breakpoints = await extractBreakpoints(await doc('Breakpoints'), targets);
 
-  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs }, guide: { help, guides, breakpoints } };
+  const filters = await extractFilters(await doc('Item Filtering'), await doc('Customization'), targets);
+  const fi = byTitle.get('Filter Info');
+  if (fi) targets[`${fi.id}#`] = 'filters/list';
+
+  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs }, guide: { help, guides, breakpoints }, filters };
 }
 
 // ---------- maps ----------
@@ -1266,4 +1270,112 @@ async function extractBreakpoints(r, targets) {
   }
   targets[`${page.id}#`] = 'breakpoints';
   return { page: page.id, tables, info: info.filter(i => i.html) };
+}
+
+// ---------- loot filter reference & customization ----------
+// Every table with a "Code" column becomes code entries; each Code column starts a group
+// (item codes list Normal | Exceptional | Elite side by side), and header cells to the
+// left of the first Code (e.g. "Type") are shared context for the row.
+async function extractFilters(r, custom, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const codes = [], topics = [], filters = [];
+  const CODE_TOPICS = /^(filter codes|value condition ids)$/i;
+
+  // Pass 1: prose topics (Filters, Syntax, Strictness, Formulas) in reading order.
+  {
+    let topic = null, inCodes = false;
+    for (const el of flatten(d.querySelector('.mw-parser-output'))) {
+      const hd = headingOf(el);
+      if (hd) {
+        if (hd.level === 2) { inCodes = CODE_TOPICS.test(hd.text); topic = inCodes ? null : { title: hd.text, anchor: hd.id, html: '', subs: [] }; if (topic) topics.push(topic); }
+        else if (hd.level === 3 && CODE_TOPICS.test(hd.text)) { inCodes = true; topic = null; }
+        else if (topic && !inCodes) { topic.subs.push({ title: hd.text, anchor: hd.id }); topic.html += `<h3 class="mech-sub" id="${hd.id}">${hd.text.replace(/</g, '&lt;')}</h3>`; }
+        targets[`${page.id}#${hd.id}`] = inCodes ? `filters/codes?sec=${encodeURIComponent(hd.text)}` : topic ? `filters#${hd.id}` : 'filters';
+        continue;
+      }
+      if (!topic || inCodes) continue;
+      if (el.matches('table')) {
+        const h0 = text(el.querySelector('th'));
+        if (h0 === 'Filter' || el.querySelector('th') && /^code$/i.test(h0)) continue;
+        if (el.querySelectorAll('tr').length <= 30) topic.html += clean(el.outerHTML);
+        continue;
+      }
+      if (text(el) || el.querySelector('img')) topic.html += clean(el.outerHTML);
+    }
+  }
+
+  // Pass 2: every heading and table in document order, wherever it's nested.
+  const path = [];
+  for (const el of d.querySelectorAll('.mw-heading, table')) {
+    if (el.matches('.mw-heading')) {
+      const hd = headingOf(el);
+      if (!hd) continue;
+      path.length = Math.max(0, hd.level - 2);
+      path[hd.level - 2] = hd.text;
+      continue;
+    }
+    if (el.parentElement?.closest('table')) continue;
+    const g = grid(el);
+    const head = (g[0] || []).map(c => text(c));
+    if (head[0] === 'Filter' && head.some(h => /author/i.test(h))) {
+      const archived = /archived/i.test(text(el.querySelector('caption')));
+      for (const row of g.slice(1)) {
+        const a = row[0]?.querySelector('a');
+        filters.push({ name: text(row[0]), href: fixUrl(a?.getAttribute('href') || ''), updated: text(row[1]), author: text(row[2]), desc: htmlOf(row[3]), archived });
+      }
+      continue;
+    }
+    const codeCols = head.map((h, i) => /^(code|id|stat id)$/i.test(h) ? i : -1).filter(i => i >= 0);
+    if (!codeCols.length || !/codes|ids|keywords|groups|items|variables|conditions|stats|gear|runes|gems|potions|quivers|armor|weapons|ears|skills|rarities|tiers|properties|elements|damage|general|level|maps|other|unused|amazon|sorceress|necromancer|paladin|barbarian|druid|assassin/i.test(path.join(' '))) continue;
+    const trail = path.filter(Boolean);
+    const sec = trail.slice(-2).join(' › ');
+    const top = trail[1] || trail[0] || '';
+    const caption = text(el.querySelector('caption'));
+    // A single "code" header over several columns: every cell is a bare code (formula variables).
+    if (head.length === 1 && +(g[0][0]?.getAttribute('colspan') || 1) > 1) {
+      for (const row of g.slice(1)) for (const c of row) {
+        const t = text(c);
+        if (t) codes.push({ codes: [t], f: { details: 'formula variable, no parameters (see Formulas › Variables)' }, ctx: '', sec, top });
+      }
+      continue;
+    }
+    const isCode = h => /^(code|id|stat id)$/i.test(h);
+    const groups = [];
+    for (let i = 0; i < head.length; i++) {
+      if (!isCode(head[i])) continue;
+      const gcodes = [i];
+      let j = i + 1;
+      while (isCode(head[j] || '')) gcodes.push(j++);
+      const fields = [];
+      for (; j < head.length && head[j] && !isCode(head[j]); j++) fields.push(j);
+      groups.push({ gcodes, fields });
+      i = j - 1;
+    }
+    const ctxCols = head.slice(0, codeCols[0]).map((h, i) => (h ? i : -1)).filter(i => i >= 0);
+    for (const row of g.slice(1)) {
+      const ctx = ctxCols.map(i => text(row[i])).filter(Boolean).join(' · ');
+      for (const gr of groups) {
+        const cs = gr.gcodes.map(i => text(row[i])).filter(Boolean);
+        if (!cs.length) continue;
+        const f = {};
+        for (const i of gr.fields) { if (text(row[i])) f[head[i]] = htmlOf(row[i]); }
+        codes.push({ codes: cs, f, ctx, sec: caption ? `${trail.at(-1) || ''} › ${caption}` : sec, top });
+      }
+    }
+  }
+  targets[`${page.id}#`] = 'filters';
+  // Customization: one topic per config file.
+  const setup = [];
+  if (custom) {
+    for (const w of custom.d.querySelectorAll('.mw-heading')) {
+      const hd = headingOf(w);
+      if (!hd || hd.level !== 2) continue;
+      if (/loot\.filter/i.test(hd.text)) { targets[`${custom.page.id}#${hd.id}`] = 'filters/list'; continue; }
+      setup.push({ title: hd.text, anchor: hd.id, html: sectionAfter(w, 2, false).map(e => clean(e.outerHTML)).join('') });
+      targets[`${custom.page.id}#${hd.id}`] = `filters/setup#${hd.id}`;
+    }
+    targets[`${custom.page.id}#`] = 'filters/setup';
+  }
+  return { page: page.id, customPage: custom?.page.id, codes, topics: topics.filter(t => t.html), filters, setup };
 }
