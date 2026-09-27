@@ -330,6 +330,8 @@ export async function extract(pages, dir) {
   const qlvl = await extractQlvlIntro(await doc('Item Quality Levels'), targets);
   const newItems = await extractNewItems(await doc('New Items'), targets);
   const cosmetics = await extractCosmetics(await doc('Cosmetics'), targets);
+  const general = await extractGeneralChanges(await doc('General Changes'), targets);
+  const balance = await extractBalance(await doc('Balance Changes'), targets);
 
   const skillIndexAll = Object.values(skills).flatMap(c => c.trees.flatMap(t => t.skills.map(k => ({ c: c.cls, n: k.name, a: k.anchor }))));
   const help = await extractHelp(await doc('FAQ'), await doc('Support FAQ'), targets);
@@ -340,7 +342,7 @@ export async function extract(pages, dir) {
   const fi = byTitle.get('Filter Info');
   if (fi) targets[`${fi.id}#`] = 'filters/list';
 
-  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs, classAttrs, qlvl, newItems, cosmetics }, guide: { help, guides, breakpoints }, filters };
+  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs, classAttrs, qlvl, newItems, cosmetics, general, balance }, guide: { help, guides, breakpoints }, filters };
 }
 
 // ---------- maps ----------
@@ -1485,4 +1487,58 @@ async function extractCosmetics(r, targets) {
   }
   targets[`${page.id}#`] = 'cosmetics';
   return { page: page.id, groups: groups.filter(g => g.entries.length || g.intro) };
+}
+
+// ---------- general changes & (outdated) balance changes ----------
+async function extractGeneralChanges(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const intro = [], cats = [];
+  let cat = null;
+  for (const w of d.querySelectorAll('.mw-heading')) {
+    const hd = headingOf(w);
+    if (!hd) continue;
+    const els = sectionAfter(w, hd.level);
+    // Top-level sections (Skills, Individual Items, General) are the overview's intro.
+    if (hd.level === 2) {
+      if (els.length) intro.push({ title: hd.text, anchor: hd.id, html: els.map(e => clean(e.outerHTML)).join('') });
+      targets[`${page.id}#${hd.id}`] = 'overview';
+      continue;
+    }
+    cat = { title: hd.text, anchor: hd.id, items: [] };
+    cats.push(cat);
+    for (const ul of els.filter(e => e.matches('ul'))) {
+      for (const li of ul.querySelectorAll(':scope > li')) cat.items.push({ html: clean(li.innerHTML), text: text(li) });
+    }
+    const extra = els.filter(e => !e.matches('ul') && text(e)).map(e => clean(e.outerHTML)).join('');
+    if (extra) cat.note = extra;
+    targets[`${page.id}#${hd.id}`] = `overview?cat=${encodeURIComponent(hd.text)}`;
+  }
+  targets[`${page.id}#`] = 'overview';
+  return { page: page.id, intro, cats };
+}
+
+async function extractBalance(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const classes = [];
+  let cls = null, tree = '', abbr = '';
+  for (const el of flatten(d.querySelector('.mw-parser-output'))) {
+    const hd = headingOf(el);
+    if (hd) {
+      if (hd.level === 1) { cls = /reference|source/i.test(hd.text) ? null : { cls: hd.text, rows: [] }; if (cls) classes.push(cls); tree = ''; }
+      else tree = hd.text;
+      targets[`${page.id}#${hd.id}`] = cls ? `overview/season1?cls=${cls.cls}` : 'overview/season1';
+      continue;
+    }
+    if (!cls && el.matches('p') && /FRW|FCR/.test(text(el)) && !abbr) { abbr = clean(el.outerHTML); continue; }
+    if (!cls || !el.matches('table')) continue;
+    for (const tr of el.querySelectorAll('tr')) {
+      const c = [...tr.children];
+      if (c.length < 2) continue;
+      cls.rows.push({ tree, skill: text(c[0]), html: clean(c[1].innerHTML) });
+    }
+  }
+  targets[`${page.id}#`] = 'overview/season1';
+  return { page: page.id, classes, abbr };
 }
