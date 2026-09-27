@@ -155,7 +155,7 @@
           const notes = ts.length ? t.notes.filter(n => hit(strip(n))) : t.notes;
           return sk.length || notes.length ? `<h3 class="sub-h" id="${esc(t.anchor)}">${esc(t.name)}</h3>
             ${notes.map(n => `<p class="wiki muted">${n}</p>`).join('')}
-            <div class="chg">${sk.map(s => `<div class="chg-row"><a class="chg-name"${skillHref(c.cls, s) ? ` href="${skillHref(c.cls, s)}"` : ''}>${esc(s.name)}</a><ul class="wiki">${s.changes.map(x => `<li>${x}</li>`).join('')}</ul></div>`).join('')}</div>` : '';
+            <div class="chgl">${sk.map(s => `<div class="chg-row"><a class="chg-name"${skillHref(c.cls, s) ? ` href="${skillHref(c.cls, s)}"` : ''}>${esc(s.name)}</a><ul class="wiki">${s.changes.map(x => `<li>${x}</li>`).join('')}</ul></div>`).join('')}</div>` : '';
         }).join('');
         return trees ? `<section class="info-card" id="${esc(c.anchor)}"><h2 class="home-h">${esc(c.cls)}</h2>${trees}</section>` : '';
       }).join('');
@@ -232,6 +232,39 @@
     }
   }
 
+  // Hover card: icon, tree, level, description, a few numbers at the saved skill level,
+  // and what PD2 changed.
+  async function tip(cls, anchor) {
+    const { esc } = P();
+    const c = [...CLASSES, 'Items'].find(x => x.toLowerCase() === String(cls).toLowerCase());
+    if (!c) return '';
+    const d = await load(c);
+    let tree = null, s = null;
+    for (const t of d.trees) { s = t.skills.find(x => x.anchor === anchor); if (s) { tree = t; break; } }
+    if (!s) return '';
+    const ch = c === 'Items' ? null : await loadChanges();
+    const mine = ch?.classes.find(x => x.cls === c)?.trees.flatMap(t => t.skills).find(x => x.anchor === s.anchor || x.name === s.name);
+    // Numbers at the reader's skill level, from the first "Level | 1 | 2 | …" table.
+    const lvl = getLvl();
+    let nums = [];
+    const tpl = document.createElement('template');
+    tpl.innerHTML = s.body;
+    const t = [...tpl.content.querySelectorAll('table')].find(x => /^level$/i.test(x.rows[0]?.cells[0]?.textContent.trim() || ''));
+    if (t) {
+      const head = [...t.rows[0].cells].map(x => x.textContent.trim());
+      const col = Math.min(head.indexOf(String(lvl)) > 0 ? head.indexOf(String(lvl)) : head.length - 1, head.length - 1);
+      nums = [...t.rows].slice(1).map(r => [r.cells[0]?.textContent.trim(), r.cells[col]?.textContent.trim()]).filter(([k, v]) => k && v).slice(0, 6);
+    }
+    const strip = h => String(h).replace(/<a\b[^>]*>|<\/a>/g, '');
+    return `<div class="hc-skill">
+      <div class="hc-head">${s.img ? `<img src="${esc(s.img)}" alt="">` : ''}<span><b class="hc-name">${esc(s.name)}</b><span class="hc-sub">${c === 'Items' ? 'Item skill' : esc(c)} · ${esc(tree.name)} · req. level ${s.lvl || 1}</span></span></div>
+      ${s.desc ? `<p class="hc-desc">${esc(s.desc)}</p>` : ''}
+      ${s.reqSkills.length ? `<div class="hc-req">Requires ${esc(s.reqSkills.join(', '))}</div>` : ''}
+      ${nums.length ? `<div class="hc-lvl">At skill level ${esc(t.rows[0].cells[Math.min(Math.max(1, [...t.rows[0].cells].findIndex(x => x.textContent.trim() === String(lvl))), t.rows[0].cells.length - 1)].textContent.trim())}</div><ul class="hc-kv">${nums.map(([k, v]) => `<li><span>${esc(k)}</span> ${esc(v)}</li>`).join('')}</ul>` : ''}
+      ${mine ? `<div class="hc-lvl">Changed from vanilla</div><ul class="hc-list">${mine.changes.slice(0, 4).map(x => `<li>${strip(x)}</li>`).join('')}</ul>` : ''}
+    </div>`;
+  }
+
   function search(q, n) {
     const idx = P().S.index.skillIndex || [];
     const ql = q.toLowerCase();
@@ -244,5 +277,5 @@
     return out.sort((a, b) => b.sc - a.sc).slice(0, n).map(x => x.s);
   }
 
-  window.PD2Skills = { render, search, CLASSES };
+  window.PD2Skills = { render, search, tip, CLASSES };
 })();

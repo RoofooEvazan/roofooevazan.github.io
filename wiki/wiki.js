@@ -117,18 +117,16 @@
   // Links are [label, href] or a wiki page title. Titles that aren't on the wiki are skipped,
   // and every page nobody lists here still shows up under "More pages".
   const SITE = [
-    { name: 'Items', icon: 'items', links: [['Item Database', '#/items'], ['Uniques', '#/items?t=unique'], ['Set Items', '#/items?t=set'], ['Runewords', '#/items?t=runeword'],
-      ['Affix Finder', '#/affixes'], ['Runes & Gems', '#/runes'], ['Item Bases', '#/bases'], ['Quality Levels', '#/bases/qlvl'], ['New in PD2', '#/new'], ['Cosmetics', '#/cosmetics']] },
-    { name: 'Skills', icon: 'skills', links: [...['Amazon', 'Assassin', 'Barbarian', 'Druid', 'Necromancer', 'Paladin', 'Sorceress'].map(c => [c, `#/skills/${c}`]),
-      ['Skill Changes', '#/skills/changes'], ['Item-Only Skills', '#/skills/Items'], ['Mercenary Skills', '#/mercs/a2'], ['Stat Planner', '#/classes']] },
-    { name: 'Crafting & Cube', icon: 'craft', links: [['Cube Recipes', '#/cube'], ['Crafted Items', '#/cube/crafting'], ['Corruptions', '#/cube/corruptions'],
-      ['How Crafting Works', '#/cube/guide'], ['Desecration', '#/cube/corruptions?type=Amulet#Desecration']] },
-    { name: 'Endgame', icon: 'map', links: [['Map Explorer', '#/maps'], ['Map Events', '#/maps/events'], ['Modifying Maps', '#/maps/modify'], ['Map Affixes', '#/maps/affixes'],
-      ['Zones', '#/zones'], ['Monsters & Ubers', '#/monsters'], ['Mercenaries', '#/mercs'], ['Merc Weapon Compare', '#/' + MERC_ROUTE]] },
-    { name: 'Mechanics', icon: 'gear', links: [['Game Mechanics', '#/mechanics'], ['Crit & Leech Calculators', '#/mechanics/Critical_Damage'], ['Resistance Calculator', '#/mechanics/Reducing_Resistances'], ['Breakpoints', '#/breakpoints'], ['What PD2 Changed', '#/overview'], ['PvP & Dueling', '#/pvp'], ['Skills in PvP', '#/pvp/skills'], ['Low Level Dueling', '#/pvp/lld'], ['Abbreviations', '#/glossary'], ['Filter Formulas', '#/filters/Formulas'], ['Known Bugs', '#/about/bugs']] },
-    { name: 'Guides & Builds', icon: 'book', links: [['Build Directory', '#/guides'], ['Starter Builds', '#/guides?starter=1'], ['Community Links', '#/guides/links']] },
+    { name: 'Items', icon: 'items', links: [['Item Database', '#/items'], ['Runewords', '#/items?t=runeword'], ['Uniques', '#/items?t=unique'], ['Set Items', '#/items?t=set'],
+      ['Runes & Gems', '#/runes'], ['Item Bases', '#/bases'], ['Affix Finder', '#/affixes'], ['New in PD2', '#/new'], ['Cosmetics', '#/cosmetics']] },
+    { name: 'Classes & Skills', icon: 'skills', links: [['Skills', '#/skills'], ['Skill Changes', '#/skills/changes'], ['Item-Only Skills', '#/skills/Items'], ['Stat Planner', '#/classes'],
+      ['Breakpoints', '#/breakpoints'], ['Mercenaries', '#/mercs'], ['Merc Weapon Compare', '#/' + MERC_ROUTE]] },
+    { name: 'Crafting & Cube', icon: 'craft', links: [['Cube Recipes', '#/cube'], ['Crafted Items', '#/cube/crafting'], ['Corruptions', '#/cube/corruptions']] },
+    { name: 'Endgame', icon: 'map', links: [['Maps', '#/maps'], ['Zones', '#/zones'], ['Monsters & Ubers', '#/monsters'], ['PvP & Dueling', '#/pvp']] },
+    { name: 'Mechanics', icon: 'gear', links: [['Game Mechanics', '#/mechanics'], ['What PD2 Changed', '#/overview'], ['Abbreviations', '#/glossary'], ['Known Bugs', '#/about/bugs']] },
+    { name: 'Guides & Help', icon: 'book', links: [['Build Directory', '#/guides'], ['Help Center', '#/help'], ['Loot Filters', '#/filters'], ['Community Links', '#/guides/links']] },
     { name: 'Patch Notes', icon: 'scroll', auto: 'seasons' },
-    { name: 'Help', icon: 'help', links: [['Help Center', '#/help'], ['Game Crashes & Errors', '#/help?cat=Game%20errors%20%26%20crashes'], ['Loot Filters', '#/filters'], ['Filter Code Finder', '#/filters/codes'], ['Public Filters', '#/filters/list'], ['Game Setup & Config', '#/filters/setup'], ['Singleplayer', '#/about/singleplayer'], ['Rules', '#/about'], ['Credits', '#/about/credits']] },
+    { name: 'About PD2', icon: 'help', links: [['Rules', '#/about'], ['Seasons', '#/about/seasons'], ['Singleplayer', '#/about/singleplayer'], ['Credits', '#/about/credits']] },
     { name: 'More Pages', icon: 'list', auto: 'rest' },
   ];
   // Pages our own views replace; they stay reachable through search and A–Z.
@@ -160,9 +158,11 @@
       guides: sortP(take(p => /^Guide:|guide|^Starter |^\w+Assassin$|Build/i.test(p.title))),
     };
     const today = new Date().toISOString().slice(0, 10);
+    // The newest three seasons (and upcoming spoilers); the rest are a click away on the patch notes page.
+    const seasons = (S.index.seasons || []).slice().sort((a, b) => (b.iso || '9').localeCompare(a.iso || '9'));
     autos.seasons = [
-      ...(S.index.seasons || []).map(x => ({ label: x.key === 'upcoming' ? 'Upcoming spoilers' : `Season ${x.n} · ${x.name}${x.iso > today ? ' (upcoming)' : ''}`, href: `#/patches/${x.key}`, route: `patches/${x.key}` })),
-      { label: 'Season timeline', href: '#/about/seasons', route: 'about/seasons' },
+      ...seasons.slice(0, 4).map(x => ({ label: x.key === 'upcoming' ? 'Upcoming spoilers' : `Season ${x.n} · ${x.name}${x.iso > today ? ' (upcoming)' : ''}`, href: `#/patches/${x.key}`, route: `patches/${x.key}` })),
+      { label: `All ${seasons.filter(x => x.n).length} seasons`, href: '#/patches', route: 'patches' },
     ];
     autos.rest = sortP(take(() => true));
     for (const p of S.index.pages) delete p._t;
@@ -194,7 +194,7 @@
     const nav = $('#side-nav');
     const top = `<a class="top-link" href="#/" data-route="">${ICONS.home}<span>Home</span></a>`;
     nav.innerHTML = top + S.sections.map((s, i) => `
-      <details data-s="${i}"${i < 2 ? ' open' : ''}>
+      <details data-s="${i}">
         <summary>${ICONS[s.icon] || ''}<span>${esc(s.name)}</span><span class="n">${s.links.length}</span></summary>
         <ul>${s.links.map(l => `<li><a href="${l.href}"${l.id ? ` data-id="${l.id}"` : ` data-route="${esc(l.route)}"`}>${esc(l.label)}</a></li>`).join('')}</ul>
       </details>`).join('') +
@@ -232,6 +232,7 @@
     if (!el) return;
     el.setAttribute('aria-current', 'page');
     const d = el.closest('details');
+    if (!$('#side-filter').value) for (const x of $$('details', nav)) if (x !== d) x.open = false;
     if (d && !d.open) d.open = true;
     const side = $('#side');
     const r = el.getBoundingClientRect(), sr = side.getBoundingClientRect();
@@ -1033,62 +1034,57 @@
     return S.changes;
   }
 
-  function pageLink(title, label) {
-    const r = resolve(title);
-    return r ? `<a href="${pageHref(r.page.title)}">${esc(label || displayName(r.page))}</a>` : '';
-  }
-
   async function home() {
     const pages = S.index.pages;
-    const recent = pages.filter(p => p.edited && !/^Main Page/.test(p.title)).sort((a, b) => b.edited.localeCompare(a.edited)).slice(0, 8);
-    const skillsN = (S.index.skillIndex || []).length;
-    const tile = (href, icon, title, desc, cls = '') => `<a class="tile ${cls}" href="${href}"><span class="tile-ico">${ICONS[icon]}</span><span><b>${title}</b><span>${desc}</span></span></a>`;
+    const recent = pages.filter(p => p.edited && !/^Main Page/.test(p.title)).sort((a, b) => b.edited.localeCompare(a.edited)).slice(0, 6);
     const newest = pages.reduce((a, p) => (p.edited > a ? p.edited : a), '');
+    const today = new Date().toISOString().slice(0, 10);
+    const seasons = (S.index.seasons || []).filter(x => x.n && x.iso);
+    const cur = seasons.filter(x => x.iso <= today).sort((a, b) => b.iso.localeCompare(a.iso))[0];
+    const next = seasons.filter(x => x.iso > today).sort((a, b) => a.iso.localeCompare(b.iso))[0];
+    const spoilers = (S.index.seasons || []).find(x => x.key === 'upcoming');
+    const days = cur ? Math.round((new Date(today) - new Date(cur.iso)) / 864e5) : 0;
+    const tool = (href, icon, label) => `<a class="qt" href="${href}">${ICONS[icon]}<span>${label}</span></a>`;
+    const dir = S.sections.filter(sec => sec.name !== 'More Pages' && sec.name !== 'Patch Notes');
 
     main.innerHTML = `
-      <section class="hero">
-        <h1>PD2 Wiki</h1>
-        <p>Everything about <b>Project Diablo 2</b> — every item, skill and mechanic — in one place that's quick to search and easy to read on any screen.</p>
-        <button id="home-search-btn" class="hero-search" type="button">${I('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>', 'stroke-width="2"')}<span>Search items, skills, runewords, pages…</span><kbd>/</kbd></button>
-        <div class="status">
-          <span class="pill" id="sync-pill"><i></i>Updated daily from the PD2 Wiki</span>
-          ${newest ? `<span class="pill">Latest change <b>${esc(ago(newest))}</b></span>` : ''}
-        </div>
+      <section class="home-top">
+        <div><h1 class="page-title">PD2 Wiki</h1>
+          <p class="home-sub">Every item, skill and mechanic in Project Diablo 2. <span id="sync-pill">Synced daily${newest ? ` · last edit ${esc(ago(newest))}` : ''}</span></p></div>
+        <button id="home-search-btn" class="hero-search" type="button">${I('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>', 'stroke-width="2"')}<span>Search items, skills, runewords…</span><kbd>/</kbd></button>
       </section>
 
-      <h2 class="home-h">Items</h2>
-      <div class="tiles">
-        ${tile('#/items?t=unique', 'unique', 'Uniques', 'Every unique with its PD2 changes', 'q-unique')}
-        ${tile('#/items?t=set', 'set', 'Set Items', 'Sets, their pieces and bonuses', 'q-set')}
-        ${tile('#/items?t=runeword', 'rune', 'Runewords', 'Filter by sockets, base and level', 'q-rw')}
-        ${tile('#/items?ch=1&sort=changes', 'items', 'Changed in PD2', 'Items PD2 reworked the most')}
-      </div>
-      <p class="tile-links"><a href="#/affixes">Affix finder</a><a href="#/runes">Runes &amp; gems</a><a href="#/bases">Item bases</a><a href="#/new">New in PD2</a><a href="#/cosmetics">Cosmetics</a></p>
-
-      <h2 class="home-h">Skills${skillsN ? ` <small>${skillsN}</small>` : ''}</h2>
-      <div class="classes">${window.PD2Skills.CLASSES.map(c => `<a href="#/skills/${c}"><span class="cls-orb cls-${c.toLowerCase()}" aria-hidden="true">${c[0]}</span>${c}</a>`).join('')}</div>
-      <p class="tile-links"><a href="#/classes">Stat planner</a>${[['Skill Changes', 'Skill overview'], ['Item Skills', 'Item-only skills']].map(([t, l]) => pageLink(t, l)).filter(Boolean).join('')}<a href="#/mercs">Mercenaries</a></p>
-
-      <h2 class="home-h">Play</h2>
-      <div class="tiles">
-        ${tile('#/cube', 'craft', 'Crafting & Cube', 'Every cube recipe, craft and corruption')}
-        ${tile('#/maps', 'map', 'Map Explorer', 'Every map, filtered by what your build can kill')}
-        ${tile('#/monsters', 'skull', 'Monsters & Ubers', 'Bosses, key holders and uber stats')}
-        ${tile('#/zones', 'list', 'Zones', 'Every zone’s level, level 85 areas and immunities')}
-        ${tile('#/guides', 'book', 'Build Directory', 'Every build guide by class, starter builds first')}
-        ${tile('#/breakpoints', 'clock', 'Breakpoints', 'Frames at your cast rate, hit recovery, block and attack speed')}
-        ${tile('#/' + MERC_ROUTE, 'merc', 'Merc Weapon Compare', 'Best Act 2 merc weapon for your IAS')}
-        ${tile('#/mechanics', 'gear', 'Game Mechanics', 'Crit, leech, crushing blow and resistance calculators')}
-        ${tile(pageHref('Patch Notes'), 'scroll', 'Patch Notes', 'Every season\u2019s changes')}
+      <div class="home-row">
+        ${cur ? `<a class="season-card" href="#/patches/${cur.key}">
+          <span class="sc-k">Current season</span><b>Season ${cur.n} · ${esc(cur.name)}</b>
+          <span class="sc-d">Day ${days} · started ${esc(fmtDate(cur.iso))}</span>
+          <span class="sc-links"><span>Patch notes →</span></span></a>` : ''}
+        ${next || spoilers ? `<a class="season-card soon" href="#/patches/${next ? next.key : 'upcoming'}">
+          <span class="sc-k">Coming next</span><b>${next ? `Season ${next.n} · ${esc(next.name)}` : 'Next season'}</b>
+          <span class="sc-d">${next ? `Starts ${esc(fmtDate(next.iso))}` : 'Dev streams & spoilers'}</span>
+          <span class="sc-links"><span>What's changing →</span></span></a>` : ''}
+        <div class="quick">
+          ${tool('#/items?t=runeword', 'rune', 'Runeword finder')}
+          ${tool('#/breakpoints', 'clock', 'Breakpoints')}
+          ${tool('#/classes', 'skills', 'Stat planner')}
+          ${tool('#/affixes', 'items', 'Affix finder')}
+          ${tool('#/' + MERC_ROUTE, 'merc', 'Merc weapons')}
+          ${tool('#/filters/codes', 'list', 'Filter codes')}
+        </div>
       </div>
 
-      <h2 class="home-h">Recently updated</h2>
-      <ul class="changes">${recent.map(p => `<li><a href="${hrefFor(p)}">${esc(displayName(p))}</a><span>${esc(ago(p.edited))}</span></li>`).join('')}</ul>
-      <a class="more-link" href="#/changes">All recent changes →</a>`;
+      <div class="dir">${dir.map(sec => `<section class="dir-sec">
+        <h2>${ICONS[sec.icon] || ''}<span>${esc(sec.name)}</span></h2>
+        ${sec.name === 'Classes & Skills' ? `<div class="dir-cls">${window.PD2Skills.CLASSES.map(c => `<a href="#/skills/${c}" title="${c} skills"><span class="cls-orb cls-${c.toLowerCase()}" aria-hidden="true">${c[0]}</span>${c}</a>`).join('')}</div>` : ''}
+        <ul>${sec.links.filter(l => !(sec.name === 'Classes & Skills' && l.label === 'Skills')).map(l => `<li><a href="${l.href}">${esc(l.label)}</a></li>`).join('')}</ul></section>`).join('')}</div>
+
+      <section class="home-recent"><h2 class="home-h">Recently updated</h2>
+        <ul class="changes">${recent.map(p => `<li><a href="${hrefFor(p)}">${esc(displayName(p))}</a><span>${esc(ago(p.edited))}</span></li>`).join('')}</ul>
+        <a class="more-link" href="#/changes">All recent changes →</a></section>`;
 
     lastCheck().then(t => {
       const pill = $('#sync-pill');
-      if (pill && t) pill.innerHTML = `<i></i>Updated daily · last check <b>${esc(ago(t))}</b>`;
+      if (pill && t) pill.textContent = `Synced daily · last check ${ago(t)}`;
     });
     $('#home-search-btn').addEventListener('click', () => { $('#q').focus(); });
   }

@@ -47,6 +47,18 @@
     }).join('')}</div>`;
   }
 
+  // One line per map; the screenshot shows on hover.
+  const VIEW = 'pd2wiki-mview';
+  const getView = () => { try { return localStorage.getItem(VIEW) || 'list'; } catch { return 'list'; } };
+  const saveView = v => { try { localStorage.setItem(VIEW, v); } catch {} };
+  function row(m) {
+    const { esc } = P();
+    return `<a class="mrow" href="#/map/${m.slug}">
+      <span class="mr-ico">${m.icon ? `<img src="${esc(m.icon)}" alt="" loading="lazy">` : ''}</span>
+      <b>${esc(m.name)}</b>${immuneRow(m)}
+      <span class="mr-meta">${m.monsters.length} monsters${m.types.length ? ' · ' + m.types.map(esc).join(', ') : ''}</span></a>`;
+  }
+
   function card(m) {
     const { esc } = P();
     const shot = m.shots[0];
@@ -98,7 +110,8 @@
           <div class="chips" role="group" aria-label="Hide maps with immunities">${EL.map(([k, l]) => chip(l, { ...f, avoid: f.avoid.includes(k) ? f.avoid.filter(x => x !== k) : [...f.avoid, k] }, f.avoid.includes(k), ` el-chip el-${k}`)).join('')}</div></div>
         ${types.length ? `<div class="frow"><span class="flabel">Has</span><div class="chips" role="group" aria-label="Monster type">${types.map(t => chip(esc(t), { ...f, type: f.type === t ? '' : t }, f.type === t)).join('')}</div></div>` : ''}
       </div>
-      <div class="rcount" aria-live="polite"></div>
+      <div class="rbar"><div class="rcount" aria-live="polite"></div>
+        <div class="vtoggle" role="group" aria-label="Layout"><button type="button" data-v="list">List</button><button type="button" data-v="cards">Cards</button></div></div>
       <div class="mgrid"></div>
       ${foot}`;
     const grid = $('.mgrid', root), count = $('.rcount', root);
@@ -106,10 +119,18 @@
       const res = apply(ff);
       count.textContent = `${res.length} map${res.length === 1 ? '' : 's'}${ff.avoid.length ? ` with nothing immune to ${ff.avoid.map(e => EL.find(x => x[0] === e)[1].toLowerCase()).join(' or ')}` : ''}`;
       const byTier = TIERS.map(([k, l]) => [l, res.filter(m => m.tier === k)]).filter(([, ms]) => ms.length);
-      grid.innerHTML = res.length ? byTier.map(([l, ms]) => `<h2 class="home-h">${esc(l)}</h2><div class="mcards">${ms.map(card).join('')}</div>`).join('')
+      const list = getView() === 'list';
+      for (const b of root.querySelectorAll('.vtoggle button')) b.classList.toggle('on', (b.dataset.v === 'list') === list);
+      grid.innerHTML = res.length ? byTier.map(([l, ms]) => `<h2 class="home-h">${esc(l)}</h2>${list ? `<div class="mlist">${ms.map(row).join('')}</div>` : `<div class="mcards">${ms.map(card).join('')}</div>`}`).join('')
         : `<div class="empty">No maps match. <a href="#/maps">Clear filters</a></div>`;
     };
     update(f);
+    $('.vtoggle', root).addEventListener('click', e => {
+      const b = e.target.closest('[data-v]');
+      if (!b) return;
+      saveView(b.dataset.v);
+      update(readQ(location.hash.split('?')[1]));
+    });
     let t;
     $('#mq', root).addEventListener('input', e => {
       clearTimeout(t);
@@ -163,5 +184,20 @@
     return data.maps.filter(m => m.name.toLowerCase().includes(ql)).slice(0, n);
   }
 
-  window.PD2Maps = { load, list, detail, search, get data() { return data; } };
+  // Hover card: screenshot, tier, immunities and monster types.
+  async function tip(slug) {
+    const { esc } = P();
+    await load();
+    const m = data.maps.find(x => x.slug === slug);
+    if (!m) return '';
+    const shot = m.shots[0];
+    return `<div class="hc-map">
+      ${shot ? `<img class="hc-shot" src="${esc(shot.thumb)}" alt="">` : ''}
+      <div class="hc-head">${m.icon ? `<img src="${esc(m.icon)}" alt="">` : ''}<span><b class="hc-name">${esc(m.name)}</b><span class="hc-sub">${esc(tierLabel(m.tier))}</span></span></div>
+      ${immuneRow(m)}
+      <div class="hc-foot">${m.monsters.length} monster types${m.types.length ? ' · ' + m.types.map(esc).join(', ') : ''}</div>
+    </div>`;
+  }
+
+  window.PD2Maps = { load, list, detail, search, tip, get data() { return data; } };
 })();

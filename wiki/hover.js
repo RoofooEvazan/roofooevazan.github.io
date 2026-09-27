@@ -1,0 +1,98 @@
+/* Hover cards: point at any link to an item, skill or map (or anything marked
+ * data-hc="rune:Ber") and its details appear beside the pointer, so lists can stay
+ * short. Mouse and trackpad only; on touch screens links just open their page.
+ */
+(() => {
+  'use strict';
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const SEL = 'a[href^="#/item/"], a[href^="#/skills/"], a[href^="#/map/"], [data-hc]';
+  const SKIP = '.hc, .icard, .tooltip, .results';
+  const cache = new Map();
+  let box = null, cur = null, timer = 0, seq = 0, px = 0, py = 0;
+
+  const keyOf = el => {
+    if (el.dataset.hc) return el.dataset.hc;
+    const h = el.getAttribute('href') || '';
+    let m;
+    if ((m = h.match(/^#\/item\/([^?#]+)/))) return 'item:' + decodeURIComponent(m[1]);
+    if ((m = h.match(/^#\/skills\/([A-Za-z]+)\/([^?#]+)/)) && m[1] !== 'changes') return `skill:${m[1]}/${decodeURIComponent(m[2])}`;
+    if ((m = h.match(/^#\/map\/([^?#]+)/))) return 'map:' + decodeURIComponent(m[1]);
+    return '';
+  };
+
+  function build(key) {
+    if (cache.has(key)) return cache.get(key);
+    const i = key.indexOf(':'), type = key.slice(0, i), arg = key.slice(i + 1);
+    let p = null;
+    if (type === 'item') p = window.PD2Items?.tip(arg);
+    else if (type === 'skill') { const j = arg.indexOf('/'); p = window.PD2Skills?.tip(arg.slice(0, j), arg.slice(j + 1)); }
+    else if (type === 'map') p = window.PD2Maps?.tip(arg);
+    else if (type === 'rune') p = window.PD2Gear?.runeTip(arg);
+    p = Promise.resolve(p).catch(() => '');
+    cache.set(key, p);
+    return p;
+  }
+
+  function place() {
+    if (!box || box.hidden) return;
+    const w = box.offsetWidth, h = box.offsetHeight, gap = 18;
+    let x = px + gap, y = py + gap;
+    if (x + w > innerWidth - 8) x = Math.max(8, px - w - gap);
+    if (y + h > innerHeight - 8) y = Math.max(8, innerHeight - h - 8);
+    box.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+  }
+
+  function show(html) {
+    if (!box) {
+      box = document.createElement('div');
+      box.className = 'hc';
+      box.setAttribute('role', 'tooltip');
+      document.body.appendChild(box);
+    }
+    box.innerHTML = html;
+    box.hidden = false;
+    place();
+    // Images change the size once they load.
+    for (const img of box.querySelectorAll('img')) if (!img.complete) img.addEventListener('load', place, { once: true });
+  }
+
+  function hide() {
+    clearTimeout(timer);
+    seq++;
+    cur = null;
+    if (box) box.hidden = true;
+  }
+
+  document.addEventListener('pointermove', e => {
+    px = e.clientX; py = e.clientY;
+    if (cur) place();
+  }, { passive: true });
+
+  document.addEventListener('pointerover', e => {
+    if (!fine.matches || e.pointerType === 'touch') return;
+    const el = e.target.closest?.(SEL);
+    if (!el || el === cur) return;
+    if (el.closest(SKIP)) return;
+    const key = keyOf(el);
+    if (!key) return;
+    hide();
+    cur = el;
+    const my = seq;
+    timer = setTimeout(async () => {
+      const html = await build(key);
+      if (my !== seq || !html || !el.isConnected) return;
+      show(html);
+    }, 110);
+  });
+
+  document.addEventListener('pointerout', e => {
+    if (!cur) return;
+    const to = e.relatedTarget;
+    if (to && cur.contains(to)) return;
+    hide();
+  });
+  addEventListener('scroll', hide, { passive: true, capture: true });
+  addEventListener('hashchange', hide);
+  document.addEventListener('pointerdown', hide);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
+})();

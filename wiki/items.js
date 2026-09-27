@@ -49,7 +49,7 @@
     if (it.kind === 'runeword') return `${it.sockets}-socket ${it.base}`;
     return [it.base, it.kind === 'set' ? it.set : ''].filter(Boolean).join(' · ');
   };
-  const runes = it => it.runes?.length ? `<div class="runes">${it.runes.map(r => `<span>${P().esc(r)}</span>`).join('')}</div>` : '';
+  const runes = it => it.runes?.length ? `<div class="runes">${it.runes.map(r => `<span data-hc="rune:${P().esc(r)}">${P().esc(r)}</span>`).join('')}</div>` : '';
   const statLi = (s, withLinks) => {
     const html = withLinks ? s.html : unlink(s.html);
     const cls = `st st-${s.st}`;
@@ -77,6 +77,43 @@
         ${it.changes ? `<span class="chg" title="Stats PD2 added, changed or removed">${it.changes} PD2 change${it.changes === 1 ? '' : 's'}</span>` : ''}
       </div>
     </${tag}>`;
+  }
+
+  // One line per item: picture, name and base, level and its first stats; the rest on hover.
+  const VIEW = 'pd2wiki-iview';
+  const getView = () => { try { return localStorage.getItem(VIEW) || 'list'; } catch { return 'list'; } };
+  const saveView = v => { try { localStorage.setItem(VIEW, v); } catch {} };
+  function row(it) {
+    const { esc } = P();
+    const k = kindOf(it);
+    const shown = it.stats.filter(s => s.st !== 'removed');
+    const sum = shown.slice(0, 3).map(s => esc(strip(s.html))).join('<i>·</i>');
+    return `<a class="irow ${k.cls}" href="#/item/${it.slug}">
+      <span class="ir-img">${it.img ? `<img src="${esc(it.img)}" alt="" loading="lazy" decoding="async">` : ''}</span>
+      <span class="ir-name"><b>${esc(it.name)}</b><span>${esc(subtitle(it))}</span></span>
+      <span class="ir-lvl" title="Required level">${it.lvl || ''}</span>
+      <span class="ir-stats">${sum}${shown.length > 3 ? ` <em>+${shown.length - 3}</em>` : ''}</span>
+      <span class="ir-chg">${it.changes ? `<span class="chg" title="Stats PD2 added, changed or removed">${it.changes}</span>` : ''}</span>
+    </a>`;
+  }
+
+  // Hover card: the item's full tooltip, for links to it anywhere on the site.
+  async function tip(slug) {
+    await load();
+    const it = D.bySlug.get(slug);
+    if (!it) return '';
+    const { esc } = P();
+    const k = kindOf(it);
+    const req = [it.req?.lvl && `Level ${it.req.lvl}`, it.req?.str && `${it.req.str} Str`, it.req?.dex && `${it.req.dex} Dex`].filter(Boolean).join(' · ');
+    const info = it.info.filter(l => !l.base && /defense|damage|block|sockets/i.test(l.label || '')).slice(0, 3);
+    return `<div class="hc-item ${k.cls}">
+      <div class="hc-head">${it.img ? `<img src="${esc(it.img)}" alt="">` : ''}<span><b class="hc-name">${esc(it.name)}</b><span class="hc-sub">${esc(subtitle(it))}${it.tier ? ' · ' + esc(it.tier) : ''}</span></span></div>
+      ${runes(it)}
+      ${info.length ? `<ul class="hc-kv">${info.map(l => `<li><span>${esc(l.label)}</span> ${unlink(l.html)}</li>`).join('')}</ul>` : ''}
+      ${req ? `<div class="hc-req">Requires ${esc(req)}</div>` : ''}
+      <ul class="istats">${it.stats.filter(s => s.st !== 'removed').map(s => statLi(s, false)).join('')}</ul>
+      ${it.changes ? `<div class="hc-foot"><span class="st-dot st-changed"></span>${it.changes} PD2 change${it.changes === 1 ? '' : 's'}</div>` : ''}
+    </div>`;
   }
 
   // ---------- filters in the hash ----------
@@ -166,14 +203,30 @@
           <details class="more-f"${f.type ? ' open' : ''}><summary>Base type</summary><div class="chips">${types.map(t => chip('type', t, t)).join('')}</div></details>` : ''}
       </div>
       ${set ? setPanel(set) : ''}
-      <div class="rcount" aria-live="polite"></div>
+      <div class="rbar"><div class="rcount" aria-live="polite"></div>
+        <div class="vtoggle" role="group" aria-label="Layout"><button type="button" data-v="list">List</button><button type="button" data-v="cards">Cards</button></div></div>
       <div class="igrid"></div>
       <button class="more-btn" type="button" hidden>Show more</button>`;
 
     const grid0 = $('.igrid', root), moreBtn = $('.more-btn', root), countEl = $('.rcount', root);
-    let results = [], shown = 0, grid = grid0;
+    let results = [], shown = 0, grid = grid0, view = getView();
+    const setView = v => {
+      view = v;
+      grid.className = v === 'list' ? 'ilist' : 'igrid';
+      for (const b of $$('.vtoggle button', root)) b.classList.toggle('on', b.dataset.v === v);
+    };
+    setView(view);
+    $('.vtoggle', root).addEventListener('click', e => {
+      const b = e.target.closest('[data-v]');
+      if (!b || b.dataset.v === view) return;
+      setView(b.dataset.v);
+      saveView(b.dataset.v);
+      const n = Math.max(shown, PAGE);
+      grid.innerHTML = results.slice(0, n).map(it => view === 'list' ? row(it) : card(it)).join('');
+      shown = Math.min(results.length, n);
+    });
     const renderMore = () => {
-      grid.insertAdjacentHTML('beforeend', results.slice(shown, shown + PAGE).map(it => card(it)).join(''));
+      grid.insertAdjacentHTML('beforeend', results.slice(shown, shown + PAGE).map(it => view === 'list' ? row(it) : card(it)).join(''));
       shown = Math.min(results.length, shown + PAGE);
       moreBtn.hidden = shown >= results.length;
       moreBtn.textContent = `Show more (${results.length - shown} left)`;
@@ -328,5 +381,5 @@
     return ts.length ? data.items.filter(it => ts.every(t => it._s.includes(t))).length : 0;
   }
 
-  window.PD2Items = { load, list, detail, transformPage, searchItems, countMatches, card, kindOf, subtitle, get data() { return data; } };
+  window.PD2Items = { load, list, detail, transformPage, searchItems, countMatches, card, kindOf, subtitle, tip, get data() { return data; } };
 })();

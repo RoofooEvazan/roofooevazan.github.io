@@ -8,7 +8,7 @@
 .skill-vs .more{font-size:14px}
 .skill-req .wiki{display:inline}
 
-.chg{display:grid;gap:0;border:1px solid var(--edge);background:var(--void);margin-bottom:10px}
+.chgl{display:grid;gap:0;border:1px solid var(--edge);background:var(--void);margin-bottom:10px}
 .chg-row{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:4px 14px;padding:8px 12px;border-bottom:1px solid var(--edge)}
 .chg-row:last-child{border-bottom:0}
 .chg-name{font-weight:600;color:var(--gold-hi)}

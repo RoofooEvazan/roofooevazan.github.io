@@ -137,7 +137,6 @@
     const page = P().byId(R.page);
     const segs = `<div class="segs" role="group">${[['', 'Runes'], ['gems', 'Gems'], ['jewels', 'Jewels']].map(([k, l]) => `<a class="seg${k === tab ? ' on' : ''}" href="#/runes${k ? '/' + k : ''}">${l}</a>`).join('')}</div>`;
     const info = t => R.info.find(i => i.title.toLowerCase() === t);
-    const slotRows = x => `<dl class="slots"><div><dt>Weapon</dt><dd>${x.weapon || '—'}</dd></div><div><dt>Helm / Chest</dt><dd>${x.armor || '—'}</dd></div><div><dt>Shield${x.group !== undefined ? ' / Quiver' : ''}</dt><dd>${x.shield || '—'}</dd></div></dl>`;
 
     if (tab === 'gems') {
       const types = [...new Set(R.gems.map(g => g.type))];
@@ -167,31 +166,28 @@
 
     // Runewords per rune, and each rune's cube upgrade.
     const rws = (window.PD2Items.data?.items || []).filter(i => i.kind === 'runeword');
-    const promos = (window.PD2Cube.data?.recipes.recipes || []).filter(r => /promotion/i.test(r.section) && r.runes.length);
     const strip = h => String(h || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
     root.innerHTML = `${crumbs('Items', '#/items')}<h1 class="page-title">Runes</h1>${segs}
       ${info('runes')?.html ? `<details class="about"><summary>About runes in PD2</summary><div class="wiki">${info('runes').html}</div></details>` : ''}
       <div class="filters"><div class="frow"><label class="fsearch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         <input type="search" id="rq" placeholder="Rune or stat, e.g. Ber, cannot be frozen" aria-label="Filter runes" autocomplete="off"></label>
         <div class="chips">${['', 'Low', 'Mid', 'High'].map(g => `<button type="button" class="chip${g === '' ? ' on' : ''}" data-g="${g}">${g || 'All'}</button>`).join('')}</div></div></div>
-      <div class="runes-grid"></div>${attrib(R.page)}`;
-    const grid = $('.runes-grid', root);
+      <div class="tw"><table class="restable rtable"><thead><tr><th>Rune</th><th title="Required level">Lvl</th><th>Weapon</th><th>Helm / Chest</th><th>Shield / Quiver</th><th title="Runewords that use it">Used in</th></tr></thead><tbody></tbody></table></div>
+      <p class="muted">Hover a rune for its cube upgrade and every runeword that uses it.</p>${attrib(R.page)}`;
+    const body = $('.rtable tbody', root);
     const f = { g: '', q: '' };
-    const card = r => {
-      const up = promos.find(p => p.runes[0] === r.name && !/^Upgrad/i.test(p.caption) || p.runes[0] === r.name);
+    const row = r => {
       const uses = rws.filter(i => (i.runes || []).includes(r.name));
-      return `<article class="rune" id="${esc(r.name.toLowerCase())}">
-        <header>${r.img ? `<img src="${esc(r.img)}" alt="" loading="lazy">` : ''}<div><h2>${esc(r.name)}</h2><p>#${r.n} · level ${r.lvl ?? '?'} · ${esc(r.group)}</p></div></header>
-        <div class="wiki">${slotRows(r)}</div>
-        ${up ? `<p class="rup"><span>Upgrade</span>${esc(strip(up.ing))} <b>→</b> ${esc(strip(up.res))}${up.notes ? ` <small>${esc(strip(up.notes))}</small>` : ''}</p>` : ''}
-        ${uses.length ? `<p class="ruses"><span>In ${uses.length} runeword${uses.length === 1 ? '' : 's'}</span>${uses.map(i => `<a href="#/item/${i.slug}">${esc(i.name)}${uses.filter(x => x.name === i.name).length > 1 ? ` <small>${esc(i.slot)}</small>` : ''}</a>`).join('')}</p>` : ''}
-      </article>`;
+      return `<tr id="${esc(r.name.toLowerCase())}" class="rg-${esc(r.group.toLowerCase())}">
+        <td class="rn-name"><span data-hc="rune:${esc(r.name)}">${r.img ? `<img src="${esc(r.img)}" alt="" loading="lazy">` : ''}<b>${esc(r.name)}</b><i>#${r.n}</i></span></td>
+        <td class="r">${r.lvl ?? ''}</td><td class="wiki">${r.weapon || '—'}</td><td class="wiki">${r.armor || '—'}</td><td class="wiki">${r.shield || '—'}</td>
+        <td class="r">${uses.length ? `<a href="#/items?t=runeword&q=${encodeURIComponent(r.name)}" data-hc="rune:${esc(r.name)}">${uses.length}</a>` : '—'}</td></tr>`;
     };
     const draw = () => {
       const ts = f.q.toLowerCase().split(/\s+/).filter(Boolean);
       const list = R.runes.filter(r => (!f.g || r.group === f.g) && ts.every(t => (r.name + ' ' + strip(r.weapon + ' ' + r.armor + ' ' + r.shield)).toLowerCase().includes(t)));
-      grid.innerHTML = list.map(card).join('') || '<div class="empty">No runes match.</div>';
-      enhanceFragment(grid, page);
+      body.innerHTML = list.map(row).join('') || '<tr><td colspan="6" class="empty">No runes match.</td></tr>';
+      enhanceFragment(body, page);
     };
     draw();
     root.querySelector('.filters').addEventListener('click', e => { const b = e.target.closest('[data-g]'); if (!b) return; f.g = b.dataset.g; for (const x of $$('[data-g]', root)) x.classList.toggle('on', x === b); draw(); });
@@ -260,5 +256,24 @@
     return out.slice(0, n);
   }
 
-  window.PD2Gear = { load, bases, runes, mercs, search, get data() { return data; } };
+  // Hover card for a rune: its bonuses, cube upgrade and the runewords that use it.
+  async function runeTip(name) {
+    const { esc } = P();
+    await Promise.all([load(), window.PD2Items.load().catch(() => {}), window.PD2Cube.load().catch(() => {})]);
+    const r = data.runes.runes.find(x => x.name.toLowerCase() === String(name).toLowerCase());
+    if (!r) return '';
+    const strip = h => String(h || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    const promos = (window.PD2Cube.data?.recipes.recipes || []).filter(x => /promotion/i.test(x.section) && x.runes[0] === r.name);
+    const uses = [...new Set((window.PD2Items.data?.items || []).filter(i => i.kind === 'runeword' && (i.runes || []).includes(r.name)).map(i => i.name))];
+    // Current values only: drop the struck-out pre-PD2 value the wiki shows beneath.
+    const line = h => String(h || '—').replace(/<br\s*\/?>\s*<span class="omod">.*?<\/span>/g, '').replace(/<span class="omod">.*?<\/span>/g, '').replace(/<br\s*\/?>/g, ' · ').replace(/<a\b[^>]*>|<\/a>/g, '');
+    return `<div class="hc-rune">
+      <div class="hc-head">${r.img ? `<img src="${esc(r.img)}" alt="">` : ''}<span><b class="hc-name">${esc(r.name)} Rune</b><span class="hc-sub">#${r.n} · level ${r.lvl ?? '?'} · ${esc(r.group)} rune</span></span></div>
+      <ul class="hc-kv"><li><span>Weapon</span> ${line(r.weapon)}</li><li><span>Helm / Chest</span> ${line(r.armor)}</li><li><span>Shield</span> ${line(r.shield)}</li></ul>
+      ${promos[0] ? `<div class="hc-req">Upgrade: ${esc(strip(promos[0].ing))} → ${esc(strip(promos[0].res))}</div>` : ''}
+      ${uses.length ? `<div class="hc-lvl">In ${uses.length} runeword${uses.length === 1 ? '' : 's'}</div><p class="hc-desc">${uses.slice(0, 18).map(esc).join(', ')}${uses.length > 18 ? `, +${uses.length - 18} more` : ''}</p>` : ''}
+    </div>`;
+  }
+
+  window.PD2Gear = { load, bases, runes, mercs, search, runeTip, get data() { return data; } };
 })();
