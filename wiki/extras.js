@@ -45,12 +45,12 @@
       const sub = rest.filter(x => x.kids.length && x.kids.some(k => itemsNamed(k.name).length));
       const plain = rest.filter(x => !sub.includes(x));
       return `<section class="ngroup">${title}
-        ${cards.length ? `<div class="igrid">${cards.map(i => window.PD2Items.card(i)).join('')}</div>` : ''}
+        ${cards.length ? `<div class="ilist">${cards.map(i => window.PD2Items.row(i)).join('')}</div>` : ''}
         ${sub.map(x => group(x, depth + 1)).join('')}
         ${plain.length ? `<ul class="nlist">${plain.map(listNode).join('')}</ul>` : ''}</section>`;
     };
     root.innerHTML = `${crumbs}<h1 class="page-title">New in PD2</h1>
-      <p class="lead">Everything Project Diablo 2 adds on top of Lord of Destruction: new runewords, set items and uniques, new consumables and uber keys, and maps.</p>
+      <p class="lead">Everything Project Diablo 2 adds on top of Lord of Destruction: new runewords, set items and uniques, new consumables and uber keys, and maps. Hover an item for its full stats.</p>
       <div class="chips njump">${N.sections.map(s => `<a class="chip" href="#/new#${esc(s.anchor)}">${esc(s.title)}</a>`).join('')}<a class="chip" href="#/cosmetics">Cosmetics</a></div>
       ${N.sections.map(s => `<section class="nsec" id="${esc(s.anchor)}"><h2 class="page-sub">${esc(s.title)}</h2>
         ${s.tree.map(n => n.kids.length ? group(n, 0) : `<ul class="nlist">${listNode(n)}</ul>`).join('')}</section>`).join('')}
@@ -66,26 +66,40 @@
     catch (e) { root.innerHTML = `<div class="error"><b>Couldn't load cosmetics.</b><br>${esc(e.message)}</div>`; return; }
     const C = g.cosmetics;
     const items = window.PD2Items.data.items;
-    const card = e => {
+    // One row per aura or skin: thumbnail, name, colors and how to get it; the rest on hover.
+    cosIndex = C.groups.flatMap(gr => gr.entries);
+    const row = e => {
       const it = e.unique && items.find(i => i.name === e.name);
-      return `<article class="cos${e.premium ? ' premium' : ''}" id="${esc(e.anchor)}">
-        <header><h3>${it ? `<a href="#/item/${it.slug}">${esc(e.name)}</a>` : esc(e.name)}</h3>${e.premium ? '<em>Premium</em>' : ''}</header>
-        ${e.imgs.length ? `<div class="cos-imgs">${e.imgs.map(im => `<a class="img-link" href="${esc(im.full)}"><img src="${esc(im.thumb)}" alt="${esc(im.alt || e.name)}" loading="lazy"></a>`).join('')}</div>` : ''}
-        ${e.base ? `<p class="cos-base">${esc(e.base)}</p>` : ''}
-        ${e.facts.length ? `<ul class="kv">${e.facts.map(f => `<li><span>${esc(f.label)}</span><b>${f.html}</b></li>`).join('')}</ul>` : ''}
-        ${e.notes ? `<div class="wiki cos-notes">${e.notes}</div>` : ''}
-      </article>`;
+      const im = e.imgs[0];
+      return `<div class="cosrow${e.premium ? ' premium' : ''}" id="${esc(e.anchor)}" data-hc="cos:${cosIndex.indexOf(e)}">
+        <span class="cr-img">${im ? `<a class="img-link" href="${esc(im.full)}"><img src="${esc(im.thumb)}" alt="${esc(im.alt || e.name)}" loading="lazy"></a>` : ''}</span>
+        <span class="cr-name"><b>${it ? `<a href="#/item/${it.slug}">${esc(e.name)}</a>` : esc(e.name)}</b>${e.premium ? '<em>Premium</em>' : ''}${e.base ? `<small>${esc(e.base)}</small>` : ''}</span>
+        <span class="cr-facts wiki">${e.facts.filter(f => !/^note$/i.test(f.label)).map(f => `<span><i>${esc(f.label)}</i> ${f.html}</span>`).join('')}</span>
+        ${e.imgs.length > 1 ? `<span class="cr-more">+${e.imgs.length - 1}</span>` : '<span></span>'}</div>`;
     };
     root.innerHTML = `${crumbs}<h1 class="page-title">Cosmetics</h1>
       <p class="lead">Character auras earned from achievements and events, and alternate looks for some items.</p>
       ${C.groups.map(gr => `<section class="cgroup" id="${esc(gr.anchor || '')}">
         <h2 class="home-h">${esc(gr.title)}${gr.parent && gr.parent !== gr.title ? ` <small>${esc(gr.parent)}</small>` : ''}</h2>
-        ${gr.intro ? `<div class="wiki lead">${gr.intro}</div>` : ''}
-        ${gr.entries.length ? `<div class="cos-grid">${gr.entries.map(card).join('')}</div>` : ''}</section>`).join('')}
+        ${gr.intro ? `<details class="about"><summary>How ${esc(gr.title.toLowerCase())} work</summary><div class="wiki">${gr.intro}</div></details>` : ''}
+        ${gr.entries.length ? `<div class="coslist">${gr.entries.map(row).join('')}</div>` : ''}</section>`).join('')}
       ${attrib(C.page)}`;
     for (const el of $$('.wiki', root)) enhanceFragment(el, P().byId(C.page));
     if (anchor) requestAnimationFrame(() => document.getElementById(anchor)?.scrollIntoView({ block: 'start' }));
   }
 
-  window.PD2Extras = { newItems, cosmetics };
+  // Hover card for a cosmetic: every picture, what it looks like, how to unlock it, notes.
+  let cosIndex = [];
+  async function cosTip(i) {
+    const { esc } = P();
+    const e = cosIndex[+i];
+    if (!e) return '';
+    const strip = h => String(h || '').replace(/<a\b[^>]*>|<\/a>/g, '');
+    return `<div class="hc-cos"><b class="hc-name">${esc(e.name)}</b>${e.base ? `<span class="hc-sub">${esc(e.base)}</span>` : ''}
+      ${e.imgs.length ? `<div class="hc-cos-imgs">${e.imgs.slice(0, 3).map(im => `<img src="${esc(im.thumb)}" alt="">`).join('')}</div>` : ''}
+      ${e.facts.length ? `<ul class="hc-kv">${e.facts.map(f => `<li><span>${esc(f.label)}</span> ${strip(f.html)}</li>`).join('')}</ul>` : ''}
+      ${e.notes ? `<div class="hc-notes">${strip(e.notes)}</div>` : ''}</div>`;
+  }
+
+  window.PD2Extras = { newItems, cosmetics, cosTip };
 })();

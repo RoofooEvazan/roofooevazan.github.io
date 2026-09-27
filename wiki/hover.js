@@ -35,6 +35,7 @@
     else if (type === 'build') p = window.PD2Guide?.buildTip(arg);
     else if (type === 'base') p = window.PD2Gear?.baseTip(arg);
     else if (type === 'mskill') p = window.PD2Gear?.mercSkillTip(arg);
+    else if (type === 'cos') p = window.PD2Extras?.cosTip(arg);
     else if (type === 'lfilter') p = window.PD2Filters?.filterTip(arg);
     p = Promise.resolve(p).catch(() => '');
     cache.set(key, p);

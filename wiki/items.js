@@ -385,5 +385,5 @@
     return ts.length ? data.items.filter(it => ts.every(t => it._s.includes(t))).length : 0;
   }
 
-  window.PD2Items = { load, list, detail, transformPage, searchItems, countMatches, card, kindOf, subtitle, tip, get data() { return data; } };
+  window.PD2Items = { load, list, detail, transformPage, searchItems, countMatches, card, row, kindOf, subtitle, tip, get data() { return data; } };
 })();
