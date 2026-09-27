@@ -459,3 +459,41 @@ h3.pn-title{font-size:14.5px}
 .mech{gap:18px}
 .mech-topics a{padding:4px 10px;font-size:14px}
 .mech-rel{margin:12px 0 4px 12px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}.mech-topics ol.mech-rel-l a{font-size:13.5px}@media (max-width:900px){.mech-rel,.mech-rel-l{display:none}}
+
+/* ---------- stat planner: results beside the inputs ---------- */
+.planner .cgrid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.planner .pl-actions{margin:8px 0}
+.pl-table td{padding-top:.2em;padding-bottom:.2em}
+.pl-table .stepper input,.pl-table .pl-items{height:30px}
+.pl-out .stat{flex:1 1 130px}
+@media (min-width:1000px){
+  .pl-grid{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:14px;align-items:start}
+  .pl-out{position:sticky;top:calc(var(--bar-h) + 12px);flex-direction:column;flex-wrap:nowrap;gap:0;margin:0;padding:0;border:1px solid var(--edge);background:var(--void)}
+  .pl-out .stat{flex:none;flex-direction:row-reverse;justify-content:space-between;align-items:baseline;gap:8px;padding:7px 12px;border:0;border-bottom:1px solid var(--edge);background:none}
+  .pl-out .stat b{font-size:18px}
+  .pl-out .stat.big b{font-size:22px}
+  .pl-out .cnote{padding:7px 12px;margin:0}
+}
+
+/* ---------- what PD2 changed: folding categories ---------- */
+.ovtiles{grid-template-columns:repeat(auto-fill,minmax(min(200px,100%),1fr));margin:0 0 10px}
+.ovtiles .tile{padding:8px 12px}
+.ovtiles .tile b{font-size:12.5px}
+.ovtiles .tile span span{font-size:13px}
+.ovcat{margin:0 0 6px;border:1px solid var(--edge);background:var(--panel)}
+.ovcat > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:8px 14px;font-family:var(--font-display);font-size:14px;letter-spacing:.05em;color:var(--gold-hi)}
+.ovcat > summary::-webkit-details-marker{display:none}
+.ovcat > summary::before{content:"+";width:12px;color:var(--gold)}
+.ovcat[open] > summary::before{content:"−"}
+.ovcat[open] > summary{border-bottom:1px solid var(--edge)}
+.ovcat > summary:hover{background:color-mix(in srgb,var(--gold) 5%,transparent)}
+.ovcat .ovlist{border:0;background:none}
+.ovlist > li{padding:5px 12px 5px 24px;font-size:14.5px}
+.ovlist > li::before{left:10px;top:13px;width:5px;height:5px}
+.ovcat .ovnote{padding:6px 14px 10px;font-size:13.5px}
+@media (min-width:1200px){
+  .ovcat .ovlist{columns:2;column-gap:0}
+  .ovcat .ovlist > li{break-inside:avoid}
+}
+.pl-table .stepper input{width:52px}.pl-table .pl-items{width:64px}.pl-table th,.pl-table td{padding-left:.45em;padding-right:.45em}
+.ovtiles{grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr))}

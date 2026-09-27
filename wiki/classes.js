@@ -29,7 +29,7 @@
     root.innerHTML = `<nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Wiki</a><span aria-hidden="true">›</span><a href="#/skills/${cls.cls}">Skills</a></nav>
       <h1 class="page-title">Stat Planner</h1>
       <div class="segs cls-tabs" role="group" aria-label="Class">${C.classes.map(c => `<a class="seg${c === cls ? ' on' : ''}" href="#/classes?cls=${c.cls}">${c.cls}</a>`).join('')}</div>
-      <section class="calc planner">
+      <section class="calc planner"><div class="pl-grid"><div class="pl-left">
         <div class="cgrid">
           <label class="cf"><span>Character level</span><input type="number" id="pl-lvl" min="1" max="99" value="${st.lvl}"></label>
           <label class="cf cb"><input type="checkbox" id="pl-lam"${st.lam ? ' checked' : ''}><span>Lam Esen's Tome in all 3 difficulties (+15 points)</span></label>
@@ -42,7 +42,7 @@
             <td><div class="stepper"><button type="button" data-step="-5" data-s="${s}" aria-label="Remove 5 ${s}">-5</button><input type="number" min="0" data-add="${s}" value="${st.add[s]}" aria-label="${s} points"><button type="button" data-step="5" data-s="${s}" aria-label="Add 5 ${s}">+5</button></div></td>
             <td><input type="number" class="pl-items" data-items="${s}" value="${st.items[s]}" aria-label="${s} from items"></td><td class="r pl-total" data-total="${s}"></td></tr>`).join('')}
         </tbody></table></div>
-        <div class="cout" id="pl-out"></div>
+        </div><div class="cout pl-out" id="pl-out" aria-live="polite"></div></div>
       </section>
       <details class="about"${cls.notes ? '' : ' hidden'}><summary>${esc(cls.cls)} attributes and what PD2 changed</summary><div class="wiki">
         <div class="tw"><table class="restable"><thead><tr><th>Attribute</th><th>Level 1</th><th>Per level</th><th>Per point</th></tr></thead>

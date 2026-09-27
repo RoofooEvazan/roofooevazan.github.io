@@ -30,7 +30,7 @@
       <div class="tiles ovtiles">
         <a class="tile" href="#/items?ch=1&sort=changes"><span><b>Changed items</b><span>Uniques, sets and runewords PD2 reworked, most changes first</span></span></a>
         <a class="tile" href="#/new"><span><b>New in PD2</b><span>Runewords, uniques and items that didn't exist before</span></span></a>
-        <a class="tile" href="${P().pageHref('Skill Changes')}"><span><b>Skill changes</b><span>How every class's skills were rebalanced</span></span></a>
+        <a class="tile" href="#/skills/changes"><span><b>Skill changes</b><span>How every class's skills were rebalanced</span></span></a>
         <a class="tile" href="#/patches"><span><b>Patch notes</b><span>Season by season, searchable</span></span></a>
       </div>
       ${G.intro.length ? `<details class="about"><summary>About skill and item changes</summary><div class="wiki">${G.intro.map(i => `<h3 class="sub-h">${esc(i.title)}</h3>${i.html}`).join('')}</div></details>` : ''}
@@ -39,19 +39,22 @@
           <input type="search" id="oq" value="${esc(f.q)}" placeholder="Search changes, e.g. stash, gold, potions" aria-label="Search changes" autocomplete="off"></label></div>
         <div class="chips" role="group">${['', ...G.cats.map(c => c.title)].map(c => `<button type="button" class="chip${f.cat === c ? ' on' : ''}" data-cat="${esc(c)}">${c ? esc(c) : 'All'} <i>${c ? G.cats.find(x => x.title === c).items.length : total}</i></button>`).join('')}</div>
       </div>
-      <div class="rcount" aria-live="polite"></div>
+      <div class="rbar"><div class="rcount" aria-live="polite"></div><span class="pn-toggle"><button type="button" class="chip" data-all="1">Expand all</button><button type="button" class="chip" data-all="0">Collapse all</button></span></div>
       <div class="ov"></div>${attrib(G.page)}`;
+    root.querySelector('.pn-toggle').addEventListener('click', e => { const b = e.target.closest('[data-all]'); if (b) for (const d of $$('.ov details', root)) d.open = b.dataset.all === '1'; });
     const box = $('.ov', root), count = $('.rcount', root);
     const draw = () => {
       const ts = f.q.toLowerCase().split(/\s+/).filter(Boolean);
-      let n = 0;
+      let n = 0, n0 = 0;
       box.innerHTML = G.cats.filter(c => !f.cat || c.title === f.cat).map(c => {
         const items = c.items.filter(i => ts.every(t => i.text.toLowerCase().includes(t)));
         n += items.length;
         if (!items.length) return '';
-        return `<section class="ovcat" id="${esc(c.anchor)}"><h2 class="home-h">${esc(c.title)} <small>${items.length}</small></h2>
+        // Each category folds to one line; the first opens, and a search or filter opens what it matches.
+        const open = ts.length || f.cat || !n0++;
+        return `<details class="ovcat" id="${esc(c.anchor)}"${open ? ' open' : ''}><summary><span>${esc(c.title)}</span><span class="pn-n">${items.length} change${items.length === 1 ? '' : 's'}</span></summary>
           <ul class="ovlist">${items.map(i => `<li class="wiki">${i.html}</li>`).join('')}</ul>
-          ${c.note && !ts.length ? `<div class="wiki muted ovnote">${c.note}</div>` : ''}</section>`;
+          ${c.note && !ts.length ? `<div class="wiki muted ovnote">${c.note}</div>` : ''}</details>`;
       }).join('') || '<div class="empty">No changes match.</div>';
       count.textContent = `${n} change${n === 1 ? '' : 's'}`;
       for (const el of $$('.wiki', box)) enhanceFragment(el, P().byId(G.page));
