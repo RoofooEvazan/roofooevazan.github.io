@@ -55,7 +55,7 @@
 
   // Colors come from the theme (--tri-*), with Tristram as the fallback.
   var css = [
-    '.rsn{position:relative;z-index:50;background:var(--tri-bg,#100c0a);border-bottom:1px solid var(--tri-line,#5a4030);box-shadow:inset 0 -3px 0 var(--tri-accent,#8e261c);font:400 15px/1.3 Almendra,Palatino,Georgia,serif;color:var(--tri-fg,#f1e2c6)}',
+    '.rsn{position:relative;z-index:50;background:var(--tri-bg,#100c0a);border-bottom:1px solid var(--tri-line,#5a4030);box-shadow:inset 0 -3px 0 var(--tri-accent,#8e261c);font:400 15px/1.3 var(--tri-body,Alegreya,Palatino,Georgia,serif);color:var(--tri-fg,#f1e2c6)}',
     '.rsn *{box-sizing:border-box}',
     '.rsn-in{max-width:1280px;margin:0 auto;padding:0 16px 3px;height:51px;display:flex;align-items:center;gap:18px}',
     '.rsn-brand{display:flex;align-items:center;gap:9px;flex:none;color:var(--tri-gold,#d2b06a);text-decoration:none;font:700 12px/1 var(--tri-display,"Tri Minus",Silkscreen,monospace);letter-spacing:.06em;text-transform:uppercase}',
@@ -83,11 +83,12 @@
     '@media print{.rsn{display:none}}'
   ].join('\n');
 
-  // The theme fonts, for pages that don't load them all already.
-  if (!document.querySelector('link[href*="family=Cinzel"]')) {
+  // The theme fonts, for pages that don't load them all already (Alegreya is
+  // the body text; pages with an older font link still get it from here).
+  if (!document.querySelector('link[href*="family=Alegreya:"]')) {
     var fonts = document.createElement('link');
     fonts.rel = 'stylesheet';
-    fonts.href = 'https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700&family=Silkscreen:wght@400;700&display=swap';
+    fonts.href = 'https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;700&family=Silkscreen:wght@400;700&display=swap';
     document.head.appendChild(fonts);
   }
 

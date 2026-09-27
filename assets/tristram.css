@@ -6,7 +6,7 @@
  * and add class="tri" to <body> for the page ground (the Tristram plate behind
  * everything, under a pixel grid and a flickering torch). The fonts are loaded
  * by assets/site-nav.js, or add them yourself:
- *   https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=Silkscreen:wght@400;700&display=swap
+ *   https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;700&family=Silkscreen:wght@400;700&display=swap
  */
 /* Silkscreen has no minus sign (U+2212), so the browser borrowed a thin one from
    another font. "Tri Minus" is Silkscreen's own hyphen mapped to U+2212, and
@@ -29,7 +29,7 @@
   --tri-glow:#e7a15a;
   --tri-shadow:#2a120e;
   --tri-display:"Tri Minus","Silkscreen","Courier New",monospace;
-  --tri-body:"Almendra",Palatino,Georgia,serif;
+  --tri-body:"Alegreya",Palatino,Georgia,serif;
 }
 
 /* Chaos: the second theme, picked with the toggle in the site nav bar
