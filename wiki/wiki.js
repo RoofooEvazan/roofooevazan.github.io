@@ -121,7 +121,8 @@
       ['Runes & Gems', 'Runes'], 'Item Bases', 'Item Affixes', 'Item Quality Levels', 'New Items', 'Cosmetics', 'Arrows'] },
     { name: 'Skills', icon: 'skills', links: [...['Amazon', 'Assassin', 'Barbarian', 'Druid', 'Necromancer', 'Paladin', 'Sorceress'].map(c => [c, `#/skills/${c}`]),
       ['Skill Changes', 'Skill Changes'], 'Mercenary Skills', ['Item-Only Skills', 'Item Skills'], 'Class Attributes'] },
-    { name: 'Crafting & Cube', icon: 'craft', links: ['Crafting', 'Recipes', 'Corruptions', 'Desecration'] },
+    { name: 'Crafting & Cube', icon: 'craft', links: [['Cube Recipes', '#/cube'], ['Crafted Items', '#/cube/crafting'], ['Corruptions', '#/cube/corruptions'],
+      ['How Crafting Works', '#/cube/guide'], 'Desecration'] },
     { name: 'Endgame', icon: 'map', links: [['Map Explorer', '#/maps'], ['Map Events', '#/maps/events'], ['Modifying Maps', '#/maps/modify'], ['Map Affixes', '#/maps/affixes'],
       'Zones', 'Monsters', 'Mercenaries', ['Merc Weapon Compare', '#/' + MERC_ROUTE]] },
     { name: 'Mechanics', icon: 'gear', links: ['Game Mechanics', 'Breakpoints', 'General Changes', 'Balance Changes', 'PvP Changes', 'Low Level Dueling', ['Abbreviations', 'Lexicon of Abbreviations'], 'Formula Info', 'Bugs'] },
@@ -131,7 +132,7 @@
     { name: 'More Pages', icon: 'list', auto: 'rest' },
   ];
   // Pages our own views replace; they stay reachable through search and A–Z.
-  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
+  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
 
   function buildSite() {
     const used = new Set();
@@ -324,6 +325,14 @@
       const [p0, qs = ''] = raw.split('?');
       const tab = p0.split('/')[1] || '';
       return view(() => window.PD2Maps.list(main, qs, tab), tab ? 'maps/' + tab : 'maps', 'Maps · PD2 Wiki').then(restore);
+    }
+    if (path === 'cube' || path.startsWith('cube?') || path.startsWith('cube/')) {
+      const [p0, qs = ''] = raw.split('?');
+      const tab = p0.split('/')[1] || '';
+      return view(() => window.PD2Cube.render(main, tab, qs), tab ? 'cube/' + tab : 'cube', 'Crafting & Cube · PD2 Wiki').then(() => {
+        if (anchor) requestAnimationFrame(() => document.getElementById(anchor)?.scrollIntoView({ block: 'start' }));
+        else restore();
+      });
     }
     if (path.startsWith('map/')) return view(() => window.PD2Maps.detail(main, path.slice(4)), 'maps', 'Map · PD2 Wiki');
     if (path === 'patches' || path.startsWith('patches/')) {
@@ -705,6 +714,7 @@
   function loadSearch() {
     window.PD2Items.load().catch(() => {});
     window.PD2Maps.load().catch(() => {});
+    window.PD2Cube.load().catch(() => {});
     if (S.search) return Promise.resolve(S.search);
     if (!S.searchLoading) {
       S.searchLoading = fetchJSON('data/search.json').then(list => {
@@ -808,6 +818,8 @@
       if (r.items.length || statN) html += '<div class="res-group">Items</div>' + r.items.map(it => itemRes(it, q)).join('') +
         (statN > r.items.length ? `<a class="res" role="option" href="#/items?q=${encodeURIComponent(q)}"><span class="res-ico">${ICONS.items}</span><span><b>${statN} items with “${esc(q)}”</b><span class="crumb">Open in the item database</span></span></a>` : '');
       if (r.skills.length) html += '<div class="res-group">Skills</div>' + r.skills.map(skillRes).join('');
+      const crafts = window.PD2Cube.search(q, 3);
+      if (crafts.length) html += '<div class="res-group">Crafted items</div>' + crafts.map(c => `<a class="res" role="option" href="#/cube/crafting?type=${encodeURIComponent(c.type)}&slot=${encodeURIComponent(c.slot)}"><span class="res-ico">${c.img ? `<img src="${esc(c.img)}" alt="">` : ICONS.craft}</span><span><b>${esc(c.name)}</b><span class="crumb">${esc(c.recipe.join(' + '))}</span></span></a>`).join('');
       const maps = window.PD2Maps.search(q, 3);
       if (maps.length) html += '<div class="res-group">Maps</div>' + maps.map(m => `<a class="res" role="option" href="#/map/${m.slug}"><span class="res-ico">${m.icon ? `<img src="${esc(m.icon)}" alt="">` : ICONS.map}</span><span><b>${esc(m.name)}</b><span class="crumb">${esc(m.tier)} map · ${m.monsters.length} monster types</span></span></a>`).join('');
       if (r.pages.length) html += '<div class="res-group">Pages</div>' + r.pages.map(({ p }) =>
@@ -968,7 +980,7 @@
 
       <h2 class="home-h">Play</h2>
       <div class="tiles">
-        ${tile(pageHref('Crafting'), 'craft', 'Crafting & Cube', 'Crafts, cube recipes and corruptions')}
+        ${tile('#/cube', 'craft', 'Crafting & Cube', 'Every cube recipe, craft and corruption')}
         ${tile('#/maps', 'map', 'Map Explorer', 'Every map, filtered by what your build can kill')}
         ${tile(pageHref('Monsters'), 'skull', 'Monsters', 'Bosses, ubers and what changed')}
         ${tile('#/' + MERC_ROUTE, 'merc', 'Merc Weapon Compare', 'Best Act 2 merc weapon for your IAS')}

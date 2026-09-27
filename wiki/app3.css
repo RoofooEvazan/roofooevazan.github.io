@@ -1,0 +1,57 @@
+/* Crafting & Cube. */
+.lead{max-width:760px;color:var(--muted);margin:0 0 14px}
+.lead b{color:var(--text);font-weight:500}
+.home-h small{margin-left:8px}
+.about{margin:0 0 10px;border:1px solid var(--edge);border-radius:10px;background:var(--panel)}
+.about > summary{cursor:pointer;padding:8px 14px;color:var(--muted);font-size:14.5px}
+.about > .wiki{padding:0 14px 10px;font-size:15px}
+
+/* recipe rows */
+.rsec{scroll-margin-top:calc(var(--bar-h) + 12px);margin-bottom:10px}
+.rlist{list-style:none;margin:0 0 14px;padding:0;border:1px solid var(--edge);border-radius:12px;background:linear-gradient(180deg,#15110c,#0e0b08);overflow:hidden}
+.recipe{display:grid;grid-template-columns:auto minmax(0,1.15fr) minmax(0,1fr);grid-template-areas:"icon in out" "icon note note";gap:4px 14px;align-items:center;padding:10px 14px;border-bottom:1px solid #1f1911}
+.recipe:last-child{border-bottom:0}
+.recipe:hover{background:rgba(217,178,95,.03)}
+.ricon{grid-area:icon;width:28px;height:28px}
+.recipe:not(:has(.ricon)){grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-areas:"in out" "note note"}
+.rin{grid-area:in;display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.ing{display:inline-block;padding:2px 9px;border-radius:6px;background:#0a0806;border:1px solid #2a2218;color:var(--body);font-size:14px;line-height:1.35}
+.ing .d2-orange{color:#f0b46a!important;font-weight:700}
+.plus{font-style:normal;color:var(--dim);font-size:13px}
+.rout{grid-area:out;display:flex;gap:8px;align-items:baseline;color:var(--text);font-size:15px}
+.rout .arrow{color:var(--gold);flex:none}
+.rnote{grid-area:note;color:var(--dim);font-size:13.5px}
+
+/* craft cards */
+.ct-blood{--q:#e0574a}.ct-caster{--q:#6f8dff}.ct-hitpower{--q:#e39a43}.ct-safety{--q:#4fbfa8}
+.ct-vampiric{--q:#b268e6}.ct-bountiful{--q:#e8c860}.ct-brilliant{--q:#9fe0ff}
+.chip.on[class*="ct-"]{border-color:var(--q);color:var(--q);background:color-mix(in srgb,var(--q) 12%,transparent)}
+.chip[class*="ct-"]::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--q)}
+.ccard .icard-title b{color:var(--q)}
+.crecipe{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.crecipe .ing{font-size:13px;padding:1px 8px}
+.crecipe .ing.rune{color:#f0b46a;border-color:rgba(227,154,67,.35)}
+.crecipe .ing.gem{color:#c9b8ff}
+.istats li.st-rand{color:var(--dim);font-style:italic}
+.istats li.st-rand::before{background:transparent;border:1px dashed var(--dim)}
+
+/* corruptions */
+.corr-types{margin:6px 0 4px}
+.corr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:22px}
+.corr-col{border-radius:12px;border:1px solid var(--edge);background:linear-gradient(180deg,#15110c,#0e0b08);overflow:hidden}
+.corr-col header{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:10px 14px;border-bottom:1px solid var(--edge)}
+.corr-col header b{font-family:Cinzel,serif;font-size:15px}
+.corr-col header span{color:var(--dim);font-size:13px}
+.corr-col.r0 header b{color:#b9b9b9}.corr-col.r1 header b{color:#8fb4ff}.corr-col.r2 header b{color:#f0c86a}
+.corr-col.r2{border-color:#57472a}
+.corr-col .istats{padding:8px 14px 12px}
+.corr-col .istats li{padding:5px 0 5px 12px;border-bottom:1px solid #1a150f}
+.corr-col .istats li:last-child{border-bottom:0}
+.info-card{margin:0 0 18px;padding:14px 18px;border-radius:12px;border:1px solid var(--edge);background:linear-gradient(180deg,var(--stone-2),var(--stone));scroll-margin-top:calc(var(--bar-h) + 12px)}
+.info-card .home-h{margin-top:0}
+
+@media (max-width:760px){
+  .recipe,.recipe:not(:has(.ricon)){grid-template-columns:auto minmax(0,1fr);grid-template-areas:"icon in" "icon out" "icon note"}
+  .recipe:not(:has(.ricon)){grid-template-columns:minmax(0,1fr);grid-template-areas:"in" "out" "note"}
+  .corr{grid-template-columns:1fr}
+}

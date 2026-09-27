@@ -311,7 +311,13 @@ export async function extract(pages, dir) {
   const recent = byTitle.get('Recent Patch Notes');
   if (recent) targets[`${recent.id}#`] = 'patches';
 
-  return { items, sets, skills, targets, maps, patches };
+  const cube = {
+    recipes: await extractRecipes(await doc('Recipes'), targets),
+    crafts: await extractCrafts(await doc('Crafting'), targets),
+    corruptions: await extractCorruptions(await doc('Corruptions'), targets),
+  };
+
+  return { items, sets, skills, targets, maps, patches, cube };
 }
 
 // ---------- maps ----------
@@ -525,4 +531,161 @@ async function extractPatches(r, targets, pages, doc) {
   }
   targets[`${page.id}#`] = 'patches';
   return { page: page.id, seasons };
+}
+
+// ---------- crafting, cube recipes, corruptions ----------
+const RUNES = ['El', 'Eld', 'Tir', 'Nef', 'Eth', 'Ith', 'Tal', 'Ral', 'Ort', 'Thul', 'Amn', 'Sol', 'Shael', 'Dol', 'Hel', 'Io', 'Lum', 'Ko', 'Fal',
+  'Lem', 'Pul', 'Um', 'Mal', 'Ist', 'Gul', 'Vex', 'Ohm', 'Lo', 'Sur', 'Ber', 'Jah', 'Cham', 'Zod'];
+const RUNE_SET = new Set(RUNES);
+
+// Children of the page in reading order, stepping into plain wrapper divs.
+function flatten(root) {
+  const out = [];
+  const walk = n => { for (const c of n.children) { if (c.tagName === 'DIV' && !c.matches('.mw-heading') && !c.className && c.querySelector('.mw-heading,table')) walk(c); else out.push(c); } };
+  if (root) walk(root);
+  return out;
+}
+
+// Table rows as arrays of cells, with rowspans filled in so every row is complete.
+function grid(table) {
+  const rows = [...table.querySelectorAll('tr')];
+  const out = [];
+  const carry = [];
+  for (const tr of rows) {
+    const cells = [];
+    let src = [...tr.children];
+    for (let col = 0; src.length || carry[col]; col++) {
+      if (carry[col] && carry[col].left > 0) { cells.push(carry[col].cell); carry[col].left--; if (!carry[col].left) carry[col] = null; continue; }
+      const c = src.shift();
+      if (!c) break;
+      cells.push(c);
+      const rs = +(c.getAttribute('rowspan') || 1);
+      if (rs > 1) carry[col] = { cell: c, left: rs - 1 };
+    }
+    out.push(cells);
+  }
+  return out;
+}
+
+const runesIn = el => [...new Set([...el.querySelectorAll('.d2-orange')].map(text).filter(t => RUNE_SET.has(t)))];
+const htmlOf = el => clean(el?.innerHTML || '');
+
+async function extractRecipes(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const recipes = [], sections = [];
+  let group = '', section = null;
+  for (const el of flatten(d.querySelector('.mw-parser-output'))) {
+    const hd = headingOf(el);
+    if (hd) {
+      if (hd.level === 2) group = hd.text;
+      section = { group, title: hd.level === 2 ? '' : hd.text, anchor: hd.id, html: '' };
+      sections.push(section);
+      targets[`${page.id}#${hd.id}`] = `cube?sec=${encodeURIComponent(hd.id)}`;
+      continue;
+    }
+    if (!section) continue;
+    if (el.matches('table.wikitable')) {
+      const g = grid(el);
+      const head = (g[0] || []).map(c => text(c).toLowerCase());
+      const ci = k => head.findIndex(h => h.startsWith(k));
+      const caption = text(el.querySelector('caption'));
+      let iIng = ci('ingredients'), iRes = ci('result'), iNotes = ci('notes');
+      let iItem = -1, iIcon = ci('icon');
+      if (iIng < 0 && ci('additional') >= 0) { iItem = ci('item'); iIng = ci('additional'); iRes = ci('effect'); }
+      if (iIng < 0 || iRes < 0) { section.html += clean(el.outerHTML); continue; }
+      for (const row of g.slice(1)) {
+        if (!row[iIng] || !row[iRes]) continue;
+        const ing = iItem >= 0 ? `${htmlOf(row[iItem])} + ${htmlOf(row[iIng])}` : htmlOf(row[iIng]);
+        const icon = iIcon >= 0 ? fixUrl(row[iIcon]?.querySelector('img')?.getAttribute('src')) : '';
+        recipes.push({
+          group, section: section.title || group, sec: section.anchor, caption,
+          ing, res: htmlOf(row[iRes]), notes: iNotes >= 0 ? htmlOf(row[iNotes]) : '',
+          runes: runesIn(row[iIng]), icon,
+        });
+      }
+      continue;
+    }
+    if (el.matches('figure')) continue;
+    if (text(el)) section.html += clean(el.outerHTML);
+  }
+  targets[`${page.id}#`] = 'cube';
+  return { page: page.id, recipes, sections: sections.filter(s => s.html || recipes.some(x => x.sec === s.anchor)) };
+}
+
+const CRAFT_SLOTS = ['Amulet', 'Ring', 'Belt', 'Boots', 'Gloves', 'Helm', 'Armor', 'Shield', 'Weapon', 'Quiver'];
+async function extractCrafts(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const crafts = [], info = [];
+  let type = '', cur = null, infoBlock = null;
+  for (const el of flatten(d.querySelector('.mw-parser-output'))) {
+    const hd = headingOf(el);
+    if (hd) {
+      const m = hd.text.match(/^(\w+) Items$/);
+      type = m ? m[1] : '';
+      cur = null;
+      infoBlock = type ? null : { title: hd.text, anchor: hd.id, html: '' };
+      if (infoBlock) info.push(infoBlock);
+      targets[`${page.id}#${hd.id}`] = type ? `cube/crafting?type=${type}` : 'cube/crafting';
+      continue;
+    }
+    if (!type) { if (infoBlock && text(el)) infoBlock.html += clean(el.outerHTML); continue; }
+    if (el.tagName === 'DIV' && el.id && !text(el)) { continue; }
+    if (el.tagName === 'P' && el.querySelector('b') && text(el).split(' ').length <= 5 && text(el).startsWith(type)) {
+      const name = text(el);
+      const last = name.split(' ').pop();
+      cur = { type, name, slot: CRAFT_SLOTS.find(s => s.toLowerCase() === last.toLowerCase()) || (/chest|armor/i.test(last) ? 'Armor' : last), img: '', recipe: [], stats: [], notes: '' };
+      cur.slug = slug(name);
+      crafts.push(cur);
+      targets[`${page.id}#${name.replace(/ /g, '_')}`] = `cube/crafting?type=${type}`;
+      continue;
+    }
+    if (!cur) continue;
+    if (el.matches('.item-image-table,figure')) { cur.img = fixUrl(el.querySelector('img')?.getAttribute('src')); continue; }
+    if (el.matches('table')) {
+      const th = text(el.querySelector('th'));
+      if (/^recipe$/i.test(th)) { cur.recipe = [...el.querySelectorAll('tr')].slice(1).map(tr => text(tr)).filter(Boolean); continue; }
+      const st = readStats(el);
+      if (st) { cur.stats = st; continue; }
+    }
+    if (text(el)) cur.notes += clean(el.outerHTML);
+  }
+  targets[`${page.id}#`] = 'cube/crafting';
+  return { page: page.id, crafts, info };
+}
+
+async function extractCorruptions(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const types = [], blocks = [];
+  let block = null, pendingType = null;
+  for (const el of flatten(d.querySelector('.mw-parser-output'))) {
+    const hd = headingOf(el);
+    if (hd) {
+      block = { title: hd.text, anchor: hd.id, html: '' };
+      blocks.push(block);
+      targets[`${page.id}#${hd.id}`] = `cube/corruptions#${hd.id}`;
+      continue;
+    }
+    // Per-type tables sit under bare <h3> headings (not wiki section headings).
+    if (/^H[3-5]$/.test(el.tagName)) { pendingType = { name: text(el).replace(/\s*Corruption Mods?$/i, ''), anchor: el.id }; continue; }
+    if (el.matches('table.wikitable') && pendingType) {
+      const g = grid(el);
+      const heads = (g[0] || []).map(text);
+      if (heads.some(h => /rarity/i.test(h))) {
+        const cols = heads.map((h, i) => {
+          const m = h.match(/^(.*?)\s*\((\d+)% chance\)/i);
+          return { label: m ? m[1] : h, chance: m ? +m[2] : null, mods: g.slice(1).map(row => row[i]).filter(c => c && text(c)).map(c => htmlOf(c)) };
+        });
+        types.push({ ...pendingType, cols });
+        if (pendingType.anchor) targets[`${page.id}#${pendingType.anchor}`] = `cube/corruptions?type=${encodeURIComponent(pendingType.name)}`;
+        pendingType = null;
+        continue;
+      }
+    }
+    if (block && text(el)) block.html += clean(el.outerHTML);
+  }
+  targets[`${page.id}#`] = 'cube/corruptions';
+  return { page: page.id, types, blocks: blocks.filter(b => b.html) };
 }
