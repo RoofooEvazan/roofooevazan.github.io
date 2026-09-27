@@ -8,6 +8,13 @@
  * by assets/site-nav.js, or add them yourself:
  *   https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=Silkscreen:wght@400;700&display=swap
  */
+/* Silkscreen has no minus sign (U+2212), so the browser borrowed a thin one from
+   another font. "Tri Minus" is Silkscreen's own hyphen mapped to U+2212, and
+   nothing else (fonts/, OFL like Silkscreen); it sits first in the pixel stack
+   and unicode-range keeps it to that one character. */
+@font-face{font-family:"Tri Minus";font-weight:400;font-display:swap;unicode-range:U+2212;src:url("fonts/tri-minus-regular.woff2") format("woff2")}
+@font-face{font-family:"Tri Minus";font-weight:700;font-display:swap;unicode-range:U+2212;src:url("fonts/tri-minus-bold.woff2") format("woff2")}
+
 :root{
   color-scheme:dark;
   --tri-bg:#100c0a;
@@ -21,7 +28,7 @@
   --tri-gold:#d2b06a;
   --tri-glow:#e7a15a;
   --tri-shadow:#2a120e;
-  --tri-display:"Silkscreen","Courier New",monospace;
+  --tri-display:"Tri Minus","Silkscreen","Courier New",monospace;
   --tri-body:"Almendra",Palatino,Georgia,serif;
 }
 
