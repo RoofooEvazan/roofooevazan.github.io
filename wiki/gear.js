@@ -45,7 +45,34 @@
     root.innerHTML = '<div class="loading">Loading item bases…</div>';
     try { await load(); } catch (e) { root.innerHTML = `<div class="error"><b>Couldn't load item bases.</b><br>${esc(e.message)}</div>`; return; }
     const B = data.bases;
-    const segs = `<div class="segs" role="group">${[['', 'Bases'], ['rules', 'How bases work']].map(([k, l]) => `<a class="seg${k === tab ? ' on' : ''}" href="#/bases${k ? '/' + k : ''}">${l}</a>`).join('')}</div>`;
+    const segs = `<div class="segs" role="group">${[['', 'Bases'], ['qlvl', 'Quality levels'], ['rules', 'How bases work']].map(([k, l]) => `<a class="seg${k === tab ? ' on' : ''}" href="#/bases${k ? '/' + k : ''}">${l}</a>`).join('')}</div>`;
+    if (tab === 'qlvl') {
+      // One row per Normal -> Exceptional -> Elite family, with each base's quality level.
+      const seen = new Set(), fams = [];
+      for (const b of B.bases) {
+        if (b.kind === 'Other' || b.kind === 'Quiver') continue;
+        const fam = b.family && b.family.length > 1 ? b.family : [b.name];
+        const key = fam.join('|');
+        if (seen.has(key)) continue;
+        seen.add(key);
+        fams.push({ type: b.type || b.kind, kind: b.kind, members: fam.map(n => B.bases.find(x => x.name === n)).filter(Boolean) });
+      }
+      const others = B.bases.filter(b => b.kind === 'Other' || b.kind === 'Quiver');
+      const cell = b => b ? `<td class="qn"><a href="#/affixes?base=${encodeURIComponent(b.name)}&ilvl=85" title="Affixes on ${esc(b.name)} at item level 85">${esc(b.name)}</a></td><td class="r ql">${esc(b.qlvl ?? '')}</td>` : '<td></td><td></td>';
+      root.innerHTML = `${crumbs('Items', '#/items')}<h1 class="page-title">Quality Levels</h1>${segs}
+        <p class="lead">A base's <b>quality level</b> (qlvl) is the lowest item level it can drop at, and together with the item level it sets the <b>affix level</b> that decides which affixes can roll: affix level = item level − ⌊qlvl ÷ 2⌋ (or 2 × item level − 99 near the top). Low-qlvl bases reach high affix levels sooner. Click a base to see what can roll on it at item level 85.</p>
+        <div class="filters"><div class="frow"><label class="fsearch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="qq" placeholder="Base name, e.g. Diadem, Monarch" aria-label="Filter bases" autocomplete="off"></label></div></div>
+        <div class="tw"><table class="restable qtable"><thead><tr><th>Type</th><th>Normal</th><th>qlvl</th><th>Exceptional</th><th>qlvl</th><th>Elite</th><th>qlvl</th></tr></thead>
+          <tbody>${fams.sort((a, b) => (TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type)) || (+(a.members[0]?.qlvl || 0) - +(b.members[0]?.qlvl || 0))).map(f => {
+            const by = t => f.members.find(m => m.tier === t) || (f.members.length === 1 && !f.members[0].tier && t === 'Normal' ? f.members[0] : null);
+            return `<tr data-s="${esc(f.members.map(m => m.name).join(' ').toLowerCase())}"><td>${esc(f.type)}</td>${cell(by('Normal'))}${cell(by('Exceptional'))}${cell(by('Elite'))}</tr>`;
+          }).join('')}</tbody></table></div>
+        ${others.length ? `<h2 class="home-h">Jewelry, charms &amp; quivers</h2><div class="tw"><table class="restable qtable"><thead><tr><th>Item</th><th>qlvl</th></tr></thead><tbody>${others.map(b => `<tr data-s="${esc(b.name.toLowerCase())}">${cell(b)}</tr>`).join('')}</tbody></table></div>` : ''}
+        ${attrib(data.qlvl?.page || B.page, 'Item Quality Levels')}`;
+      $('#qq', root).addEventListener('input', e => { const q = e.target.value.trim().toLowerCase(); for (const tr of $$('.qtable tbody tr', root)) tr.hidden = q && !tr.dataset.s.includes(q); });
+      return;
+    }
     if (tab === 'rules') {
       root.innerHTML = `${crumbs('Items', '#/items')}<h1 class="page-title">How Item Bases Work</h1>${segs}
         ${B.info.map(i => `<section class="info-card" id="${esc(i.anchor)}"><h2 class="home-h">${esc(i.title)}</h2><div class="wiki">${i.html}</div></section>`).join('')}${attrib(B.page)}`;

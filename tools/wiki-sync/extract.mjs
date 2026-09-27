@@ -326,6 +326,8 @@ export async function extract(pages, dir) {
   const bases = await extractBases(await doc('Item Bases'), targets, items);
   const runes = await extractRunes(await doc('Runes'), targets);
   const mercs = await extractMercs(await doc('Mercenaries'), await doc('Mercenary Skills'), targets);
+  const classAttrs = await extractClassAttrs(await doc('Class Attributes'), targets);
+  const qlvl = await extractQlvlIntro(await doc('Item Quality Levels'), targets);
 
   const skillIndexAll = Object.values(skills).flatMap(c => c.trees.flatMap(t => t.skills.map(k => ({ c: c.cls, n: k.name, a: k.anchor }))));
   const help = await extractHelp(await doc('FAQ'), await doc('Support FAQ'), targets);
@@ -336,7 +338,7 @@ export async function extract(pages, dir) {
   const fi = byTitle.get('Filter Info');
   if (fi) targets[`${fi.id}#`] = 'filters/list';
 
-  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs }, guide: { help, guides, breakpoints }, filters };
+  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs, classAttrs, qlvl }, guide: { help, guides, breakpoints }, filters };
 }
 
 // ---------- maps ----------
@@ -1378,4 +1380,43 @@ async function extractFilters(r, custom, targets) {
     targets[`${custom.page.id}#`] = 'filters/setup';
   }
   return { page: page.id, customPage: custom?.page.id, codes, topics: topics.filter(t => t.html), filters, setup };
+}
+
+// ---------- class attributes & item quality levels ----------
+// Each class: an Attributes table (Level 1, per level, per point) and "Vanilla" notes.
+async function extractClassAttrs(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const classes = [];
+  const n = s => { const m = String(s).replace(/,/g, '').match(/[+\-]?\d+(\.\d+)?/); return m ? +m[0] : null; };
+  for (const w of d.querySelectorAll('.mw-heading')) {
+    const hd = headingOf(w);
+    if (!hd || hd.level !== 2) continue;
+    const cls = hd.text.replace(/\s*Attributes$/i, '');
+    const els = sectionAfter(w, 2);
+    const table = els.find(e => e.matches('table'));
+    if (!table) continue;
+    const rows = [];
+    let parent = '';
+    for (const tr of [...table.querySelectorAll('tr')].slice(1)) {
+      const c = [...tr.children];
+      const label = text(c[0]).replace(/^[•\s]+/, '');
+      const isStat = !!c[0].querySelector('b');
+      if (isStat) parent = label;
+      rows.push({ label, stat: isStat, parent: isStat ? '' : parent, base: n(text(c[1])), perLevel: n(text(c[2])), perPoint: n(text(c[3])),
+        changed: !!tr.querySelector('.nmod') });
+    }
+    const notes = els.filter(e => !e.matches('table')).map(e => clean(e.outerHTML)).join('');
+    classes.push({ cls, anchor: hd.id, rows, notes });
+    targets[`${page.id}#${hd.id}`] = `classes?cls=${cls}`;
+  }
+  targets[`${page.id}#`] = 'classes';
+  return { page: page.id, classes };
+}
+
+async function extractQlvlIntro(r, targets) {
+  if (!r) return null;
+  const html = [...r.d.querySelector('.mw-parser-output').children].filter(e => !e.matches('table') && text(e)).map(e => clean(e.outerHTML)).join('');
+  targets[`${r.page.id}#`] = 'bases/qlvl';
+  return { page: r.page.id, html };
 }

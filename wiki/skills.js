@@ -46,6 +46,7 @@
       </div>
       <div id="skill-detail">${sel ? '' : `<p class="hint">Pick a skill to see what it does, its synergies and its numbers at any level.</p>`}</div>
       ${d.intro ? `<details class="cls-intro"><summary>${esc(cls)} attributes &amp; notes</summary><div class="wiki">${d.intro}</div></details>` : ''}
+      <p class="tile-links"><a href="#/classes?cls=${cls}">Plan ${esc(cls)} stat points →</a><a href="#/guides?cls=${cls}">${esc(cls)} builds →</a></p>
       <p class="attrib">From <a href="${page ? wikiUrl(page.title) : '#'}" target="_blank" rel="noopener">${esc(page?.title || 'the PD2 Wiki')}</a> on the Project Diablo 2 Wiki, shared under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</p>`;
 
     for (const b of $$('.tree-tabs button', root)) b.addEventListener('click', () => {

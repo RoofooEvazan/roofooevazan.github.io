@@ -118,9 +118,9 @@
   // and every page nobody lists here still shows up under "More pages".
   const SITE = [
     { name: 'Items', icon: 'items', links: [['Item Database', '#/items'], ['Uniques', '#/items?t=unique'], ['Set Items', '#/items?t=set'], ['Runewords', '#/items?t=runeword'],
-      ['Affix Finder', '#/affixes'], ['Runes & Gems', '#/runes'], ['Item Bases', '#/bases'], 'Item Quality Levels', 'New Items', 'Cosmetics', 'Arrows'] },
+      ['Affix Finder', '#/affixes'], ['Runes & Gems', '#/runes'], ['Item Bases', '#/bases'], ['Quality Levels', '#/bases/qlvl'], 'New Items', 'Cosmetics', 'Arrows'] },
     { name: 'Skills', icon: 'skills', links: [...['Amazon', 'Assassin', 'Barbarian', 'Druid', 'Necromancer', 'Paladin', 'Sorceress'].map(c => [c, `#/skills/${c}`]),
-      ['Skill Changes', 'Skill Changes'], ['Mercenary Skills', '#/mercs/a2'], ['Item-Only Skills', 'Item Skills'], 'Class Attributes'] },
+      ['Skill Changes', 'Skill Changes'], ['Mercenary Skills', '#/mercs/a2'], ['Item-Only Skills', 'Item Skills'], ['Stat Planner', '#/classes']] },
     { name: 'Crafting & Cube', icon: 'craft', links: [['Cube Recipes', '#/cube'], ['Crafted Items', '#/cube/crafting'], ['Corruptions', '#/cube/corruptions'],
       ['How Crafting Works', '#/cube/guide'], 'Desecration'] },
     { name: 'Endgame', icon: 'map', links: [['Map Explorer', '#/maps'], ['Map Events', '#/maps/events'], ['Modifying Maps', '#/maps/modify'], ['Map Affixes', '#/maps/affixes'],
@@ -132,7 +132,7 @@
     { name: 'More Pages', icon: 'list', auto: 'rest' },
   ];
   // Pages our own views replace; they stay reachable through search and A–Z.
-  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Item Bases|Runes|Mercenaries|Mercenary Skills|FAQ|Support FAQ|Breakpoints|Links|Item Filtering|Filter Info|Customization|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
+  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Item Bases|Runes|Mercenaries|Mercenary Skills|FAQ|Support FAQ|Breakpoints|Links|Item Filtering|Filter Info|Customization|Class Attributes|Item Quality Levels|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
 
   function buildSite() {
     const used = new Set();
@@ -373,6 +373,9 @@
       const seg = decodeURIComponent(p0.split('/')[1] || '');
       const tab = ['codes', 'list', 'setup'].includes(seg) ? seg : '';
       return view(() => window.PD2Filters.render(main, tab, tab ? '' : seg, qs, anchor), tab ? 'filters/' + tab : 'filters', 'Loot Filters · PD2 Wiki', !!anchor);
+    }
+    if (path === 'classes' || path.startsWith('classes?')) {
+      return view(() => window.PD2Classes.render(main, raw.split('?')[1] || ''), 'classes', 'Stat Planner · PD2 Wiki');
     }
     if (path === 'help' || path.startsWith('help?')) {
       const qs = raw.split('?')[1] || '';
@@ -1048,7 +1051,7 @@
 
       <h2 class="home-h">Skills${skillsN ? ` <small>${skillsN}</small>` : ''}</h2>
       <div class="classes">${window.PD2Skills.CLASSES.map(c => `<a href="#/skills/${c}"><span class="cls-orb cls-${c.toLowerCase()}" aria-hidden="true">${c[0]}</span>${c}</a>`).join('')}</div>
-      <p class="tile-links">${[['Skill Changes', 'Skill overview'], ['Item Skills', 'Item-only skills'], ['Class Attributes']].map(([t, l]) => pageLink(t, l)).filter(Boolean).join('')}<a href="#/mercs">Mercenaries</a></p>
+      <p class="tile-links"><a href="#/classes">Stat planner</a>${[['Skill Changes', 'Skill overview'], ['Item Skills', 'Item-only skills']].map(([t, l]) => pageLink(t, l)).filter(Boolean).join('')}<a href="#/mercs">Mercenaries</a></p>
 
       <h2 class="home-h">Play</h2>
       <div class="tiles">
