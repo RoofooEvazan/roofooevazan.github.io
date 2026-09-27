@@ -38,13 +38,9 @@
     { label: 'Twitch', href: 'https://www.twitch.tv/roofooevazan', path: 'M4.3 2 3 5.4v13.8h4.7V22h2.6l2.7-2.8h3.8l5.2-5.2V2zm16 11.1-2.9 2.9h-4.8l-2.5 2.5V16H6.2V3.7h14.1zm-3-6.4h-1.7v5h1.7zm-4.8 0h-1.7v5h1.7z' }
   ];
 
-  // ---- theme: Chaos on every page ----
-  // Pages' theme rules are keyed on <html data-theme="chaos">; it is set here,
-  // before the page below the bar draws, for pages that don't set it themselves.
-  document.documentElement.setAttribute('data-theme', 'chaos');
+  // ---- theme: Chaos on every page (colors in assets/tristram.css) ----
   var meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute('content', '#090807');
-  try { localStorage.removeItem('rf-theme'); } catch (e) {}
 
   // Colors come from the theme (--tri-*), with Chaos values as the fallback.
   var css = [
@@ -81,7 +77,7 @@
   if (!document.querySelector('link[href*="family=Alegreya:"]')) {
     var fonts = document.createElement('link');
     fonts.rel = 'stylesheet';
-    fonts.href = 'https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;700&family=Silkscreen:wght@400;700&display=swap';
+    fonts.href = 'https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;700&display=swap';
     document.head.appendChild(fonts);
   }
 

@@ -63,18 +63,16 @@ Wiki content is by the PD2 Wiki's contributors under [CC BY-SA 4.0](https://crea
 <script src="https://roofooevazan.github.io/assets/site-nav.js"></script>
 ```
 
-## Tristram theme
+## Theme
 
-The main page and the wiki use the Tristram theme: pixel stone, a blood-red rule and gold trim over a dimmed cathedral-night plate. [`assets/tristram.css`](assets/tristram.css) holds the colors, fonts (Silkscreen for headings, Almendra for text), the page ground and the red/outlined buttons; the wiki's resizing for the pixel font is in [`wiki/tristram.css`](wiki/tristram.css). Any tool can take on the same look:
+The main page, the wiki and every tool share the Chaos theme: black stone, dull brass and a seal in the floor lit by lava from below. [`assets/tristram.css`](assets/tristram.css) holds the colors, fonts (Cinzel for headings, Alegreya for text), the page ground (the drifting seal plate `assets/chaos.jpg` with the lava glow) and the brass/outlined buttons. The wiki's palette is at the top of [`wiki/wiki.css`](wiki/wiki.css), and its heading sizes are in [`wiki/tristram.css`](wiki/tristram.css). Any tool can take on the same look:
 
 ```html
 <link rel="stylesheet" href="https://roofooevazan.github.io/assets/tristram.css">
 <!-- then <body class="tri"> for the page ground -->
 ```
 
-The calculators share one older "stone and gold" design (`--void`, `--stone`, `--display`… and the HD dungeon skin). [`assets/tristram-tools.css`](assets/tristram-tools.css) turns that design into the Tristram theme, so each tool links it after its own styles, next to `tristram.css`.
-
-**Chaos theme.** The nav bar has a Tristram / Chaos switch. The choice is saved in the browser (`localStorage` key `rf-theme`) and `site-nav.js` applies it as `<html data-theme="chaos">` before the page draws, so it follows the visitor to every page of the site. Chaos (black stone, dull brass, Cinzel headings, the lava-lit seal plate `assets/chaos.jpg`) is a `:root[data-theme="chaos"]` block in each theme sheet: `assets/tristram.css`, `assets/tristram-tools.css`, `wiki/tristram.css` and the Filter Builder's `docs/css/tristram.css`.
+The calculators share one older "stone and gold" design (`--void`, `--stone`, `--display`… and the HD dungeon skin). [`assets/tristram-tools.css`](assets/tristram-tools.css) turns that design into the Chaos theme, so each tool links it after its own styles, next to `tristram.css`. The Filter Builder has its own theme sheet, `docs/css/tristram.css` in its repo. The files keep their `tristram` names from an earlier theme because the other repos link them by URL.
 
 ## Loot Filter Builder
 

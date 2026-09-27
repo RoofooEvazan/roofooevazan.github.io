@@ -1,4 +1,4 @@
-/* Stat planner & quality levels — palette variables only, so Tristram and Chaos both apply. */
+/* Stat planner & quality levels — palette variables only, so the theme applies. */
 .planner .cf.cb{flex-direction:row;align-items:center;gap:8px;align-self:end;padding-bottom:8px}
 .planner .cf.cb input{width:18px;height:18px;accent-color:var(--gold)}
 .pl-actions{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}

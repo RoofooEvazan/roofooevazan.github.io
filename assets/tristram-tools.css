@@ -1,58 +1,58 @@
-/* Theme for the calculator pages. Chaos is the only theme: its colors and
- * sizes are the :root[data-theme="chaos"] rules at the end (assets/site-nav.js
- * always sets that attribute); the rules above are the shared layout.
+/* Chaos theme for the calculator pages.
+ * (The file keeps its old name because every tool links it by URL.)
  *
  * The tools (IAS Calculator, Advanced Stats, Hit Chance, Damage Atlas,
  * Spawn Simulator, Base Finder) share one "stone and gold" design: the same
  * variables (--void, --stone, --gold, --display…) and the same HD dungeon
  * skin (gilded panels, stone tab buttons, gold-gradient titles). This sheet
- * turns that design into the Chaos theme. Load it after the page's own
- * styles, together with tristram.css, and put class="tri" on <body>:
+ * turns that design into the Chaos theme: black stone, dull brass, Cinzel.
+ * Load it after the page's own styles, together with tristram.css, and put
+ * class="tri" on <body>:
  *   <link rel="stylesheet" href="https://roofooevazan.github.io/assets/tristram.css">
  *   <link rel="stylesheet" href="https://roofooevazan.github.io/assets/tristram-tools.css">
  */
 :root{
-  --void:#100c0a;
-  --stone:#1a1410;
-  --stone-2:#261c16;
-  --pit:#120e0b;
-  --edge:#5a4030;
-  --edge-hi:#7a5a3e;
-  --ink:#f1e2c6;
-  --muted:#b59a76;
-  --gold:#d2b06a;
-  --gold-hi:#ecd29a;
-  --blood:#8e261c;
-  --display:"Tri Minus","Silkscreen","Courier New",monospace;
+  --void:#090807;
+  --stone:#14110f;
+  --stone-2:#1e1814;
+  --pit:#0d0b09;
+  --edge:#4e3b28;
+  --edge-hi:#6e5230;
+  --ink:#f0e6d6;
+  --muted:#a89480;
+  --gold:#c4924a;
+  --gold-hi:#e0b878;
+  --blood:#a8321f;
+  --display:"Cinzel",Palatino,Georgia,serif;
   --body:"Alegreya",Palatino,Georgia,serif;
-  --heat-slow:#1f1812;
+  --heat-slow:#1a1511;
 }
 /* The plate is dimmed more than on the main page: tool text sits on it. */
 body.tri{--tri-dim:62%;background:transparent}
-a{color:#e7b26a}
+a{color:#d9a860}
 
-/* ---------- header: pixel title, no globes, the red and gold rule ---------- */
+/* ---------- header: engraved title, no globes, a thin brass rule ---------- */
 .globe,.orb{display:none}
 h1{
-  font:700 clamp(18px,3vw,30px)/1.3 var(--display);letter-spacing:.04em;
+  font:700 clamp(26px,4.4vw,42px)/1.3 var(--display);letter-spacing:.14em;text-transform:uppercase;
   background:none;-webkit-background-clip:border-box;background-clip:border-box;
   color:var(--tri-fg);-webkit-text-fill-color:currentColor;filter:none;text-shadow:none;
 }
-.rune-rule{height:7px;background:linear-gradient(var(--tri-accent) 0 4px,var(--tri-gold) 4px 7px)}
+.rune-rule{height:10px;background:linear-gradient(90deg,transparent,var(--tri-gold) 20%,var(--tri-gold) 80%,transparent) center/100% 1px no-repeat}
 .rune-rule::after{display:none}
-.eyebrow,.page-head .eyebrow{font:400 11px var(--display);letter-spacing:.06em;color:var(--tri-gold)}
+.eyebrow,.page-head .eyebrow{font:400 12px var(--display);letter-spacing:.14em;color:var(--tri-gold)}
 
-/* ---------- panels: a stone sheet with the gold and soot edges ---------- */
+/* ---------- panels: obsidian sheets edged in brass ---------- */
 .panel{
   background:color-mix(in srgb,var(--tri-panel) 95%,transparent);
-  border:1px solid var(--tri-line);border-radius:0;
-  box-shadow:inset 0 4px 0 var(--tri-gold),inset 0 -4px 0 var(--tri-shadow),0 14px 40px rgba(0,0,0,.55);
+  border:1px solid color-mix(in srgb,var(--tri-gold) 60%,transparent);border-radius:0;
+  box-shadow:0 14px 40px rgba(0,0,0,.6);
 }
 .panel::before,.panel::after{display:none}
 
-/* ---------- tabs and buttons: flat, square, red when chosen ---------- */
+/* ---------- tabs and buttons: flat, square, brass when chosen ---------- */
 .tab,.subtab,.btn{
-  font:400 11px var(--display);letter-spacing:.06em;text-transform:uppercase;
+  font:400 13px var(--display);letter-spacing:.1em;text-transform:uppercase;
   color:var(--tri-fg);background:var(--tri-bg);
   border:1px solid var(--tri-line);border-radius:0;
   box-shadow:none;text-shadow:none;padding:12px 16px;
@@ -67,7 +67,7 @@ h1{
 /* Segmented toggles (Advanced Stats' character/mercenary, Damage Atlas' compare sides). */
 .seg{border:1px solid var(--tri-line);box-shadow:none}
 .seg button,.subt button{
-  font:400 11px var(--display);letter-spacing:.06em;text-transform:uppercase;
+  font:400 13px var(--display);letter-spacing:.1em;text-transform:uppercase;
   color:var(--tri-fg);background:var(--tri-bg);box-shadow:none;
 }
 .subt button{border:1px solid var(--tri-line)}
@@ -84,74 +84,37 @@ input[type=number]:focus,input[type=text]:focus,input[type=search]:focus,select:
 }
 input[type=checkbox]{border:1px solid var(--tri-line);border-radius:0;background-color:var(--tri-bg);box-shadow:none}
 
-/* ---------- headings, resized for Silkscreen ---------- */
-h2,legend{font:400 12px var(--display);letter-spacing:.05em;color:var(--tri-gold)}
+/* ---------- headings ---------- */
+h2,legend{font:400 14px var(--display);letter-spacing:.12em;color:var(--tri-gold)}
 legend::before,h2::before{width:6px;height:6px;transform:none;background:var(--tri-accent);box-shadow:none}
-h3{font:700 15px/1.35 var(--display);letter-spacing:.03em}
-h4{font:400 12px var(--display);letter-spacing:.04em}
-th{font:400 10px var(--display);letter-spacing:.05em}
-.heat-axis,.worked .tag,.res .lab{font:400 10px var(--display);letter-spacing:.05em}
-.chain .link b{font:400 11px var(--display);letter-spacing:.04em}
+h3{font:700 19px/1.35 var(--display);letter-spacing:.03em}
+h4{font:400 15px var(--display);letter-spacing:.04em}
+th{font:400 11px var(--display);letter-spacing:.1em}
+.heat-axis,.worked .tag,.res .lab{font:400 11px var(--display);letter-spacing:.1em}
+.chain .link b{font:400 13px var(--display);letter-spacing:.04em}
 ol.steps > li::before{font:400 12px var(--display);background:var(--tri-accent);color:var(--tri-accent-fg)}
 .badge{font:400 9px var(--display);letter-spacing:.05em;border-radius:0}
-details.fx.c > summary{font:700 14px var(--display);letter-spacing:.03em}
-details.fx.f > summary{font:400 12px var(--display);letter-spacing:.03em}
+details.fx.c > summary{font:700 18px var(--display);letter-spacing:.03em}
+details.fx.f > summary{font:400 15px var(--display);letter-spacing:.03em}
 details.fx.t > summary .n{font:700 17px var(--display)}
 
-/* Result numbers: plain pixel gold instead of the gilded gradient. */
-.res{background:rgba(16,12,10,.85);border:1px solid var(--tri-line);box-shadow:none;border-radius:0}
+/* Result numbers: plain brass instead of the gilded gradient. */
+.res{background:rgba(9,8,7,.85);border:1px solid var(--tri-line);box-shadow:none;border-radius:0}
 .res .big,.worked .total b{
   background:none;-webkit-background-clip:border-box;background-clip:border-box;
   color:var(--tri-gold);-webkit-text-fill-color:currentColor;filter:none;text-shadow:none;
 }
-.res .big{font:700 40px/1.1 var(--display)}
-.worked .total b{font:700 26px var(--display)}
+.res .big{font:700 48px/1.1 var(--display)}
+.worked .total b{font:700 32px var(--display)}
 
 /* ---------- boxes ---------- */
 .worked,.toc,pre.code,.eq,.chain .link,.note,.callout,.chip,code,details.fx.c,details.fx.t{border-radius:0}
-.worked,.toc{background:rgba(16,12,10,.7);border-color:var(--tri-line)}
+.worked,.toc{background:rgba(9,8,7,.7);border-color:var(--tri-line)}
 .callout{border-left-color:var(--tri-accent)}
 details.fx.c{border:1px solid var(--tri-line);box-shadow:none}
 details.fx.f{border-left-color:var(--tri-accent)}
 details.fx > summary::before{border-left-color:var(--tri-gold)}
 
 @media (max-width:640px){
-  .tab{font-size:10px;padding:11px 6px}
-  details.fx.c > summary{font-size:12px}
+  .tab{padding:11px 6px}
 }
-
-/* ---------- Chaos: the palette and display sizes ----------
-   tristram.css swaps the --tri-* colors; these are the tools' own names.
-   Cinzel is narrower than Silkscreen, so display text grows back. */
-:root[data-theme="chaos"]{
-  --void:#090807;
-  --stone:#14110f;
-  --stone-2:#1e1814;
-  --pit:#0d0b09;
-  --edge:#4e3b28;
-  --edge-hi:#6e5230;
-  --ink:#f0e6d6;
-  --muted:#a89480;
-  --gold:#c4924a;
-  --gold-hi:#e0b878;
-  --blood:#a8321f;
-  --display:"Cinzel",Palatino,Georgia,serif;
-  --heat-slow:#1a1511;
-}
-:root[data-theme="chaos"] a{color:#d9a860}
-:root[data-theme="chaos"] h1{font-size:clamp(26px,4.4vw,42px);letter-spacing:.14em;text-transform:uppercase}
-:root[data-theme="chaos"] .panel{box-shadow:0 14px 40px rgba(0,0,0,.6);border-color:color-mix(in srgb,var(--tri-gold) 60%,transparent)}
-:root[data-theme="chaos"] .rune-rule{background:linear-gradient(90deg,transparent,var(--tri-gold) 20%,var(--tri-gold) 80%,transparent) center/100% 1px no-repeat;height:10px}
-:root[data-theme="chaos"] .tab,:root[data-theme="chaos"] .subtab,:root[data-theme="chaos"] .btn,
-:root[data-theme="chaos"] .seg button,:root[data-theme="chaos"] .subt button{font-size:13px;letter-spacing:.1em}
-:root[data-theme="chaos"] h2,:root[data-theme="chaos"] legend{font-size:14px;letter-spacing:.12em}
-:root[data-theme="chaos"] h3{font-size:19px}
-:root[data-theme="chaos"] h4{font-size:15px}
-:root[data-theme="chaos"] th{font-size:11px;letter-spacing:.1em}
-:root[data-theme="chaos"] .res .lab,:root[data-theme="chaos"] .heat-axis,:root[data-theme="chaos"] .worked .tag{font-size:11px;letter-spacing:.1em}
-:root[data-theme="chaos"] .res .big{font-size:48px}
-:root[data-theme="chaos"] .worked .total b{font-size:32px}
-:root[data-theme="chaos"] .chain .link b{font-size:13px}
-:root[data-theme="chaos"] details.fx.c > summary{font-size:18px}
-:root[data-theme="chaos"] details.fx.f > summary{font-size:15px}
-:root[data-theme="chaos"] .eyebrow{font-size:12px;letter-spacing:.14em}

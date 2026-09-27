@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="chaos">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -12,7 +12,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;700&family=Silkscreen:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;700&display=swap">
 <link rel="stylesheet" href="assets/tristram.css">
 <style>
 *{box-sizing:border-box}
@@ -22,18 +22,16 @@ a{color:inherit}
 
 /* The plate shines through: only a light shade at the top and bottom edges.
    Text that sits on it carries a soot shadow instead of a panel. */
-:root[data-theme="chaos"] body.tri::before{
+body.tri::before{
   background:
     linear-gradient(to bottom,rgba(9,8,7,.45),transparent 22%,transparent 72%,rgba(9,8,7,.7)),
     url("assets/chaos.jpg") center/cover no-repeat,
     var(--tri-bg);
 }
-:root[data-theme="chaos"] h1{letter-spacing:.14em}
-:root[data-theme="chaos"] .tool h3,:root[data-theme="chaos"] .other b{font-size:1.1rem;letter-spacing:.06em}
 .on-plate{text-shadow:0 1px 0 #000,0 0 6px rgba(0,0,0,.95),0 0 18px rgba(0,0,0,.8)}
 
 header.wrap{text-align:center;padding:56px 16px 30px}
-h1{margin:.35rem 0 0;font-family:var(--tri-display);font-weight:700;font-size:clamp(1.5rem,4.6vw,2.6rem);letter-spacing:.05em;line-height:1.2;color:var(--tri-fg)}
+h1{margin:.35rem 0 0;font-family:var(--tri-display);font-weight:700;font-size:clamp(1.5rem,4.6vw,2.6rem);letter-spacing:.14em;line-height:1.2;color:var(--tri-fg)}
 /* The attribution: one quiet line under the title. */
 .byline{margin:.45rem 0 0;font-size:.86rem;letter-spacing:.02em;color:var(--tri-muted)}
 .byline a{color:inherit;text-decoration:underline dotted;text-underline-offset:.2em}
@@ -64,7 +62,7 @@ h2::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--tr
 .glyph{width:46px;height:46px;flex:none;display:grid;place-items:center;background:var(--tri-bg);border:2px solid var(--tri-line);color:var(--tri-gold)}
 .tool:hover .glyph,.tool:focus-within .glyph{border-color:var(--tri-accent);color:var(--tri-fg);background:var(--tri-accent)}
 .glyph svg{width:26px;height:26px}
-.tool h3{margin:0;font-family:var(--tri-display);font-weight:700;font-size:1rem;letter-spacing:.04em;line-height:1.3;text-transform:uppercase}
+.tool h3{margin:0;font-family:var(--tri-display);font-weight:700;font-size:1.1rem;letter-spacing:.06em;line-height:1.3;text-transform:uppercase}
 .tool h3 a{text-decoration:none;color:var(--tri-fg)}
 .tool h3 a::after{content:"";position:absolute;inset:0}
 .tool h3 a:focus-visible{outline:none}
@@ -86,7 +84,7 @@ h2::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--tr
   box-shadow:inset 0 3px 0 var(--tri-gold),0 10px 26px rgba(0,0,0,.6);transition:transform .15s,border-color .15s}
 .other:hover{transform:translateY(-2px);border-color:var(--tri-gold)}
 .other:focus-visible{outline:2px solid var(--tri-gold);outline-offset:3px}
-.other b{display:block;margin-bottom:4px;font-family:var(--tri-display);font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--tri-fg)}
+.other b{display:block;margin-bottom:4px;font-family:var(--tri-display);font-weight:700;font-size:1.1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--tri-fg)}
 .other span{color:var(--tri-muted);font-size:.98rem}
 .other .glyph{width:38px;height:38px}
 .other .glyph svg{width:20px;height:20px}

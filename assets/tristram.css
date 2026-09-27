@@ -5,9 +5,8 @@
  * below. Link it from any page of the site:
  *   <link rel="stylesheet" href="https://roofooevazan.github.io/assets/tristram.css">
  * and add class="tri" to <body> for the page ground (the seal plate behind
- * everything, drifting slowly, with the lava glow). assets/site-nav.js sets
- * <html data-theme="chaos">, which pages' own Chaos rules are keyed on. The
- * fonts are loaded by assets/site-nav.js, or add them yourself:
+ * everything, drifting slowly, with the lava glow). The fonts are loaded by
+ * assets/site-nav.js, or add them yourself:
  *   https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;700&display=swap
  */
 :root{
