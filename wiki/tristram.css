@@ -8,12 +8,12 @@ body.tri{--tri-dim:74%;background:transparent}
 
 /* ---------- top bar ---------- */
 .bar{background:rgba(16,12,10,.95);border-bottom:1px solid var(--edge);box-shadow:inset 0 -3px 0 var(--blood)}
-.wordmark{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;gap:9px}
+.wordmark{font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;gap:9px}
 .bar .orb,.wordmark .orb{width:16px;height:16px;border-radius:0;border:2px solid var(--gold);box-shadow:none;background:radial-gradient(var(--blood) 0 3px,transparent 3.5px),var(--void)}
 .search input{background:var(--stone)}
 .search input:focus{box-shadow:0 0 0 3px rgba(210,176,106,.15)}
 .results{background:var(--stone);box-shadow:inset 0 3px 0 var(--gold),0 18px 40px rgba(0,0,0,.7)}
-.res-group{font-family:var(--font-display);font-weight:400;font-size:10.5px;letter-spacing:.06em}
+.res-group{font-family:var(--font-display);font-weight:400;font-size:11.5px;letter-spacing:.06em}
 
 /* ---------- panels: the page sits on a stone sheet over the ground ---------- */
 .side{background:rgba(16,12,10,.82)}
@@ -21,36 +21,36 @@ body.tri{--tri-dim:74%;background:transparent}
 .toc-rail{background:rgba(16,12,10,.6)}
 
 /* ---------- display type, resized for Silkscreen ---------- */
-.side-nav summary{font-size:11px;font-weight:400;letter-spacing:.05em}
+.side-nav summary{font-size:12px;font-weight:400;letter-spacing:.05em}
 .side-nav li a[aria-current=page],.side-nav .top-link[aria-current=page]{color:var(--tri-accent-fg);background:var(--blood);box-shadow:none}
-.toc-title,.toc-inline > summary{font-size:11px;letter-spacing:.05em}
+.toc-title,.toc-inline > summary{font-size:12px;letter-spacing:.05em}
 .page-title{font-size:clamp(18px,2.4vw,26px);line-height:1.35;letter-spacing:.04em;text-shadow:none}
 .hero h1{font-size:clamp(20px,3vw,30px);line-height:1.3;letter-spacing:.04em;text-shadow:none}
-.home-h{font-size:12px;font-weight:400;letter-spacing:.05em}
+.home-h{font-size:13px;font-weight:400;letter-spacing:.05em}
 .home-h::after{background:var(--edge)}
-.tool-card b{font-size:14px;letter-spacing:.03em}
-.group h3{font-size:13px;letter-spacing:.03em}
-.az h3{font-size:14px}
-.log time{font-size:12px}
+.tool-card b{font-size:15px;letter-spacing:.03em}
+.group h3{font-size:14px;letter-spacing:.03em}
+.az h3{font-size:15px}
+.log time{font-size:13px}
 
 .wiki h1,.wiki h2,.wiki h3{color:var(--gold-hi);letter-spacing:.03em}
 .wiki .mw-heading1 h1{font-size:21px}
-.wiki .mw-heading2 h2{font-size:17px}
-.wiki .mw-heading3 h3{font-size:14px}
-.wiki .home-menu-title{font-size:14px}
+.wiki .mw-heading2 h2{font-size:17.5px}
+.wiki .mw-heading3 h3{font-size:15px}
+.wiki .home-menu-title{font-size:15px}
 
-.icard-title b{font-size:13px;letter-spacing:.02em;line-height:1.35}
-.setpanel-head b{font-size:14px}
+.icard-title b{font-size:14px;letter-spacing:.02em;line-height:1.35}
+.setpanel-head b{font-size:15px}
 .tt-name{font-size:19px;line-height:1.3;text-shadow:none}
-.tile b{font-size:13px;letter-spacing:.02em}
-.tree h2{font-size:12px}
+.tile b{font-size:14px;letter-spacing:.02em}
+.tree h2{font-size:13px}
 .skill-head h2{font-size:19px}
-.lvlw-head label,.cls-intro > summary{font-size:12px}
-.mtitle b{font-size:13px;letter-spacing:.02em}
-.pn-title{font-size:15px}
-.corr-col header b{font-size:12px}
-.boss h3{font-family:var(--font-display);font-size:14px}
-.mw-field label,.mw-label{font-size:11px;letter-spacing:.05em}
+.lvlw-head label,.cls-intro > summary{font-size:13px}
+.mtitle b{font-size:14px;letter-spacing:.02em}
+.pn-title{font-size:16px}
+.corr-col header b{font-size:13px}
+.boss h3{font-family:var(--font-display);font-size:15px}
+.mw-field label,.mw-label{font-size:12px;letter-spacing:.05em}
 
 /* ---------- the red "Open" of the theme on the wiki's primary buttons ---------- */
 .tool-card{background:var(--stone-2);box-shadow:inset 0 0 0 1px rgba(210,176,106,.12)}
@@ -82,14 +82,14 @@ body.tri{--tri-dim:74%;background:transparent}
 :root[data-theme="chaos"] .side{background:rgba(9,8,7,.82)}
 :root[data-theme="chaos"] .toc-rail{background:rgba(9,8,7,.6)}
 :root[data-theme="chaos"] .main{box-shadow:none;border-color:color-mix(in srgb,var(--gold) 55%,transparent)}
-:root[data-theme="chaos"] .wordmark{font-size:16px;letter-spacing:.1em}
+:root[data-theme="chaos"] .wordmark{font-size:16.5px;letter-spacing:.1em}
 :root[data-theme="chaos"] .page-title{font-size:clamp(24px,3.4vw,36px);letter-spacing:.06em}
 :root[data-theme="chaos"] .hero h1{font-size:clamp(28px,4.4vw,44px);letter-spacing:.12em;text-transform:uppercase}
-:root[data-theme="chaos"] .side-nav summary,:root[data-theme="chaos"] .toc-title,:root[data-theme="chaos"] .home-h{font-size:13px;letter-spacing:.1em}
+:root[data-theme="chaos"] .side-nav summary,:root[data-theme="chaos"] .toc-title,:root[data-theme="chaos"] .home-h{font-size:14px;letter-spacing:.1em}
 :root[data-theme="chaos"] .wiki .mw-heading1 h1{font-size:26px}
 :root[data-theme="chaos"] .wiki .mw-heading2 h2{font-size:21px}
-:root[data-theme="chaos"] .wiki .mw-heading3 h3{font-size:17px}
-:root[data-theme="chaos"] .icard-title b,:root[data-theme="chaos"] .tile b,:root[data-theme="chaos"] .mtitle b{font-size:16px}
+:root[data-theme="chaos"] .wiki .mw-heading3 h3{font-size:17.5px}
+:root[data-theme="chaos"] .icard-title b,:root[data-theme="chaos"] .tile b,:root[data-theme="chaos"] .mtitle b{font-size:16.5px}
 :root[data-theme="chaos"] .tool-card b{font-size:18px}
 :root[data-theme="chaos"] .tt-name,:root[data-theme="chaos"] .skill-head h2{font-size:24px}
 :root[data-theme="chaos"] .welcome{border-left-color:var(--gold)}
