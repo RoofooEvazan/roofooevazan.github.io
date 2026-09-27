@@ -79,8 +79,9 @@ h2::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--tr
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
 .tags li{font-size:.84rem;color:var(--tri-muted);background:var(--tri-bg);border:1px solid var(--tri-line);padding:1px 9px}
 .tool-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:8px}
-.open{display:inline-flex;align-items:center;min-height:2.6rem;padding:.4rem .9rem;background:var(--tri-accent);color:var(--tri-accent-fg);font-family:var(--tri-display);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+.open{position:relative;z-index:1;text-decoration:none;display:inline-flex;align-items:center;min-height:2.6rem;padding:.4rem .9rem;background:var(--tri-accent);color:var(--tri-accent-fg);font-family:var(--tri-display);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
 .tool:hover .open{filter:brightness(1.15)}
+.open:focus-visible{outline:2px solid var(--tri-gold);outline-offset:2px}
 .source{position:relative;z-index:1;display:inline-flex;align-items:center;min-height:2.6rem;padding:.4rem .8rem;border:1px solid var(--tri-line);color:var(--tri-fg);text-decoration:none;font-family:var(--tri-display);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase}
 .source:hover{border-color:var(--tri-gold);color:var(--tri-gold)}
 .source:focus-visible{outline:2px solid var(--tri-gold);outline-offset:2px}
@@ -135,7 +136,7 @@ footer p{margin:4px 0}
       </div>
       <p>The whole Project Diablo 2 wiki, rebuilt for reading on any screen: instant search down to single runewords and skills, sortable and filterable tables, and a page outline that follows you. It re-syncs from the official wiki every day, and adds an interactive Act 2 merc weapon comparison.</p>
       <ul class="tags"><li>Instant search</li><li>Sortable tables</li><li>Synced daily</li><li>Mobile friendly</li><li>Merc weapon compare</li></ul>
-      <div class="tool-foot"><span class="open" aria-hidden="true">Open wiki →</span><a class="source" href="https://wiki.projectdiablo2.com/">Original wiki</a></div>
+      <div class="tool-foot"><a class="open" href="https://roofooevazan.github.io/wiki/">Open wiki →</a><a class="source" href="https://wiki.projectdiablo2.com/">Original wiki</a></div>
     </article>
   </div>
 
@@ -148,7 +149,7 @@ footer p{margin:4px 0}
       </div>
       <p>Frames per attack and breakpoints for every class, weapon, attack skill and speed skill, including werewolf and werebear speed.</p>
       <ul class="tags"><li>Breakpoints</li><li>Frame grid</li><li>Fastest frames</li><li>Wereforms</li></ul>
-      <div class="tool-foot"><span class="open" aria-hidden="true">Open calculator →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-ias-calc">Source</a></div>
+      <div class="tool-foot"><a class="open" href="https://roofooevazan.github.io/pd2-ias-calc/">Open calculator →</a><a class="source" href="https://github.com/RoofooEvazan/pd2-ias-calc">Source</a></div>
     </article>
 
     <article class="tool">
@@ -158,7 +159,7 @@ footer p{margin:4px 0}
       </div>
       <p>Every advanced stat of a character, loaded from a PD2 Armory export or a single-player save and read in your browser.</p>
       <ul class="tags"><li>Offense</li><li>Defense</li><li>Skill damage</li><li>Mercenary</li></ul>
-      <div class="tool-foot"><span class="open" aria-hidden="true">Open calculator →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-advanced-stats">Source</a></div>
+      <div class="tool-foot"><a class="open" href="https://roofooevazan.github.io/pd2-advanced-stats/">Open calculator →</a><a class="source" href="https://github.com/RoofooEvazan/pd2-advanced-stats">Source</a></div>
     </article>
 
     <article class="tool">
@@ -168,7 +169,7 @@ footer p{margin:4px 0}
       </div>
       <p>Your chance to hit a monster and a monster's chance to hit you, with block, dodge, avoid and evade, from PD2's own hit roll.</p>
       <ul class="tags"><li>Attack rating</li><li>Block</li><li>Dodge &amp; evade</li><li>Attack rating needed</li></ul>
-      <div class="tool-foot"><span class="open" aria-hidden="true">Open calculator →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-hit-chance">Source</a></div>
+      <div class="tool-foot"><a class="open" href="https://roofooevazan.github.io/pd2-hit-chance/">Open calculator →</a><a class="source" href="https://github.com/RoofooEvazan/pd2-hit-chance">Source</a></div>
     </article>
 
     <article class="tool">
@@ -178,7 +179,7 @@ footer p{margin:4px 0}
       </div>
       <p>Every damage calculation, skill by skill, as flow charts: formulas, interactions and quirks traced from the code, with a pipeline map and a hit lab.</p>
       <ul class="tags"><li>Skill flow</li><li>Quirks</li><li>Pipeline map</li><li>Hit lab</li></ul>
-      <div class="tool-foot"><span class="open" aria-hidden="true">Open atlas →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-damage-atlas">Source</a></div>
+      <div class="tool-foot"><a class="open" href="https://roofooevazan.github.io/pd2-damage-atlas/">Open atlas →</a><a class="source" href="https://github.com/RoofooEvazan/pd2-damage-atlas">Source</a></div>
     </article>
 
     <article class="tool">
@@ -188,7 +189,7 @@ footer p{margin:4px 0}
       </div>
       <p>An experimental model of map spawns: monster density, packs, elites and estimated XP per map, plus a loot mini game that clears the map and shows where every drop fell.</p>
       <ul class="tags"><li>Density</li><li>Elites</li><li>XP</li><li>Loot run</li></ul>
-      <div class="tool-foot"><span class="open" aria-hidden="true">Open simulator →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-spawn-simulator">Source</a></div>
+      <div class="tool-foot"><a class="open" href="https://roofooevazan.github.io/pd2-spawn-simulator/">Open simulator →</a><a class="source" href="https://github.com/RoofooEvazan/pd2-spawn-simulator">Source</a></div>
     </article>
 
     <article class="tool">
@@ -198,7 +199,7 @@ footer p{margin:4px 0}
       </div>
       <p>The earliest area in the game where an item base can drop, and the earliest where it can roll the sockets you want, from PD2's own drop tables and item-level socket caps.</p>
       <ul class="tags"><li>Earliest drop</li><li>Max sockets</li><li>Area drop list</li><li>Item level</li></ul>
-      <div class="tool-foot"><span class="open" aria-hidden="true">Open finder →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-base-finder">Source</a></div>
+      <div class="tool-foot"><a class="open" href="https://roofooevazan.github.io/pd2-base-finder/">Open finder →</a><a class="source" href="https://github.com/RoofooEvazan/pd2-base-finder">Source</a></div>
     </article>
 
     <article class="tool">
@@ -208,7 +209,7 @@ footer p{margin:4px 0}
       </div>
       <p>Make Roofoo's loot filter your own without touching filter code: color themes, drop sounds, star tiers, mystery drops, and what shows or hides on each filter level.</p>
       <ul class="tags"><li>Themes</li><li>Drop sounds</li><li>Show / hide</li><li>Item tester</li></ul>
-      <div class="tool-foot"><span class="open" aria-hidden="true">Open builder →</span><a class="source" href="https://github.com/RoofooEvazan/Roofoo-s-PD2-Loot-Filter">Source</a></div>
+      <div class="tool-foot"><a class="open" href="https://roofooevazan.github.io/Roofoo-s-PD2-Loot-Filter/">Open builder →</a><a class="source" href="https://github.com/RoofooEvazan/Roofoo-s-PD2-Loot-Filter">Source</a></div>
     </article>
   </div>
 
