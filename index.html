@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="chaos">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#100c0a">
+<meta name="theme-color" content="#090807">
 <meta name="color-scheme" content="dark">
 <title>PD2 Hub</title>
 <meta name="description" content="Project Diablo 2 calculators and simulators built on the game's reverse-engineered code: attack speed, advanced stats, hit chance, a damage atlas, map spawns with loot, and a loot filter builder.">
@@ -22,12 +22,6 @@ a{color:inherit}
 
 /* The plate shines through: only a light shade at the top and bottom edges.
    Text that sits on it carries a soot shadow instead of a panel. */
-body.tri::before{
-  background:
-    linear-gradient(to bottom,rgba(16,12,10,.45),transparent 22%,transparent 72%,rgba(16,12,10,.7)),
-    url("assets/tristram.jpg") center/cover no-repeat,
-    var(--tri-bg);
-}
 :root[data-theme="chaos"] body.tri::before{
   background:
     linear-gradient(to bottom,rgba(9,8,7,.45),transparent 22%,transparent 72%,rgba(9,8,7,.7)),

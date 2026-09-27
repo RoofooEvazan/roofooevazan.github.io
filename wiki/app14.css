@@ -651,3 +651,4 @@ a.brow .cls-orb{width:20px;height:20px;font-size:11px;border-width:1px}
 }
 .skill-btn span{overflow-wrap:anywhere}
 .sres2 > li{min-width:0}.sres2 > li > a,.sres2 p,.sres2 .crumb{overflow-wrap:anywhere;min-width:0}
+.qt span{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.25}

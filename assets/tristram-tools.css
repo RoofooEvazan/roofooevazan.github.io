@@ -1,10 +1,12 @@
-/* Tristram theme for the calculator pages.
+/* Theme for the calculator pages. Chaos is the only theme: its colors and
+ * sizes are the :root[data-theme="chaos"] rules at the end (assets/site-nav.js
+ * always sets that attribute); the rules above are the shared layout.
  *
  * The tools (IAS Calculator, Advanced Stats, Hit Chance, Damage Atlas,
  * Spawn Simulator, Base Finder) share one "stone and gold" design: the same
  * variables (--void, --stone, --gold, --display…) and the same HD dungeon
  * skin (gilded panels, stone tab buttons, gold-gradient titles). This sheet
- * turns that design into the Tristram theme. Load it after the page's own
+ * turns that design into the Chaos theme. Load it after the page's own
  * styles, together with tristram.css, and put class="tri" on <body>:
  *   <link rel="stylesheet" href="https://roofooevazan.github.io/assets/tristram.css">
  *   <link rel="stylesheet" href="https://roofooevazan.github.io/assets/tristram-tools.css">
@@ -118,7 +120,7 @@ details.fx > summary::before{border-left-color:var(--tri-gold)}
   details.fx.c > summary{font-size:12px}
 }
 
-/* ---------- Chaos: the other theme from the site nav's switch ----------
+/* ---------- Chaos: the palette and display sizes ----------
    tristram.css swaps the --tri-* colors; these are the tools' own names.
    Cinzel is narrower than Silkscreen, so display text grows back. */
 :root[data-theme="chaos"]{

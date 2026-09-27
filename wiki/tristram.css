@@ -1,7 +1,7 @@
-/* Tristram theme for the wiki. Loaded last, after ../assets/tristram.css
-   and the wiki's own sheets. Silkscreen runs much wider than a book face,
-   so display text is sized down here; everything else comes from the
-   palette and fonts set in wiki.css. */
+/* Theme for the wiki, loaded last, after ../assets/tristram.css and the
+   wiki's own sheets. Chaos is the only theme: its palette and sizes are the
+   :root[data-theme="chaos"] rules below (the <html> always carries that
+   attribute); the rules above them are the shared layout they build on. */
 
 /* The plate stays behind the page, dimmed further so long reading holds. */
 body.tri{--tri-dim:74%;background:transparent}
@@ -58,7 +58,7 @@ body.tri{--tri-dim:74%;background:transparent}
 .pill{background:var(--void)}
 .welcome{background:rgba(16,12,10,.6);border-left-color:var(--blood)}
 
-/* ---------- Chaos: the other theme from the site nav's switch ----------
+/* ---------- Chaos: the palette and display sizes ----------
    Black stone and dull brass; brass is also the accent, so --blood carries it
    here. Cinzel is narrower than Silkscreen, so display text grows back. */
 :root[data-theme="chaos"]{
