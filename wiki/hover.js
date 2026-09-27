@@ -33,6 +33,8 @@
     else if (type === 'affix') p = window.PD2Affixes?.tip(arg);
     else if (type === 'faq') p = window.PD2Guide?.faqTip(arg);
     else if (type === 'build') p = window.PD2Guide?.buildTip(arg);
+    else if (type === 'base') p = window.PD2Gear?.baseTip(arg);
+    else if (type === 'mskill') p = window.PD2Gear?.mercSkillTip(arg);
     else if (type === 'lfilter') p = window.PD2Filters?.filterTip(arg);
     p = Promise.resolve(p).catch(() => '');
     cache.set(key, p);

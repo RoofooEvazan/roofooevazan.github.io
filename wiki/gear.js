@@ -18,7 +18,7 @@
   };
   const crumbs = (label, href) => `<nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Wiki</a><span aria-hidden="true">›</span><a href="${href}">${label}</a></nav>`;
   const hi = s => { const m = String(s ?? '').match(/-?\d+(\.\d+)?/g); return m ? Math.max(...m.map(Number)) : -Infinity; };
-  const vv = x => x ? `${P().esc(x.v)}${x.was != null ? `<s title="Before PD2">${P().esc(x.was)}</s>` : ''}` : '<span class="muted">—</span>';
+  const vv = x => x ? (x.was != null ? `<span class="bv-chg" title="Before PD2: ${P().esc(x.was)}">${P().esc(x.v)}</span>` : P().esc(x.v)) : '<span class="muted">—</span>';
 
   // ---------- item bases ----------
   const KINDS = [['Weapon', 'Weapons'], ['Armor', 'Armor'], ['Quiver', 'Quivers'], ['Other', 'Jewelry & charms']];
@@ -96,7 +96,7 @@
       </div>
       <div class="rcount" aria-live="polite"></div>
       <div class="tw"><table class="restable btable"></table></div>
-      <p class="muted">Struck-through values are from before PD2. Click a base's upgrade path to jump to that base.</p>
+      <p class="muted"><span class="bv-chg">Gold</span> values changed in PD2. Hover a base for its full card, or click it for its upgrade path and shortcuts.</p>
       ${attrib(B.page)}`;
     const table = $('.btable', root), count = $('.rcount', root);
     const W = f.kind === 'Weapon', A = f.kind === 'Armor';
@@ -109,22 +109,119 @@
         : [...rows].sort((a, b) => (TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type)) || a.name.localeCompare(b.name));
       count.textContent = `${rows.length} base${rows.length === 1 ? '' : 's'}`;
       const fam = b => b.family && b.family.length > 1 ? `<span class="fam">${b.family.map(n => n === b.name ? `<b>${esc(n)}</b>` : `<a href="${writeQ({ ...ff, q: n, type: '', tier: '' })}">${esc(n)}</a>`).join(' › ')}</span>` : '';
-      const links = b => `<span class="blinks"><a href="#/items?q=${encodeURIComponent(b.name)}">Uniques & sets</a><a href="#/affixes?base=${encodeURIComponent(b.name)}&ilvl=85">Affixes</a></span>`;
+      const links = b => `<span class="blinks"><a href="#/items?q=${encodeURIComponent(b.name)}">Uniques &amp; sets on it</a><a href="#/affixes?base=${encodeURIComponent(b.name)}&ilvl=85">Affixes at ilvl 85</a>${W || A ? `<a href="#/runes">Runewords</a>` : ''}</span>`;
       const head = W ? '<th>Base</th><th>Type</th><th>Damage</th><th title="Average damage">Avg</th><th title="Weapon speed modifier">WSM</th><th>Range</th><th>Str</th><th>Dex</th><th title="Max sockets">Sock</th><th title="Required level">Lvl</th><th>qlvl</th>'
         : A ? '<th>Base</th><th>Type</th><th>Defense</th><th>Str</th><th>Block</th><th title="Max sockets">Sock</th><th>Durability</th><th title="Required level">Lvl</th><th>qlvl</th>'
         : '<th>Base</th><th>Type</th><th title="Max sockets">Sock</th><th title="Required level">Lvl</th><th>qlvl</th>';
       table.innerHTML = `<thead><tr>${head}</tr></thead><tbody>${rows.map(b => `<tr id="b-${esc(b.slug)}"${b.changed ? ' class="chg"' : ''}>
-        <td class="bn"><span class="bname">${esc(b.name)}${b.tier ? `<em class="tier tier-${esc(b.tier)}">${esc(b.tier[0] === 'E' && b.tier !== 'Elite' ? 'Exc' : b.tier)}</em>` : ''}</span>${fam(b)}${W || A ? links(b) : ''}</td>
+        <td class="bn" data-hc="base:${esc(b.slug)}"><span class="bname">${esc(b.name)}${b.tier ? `<em class="tier tier-${esc(b.tier)}">${esc(b.tier[0] === 'E' && b.tier !== 'Elite' ? 'Exc' : b.tier)}</em>` : ''}</span></td>
         <td>${esc(b.type || '')}</td>
         ${W ? `<td class="r">${vv(b.dmg)}</td><td class="r">${esc(b.avg || '')}</td><td class="r">${vv(b.wsm)}</td><td class="r">${vv(b.range)}</td><td class="r">${esc(b.str || '')}</td><td class="r">${esc(b.dex || '')}</td>`
           : A ? `<td class="r">${vv(b.def)}</td><td class="r">${esc(b.str || '')}</td><td class="r">${vv(b.block)}</td>` : ''}
-        <td class="r">${vv(b.sockets)}</td>${A ? `<td class="r">${vv(b.dur)}</td>` : ''}<td class="r">${esc(b.rlvl || '')}</td><td class="r">${esc(b.qlvl || '')}</td></tr>`).join('')}</tbody>`;
+        <td class="r">${vv(b.sockets)}</td>${A ? `<td class="r">${vv(b.dur)}</td>` : ''}<td class="r">${esc(b.rlvl || '')}</td><td class="r">${esc(b.qlvl || '')}</td></tr>
+        <tr class="bdet" hidden><td colspan="${W ? 11 : A ? 9 : 5}">${fam(b)}${links(b)}</td></tr>`).join('')}</tbody>`;
     };
+    // Click a base for its upgrade path and shortcuts.
+    table.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      const tr = e.target.closest('tbody tr:not(.bdet)');
+      if (tr?.nextElementSibling?.classList.contains('bdet')) { const d = tr.nextElementSibling; d.hidden = !d.hidden; tr.classList.toggle('open', !d.hidden); }
+    });
     draw(f);
     const live = patch => { Object.assign(f, patch); history.replaceState(null, '', writeQ(f)); draw(f); };
     let t;
     $('#bq', root).addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => live({ q: e.target.value.trim() }), 150); });
     $('#bs', root).addEventListener('change', e => live({ sort: e.target.value }));
+  }
+
+  const mercTabs = cur => `<div class="segs mercs-tabs" role="group"><a class="seg${cur ? '' : ' on'}" href="#/mercs">Compare all</a>${data.mercs.mercs.map(x => `<a class="seg${x.key === cur ? ' on' : ''}" href="#/mercs/${x.key}">${P().esc(x.name.replace(/^Act (\d) /, 'A$1 '))}</a>`).join('')}</div>`;
+
+  // Every mercenary side by side at one level, with their auras; then the rules for all of them.
+  function mercCompare(root, anchor) {
+    const { esc, $, $$, enhanceFragment } = P();
+    const M = data.mercs;
+    const page = P().byId(M.page);
+    document.title = 'Mercenaries · PD2 Wiki';
+    const all = [...new Set(M.mercs.flatMap(m => m.levels))].sort((a, b) => a - b);
+    root.innerHTML = `${crumbs('Classes &amp; Skills', '#/mercs')}<h1 class="page-title">Mercenaries</h1>${mercTabs('')}
+      <div class="lvlw merc-cmp-lvl"><div class="lvlw-head"><label>Merc level <b class="lvlw-n"></b></label><input type="range" min="0" max="${all.length - 1}" aria-label="Mercenary level"></div></div>
+      <div class="tw"><table class="restable mcmp"><thead><tr><th>Mercenary</th><th>Auras by type</th><th>HP</th><th>Defense</th><th>Str</th><th>Dex</th><th title="Attack rating, before Dexterity">AR</th><th>Resist</th><th>Damage</th></tr></thead><tbody></tbody></table></div>
+      <p class="muted">Stats are the same whichever difficulty you hire from, once the merc is level 80 or higher. Click a mercenary for its skills and level-by-level stats. The <a href="#/tools/merc-weapons">merc weapon compare</a> ranks Act 2 weapons by attack speed.</p>
+      <h2 class="home-h">Rules for all mercenaries</h2>
+      ${M.sections.filter(s => !/^stats$|^sources$/i.test(s.title)).map(s => `<details class="about" id="${esc(s.anchor)}"${s.anchor === anchor ? ' open' : ''}><summary>${esc(s.title)}</summary><div class="wiki">${s.html}</div></details>`).join('')}
+      ${attrib(M.page, 'Mercenaries')}`;
+    for (const el of $$('.about .wiki', root)) enhanceFragment(el, page);
+    const body = $('tbody', root), range = $('input', root), n = $('.lvlw-n', root);
+    const draw = i => {
+      const want = all[i];
+      n.textContent = want;
+      body.innerHTML = M.mercs.map(m => {
+        const lv = m.levels.find(l => l >= want) ?? m.levels.at(-1);
+        const g = s => m.stats[s]?.[lv];
+        const dmg = g('Dmg-Min') ? `${g('Dmg-Min')}–${g('Dmg-Max')}` : '—';
+        return `<tr><td class="mn"><a href="#/mercs/${m.key}">${esc(m.name)}</a>${lv !== want ? ` <small title="Closest level listed">lvl ${lv}</small>` : ''}</td>
+          <td class="mauras wiki">${m.auras.map(a => `<span><i>${esc(a.subtype)}</i> ${a.aura}</span>`).join('')}</td>
+          ${['HP', 'Defense', 'Str', 'Dex', 'Attack Rating', 'Resist'].map(s => `<td class="r">${esc(g(s) ?? '—')}</td>`).join('')}<td class="r">${esc(dmg)}</td></tr>`;
+      }).join('');
+      enhanceFragment(body, page);
+    };
+    let idx = all.findIndex(l => l >= getLvl()); if (idx < 0) idx = all.length - 1;
+    range.value = idx; draw(idx);
+    range.addEventListener('input', () => { draw(+range.value); setLvl(all[+range.value]); });
+    if (anchor) requestAnimationFrame(() => { const el = document.getElementById(anchor); if (el) { el.open = true; el.scrollIntoView({ block: 'start' }); } });
+  }
+
+  // Hover cards: an item base, and a merc skill's description.
+  async function baseTip(slug) {
+    const { esc } = P();
+    await Promise.all([load(), window.PD2Items.load().catch(() => {})]);
+    const b = data.bases.bases.find(x => x.slug === slug);
+    if (!b) return '';
+    const rows = [['Damage', b.dmg], ['Speed (WSM)', b.wsm], ['Range', b.range], ['Defense', b.def], ['Block', b.block], ['Sockets', b.sockets], ['Durability', b.dur]]
+      .filter(([, v]) => v).map(([k, v]) => `<li><span>${k}</span> ${esc(v.v)}${v.was != null ? ` <span class="hc-was">was ${esc(v.was)}</span>` : ''}</li>`);
+    const req = [b.str && `${b.str} Str`, b.dex && `${b.dex} Dex`, b.rlvl && `level ${b.rlvl}`].filter(Boolean).join(' · ');
+    const on = (window.PD2Items.data?.items || []).filter(i => i.base === b.name && i.kind !== 'runeword');
+    return `<div class="hc-base">
+      <div class="hc-head"><span><b class="hc-name">${esc(b.name)}</b><span class="hc-sub">${[b.tier, b.type || b.kind, b.qlvl && 'qlvl ' + b.qlvl].filter(Boolean).map(esc).join(' · ')}</span></span></div>
+      ${b.family && b.family.length > 1 ? `<div class="hc-req">${b.family.map(x => x === b.name ? `<b>${esc(x)}</b>` : esc(x)).join(' → ')}</div>` : ''}
+      ${rows.length ? `<ul class="hc-kv">${rows.join('')}</ul>` : ''}
+      ${req ? `<div class="hc-req">Requires ${esc(req)}</div>` : ''}
+      ${on.length ? `<div class="hc-lvl">Uniques &amp; sets on it</div><p class="hc-desc">${on.slice(0, 8).map(i => esc(i.name)).join(', ')}${on.length > 8 ? `, +${on.length - 8} more` : ''}</p>` : ''}
+    </div>`;
+  }
+  // Merc skill card: the skill's level at the reader's merc level (from the wiki's
+  // "Merc Level | 1 | 9 | …" table), then the class skill's own card when there is one.
+  async function mercSkillTip(arg) {
+    const { esc } = P();
+    await load();
+    const [k, a] = arg.split('/');
+    const m = data.mercs.mercs.find(x => x.key === k);
+    const s = m?.skills.find(x => x.anchor === a);
+    if (!s || !s.html) return '';
+    const t = document.createElement('template');
+    t.innerHTML = s.html;
+    const lvl = getLvl();
+    let at = '';
+    for (const tb of t.content.querySelectorAll('table')) {
+      const rows = [...tb.querySelectorAll('tr')].map(r => [...r.children].map(c => c.textContent.replace(/\s+/g, ' ').trim()));
+      if (!/merc level/i.test(rows[0]?.[0] || '')) continue;
+      const lv = rows[0].slice(1).map(Number);
+      let i = -1;
+      lv.forEach((v, j) => { if (v <= lvl) i = j; });
+      if (i < 0) continue;
+      at = rows.slice(1).map(r => `<li><span>${esc(r[0])}</span> ${esc(r[i + 1] || '')}</li>`).join('');
+      break;
+    }
+    for (const x of t.content.querySelectorAll('table')) x.remove();
+    const text = t.content.textContent.replace(/\s+/g, ' ').replace(/For more information, see:.*$/i, '').trim();
+    // The class skill this is based on ("Defiance Aura" → Defiance, "Fire Ball (Mercenary-Only)" → Fire Ball).
+    const base = s.name.replace(/\s*\(Mercenary-Only\)/i, '').replace(/\s+Aura$/i, '');
+    const sk = (P().S.index.skillIndex || []).find(x => x.n.toLowerCase() === base.toLowerCase() && x.c !== 'Items');
+    const own = sk ? await window.PD2Skills?.tip(sk.c, sk.a).catch(() => '') : '';
+    return `<div class="hc-mskill"><b class="hc-name">${esc(s.name)}</b><span class="hc-sub">${esc(m.name)} · ${esc(s.group)}</span>
+      ${at ? `<div class="hc-lvl">At merc level ${lvl}</div><ul class="hc-kv">${at}</ul>` : ''}
+      ${text ? `<p class="hc-desc">${esc(text.length > 300 ? text.slice(0, 290).replace(/\s+\S*$/, '') + '…' : text)}</p>` : ''}
+      ${own ? `<div class="hc-sub-card">${own}</div>` : ''}</div>`;
   }
 
   // ---------- runes, gems, jewels ----------
@@ -206,14 +303,15 @@
     root.innerHTML = '<div class="loading">Loading mercenaries…</div>';
     try { await load(); } catch (e) { root.innerHTML = `<div class="error"><b>Couldn't load mercenaries.</b><br>${esc(e.message)}</div>`; return; }
     const M = data.mercs;
+    if (!key) return mercCompare(root, anchor);
     const m = M.mercs.find(x => x.key === key) || M.mercs.find(x => x.key === 'a2') || M.mercs[0];
     document.title = `${m.name} · Mercenaries · PD2 Wiki`;
     const page = P().byId(M.page), spage = P().byId(M.skillsPage);
     const groups = [...new Set(m.skills.map(s => s.group))];
     const rwPage = { a2: 'Act 2 Mercenary Runewords', a3: 'Act 3 Mercenary Runewords', a5: 'Act 5 Mercenary Runewords' }[m.key];
     const rwLink = rwPage && P().resolve(rwPage) ? P().pageHref(rwPage) : '';
-    root.innerHTML = `${crumbs('Endgame', '#/mercs')}<h1 class="page-title">Mercenaries</h1>
-      <div class="segs mercs-tabs" role="group">${M.mercs.map(x => `<a class="seg${x === m ? ' on' : ''}" href="#/mercs/${x.key}">${esc(x.name.replace(/^Act (\d) /, 'A$1 '))}</a>`).join('')}</div>
+    root.innerHTML = `${crumbs('Classes &amp; Skills', '#/mercs')}<h1 class="page-title">Mercenaries</h1>
+      ${mercTabs(m.key)}
       <section class="merc-head"><h2 class="home-h">${esc(m.name)}</h2>
         <div class="merc-links">${m.key === 'a2' ? '<a class="chip" href="#/tools/merc-weapons">Merc weapon compare</a>' : ''}${rwLink ? `<a class="chip" href="${rwLink}">Runewords for this merc</a>` : ''}</div></section>
       <section class="lvlw merc-lvl">
@@ -223,9 +321,8 @@
       </section>
       ${m.auras.length ? `<h2 class="home-h">Types &amp; auras</h2><div class="auras">${m.auras.map(a => `<div class="aura"><b>${esc(a.subtype)}</b><span class="wiki">${a.aura}</span></div>`).join('')}</div>` : ''}
       ${m.skills.length ? `<h2 class="home-h">Skills</h2>${groups.map(g => `<h3 class="sub-h">${esc(g)}</h3><div class="mskills">${m.skills.filter(s => s.group === g).map(s => `
-        <details class="mskill" id="${esc(s.anchor)}"${s.anchor === anchor ? ' open' : ''}><summary>${esc(s.name)}</summary><div class="wiki">${s.html}</div></details>`).join('')}</div>`).join('')}` : ''}
-      <h2 class="home-h">Rules for all mercenaries</h2>
-      ${M.sections.filter(s => !/^stats$|^sources$/i.test(s.title)).map(s => `<details class="about" id="${esc(s.anchor)}"${s.anchor === anchor ? ' open' : ''}><summary>${esc(s.title)}</summary><div class="wiki">${s.html}</div></details>`).join('')}
+        <details class="mskill" id="${esc(s.anchor)}"${s.anchor === anchor ? ' open' : ''}><summary${s.html ? ` data-hc="mskill:${m.key}/${esc(s.anchor)}"` : ''}>${esc(s.name)}</summary><div class="wiki">${s.html}</div></details>`).join('')}</div>`).join('')}` : ''}
+      <p class="tile-links"><a href="#/mercs">Compare all mercenaries and the rules for hiring, gear and auras →</a></p>
       ${attrib(M.page, 'Mercenaries')}${spage ? attrib(M.skillsPage, 'Mercenary Skills') : ''}`;
     for (const el of $$('.wiki', root)) enhanceFragment(el, el.closest('.mskill') ? spage : page);
 
@@ -275,5 +372,5 @@
     </div>`;
   }
 
-  window.PD2Gear = { load, bases, runes, mercs, search, runeTip, get data() { return data; } };
+  window.PD2Gear = { load, bases, runes, mercs, search, runeTip, baseTip, mercSkillTip, get data() { return data; } };
 })();
