@@ -327,7 +327,12 @@ export async function extract(pages, dir) {
   const runes = await extractRunes(await doc('Runes'), targets);
   const mercs = await extractMercs(await doc('Mercenaries'), await doc('Mercenary Skills'), targets);
 
-  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs } };
+  const skillIndexAll = Object.values(skills).flatMap(c => c.trees.flatMap(t => t.skills.map(k => ({ c: c.cls, n: k.name, a: k.anchor }))));
+  const help = await extractHelp(await doc('FAQ'), await doc('Support FAQ'), targets);
+  const guides = await extractGuides(await doc('Links'), pages, doc, skillIndexAll, targets);
+  const breakpoints = await extractBreakpoints(await doc('Breakpoints'), targets);
+
+  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs }, guide: { help, guides, breakpoints } };
 }
 
 // ---------- maps ----------
@@ -1129,4 +1134,136 @@ async function extractMercs(r, rs, targets) {
   }
   targets[`${page.id}#`] = 'mercs';
   return { page: page.id, skillsPage: rs?.page.id, mercs: MERC_KEYS.map(([, k]) => mercs[k]).filter(Boolean), sections: sections.filter(s => s.html) };
+}
+
+// ---------- help (FAQ + Support FAQ), guides & builds, breakpoints ----------
+async function extractHelp(faq, support, targets) {
+  const items = [];
+  const take = (r, catDefault) => {
+    if (!r) return;
+    let cat = catDefault;
+    for (const w of r.d.querySelectorAll('.mw-heading')) {
+      const hd = headingOf(w);
+      if (!hd) continue;
+      if (hd.level === 1) { cat = hd.text; targets[`${r.page.id}#${hd.id}`] = `help?cat=${encodeURIComponent(cat)}`; continue; }
+      if (hd.level !== 2) continue;
+      const id = `${r.page.id}-${hd.id}`;
+      items.push({ id, q: hd.text, cat, page: r.page.id, anchor: hd.id, html: sectionAfter(w, 2, false).map(e => clean(e.outerHTML)).join('') });
+      targets[`${r.page.id}#${hd.id}`] = `help#${id}`;
+    }
+    targets[`${r.page.id}#`] = catDefault === 'General' ? 'help' : 'help?cat=support';
+  };
+  take(faq, 'General');
+  take(support, 'Support');
+  return { items, pages: [faq?.page.id, support?.page.id].filter(Boolean) };
+}
+
+const CLASS_WORDS = { Amazon: /amazon|bowazon|javazon|zon\b|valkyrie/i, Assassin: /assassin|\bsin\b|trapsin|mind blast|blade dance|death sentry|venom/i,
+  Barbarian: /barbarian|\bbarb\b|whirlwind|frenzy|berserk/i, Druid: /druid|bear|wolf|fire claws|tornado|hurricane|shockwave/i,
+  Necromancer: /necromancer|necro|bone spear|corpse explosion|golem|skeleton|poison strike/i, Paladin: /paladin|pala\b|zeal|hammer|smite|fanazealot|\bfoh\b/i,
+  Sorceress: /sorceress|\bsorc\b|frozen orb|blizzard|meteor|nova/i };
+const seasonOf = t => { const all = [...String(t).matchAll(/\b(?:S|Season\s*)(\d{1,2})\b/gi)].map(m => +m[1]).filter(n => n > 0 && n < 40); return all.length ? Math.max(...all) : null; };
+const hostOf = u => { try { const h = new URL(u).hostname.replace(/^www\./, ''); return /youtu/.test(h) ? 'YouTube' : /reddit/.test(h) ? 'Reddit' : /docs\.google/.test(h) ? 'Google Docs' : /maxroll/.test(h) ? 'Maxroll' : /pd2\.tools|projectdiablo2/.test(h) ? h : h; } catch { return ''; } };
+
+async function extractGuides(links, pages, doc, skillIndex, targets) {
+  const builds = [], resources = [];
+  const guidePages = pages.filter(p => /^Guide:|guide|^Starter |^\w+Assassin$/i.test(p.title) && p.len > 2000);
+  const internalByTitle = new Map(guidePages.map(p => [p.title, p]));
+  if (links) {
+    let h2 = '', h3 = '';
+    for (const el of flatten(links.d.querySelector('.mw-parser-output'))) {
+      const hd = headingOf(el);
+      if (hd) {
+        if (hd.level <= 2) { h2 = hd.text; h3 = ''; } else h3 = hd.text;
+        const cls = /builds/i.test(h2) && h3 && CLASS_WORDS[h3] ? `?cls=${h3}` : '';
+        targets[`${links.page.id}#${hd.id}`] = /builds|guides/i.test(h2 + h3) ? `guides${cls}` : 'guides/links';
+        continue;
+      }
+      if (!el.matches('table')) continue;
+      const g = grid(el);
+      const head = g[0].map(c => text(c).toLowerCase());
+      const ci = k => head.findIndex(h => h.startsWith(k));
+      for (const row of g.slice(1)) {
+        const nameCell = row[ci('name')];
+        if (!nameCell || !text(nameCell)) continue;
+        const a = nameCell.querySelector('a');
+        let href = a?.getAttribute('href') || '', internal = null;
+        if (href.startsWith('/wiki/')) { let t = decodeURIComponent(href.slice(6)).replace(/_/g, ' '); internal = pages.find(p => p.title === t)?.id || null; }
+        else href = fixUrl(href);
+        const entry = { name: text(nameCell), author: ci('author') >= 0 ? text(row[ci('author')]) : '', date: ci('date') >= 0 ? text(row[ci('date')]) : '',
+          desc: ci('description') >= 0 ? htmlOf(row[ci('description')]) : '', href: internal ? '' : href, page: internal };
+        if (/builds/i.test(h2) && h3) builds.push({ ...entry, cls: h3, season: seasonOf(entry.date) });
+        else if (/general guides/i.test(h2)) builds.push({ ...entry, cls: 'General', season: seasonOf(entry.date) });
+        else resources.push({ ...entry, section: h3 ? `${h2} › ${h3}` : h2 });
+      }
+    }
+    targets[`${links.page.id}#`] = 'guides';
+  }
+  // Wiki-hosted guides: class, headline skills, season, starter, intro.
+  const skillsByName = skillIndex.map(s => ({ ...s, re: new RegExp(`\\b${s.n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'g') }));
+  const meta = [];
+  for (const p of guidePages) {
+    const r = await doc(p.title);
+    const body = text(r.d.querySelector('.mw-parser-output'));
+    const listed = builds.find(b => b.page === p.id);
+    let cls = listed && listed.cls !== 'General' ? listed.cls : null;
+    if (!cls) {
+      const t = p.title + ' ' + body.slice(0, 3000);
+      let best = null, bestN = 0;
+      for (const [c, re] of Object.entries(CLASS_WORDS)) { const n = (t.match(new RegExp(re.source, 'gi')) || []).length + (re.test(p.title) ? 20 : 0); if (n > bestN) { best = c; bestN = n; } }
+      cls = best;
+    }
+    const counts = skillsByName.filter(s => !cls || s.c === cls).map(s => ({ s, n: (body.match(s.re) || []).length })).filter(x => x.n >= 2).sort((a, b) => b.n - a.n);
+    const intro = text([...r.d.querySelectorAll('.mw-parser-output > p')].find(x => text(x).length > 60)).slice(0, 240);
+    meta.push({
+      page: p.id, title: p.title.replace(/^Guide:/, ''), cls, starter: /starter|beginner|budget|league start/i.test(p.title + ' ' + body.slice(0, 1500)),
+      season: listed?.season ?? seasonOf(p.title + ' ' + body.slice(0, 4000)), author: listed?.author || (p.title.match(/by (.+)$|from (\w+)/i) || []).slice(1).find(Boolean) || '',
+      skills: counts.slice(0, 5).map(x => ({ n: x.s.n, c: x.s.c, a: x.s.a })), intro, edited: p.edited, words: body.split(/\s+/).length,
+    });
+  }
+  for (const b of builds) if (b.href) b.host = hostOf(b.href);
+  return { page: links?.page.id, builds, resources, guides: meta };
+}
+
+async function extractBreakpoints(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const tables = [], info = [];
+  let h1 = '', h2 = '', h3 = '', block = null;
+  for (const el of flatten(d.querySelector('.mw-parser-output'))) {
+    const hd = headingOf(el);
+    if (hd) {
+      if (hd.level === 1) { h1 = hd.text; h2 = h3 = ''; } else if (hd.level === 2) { h2 = hd.text; h3 = ''; } else h3 = hd.text;
+      block = { h1, title: hd.text, anchor: hd.id, level: hd.level, html: '' };
+      info.push(block);
+      const tab = /cast/i.test(h2) ? 'fcr' : /hit recovery/i.test(h2) ? 'fhr' : /block/i.test(h2) ? 'fbr' : /^attack speed$/i.test(h2) ? 'ias' : /threshold|diminish/i.test(h1) ? 'thresholds' : /changes/i.test(h1) ? 'changes' : '';
+      targets[`${page.id}#${hd.id}`] = tab ? `breakpoints/${tab}` : 'breakpoints';
+      continue;
+    }
+    if (el.matches('table') && /animation type/i.test(text(el.querySelector('th')))) {
+      const g = grid(el);
+      const frames = g[1].map(c => cellNum(c));
+      const rows = [];
+      for (const row of g.slice(2)) {
+        // Leading header cells name the row: "Amazon", or "Amazon — 1-hand swinging" when the
+        // class spans several animation rows.
+        let lead = 0;
+        while (lead < row.length && row[lead]?.tagName === 'TH') lead++;
+        const name = row.slice(0, Math.max(1, lead)).map(c => text(c).replace(/\s+/g, ' ')).filter(Boolean).join(' — ');
+        if (!name) continue;
+        const bps = [];
+        row.forEach((c, i) => { if (i < Math.max(1, lead)) return; const need = cellNum(c); const f = frames[i]; if (need != null && f != null) bps.push([need, f]); });
+        bps.sort((a, b) => a[0] - b[0]);
+        if (bps.length) rows.push({ name, bps });
+      }
+      // Tables in another layout (wereforms) stay as the wiki's own table.
+      if (rows.length) { tables.push({ stat: h2, sub: h3, anchor: block?.anchor, rows, collapsed: el.classList.contains('mw-collapsed') }); continue; }
+      if (block) block.html += clean(el.outerHTML);
+      continue;
+    }
+    if (el.matches('table') && el.querySelectorAll('tr').length > 20) continue;
+    if (block && (text(el) || el.querySelector('img,math'))) block.html += clean(el.outerHTML);
+  }
+  targets[`${page.id}#`] = 'breakpoints';
+  return { page: page.id, tables, info: info.filter(i => i.html) };
 }

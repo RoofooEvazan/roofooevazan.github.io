@@ -125,14 +125,14 @@
       ['How Crafting Works', '#/cube/guide'], 'Desecration'] },
     { name: 'Endgame', icon: 'map', links: [['Map Explorer', '#/maps'], ['Map Events', '#/maps/events'], ['Modifying Maps', '#/maps/modify'], ['Map Affixes', '#/maps/affixes'],
       ['Zones', '#/zones'], ['Monsters & Ubers', '#/monsters'], ['Mercenaries', '#/mercs'], ['Merc Weapon Compare', '#/' + MERC_ROUTE]] },
-    { name: 'Mechanics', icon: 'gear', links: [['Game Mechanics', '#/mechanics'], ['Crit & Leech Calculators', '#/mechanics/Critical_Damage'], ['Resistance Calculator', '#/mechanics/Reducing_Resistances'], 'Breakpoints', 'General Changes', 'Balance Changes', 'PvP Changes', 'Low Level Dueling', ['Abbreviations', 'Lexicon of Abbreviations'], 'Formula Info', 'Bugs'] },
-    { name: 'Guides & Builds', icon: 'book', auto: 'guides' },
+    { name: 'Mechanics', icon: 'gear', links: [['Game Mechanics', '#/mechanics'], ['Crit & Leech Calculators', '#/mechanics/Critical_Damage'], ['Resistance Calculator', '#/mechanics/Reducing_Resistances'], ['Breakpoints', '#/breakpoints'], 'General Changes', 'Balance Changes', 'PvP Changes', 'Low Level Dueling', ['Abbreviations', 'Lexicon of Abbreviations'], 'Formula Info', 'Bugs'] },
+    { name: 'Guides & Builds', icon: 'book', links: [['Build Directory', '#/guides'], ['Starter Builds', '#/guides?starter=1'], ['Community Links', '#/guides/links']] },
     { name: 'Patch Notes', icon: 'scroll', auto: 'seasons' },
-    { name: 'Help', icon: 'help', links: ['FAQ', 'Support FAQ', 'Item Filtering', 'Filter Info', 'Customization', 'Singleplayer', ['Links & Guides', 'Links'], 'Rules', 'Credits'] },
+    { name: 'Help', icon: 'help', links: [['Help Center', '#/help'], ['Game Crashes & Errors', '#/help?cat=Game%20errors%20%26%20crashes'], 'Item Filtering', 'Filter Info', 'Customization', 'Singleplayer', 'Rules', 'Credits'] },
     { name: 'More Pages', icon: 'list', auto: 'rest' },
   ];
   // Pages our own views replace; they stay reachable through search and A–Z.
-  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Item Bases|Runes|Mercenaries|Mercenary Skills|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
+  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Item Bases|Runes|Mercenaries|Mercenary Skills|FAQ|Support FAQ|Breakpoints|Links|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
 
   function buildSite() {
     const used = new Set();
@@ -368,6 +368,18 @@
       const k = path.split('/')[1] || '';
       return view(() => window.PD2Gear.mercs(main, k, anchor), 'mercs', 'Mercenaries · PD2 Wiki', !!anchor);
     }
+    if (path === 'help' || path.startsWith('help?')) {
+      const qs = raw.split('?')[1] || '';
+      return view(() => window.PD2Guide.help(main, qs, anchor), 'help', 'Help Center · PD2 Wiki', !!anchor);
+    }
+    if (path === 'guides' || path.startsWith('guides?') || path.startsWith('guides/')) {
+      const [p0, qs = ''] = raw.split('?');
+      const tab = p0.split('/')[1] || '';
+      return view(() => window.PD2Guide.guides(main, tab, qs), tab ? 'guides/' + tab : 'guides' + (qs.includes('starter=1') ? '?starter=1' : ''), 'Guides & Builds · PD2 Wiki').then(restore);
+    }
+    if (path === 'breakpoints' || path.startsWith('breakpoints/')) {
+      return view(() => window.PD2Guide.breakpoints(main, path.split('/')[1] || ''), 'breakpoints', 'Breakpoints · PD2 Wiki');
+    }
     if (path.startsWith('map/')) return view(() => window.PD2Maps.detail(main, path.slice(4)), 'maps', 'Map · PD2 Wiki');
     if (path === 'patches' || path.startsWith('patches/')) {
       const k = path.split('/')[1] || '';
@@ -453,6 +465,7 @@
     art.innerHTML = html;
     enhance(art, p);
     await window.PD2Items.transformPage(art, p);
+    window.PD2Guide.guideHeader(p).then(h => { if (h && S.current === p.id) $('.page-meta', main)?.insertAdjacentHTML('afterend', h); });
     if (S.current !== p.id) return;
     buildToc(art, p);
     requestAnimationFrame(markScrollers);
@@ -751,6 +764,7 @@
     window.PD2Cube.load().catch(() => {});
     window.PD2World.load().catch(() => {});
     window.PD2Gear.load().catch(() => {});
+    window.PD2Guide.load().catch(() => {});
     if (S.search) return Promise.resolve(S.search);
     if (!S.searchLoading) {
       S.searchLoading = fetchJSON('data/search.json').then(list => {
@@ -863,6 +877,8 @@
       if (gear.length) html += '<div class="res-group">Runes &amp; bases</div>' + gear.map(g => g.kind === 'rune'
         ? `<a class="res" role="option" href="#/runes#${g.r.name.toLowerCase()}"><span class="res-ico">${g.r.img ? `<img src="${esc(g.r.img)}" alt="">` : ICONS.rune}</span><span><b>${esc(g.r.name)} Rune</b><span class="crumb">#${g.r.n} · level ${g.r.lvl ?? '?'}</span></span></a>`
         : `<a class="res" role="option" href="#/bases?kind=${encodeURIComponent(g.b.kind)}&q=${encodeURIComponent(g.b.name)}"><span class="res-ico">${ICONS.items}</span><span><b>${esc(g.b.name)}</b><span class="crumb">${esc([g.b.tier, g.b.type].filter(Boolean).join(' ') || g.b.kind)} base</span></span></a>`).join('');
+      const helps = window.PD2Guide.search(q, 3);
+      if (helps.length) html += '<div class="res-group">Help</div>' + helps.map(h => `<a class="res" role="option" href="#/help#${h.id}"><span class="res-ico">${ICONS.help}</span><span><b>${esc(h.q)}</b><span class="crumb">${esc(h.cat)}</span></span></a>`).join('');
       const world = window.PD2World.search(q, 4);
       if (world.length) html += '<div class="res-group">Monsters &amp; zones</div>' + world.map(w => w.kind === 'boss'
         ? `<a class="res" role="option" href="#/monsters#${w.b.slug}"><span class="res-ico">${ICONS.skull}</span><span><b>${esc(w.b.name)}</b><span class="crumb">${esc(w.b.group)}</span></span></a>`
@@ -1031,6 +1047,8 @@
         ${tile('#/maps', 'map', 'Map Explorer', 'Every map, filtered by what your build can kill')}
         ${tile('#/monsters', 'skull', 'Monsters & Ubers', 'Bosses, key holders and uber stats')}
         ${tile('#/zones', 'list', 'Zones', 'Every zone’s level, level 85 areas and immunities')}
+        ${tile('#/guides', 'book', 'Build Directory', 'Every build guide by class, starter builds first')}
+        ${tile('#/breakpoints', 'clock', 'Breakpoints', 'Frames at your cast rate, hit recovery, block and attack speed')}
         ${tile('#/' + MERC_ROUTE, 'merc', 'Merc Weapon Compare', 'Best Act 2 merc weapon for your IAS')}
         ${tile('#/mechanics', 'gear', 'Game Mechanics', 'Crit, leech, crushing blow and resistance calculators')}
         ${tile(pageHref('Patch Notes'), 'scroll', 'Patch Notes', 'Every season\u2019s changes')}

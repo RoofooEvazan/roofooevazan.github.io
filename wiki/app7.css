@@ -1,0 +1,54 @@
+/* Help center, build directory, breakpoints — Tristram theme conventions:
+   square corners, var(--font-display) for small labels, palette variables only. */
+
+/* help center */
+.faq{margin-top:4px}
+.qa{border:1px solid var(--edge);border-radius:0;background:var(--panel);margin:0 0 6px;scroll-margin-top:calc(var(--bar-h) + 12px)}
+.qa > summary{cursor:pointer;padding:10px 14px;color:var(--text);list-style:none;display:flex;gap:10px;align-items:baseline}
+.qa > summary::-webkit-details-marker{display:none}
+.qa > summary::before{content:"+";font-family:var(--font-display);color:var(--gold);flex:none;width:12px}
+.qa[open] > summary::before{content:"−"}
+.qa[open] > summary{color:var(--gold-hi);border-bottom:1px solid var(--edge)}
+.qa > .wiki{padding:8px 16px 12px;font-size:15.5px}
+.qa:target{border-color:var(--gold)}
+
+/* build directory */
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.build{min-width:0;overflow-wrap:anywhere;display:flex;flex-direction:column;gap:6px;padding:12px 14px;border:1px solid var(--edge);border-radius:0;background:linear-gradient(180deg,var(--stone-2),var(--stone));color:var(--body);text-decoration:none!important}
+.build:hover{border-color:var(--edge-hi)}
+.build.local{box-shadow:inset 3px 0 0 var(--gold)}
+.build header{display:flex;align-items:flex-start;gap:10px}
+.build header b{color:var(--text);font-weight:700;line-height:1.3}
+.build .cls-orb{width:24px;height:24px;font-size:11px;font-family:var(--font-display);font-weight:400;flex:none}
+.cls-orb.gen{background:var(--void);color:var(--dim)}
+.bmeta{margin:0;color:var(--dim);font-size:13.5px}
+.bmeta .starter{font-style:normal;font-family:var(--font-display);font-size:10px;letter-spacing:.04em;padding:0 5px;margin-left:4px;background:var(--blood);color:var(--tri-accent-fg,#fff)}
+.bskills{display:flex;flex-wrap:wrap;gap:4px;margin:0}
+.bskills span{padding:0 7px;border:1px solid var(--edge);border-radius:0;color:var(--mod);font-size:12.5px}
+.bintro{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
+.chip .cls-orb{width:16px;height:16px;font-size:9px;border-width:1px;font-family:var(--font-display);font-weight:400}
+.guide-facts{display:flex;flex-wrap:wrap;gap:6px;margin:-8px 0 18px}
+.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
+.link{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:1px solid var(--edge);border-radius:0;background:var(--panel);color:var(--body);text-decoration:none!important}
+.link:hover{border-color:var(--edge-hi)}
+.link b{color:var(--gold-hi)}
+.link .by{color:var(--dim);font-size:13px}
+.link .desc{color:var(--muted);font-size:14px}
+
+/* breakpoints */
+.bp-tabs{flex-wrap:wrap}
+.cf.wide{grid-column:span 2}
+.bp-ladder{display:flex;flex-wrap:wrap;gap:4px;margin-top:12px}
+.bp-ladder span{display:flex;flex-direction:column;align-items:center;min-width:48px;padding:4px 6px;border:1px solid var(--edge);border-radius:0;background:var(--void);color:var(--dim);font-size:12.5px;font-variant-numeric:tabular-nums}
+.bp-ladder span b{font-family:var(--font-display);font-weight:400;font-size:11px;color:var(--muted)}
+.bp-ladder span.on{border-color:var(--edge-hi);color:var(--text)}
+.bp-ladder span.cur{border-color:var(--gold);background:rgba(210,176,106,.12)}
+.bp-ladder span.cur b{color:var(--gold-hi)}
+.bp-table{font-size:13.5px}
+.bp-table tr.cur td{background:rgba(210,176,106,.08)}
+.bp-table td.hit{background:var(--gold)!important;color:var(--void);font-weight:700}
+
+@media (max-width:640px){
+  .cf.wide{grid-column:auto}
+  .bgrid,.links{grid-template-columns:minmax(0,1fr)}
+}
