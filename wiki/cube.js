@@ -55,8 +55,12 @@
     return recipes(root, qs);
   }
 
-  // Ingredients "A + B + C" as separate pills.
-  const pills = html => html.split(/\s\+\s/).map(p => `<span class="ing">${p.trim()}</span>`).join('<i class="plus" aria-hidden="true">+</i>');
+  // Ingredients on one line, runes marked so they get their hover card.
+  const ingLine = r => r.ing.split(/\s\+\s/).map(p => {
+    const rune = r.runes.find(n => new RegExp(`^\\s*(<[^>]+>)*\\s*${n}\\b`).test(p));
+    return rune ? `<span class="ri ri-rune" data-hc="rune:${rune}">${p.trim()}</span>` : `<span class="ri">${p.trim()}</span>`;
+  }).join('<i class="plus" aria-hidden="true">+</i>');
+
 
   function recipes(root, qs) {
     const { esc, $, enhanceFragment } = P();
@@ -95,13 +99,13 @@
         const caps = [...new Set(rs.map(r => r.caption))];
         return `<section class="rsec" id="${esc(s.anchor)}">
           <h2 class="home-h">${esc(s.title || s.group)}${s.title ? `<small>${esc(s.group)}</small>` : ''}</h2>
-          ${s.html ? `<details class="about"${rs.length ? '' : ' open'}><summary>About ${esc((s.title || s.group).toLowerCase())}</summary><div class="wiki">${s.html}</div></details>` : ''}
-          ${caps.map(cap => `${cap ? `<h3 class="sub-h">${esc(cap)}</h3>` : ''}<ul class="rlist">${rs.filter(r => r.caption === cap).map(r => `
-            <li class="recipe">
-              ${r.icon ? `<img class="ricon" src="${esc(r.icon)}" alt="" loading="lazy">` : ''}
-              <div class="rin">${pills(r.ing)}</div>
-              <div class="rout"><span class="arrow" aria-hidden="true">→</span><span>${r.res}</span></div>
-              ${r.notes ? `<div class="rnote">${r.notes}</div>` : ''}
+          ${s.html && s.html.replace(/<[^>]+>/g, '').trim().length < 240 ? `<div class="wiki muted rs-intro">${s.html}</div>` : s.html ? `<details class="about"><summary>${rs.length ? `How ${esc((s.title || s.group).toLowerCase())} work` : `Read about ${esc((s.title || s.group).toLowerCase())}`}</summary><div class="wiki">${s.html}</div></details>` : ''}
+          ${caps.map(cap => `${cap ? `<h3 class="sub-h">${esc(cap)}</h3>` : ''}<ul class="rrows">${rs.filter(r => r.caption === cap).map(r => `
+            <li class="rrow">
+              <span class="rr-ico">${r.icon ? `<img src="${esc(r.icon)}" alt="" loading="lazy">` : ''}</span>
+              <span class="rr-in">${ingLine(r)}</span>
+              <span class="rr-out"><i aria-hidden="true">→</i>${r.res}</span>
+              ${r.notes ? `<span class="rr-note">${r.notes}</span>` : ''}
             </li>`).join('')}</ul>`).join('')}
         </section>`;
       }).join('') || `<div class="empty">No recipes match. <a href="#/cube">Clear filters</a></div>`;

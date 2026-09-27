@@ -68,8 +68,9 @@
           chip(l, { ...f, avoid: f.avoid.includes(k) ? f.avoid.filter(x => x !== k) : [...f.avoid, k] }, f.avoid.includes(k), ` el-chip el-${k}`)).join('')}</div></div>
       </div>
       <div class="rcount" aria-live="polite"></div>
+      <p class="zkey muted"><em class="corrupt">C</em> can be a corrupted zone · <span class="l85k">85</span> level 85 in Hell · hover a boss for its details</p>
       <div class="tw"><table class="restable ztable"><thead><tr>
-        <th>Zone</th><th>Act</th>${DIFF.map(([k, l]) => `<th class="${k === f.diff ? 'cur' : ''}" title="${l} monster level">${l === 'Nightmare' ? 'NM' : l[0]}</th>`).join('')}
+        <th>Zone</th>${DIFF.map(([k, l]) => `<th class="${k === f.diff ? 'cur' : ''}" title="${l} monster level">${l === 'Nightmare' ? 'NM' : l[0]}</th>`).join('')}
         <th title="Waypoint">WP</th><th>Immunities <small>(lvl 85)</small></th><th>Super uniques</th></tr></thead><tbody></tbody></table></div>
       ${f.avoid.length ? '<p class="muted">Immunity counts are only listed for level 85 zones, so the immunity filter shows those.</p>' : ''}
       ${foot(Z.page)}`;
@@ -85,6 +86,8 @@
       else if (ff.sort === 'lvl-asc') rows = [...rows].filter(z => lv(z) >= 0).sort((a, b) => lv(a) - lv(b));
       else if (ff.sort === 'name') rows = [...rows].sort((a, b) => a.name.localeCompare(b.name));
       count.textContent = `${rows.length} zone${rows.length === 1 ? '' : 's'}`;
+      const byAct = ff.sort === 'act';
+      let lastAct = null;
       body.innerHTML = rows.map(z => {
         const lvCell = k => {
           const v = z.lvl[k];
@@ -94,12 +97,14 @@
         const imm = z.immune ? `<div class="imm">${EL.filter(([k]) => z.immune[k]?.n).map(([k, l]) => `<span class="el el-${k} on" title="${esc(z.immune[k].t)} ${l.toLowerCase()}-immune monster type(s)">${l.slice(0, 4)}<b>${esc(z.immune[k].t.replace(/\s/g, ''))}</b></span>`).join('') || '<span class="muted">none</span>'}</div>` : '';
         const sup = z.supers.map(s => {
           const b = bossBy.get(s.toLowerCase().replace(/^the /, ''));
-          return b ? `<a class="sup sup-boss" href="#/monsters#${b.slug}">${esc(s)}</a>` : `<span class="sup">${esc(s)}</span>`;
-        }).join('');
-        return `<tr id="z-${esc(z.slug)}"><td class="zn"><b>${esc(z.name)}</b>${z.parent ? `<small>in ${esc(z.parent)}</small>` : ''}${z.corrupt ? '<em class="corrupt" title="Can be a corrupted zone (monster level 85)">corruptible</em>' : ''}</td>
-          <td class="r">${z.act ? 'A' + z.act : ''}</td>${DIFF.map(([k]) => lvCell(k)).join('')}
+          return b ? `<a class="sup sup-boss" href="#/monsters#${b.slug}" data-hc="boss:${esc(b.slug)}">${esc(s)}</a>` : `<span class="sup">${esc(s)}</span>`;
+        }).join('<i class="zsep">, </i>');
+        const act = byAct && z.act !== lastAct ? `<tr class="zact"><th colspan="7">${z.act ? `Act ${z.act}` : 'Other'}</th></tr>` : '';
+        lastAct = z.act;
+        return `${act}<tr id="z-${esc(z.slug)}"><td class="zn">${!byAct && z.act ? `<i class="zact-n">A${z.act}</i>` : ''}<b>${esc(z.name)}</b>${z.parent ? ` <small>· ${esc(z.parent)}</small>` : ''}${z.corrupt ? ' <em class="corrupt" title="Can be a corrupted zone (monster level 85)">C</em>' : ''}</td>
+          ${DIFF.map(([k]) => lvCell(k)).join('')}
           <td class="r">${z.wp ? '<span class="wp" title="Waypoint">✓</span>' : ''}</td><td>${imm}</td><td class="sups">${sup}</td></tr>`;
-      }).join('') || `<tr><td colspan="8" class="empty">No zones match. <a href="#/zones">Clear filters</a></td></tr>`;
+      }).join('') || `<tr><td colspan="7" class="empty">No zones match. <a href="#/zones">Clear filters</a></td></tr>`;
     };
     draw(f);
     const live = patch => { const next = { ...readQ(location.hash.split('?')[1]), ...patch }; history.replaceState(null, '', writeQ(next)); draw(next); };
