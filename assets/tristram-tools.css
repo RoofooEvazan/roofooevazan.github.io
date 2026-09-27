@@ -117,3 +117,39 @@ details.fx > summary::before{border-left-color:var(--tri-gold)}
   .tab{font-size:10px;padding:11px 6px}
   details.fx.c > summary{font-size:12px}
 }
+
+/* ---------- Chaos: the other theme from the site nav's switch ----------
+   tristram.css swaps the --tri-* colors; these are the tools' own names.
+   Cinzel is narrower than Silkscreen, so display text grows back. */
+:root[data-theme="chaos"]{
+  --void:#090807;
+  --stone:#14110f;
+  --stone-2:#1e1814;
+  --pit:#0d0b09;
+  --edge:#4e3b28;
+  --edge-hi:#6e5230;
+  --ink:#f0e6d6;
+  --muted:#a89480;
+  --gold:#c4924a;
+  --gold-hi:#e0b878;
+  --blood:#a8321f;
+  --display:"Cinzel",Palatino,Georgia,serif;
+  --heat-slow:#1a1511;
+}
+:root[data-theme="chaos"] a{color:#d9a860}
+:root[data-theme="chaos"] h1{font-size:clamp(26px,4.4vw,42px);letter-spacing:.14em;text-transform:uppercase}
+:root[data-theme="chaos"] .panel{box-shadow:0 14px 40px rgba(0,0,0,.6);border-color:color-mix(in srgb,var(--tri-gold) 60%,transparent)}
+:root[data-theme="chaos"] .rune-rule{background:linear-gradient(90deg,transparent,var(--tri-gold) 20%,var(--tri-gold) 80%,transparent) center/100% 1px no-repeat;height:10px}
+:root[data-theme="chaos"] .tab,:root[data-theme="chaos"] .subtab,:root[data-theme="chaos"] .btn,
+:root[data-theme="chaos"] .seg button,:root[data-theme="chaos"] .subt button{font-size:13px;letter-spacing:.1em}
+:root[data-theme="chaos"] h2,:root[data-theme="chaos"] legend{font-size:14px;letter-spacing:.12em}
+:root[data-theme="chaos"] h3{font-size:19px}
+:root[data-theme="chaos"] h4{font-size:15px}
+:root[data-theme="chaos"] th{font-size:11px;letter-spacing:.1em}
+:root[data-theme="chaos"] .res .lab,:root[data-theme="chaos"] .heat-axis,:root[data-theme="chaos"] .worked .tag{font-size:11px;letter-spacing:.1em}
+:root[data-theme="chaos"] .res .big{font-size:48px}
+:root[data-theme="chaos"] .worked .total b{font-size:32px}
+:root[data-theme="chaos"] .chain .link b{font-size:13px}
+:root[data-theme="chaos"] details.fx.c > summary{font-size:18px}
+:root[data-theme="chaos"] details.fx.f > summary{font-size:15px}
+:root[data-theme="chaos"] .eyebrow{font-size:12px;letter-spacing:.14em}

@@ -64,6 +64,8 @@ The main page and the wiki use the Tristram theme: pixel stone, a blood-red rule
 
 The calculators share one older "stone and gold" design (`--void`, `--stone`, `--display`… and the HD dungeon skin). [`assets/tristram-tools.css`](assets/tristram-tools.css) turns that design into the Tristram theme, so each tool links it after its own styles, next to `tristram.css`.
 
+**Chaos theme.** The nav bar has a Tristram / Chaos switch. The choice is saved in the browser (`localStorage` key `rf-theme`) and `site-nav.js` applies it as `<html data-theme="chaos">` before the page draws, so it follows the visitor to every page of the site. Chaos (black stone, dull brass, Cinzel headings, the lava-lit seal plate `assets/chaos.jpg`) is a `:root[data-theme="chaos"]` block in each theme sheet: `assets/tristram.css`, `assets/tristram-tools.css`, `wiki/tristram.css` and the Filter Builder's `docs/css/tristram.css`.
+
 ## Loot Filter Builder
 
 **https://roofooevazan.github.io/Roofoo-s-PD2-Loot-Filter/**

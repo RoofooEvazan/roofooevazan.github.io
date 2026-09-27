@@ -12,7 +12,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=Silkscreen:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700&family=Silkscreen:wght@400;700&display=swap">
 <link rel="stylesheet" href="assets/tristram.css">
 <style>
 *{box-sizing:border-box}
@@ -28,6 +28,14 @@ body.tri::before{
     url("assets/tristram.jpg") center/cover no-repeat,
     var(--tri-bg);
 }
+:root[data-theme="chaos"] body.tri::before{
+  background:
+    linear-gradient(to bottom,rgba(9,8,7,.45),transparent 22%,transparent 72%,rgba(9,8,7,.7)),
+    url("assets/chaos.jpg") center/cover no-repeat,
+    var(--tri-bg);
+}
+:root[data-theme="chaos"] h1{letter-spacing:.14em}
+:root[data-theme="chaos"] .tool h3,:root[data-theme="chaos"] .other b{font-size:1.1rem;letter-spacing:.06em}
 .on-plate{text-shadow:0 1px 0 #000,0 0 6px rgba(0,0,0,.95),0 0 18px rgba(0,0,0,.8)}
 
 header.wrap{text-align:center;padding:56px 16px 30px}

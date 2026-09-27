@@ -57,3 +57,39 @@ body.tri{--tri-dim:74%;background:transparent}
 .tool-card .glyph{background:var(--void);color:var(--gold)}
 .pill{background:var(--void)}
 .welcome{background:rgba(16,12,10,.6);border-left-color:var(--blood)}
+
+/* ---------- Chaos: the other theme from the site nav's switch ----------
+   Black stone and dull brass; brass is also the accent, so --blood carries it
+   here. Cinzel is narrower than Silkscreen, so display text grows back. */
+:root[data-theme="chaos"]{
+  --void:#090807;
+  --stone:#14110f;
+  --stone-2:#1e1814;
+  --stone-3:#261e18;
+  --edge:#4e3b28;
+  --edge-hi:#6e5230;
+  --gold:#c4924a;
+  --gold-hi:#e0b878;
+  --link:#d9a860;
+  --text:#f0e6d6;
+  --body:#ddd0bc;
+  --muted:#a89480;
+  --dim:#86735f;
+  --blood:#c4924a;
+  --font-display:"Cinzel",Palatino,Georgia,serif;
+}
+:root[data-theme="chaos"] .bar{background:rgba(9,8,7,.95)}
+:root[data-theme="chaos"] .side{background:rgba(9,8,7,.82)}
+:root[data-theme="chaos"] .toc-rail{background:rgba(9,8,7,.6)}
+:root[data-theme="chaos"] .main{box-shadow:none;border-color:color-mix(in srgb,var(--gold) 55%,transparent)}
+:root[data-theme="chaos"] .wordmark{font-size:16px;letter-spacing:.1em}
+:root[data-theme="chaos"] .page-title{font-size:clamp(24px,3.4vw,36px);letter-spacing:.06em}
+:root[data-theme="chaos"] .hero h1{font-size:clamp(28px,4.4vw,44px);letter-spacing:.12em;text-transform:uppercase}
+:root[data-theme="chaos"] .side-nav summary,:root[data-theme="chaos"] .toc-title,:root[data-theme="chaos"] .home-h{font-size:13px;letter-spacing:.1em}
+:root[data-theme="chaos"] .wiki .mw-heading1 h1{font-size:26px}
+:root[data-theme="chaos"] .wiki .mw-heading2 h2{font-size:21px}
+:root[data-theme="chaos"] .wiki .mw-heading3 h3{font-size:17px}
+:root[data-theme="chaos"] .icard-title b,:root[data-theme="chaos"] .tile b,:root[data-theme="chaos"] .mtitle b{font-size:16px}
+:root[data-theme="chaos"] .tool-card b{font-size:18px}
+:root[data-theme="chaos"] .tt-name,:root[data-theme="chaos"] .skill-head h2{font-size:24px}
+:root[data-theme="chaos"] .welcome{border-left-color:var(--gold)}
