@@ -60,6 +60,8 @@ The main page and the wiki use the Tristram theme: pixel stone, a blood-red rule
 <!-- then <body class="tri"> for the page ground -->
 ```
 
+The calculators share one older "stone and gold" design (`--void`, `--stone`, `--display`… and the HD dungeon skin). [`assets/tristram-tools.css`](assets/tristram-tools.css) turns that design into the Tristram theme, so each tool links it after its own styles, next to `tristram.css`.
+
 ## Loot Filter Builder
 
 **https://roofooevazan.github.io/Roofoo-s-PD2-Loot-Filter/**
