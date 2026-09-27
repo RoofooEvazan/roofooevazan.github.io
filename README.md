@@ -19,16 +19,19 @@ The main page that links all of RoofooEvazan's Project Diablo 2 tools together. 
 
 **https://roofooevazan.github.io/wiki/**
 
-A copy of the [Project Diablo 2 wiki](https://wiki.projectdiablo2.com/) that's easier to read and search, on desktop or phone:
+Everything from the [Project Diablo 2 wiki](https://wiki.projectdiablo2.com/), reorganized in this site's own style so it's faster to find things, on desktop or phone:
 
-- **Search** finds pages, single sections (every runeword, skill and unique has its own) and full-text mentions as you type. Press `/` to jump to it.
-- **Browse** uses the wiki's own main-page menus in a sidebar, with guides, patch notes and every other page grouped below.
-- **Pages** get a sticky outline, sortable tables, row filters on long tables, collapsible changelogs and tap-to-zoom images.
+- **Item database** with every unique, set item and runeword as a card. Filter by type, slot, weapon type, tier, sockets, base type and level; search by name, rune or any stat ("faster cast rate"); show only what PD2 changed. Each item has its own page with a D2-style tooltip, exactly what PD2 added, changed or removed, the base item, and the rest of its set.
+- **Skill browser** for each class, with the three trees laid out by level and a skill-level slider in place of the wiki's 60-column tables.
+- **Our own navigation**: Items, Skills, Crafting & Cube, Endgame, Mechanics, Guides, Patch Notes and Help. Pages that no section lists still appear under More Pages.
+- **Search** finds items and skills first, then pages, sections and full-text mentions, as you type. Press `/` to jump to it.
+- **Every other page** uses the site's style, with a sticky outline, sortable and filterable tables, and collapsible changelogs. Item lists inside pages become item cards.
 - **Act 2 Merc Weapon Compare** turns the [merc weapon spreadsheet](https://docs.google.com/spreadsheets/d/1EnksMO35WPthXshjlNCg_wmbfYB_kcgUT321p6GhcsI/edit?gid=0) into a tool: set item and skill IAS (and optionally merc Str/Dex) to rank every weapon, see the best weapon at each IAS, and how much IAS the next breakpoint needs.
 
-**Daily sync.** [`.github/workflows/wiki-sync.yml`](.github/workflows/wiki-sync.yml) runs [`tools/wiki-sync/sync.mjs`](tools/wiki-sync/sync.mjs) every day at 07:23 UTC. It asks the wiki's API which pages changed, re-fetches only those, pulls the spreadsheet, and commits anything new to `wiki/data/`, which Pages then republishes. Each run's changes are listed on the wiki's Recent Changes page. To sync right away, open **Actions → Wiki sync → Run workflow** (tick *full* to re-fetch every page). To run it locally:
+**Daily sync.** [`.github/workflows/wiki-sync.yml`](.github/workflows/wiki-sync.yml) runs [`tools/wiki-sync/sync.mjs`](tools/wiki-sync/sync.mjs) every day at 07:23 UTC. It asks the wiki's API which pages changed, re-fetches only those, pulls the spreadsheet, rebuilds the item and skill data with [`extract.mjs`](tools/wiki-sync/extract.mjs), and commits anything new to `wiki/data/`, which Pages then republishes. Each run's changes are listed on the wiki's Recent Changes page. To sync right away, open **Actions → Wiki sync → Run workflow** (tick *full* to re-fetch every page). To run it locally:
 
 ```
+npm ci --prefix tools/wiki-sync
 node tools/wiki-sync/sync.mjs
 ```
 

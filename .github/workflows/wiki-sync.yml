@@ -32,6 +32,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: Install the sync's HTML parser
+        run: npm ci --prefix tools/wiki-sync
+
       - name: Sync from wiki.projectdiablo2.com
         id: sync
         run: node tools/wiki-sync/sync.mjs ${{ inputs.full && '--full' || '' }}

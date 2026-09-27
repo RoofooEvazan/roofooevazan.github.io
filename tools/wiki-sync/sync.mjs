@@ -11,6 +11,7 @@ import { mkdir, readFile, writeFile, readdir, unlink } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { extract } from './extract.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const OUT = join(ROOT, 'wiki', 'data');
@@ -233,12 +234,30 @@ async function main() {
 
   const main = pages.find(p => p.title === 'Main Page');
   const mainHtml = main ? await readFile(join(PAGES, `${main.id}.html`), 'utf8') : '';
+  // Structured items and skills for the reader's own views. If the wiki's markup ever
+  // stops parsing, keep the previous files rather than publishing empty ones.
+  let targets = prev.targets || {};
+  let skillIndex = prev.skillIndex || [];
+  try {
+    const ex = await extract(pages, OUT);
+    if (ex.items.length < 300) throw new Error(`only ${ex.items.length} items found`);
+    await put(join(OUT, 'items.json'), JSON.stringify({ items: ex.items, sets: ex.sets }) + '\n');
+    for (const [cls, data] of Object.entries(ex.skills)) await put(join(OUT, 'skills', `${cls}.json`), JSON.stringify(data) + '\n');
+    targets = ex.targets;
+    skillIndex = Object.values(ex.skills).flatMap(c => c.trees.flatMap(t => t.skills.map(k => ({ c: c.cls, n: k.name, a: k.anchor, l: k.lvl, t: t.name, i: k.img }))));
+    console.log(`extracted ${ex.items.length} items, ${ex.sets.length} sets, ${Object.keys(ex.skills).length} skill classes`);
+  } catch (e) {
+    console.warn(`! extraction failed, keeping the previous item and skill data: ${e.message}`);
+  }
+
   const index = {
     source: WIKI,
     license: 'CC BY-SA 4.0',
     nav: navFromMainPage(mainHtml),
     pages,
     redirects,
+    targets,
+    skillIndex,
   };
   const indexChanged = await put(join(OUT, 'index.json'), index);
 

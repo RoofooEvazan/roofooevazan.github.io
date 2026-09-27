@@ -1,0 +1,9 @@
+{
+  "name": "pd2-wiki-sync",
+  "private": true,
+  "type": "module",
+  "description": "Mirrors the PD2 wiki into wiki/data/ for roofooevazan.github.io/wiki/",
+  "dependencies": {
+    "linkedom": "^0.18.5"
+  }
+}
