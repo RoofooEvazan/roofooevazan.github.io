@@ -124,7 +124,7 @@
     { name: 'Crafting & Cube', icon: 'craft', links: [['Cube Recipes', '#/cube'], ['Crafted Items', '#/cube/crafting'], ['Corruptions', '#/cube/corruptions'],
       ['How Crafting Works', '#/cube/guide'], 'Desecration'] },
     { name: 'Endgame', icon: 'map', links: [['Map Explorer', '#/maps'], ['Map Events', '#/maps/events'], ['Modifying Maps', '#/maps/modify'], ['Map Affixes', '#/maps/affixes'],
-      'Zones', 'Monsters', 'Mercenaries', ['Merc Weapon Compare', '#/' + MERC_ROUTE]] },
+      ['Zones', '#/zones'], ['Monsters & Ubers', '#/monsters'], 'Mercenaries', ['Merc Weapon Compare', '#/' + MERC_ROUTE]] },
     { name: 'Mechanics', icon: 'gear', links: ['Game Mechanics', 'Breakpoints', 'General Changes', 'Balance Changes', 'PvP Changes', 'Low Level Dueling', ['Abbreviations', 'Lexicon of Abbreviations'], 'Formula Info', 'Bugs'] },
     { name: 'Guides & Builds', icon: 'book', auto: 'guides' },
     { name: 'Patch Notes', icon: 'scroll', auto: 'seasons' },
@@ -132,7 +132,7 @@
     { name: 'More Pages', icon: 'list', auto: 'rest' },
   ];
   // Pages our own views replace; they stay reachable through search and A–Z.
-  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
+  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
 
   function buildSite() {
     const used = new Set();
@@ -334,6 +334,11 @@
         else restore();
       });
     }
+    if (path === 'zones' || path.startsWith('zones?')) {
+      const qs = raw.split('?')[1] || '';
+      return view(() => window.PD2World.zones(main, qs), 'zones', 'Zones · PD2 Wiki').then(restore);
+    }
+    if (path === 'monsters') return view(() => window.PD2World.monsters(main, anchor), 'monsters', 'Monsters · PD2 Wiki', !!anchor);
     if (path.startsWith('map/')) return view(() => window.PD2Maps.detail(main, path.slice(4)), 'maps', 'Map · PD2 Wiki');
     if (path === 'patches' || path.startsWith('patches/')) {
       const k = path.split('/')[1] || '';
@@ -715,6 +720,7 @@
     window.PD2Items.load().catch(() => {});
     window.PD2Maps.load().catch(() => {});
     window.PD2Cube.load().catch(() => {});
+    window.PD2World.load().catch(() => {});
     if (S.search) return Promise.resolve(S.search);
     if (!S.searchLoading) {
       S.searchLoading = fetchJSON('data/search.json').then(list => {
@@ -820,6 +826,10 @@
       if (r.skills.length) html += '<div class="res-group">Skills</div>' + r.skills.map(skillRes).join('');
       const crafts = window.PD2Cube.search(q, 3);
       if (crafts.length) html += '<div class="res-group">Crafted items</div>' + crafts.map(c => `<a class="res" role="option" href="#/cube/crafting?type=${encodeURIComponent(c.type)}&slot=${encodeURIComponent(c.slot)}"><span class="res-ico">${c.img ? `<img src="${esc(c.img)}" alt="">` : ICONS.craft}</span><span><b>${esc(c.name)}</b><span class="crumb">${esc(c.recipe.join(' + '))}</span></span></a>`).join('');
+      const world = window.PD2World.search(q, 4);
+      if (world.length) html += '<div class="res-group">Monsters &amp; zones</div>' + world.map(w => w.kind === 'boss'
+        ? `<a class="res" role="option" href="#/monsters#${w.b.slug}"><span class="res-ico">${ICONS.skull}</span><span><b>${esc(w.b.name)}</b><span class="crumb">${esc(w.b.group)}</span></span></a>`
+        : `<a class="res" role="option" href="#/zones?q=${encodeURIComponent(w.z.name)}"><span class="res-ico">${ICONS.map}</span><span><b>${esc(w.z.name)}</b><span class="crumb">${w.z.act ? 'Act ' + w.z.act + ' · ' : ''}${w.z.lvl.h ? 'Hell level ' + w.z.lvl.h : 'Town'}</span></span></a>`).join('');
       const maps = window.PD2Maps.search(q, 3);
       if (maps.length) html += '<div class="res-group">Maps</div>' + maps.map(m => `<a class="res" role="option" href="#/map/${m.slug}"><span class="res-ico">${m.icon ? `<img src="${esc(m.icon)}" alt="">` : ICONS.map}</span><span><b>${esc(m.name)}</b><span class="crumb">${esc(m.tier)} map · ${m.monsters.length} monster types</span></span></a>`).join('');
       if (r.pages.length) html += '<div class="res-group">Pages</div>' + r.pages.map(({ p }) =>
@@ -982,7 +992,8 @@
       <div class="tiles">
         ${tile('#/cube', 'craft', 'Crafting & Cube', 'Every cube recipe, craft and corruption')}
         ${tile('#/maps', 'map', 'Map Explorer', 'Every map, filtered by what your build can kill')}
-        ${tile(pageHref('Monsters'), 'skull', 'Monsters', 'Bosses, ubers and what changed')}
+        ${tile('#/monsters', 'skull', 'Monsters & Ubers', 'Bosses, key holders and uber stats')}
+        ${tile('#/zones', 'list', 'Zones', 'Every zone’s level, level 85 areas and immunities')}
         ${tile('#/' + MERC_ROUTE, 'merc', 'Merc Weapon Compare', 'Best Act 2 merc weapon for your IAS')}
         ${tile(pageHref('Game Mechanics'), 'gear', 'Mechanics', 'Breakpoints, formulas and general changes')}
         ${tile(pageHref('Patch Notes'), 'scroll', 'Patch Notes', 'Every season\u2019s changes')}

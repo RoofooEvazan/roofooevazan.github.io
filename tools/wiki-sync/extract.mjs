@@ -317,7 +317,10 @@ export async function extract(pages, dir) {
     corruptions: await extractCorruptions(await doc('Corruptions'), targets),
   };
 
-  return { items, sets, skills, targets, maps, patches, cube };
+  const zones = await extractZones(await doc('Zones'), targets);
+  const monsters = await extractMonsters(await doc('Monsters'), targets, zones);
+
+  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters } };
 }
 
 // ---------- maps ----------
@@ -688,4 +691,142 @@ async function extractCorruptions(r, targets) {
   }
   targets[`${page.id}#`] = 'cube/corruptions';
   return { page: page.id, types, blocks: blocks.filter(b => b.html) };
+}
+
+// ---------- zones & monsters ----------
+const zoneKey = s => String(s || '').toLowerCase().replace(/\blevel\s+/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+const cellNum = c => { const m = text(c).match(/-?\d+/); return m ? +m[0] : null; };
+const immTotal = t => (t.match(/\d+/g) || []).reduce((a, b) => a + +b, 0);
+
+async function extractZones(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const zones = [], info = [];
+  let corruptible = [];
+  const byKey = new Map();
+  for (const table of d.querySelectorAll('table')) {
+    const cap = text(table.querySelector('caption'));
+    const g = grid(table);
+    const head = (g[0] || []).map(c => text(c).toLowerCase());
+    const col = k => head.findIndex(h => h.startsWith(k));
+    if (/zone levels/i.test(cap)) {
+      for (const row of g.slice(1)) {
+        if (!row[0] || !text(row[0])) continue;
+        const loc = text(row[col('location')]);
+        const act = (loc.match(/^A(\d)/) || [])[1];
+        const hellCell = row[col('hell')];
+        const supers = text(row[col('super')]).split(/,|\s{2,}|;/).map(s => s.replace(/\*+$/, '').trim()).filter(Boolean);
+        const z = {
+          name: text(row[0]), slug: slug(text(row[0])), act: act ? +act : null, parent: loc.replace(/^A\d\s*/, ''),
+          lvl: { n: cellNum(row[col('normal')]), nm: cellNum(row[col('nightmare')]), h: cellNum(hellCell) },
+          hellWas: col('hell was') >= 0 ? cellNum(row[col('hell was')]) : cellNum(row[6]),
+          wp: /\*/.test(text(row[col('wp')])), supers,
+        };
+        zones.push(z);
+        byKey.set(zoneKey(z.name), z);
+      }
+    } else if (/immunities/i.test(cap)) {
+      const els = ['phys', 'magic', 'fire', 'light', 'cold', 'poison'];
+      for (const row of g.slice(1)) {
+        if (!row[0]) continue;
+        const name = text(row[0]);
+        let z = byKey.get(zoneKey(name));
+        if (!z) {
+          // "Hole 1" is "Hole Level 1"; also try matching by prefix within the same act.
+          const k = zoneKey(name);
+          z = zones.find(x => zoneKey(x.name) === k || zoneKey(x.name).replace(/ /g, '') === k.replace(/ /g, ''));
+        }
+        const imm = {};
+        els.forEach((e, i) => { const t = text(row[1 + i]); if (t) imm[e] = { n: immTotal(t), t }; });
+        const vanilla = cellNum(row[col('vanilla')]);
+        if (z) { z.immune = imm; z.l85 = true; if (vanilla != null) z.vanilla = vanilla; }
+        else {
+          const loc = text(row[col('location')]);
+          const act = (loc.match(/^A(\d)/) || [])[1];
+          const nz = { name, slug: slug(name), act: act ? +act : null, parent: loc.replace(/^A\d\s*/, ''), lvl: { n: null, nm: null, h: 85 }, supers: [], immune: imm, l85: true, vanilla };
+          zones.push(nz); byKey.set(zoneKey(name), nz);
+        }
+      }
+    } else if (head[0] === 'act' && head[1] === 'zone') {
+      corruptible = g.slice(1).map(row => ({ act: text(row[0]), zone: text(row[1]) })).filter(x => x.zone);
+    }
+  }
+  for (const z of zones) if (z.lvl.h >= 85) z.l85 = true;
+  // Corruptible zones: entries can list several zones ("Cave Level 1 & 2"), so match loosely.
+  // "Cold Plains and The Cave" covers Cold Plains and every Cave level.
+  const parts = corruptible.flatMap(c => c.zone.split(/ and | & |, /).map(p => zoneKey(p).replace(/^the /, '')));
+  for (const z of zones) {
+    const k = zoneKey(z.name).replace(/^the /, '');
+    if (parts.some(p => p && (k === p || k === p + 's' || k.startsWith(p + ' ') || k.startsWith(p + 's ')))) z.corrupt = true;
+  }
+  // Prose sections (general notes, corrupted zones) as info blocks, without their big tables.
+  for (const w of d.querySelectorAll('.mw-heading')) {
+    const hd = headingOf(w);
+    if (!hd) continue;
+    const html = sectionAfter(w, hd.level).filter(e => !e.matches('table')).map(e => clean(e.outerHTML)).join('');
+    if (text({ textContent: html.replace(/<[^>]+>/g, '') })) info.push({ title: hd.text, anchor: hd.id, html });
+    targets[`${page.id}#${hd.id}`] = 'zones';
+  }
+  targets[`${page.id}#`] = 'zones';
+  return { page: page.id, zones, corruptible, info };
+}
+
+async function extractMonsters(r, targets, zones) {
+  if (!r) return null;
+  const { page, d } = r;
+  const bosses = [], info = [], statRows = [];
+  let group = '', sub = '', cur = null, block = null;
+  const ENTRY_GROUPS = /special monsters|ubers/i;
+  const els = flatten(d.querySelector('.mw-parser-output'));
+  for (const el of els) {
+    const hd = headingOf(el);
+    const bare = !hd && /^H[3-5]$/.test(el.tagName) ? { level: +el.tagName[1], id: el.id, text: text(el) } : null;
+    const h = hd || bare;
+    if (h) {
+      if (h.level === 2) { group = h.text; sub = ''; cur = null; block = { title: h.text, anchor: h.id, html: '' }; info.push(block); targets[`${page.id}#${h.id}`] = `monsters#${h.id}`; continue; }
+      const isSubGroup = /key holders/i.test(h.text);
+      if (isSubGroup) { sub = h.text; cur = null; block = { title: h.text, anchor: h.id, html: '', parent: group }; info.push(block); targets[`${page.id}#${h.id}`] = `monsters#${h.id}`; continue; }
+      if (ENTRY_GROUPS.test(group)) {
+        const g = sub && h.level > 3 ? sub : /ubers/i.test(group) ? 'Ubers' : 'Act Bosses';
+        if (h.level === 3) sub = '';
+        cur = { name: h.text, slug: slug(h.text), group: g, anchor: h.id, html: '' };
+        bosses.push(cur);
+        block = null;
+        targets[`${page.id}#${h.id}`] = `monsters#${slug(h.text)}`;
+        continue;
+      }
+      cur = null; block = { title: h.text, anchor: h.id, html: '', parent: group }; info.push(block);
+      targets[`${page.id}#${h.id}`] = `monsters#${h.id}`;
+      continue;
+    }
+    if (el.matches('table') && /monster/i.test(text(el.querySelector('th')))) {
+      const g = grid(el);
+      const head = g[0].map(c => text(c).toLowerCase());
+      if (head.includes('phys')) {
+        for (const row of g.slice(1)) {
+          const o = { name: text(row[0]) };
+          head.forEach((k, i) => { if (i) o[k] = text(row[i]); });
+          o.where = cur ? cur.slug : (sub || group);
+          statRows.push(o);
+        }
+        continue;
+      }
+    }
+    const target = cur || block;
+    if (target && text(el)) target.html += clean(el.outerHTML);
+  }
+  // Attach stat rows to bosses of the same name; the rest (e.g. Uber Andariel) stay as a table.
+  const EL6 = ['phys', 'magic', 'fire', 'light', 'cold', 'poison'];
+  for (const row of statRows) {
+    const b = bosses.find(x => x.name.toLowerCase() === row.name.toLowerCase());
+    row.res = Object.fromEntries(EL6.map(e => [e, parseInt(row[e], 10) || 0]));
+    if (b) b.stats = row;
+  }
+  // Where each boss lives, from the zone list's super uniques.
+  for (const b of bosses) {
+    const k = b.name.toLowerCase().replace(/^the /, '');
+    b.zones = (zones?.zones || []).filter(z => z.supers.some(s => s.toLowerCase().replace(/^the /, '') === k)).map(z => z.slug);
+  }
+  targets[`${page.id}#`] = 'monsters';
+  return { page: page.id, bosses, info: info.filter(b => b.html), stats: statRows };
 }
