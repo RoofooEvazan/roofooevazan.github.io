@@ -954,7 +954,6 @@
       if (e.target.closest('#q-results a')) { input.blur(); input.value = ''; }
       if (!e.target.closest('.search')) closeResults();
     });
-    $('#home-search-btn')?.addEventListener('click', () => input.focus());
   }
 
   function closeResults() {
@@ -1001,17 +1000,52 @@
     let q = raw;
     try { q = decodeURIComponent(raw); } catch {}
     main.innerHTML = `<h1 class="page-title">Search</h1><div class="page-meta">Results for “${esc(q)}”</div><div class="loading">Searching…</div>`;
-    try { await Promise.all([loadSearch(), window.PD2Items.load()]); } catch {}
+    try {
+      await Promise.all([loadSearch(), window.PD2Items.load(), window.PD2Gear.load(), window.PD2Cube.load(), window.PD2World.load(), window.PD2Maps.load(), window.PD2Guide.load(), window.PD2Filters.load()].map(p => p.catch(() => {})));
+    } catch {}
     const r = searchAll(q, { items: 60, skills: 30, pages: 30, heads: 60, hits: 120 });
-    const li = (href, title, crumb, snip, hl = true) => `<li><a href="${href}"${hl ? hlAttr(q) : ''}><b>${title}</b></a>${crumb ? `<div class="crumb">${crumb}</div>` : ''}${snip ? `<p>${snip}</p>` : ''}</li>`;
-    let html = '';
-    if (r.items.length) html += `<h2 class="home-h">Items</h2><div class="igrid">${r.items.map(it => window.PD2Items.card(it)).join('')}</div>`;
-    if (r.skills.length) html += `<h2 class="home-h">Skills</h2><ul class="sres">${r.skills.map(s => li(`#/skills/${s.c}/${encodeURIComponent(s.a)}`, esc(s.n), `${esc(s.c)} · ${esc(s.t)} · level ${s.l || 1}`, '', false)).join('')}</ul>`;
-    if (r.pages.length) html += `<h2 class="home-h">Pages</h2><ul class="sres">${r.pages.map(({ p }) => li(pageHref(p.title), esc(displayName(p)), esc(S.groupOf.get(p.id) || ''), esc(p.intro || ''))).join('')}</ul>`;
-    if (r.heads.length) html += `<h2 class="home-h">Sections</h2><ul class="sres">${r.heads.map(({ e }) => li(pageHref(e.p.title, e.anchor), esc(e.heading), 'in ' + esc(displayName(e.p)), snippet(e.text, q, 200))).join('')}</ul>`;
-    if (r.hits.length) html += `<h2 class="home-h">Mentions</h2><ul class="sres">${r.hits.map(({ e }) => li(pageHref(e.p.title, e.anchor), esc(displayName(e.p)) + (e.heading ? ' › ' + esc(e.heading) : ''), '', snippet(e.text, q, 220))).join('')}</ul>`;
-    if (!html) html = `<div class="error"><b>Nothing found for “${esc(q)}”.</b><br>Try fewer words, or <a href="${WIKI}/w/index.php?search=${encodeURIComponent(q)}" target="_blank" rel="noopener">search the PD2 Wiki itself</a>.</div>`;
-    main.innerHTML = `<h1 class="page-title">Search</h1><div class="page-meta">Results for “${esc(q)}” · <a href="#/items?q=${encodeURIComponent(q)}">Search item stats for “${esc(q)}”</a></div>${html}`;
+    const statN = q.length >= 3 ? window.PD2Items.countMatches(q) : 0;
+    const row = (href, title, crumb, extra = '', hc = '', hl = false) => `<li><a href="${href}"${hc ? ` data-hc="${esc(hc)}"` : ''}${hl ? hlAttr(q) : ''}><b>${title}</b></a>${crumb ? `<span class="crumb">${crumb}</span>` : ''}${extra}</li>`;
+    const groups = [];
+    const add = (id, label, n, body, exact = false) => { if (n) groups.push({ id, label, n, body, exact }); };
+    const ql = q.toLowerCase();
+
+    // Items by name, plus a way into every item whose stats mention the words.
+    add('items', 'Items', r.items.length || statN, `${r.items.length ? `<div class="ilist">${r.items.map(it => window.PD2Items.row(it)).join('')}</div>` : ''}
+      ${statN > r.items.length ? `<p class="smore"><a href="#/items?q=${encodeURIComponent(q)}">All ${statN} items with “${esc(q)}” in the item database →</a></p>` : ''}`, r.items.some(it => it.name.toLowerCase() === ql));
+    add('skills', 'Skills', r.skills.length, `<ul class="sres2">${r.skills.map(x => row(`#/skills/${x.c}/${encodeURIComponent(x.a)}`, esc(x.n), `${esc(x.c)} · ${esc(x.t)} · level ${x.l || 1}`)).join('')}</ul>`, r.skills.some(x => x.n.toLowerCase() === ql));
+    const gear = window.PD2Gear.search(q, 12);
+    add('gear', 'Runes & bases', gear.length, `<ul class="sres2">${gear.map(g => g.kind === 'rune'
+      ? row(`#/runes#${g.r.name.toLowerCase()}`, `${esc(g.r.name)} Rune`, `#${g.r.n} · level ${g.r.lvl ?? '?'}`, '', `rune:${g.r.name}`)
+      : row(`#/bases?kind=${encodeURIComponent(g.b.kind)}&q=${encodeURIComponent(g.b.name)}`, esc(g.b.name), `${esc([g.b.tier, g.b.type].filter(Boolean).join(' ') || g.b.kind)} base`, '', `base:${g.b.slug}`)).join('')}</ul>`, gear.some(g => (g.r || g.b).name.toLowerCase() === ql));
+    const crafts = window.PD2Cube.search(q, 12);
+    add('crafts', 'Crafted items', crafts.length, `<ul class="sres2">${crafts.map(c => row(`#/cube/crafting?type=${encodeURIComponent(c.type)}&slot=${encodeURIComponent(c.slot)}`, esc(c.name), esc(c.recipe.join(' + ')), '', `craft:${c.slug}`)).join('')}</ul>`);
+    const world = window.PD2World.search(q, 12);
+    add('world', 'Monsters & zones', world.length, `<ul class="sres2">${world.map(w => w.kind === 'boss'
+      ? row(`#/monsters#${w.b.slug}`, esc(w.b.name), esc(w.b.group), '', `boss:${w.b.slug}`)
+      : row(`#/zones?q=${encodeURIComponent(w.z.name)}`, esc(w.z.name), `${w.z.act ? 'Act ' + w.z.act + ' · ' : ''}${w.z.lvl.h ? 'Hell level ' + w.z.lvl.h : 'Town'}`)).join('')}</ul>`);
+    const maps = window.PD2Maps.search(q, 12);
+    add('maps', 'Maps', maps.length, `<ul class="sres2">${maps.map(m => row(`#/map/${m.slug}`, esc(m.name), `${esc(m.tier)} map · ${m.monsters.length} monster types`)).join('')}</ul>`);
+    const helps = window.PD2Guide.search(q, 12);
+    add('help', 'Help', helps.length, `<ul class="sres2">${helps.map(h => row(`#/help#${h.id}`, esc(h.q), esc(h.cat), '', `faq:${h.id}`)).join('')}</ul>`);
+    const fcodes = window.PD2Filters.search(q, 12);
+    add('codes', 'Filter codes', fcodes.length, `<ul class="sres2">${fcodes.map(c => row(`#/filters/codes?q=${encodeURIComponent(q)}`, esc(c.codes.join(' / ')), esc(c.sec))).join('')}</ul>`);
+    add('pages', 'Pages', r.pages.length, `<ul class="sres2">${r.pages.map(({ p }) => { const h = hrefFor(p); return row(h, esc(displayName(p)), esc(areaOf(h) || S.groupOf.get(p.id) || ''), p.intro ? `<p>${esc(p.intro.slice(0, 160))}${p.intro.length > 160 ? '…' : ''}</p>` : '', '', true); }).join('')}</ul>`);
+    add('sections', 'Sections', r.heads.length, `<ul class="sres2">${r.heads.map(({ e }) => row(pageHref(e.p.title, e.anchor), esc(e.heading), 'in ' + esc(displayName(e.p)), `<p>${snippet(e.text, q, 180)}</p>`, '', true)).join('')}</ul>`);
+    add('mentions', 'Mentions', r.hits.length, `<ul class="sres2 mentions">${r.hits.map(({ e }) => row(pageHref(e.p.title, e.anchor), esc(displayName(e.p)) + (e.heading ? ' › ' + esc(e.heading) : ''), '', `<p>${snippet(e.text, q, 200)}</p>`, '', true)).join('')}</ul>`);
+
+    // Groups with an exact name match ("ber" → the Ber rune) come first.
+    groups.sort((a, b) => b.exact - a.exact);
+    const html = groups.length ? `<nav class="chips sjump" aria-label="Result types">${groups.map(g => `<a class="chip" href="#s-${g.id}" data-jump="${g.id}">${esc(g.label)} <i>${g.n}</i></a>`).join('')}</nav>
+      ${groups.map(g => `<section class="sgroup" id="s-${g.id}"><h2 class="home-h">${esc(g.label)} <small>${g.n}</small></h2>${g.body}</section>`).join('')}`
+      : `<div class="error"><b>Nothing found for “${esc(q)}”.</b><br>Try fewer words, or <a href="${WIKI}/w/index.php?search=${encodeURIComponent(q)}" target="_blank" rel="noopener">search the PD2 Wiki itself</a>.</div>`;
+    main.innerHTML = `<h1 class="page-title">Search</h1><div class="page-meta">Results for “${esc(q)}” · hover a result for its details</div>${html}`;
+    main.querySelector('.sjump')?.addEventListener('click', e => {
+      const a = e.target.closest('[data-jump]');
+      if (!a) return;
+      e.preventDefault();
+      document.getElementById('s-' + a.dataset.jump)?.scrollIntoView({ block: 'start' });
+    });
   }
 
   // ---------- home & lists ----------
@@ -1036,7 +1070,7 @@
 
   async function home() {
     const pages = S.index.pages;
-    const recent = pages.filter(p => p.edited && !/^Main Page/.test(p.title)).sort((a, b) => b.edited.localeCompare(a.edited)).slice(0, 6);
+    const recent = pages.filter(p => p.edited && !/^Main Page/.test(p.title) && !/\/[a-z]{2}(-[a-z]+)?$/.test(p.title) && !/[^\x00-\x7F]/.test(p.title)).sort((a, b) => b.edited.localeCompare(a.edited)).slice(0, 6);
     const newest = pages.reduce((a, p) => (p.edited > a ? p.edited : a), '');
     const today = new Date().toISOString().slice(0, 10);
     const seasons = (S.index.seasons || []).filter(x => x.n && x.iso);
@@ -1051,7 +1085,7 @@
       <section class="home-top">
         <div><h1 class="page-title">PD2 Wiki</h1>
           <p class="home-sub">Every item, skill and mechanic in Project Diablo 2. <span id="sync-pill">Synced daily${newest ? ` · last edit ${esc(ago(newest))}` : ''}</span></p></div>
-        <button id="home-search-btn" class="hero-search" type="button">${I('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>', 'stroke-width="2"')}<span>Search items, skills, runewords…</span><kbd>/</kbd></button>
+        <div class="home-pop"><span>Popular</span>${[['#/item/enigma', 'Enigma'], ['#/item/harlequin-crest', 'Shako'], ['#/runes#ber', 'Ber', 'rune:Ber'], ['#/skills/Sorceress/Frozen_Orb', 'Frozen Orb'], ['#/items?t=runeword&sock=4', '4-socket runewords'], ['#/maps?tier=T3', 'Tier 3 maps']].map(([h, l, hc]) => `<a class="chip" href="${h}"${hc ? ` data-hc="${hc}"` : ''}>${esc(l)}</a>`).join('')}<span class="home-kbd">Press <kbd>/</kbd> to search</span></div>
       </section>
 
       <div class="home-row">
@@ -1079,14 +1113,13 @@
         <ul>${sec.links.filter(l => !(sec.name === 'Classes & Skills' && l.label === 'Skills')).map(l => `<li><a href="${l.href}">${esc(l.label)}</a></li>`).join('')}</ul></section>`).join('')}</div>
 
       <section class="home-recent"><h2 class="home-h">Recently updated</h2>
-        <ul class="changes">${recent.map(p => `<li><a href="${hrefFor(p)}">${esc(displayName(p))}</a><span>${esc(ago(p.edited))}</span></li>`).join('')}</ul>
+        <ul class="changes">${recent.map(p => { const h = hrefFor(p); return `<li><a href="${h}">${esc(displayName(p))}</a>${areaOf(h) ? `<span class="charea">${esc(areaOf(h))}</span>` : ''}<span>${esc(ago(p.edited))}</span></li>`; }).join('')}</ul>
         <a class="more-link" href="#/changes">All recent changes →</a></section>`;
 
     lastCheck().then(t => {
       const pill = $('#sync-pill');
       if (pill && t) pill.textContent = `Synced daily · last check ${ago(t)}`;
     });
-    $('#home-search-btn').addEventListener('click', () => { $('#q').focus(); });
   }
 
   // Where a page's link lands, as a short label ("Skills", "Patch notes").
