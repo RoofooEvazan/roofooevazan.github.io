@@ -332,6 +332,7 @@ export async function extract(pages, dir) {
   const cosmetics = await extractCosmetics(await doc('Cosmetics'), targets);
   const general = await extractGeneralChanges(await doc('General Changes'), targets);
   const balance = await extractBalance(await doc('Balance Changes'), targets);
+  const about = await extractAbout(await doc('Rules'), await doc('Singleplayer'), await doc('Credits'), await doc('Arrows'), targets);
 
   const skillIndexAll = Object.values(skills).flatMap(c => c.trees.flatMap(t => t.skills.map(k => ({ c: c.cls, n: k.name, a: k.anchor }))));
   const help = await extractHelp(await doc('FAQ'), await doc('Support FAQ'), targets);
@@ -342,7 +343,7 @@ export async function extract(pages, dir) {
   const fi = byTitle.get('Filter Info');
   if (fi) targets[`${fi.id}#`] = 'filters/list';
 
-  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs, classAttrs, qlvl, newItems, cosmetics, general, balance }, guide: { help, guides, breakpoints }, filters };
+  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs, classAttrs, qlvl, newItems, cosmetics, general, balance, about }, guide: { help, guides, breakpoints }, filters };
 }
 
 // ---------- maps ----------
@@ -1541,4 +1542,63 @@ async function extractBalance(r, targets) {
   }
   targets[`${page.id}#`] = 'overview/season1';
   return { page: page.id, classes, abbr };
+}
+
+// ---------- rules, singleplayer, credits (and arrows, which the item database covers) ----------
+async function extractAbout(rules, sp, credits, arrows, targets) {
+  const out = { pages: {} };
+  if (rules) {
+    out.pages.rules = rules.page.id;
+    const groups = [];
+    let g = null, rule = null;
+    const intro = [];
+    for (const el of flatten(rules.d.querySelector('.mw-parser-output'))) {
+      const hd = headingOf(el);
+      if (hd) { g = { title: hd.text, anchor: hd.id, rules: [] }; groups.push(g); rule = null; targets[`${rules.page.id}#${hd.id}`] = `about#${hd.id}`; continue; }
+      if (!g) { if (text(el)) intro.push(clean(el.outerHTML)); continue; }
+      const m = el.matches('p') && text(el).match(/^(\d+)\)\s*/);
+      if (m) { rule = { n: +m[1], html: clean(el.innerHTML).replace(/^\s*\d+\)\s*/, ''), more: '' }; g.rules.push(rule); continue; }
+      if (rule && text(el)) rule.more += clean(el.outerHTML);
+      else if (text(el)) g.rules.push({ n: null, html: clean(el.innerHTML), more: '' });
+    }
+    out.rules = { intro: intro.join(''), groups };
+    targets[`${rules.page.id}#`] = 'about';
+  }
+  if (sp) {
+    out.pages.sp = sp.page.id;
+    const sections = [];
+    let intro = '';
+    for (const el of flatten(sp.d.querySelector('.mw-parser-output'))) {
+      const hd = headingOf(el);
+      if (hd) { sections.push({ title: hd.text, anchor: hd.id, items: [], after: '' }); targets[`${sp.page.id}#${hd.id}`] = `about/singleplayer#${hd.id}`; continue; }
+      const s = sections.at(-1);
+      if (!s) { if (text(el)) intro += clean(el.outerHTML); continue; }
+      if (el.matches('ul')) {
+        for (const li of el.querySelectorAll(':scope > li')) {
+          const fix = li.querySelector(':scope > dl');
+          const fixHtml = fix ? clean(fix.innerHTML).replace(/<\/?dd>/g, ' ').trim() : '';
+          if (fix) fix.remove();
+          s.items.push({ html: clean(li.innerHTML), fix: fixHtml });
+        }
+      } else if (text(el)) s.after += clean(el.outerHTML);
+    }
+    out.sp = { intro, sections };
+    targets[`${sp.page.id}#`] = 'about/singleplayer';
+  }
+  if (credits) {
+    out.pages.credits = credits.page.id;
+    const roles = [];
+    let intro = '', role = null;
+    for (const el of flatten(credits.d.querySelector('.mw-parser-output'))) {
+      const b = el.matches('p') ? el.querySelector('b') : null;
+      if (b) { role = { title: text(b).replace(/:$/, ''), note: text(el).replace(text(b), '').replace(/^[:\s]+/, ''), names: [] }; roles.push(role); continue; }
+      if (el.matches('dl') && role) { role.names.push(...[...el.querySelectorAll('dd')].map(text).filter(Boolean)); continue; }
+      if (!roles.length && text(el)) intro += clean(el.outerHTML);
+      else if (role && text(el)) role.more = (role.more || '') + clean(el.outerHTML);
+    }
+    out.credits = { intro, roles };
+    targets[`${credits.page.id}#`] = 'about/credits';
+  }
+  if (arrows) targets[`${arrows.page.id}#`] = 'items?t=unique&slot=Quiver';
+  return out;
 }

@@ -118,7 +118,7 @@
   // and every page nobody lists here still shows up under "More pages".
   const SITE = [
     { name: 'Items', icon: 'items', links: [['Item Database', '#/items'], ['Uniques', '#/items?t=unique'], ['Set Items', '#/items?t=set'], ['Runewords', '#/items?t=runeword'],
-      ['Affix Finder', '#/affixes'], ['Runes & Gems', '#/runes'], ['Item Bases', '#/bases'], ['Quality Levels', '#/bases/qlvl'], ['New in PD2', '#/new'], ['Cosmetics', '#/cosmetics'], 'Arrows'] },
+      ['Affix Finder', '#/affixes'], ['Runes & Gems', '#/runes'], ['Item Bases', '#/bases'], ['Quality Levels', '#/bases/qlvl'], ['New in PD2', '#/new'], ['Cosmetics', '#/cosmetics']] },
     { name: 'Skills', icon: 'skills', links: [...['Amazon', 'Assassin', 'Barbarian', 'Druid', 'Necromancer', 'Paladin', 'Sorceress'].map(c => [c, `#/skills/${c}`]),
       ['Skill Changes', 'Skill Changes'], ['Mercenary Skills', '#/mercs/a2'], ['Item-Only Skills', 'Item Skills'], ['Stat Planner', '#/classes']] },
     { name: 'Crafting & Cube', icon: 'craft', links: [['Cube Recipes', '#/cube'], ['Crafted Items', '#/cube/crafting'], ['Corruptions', '#/cube/corruptions'],
@@ -128,11 +128,11 @@
     { name: 'Mechanics', icon: 'gear', links: [['Game Mechanics', '#/mechanics'], ['Crit & Leech Calculators', '#/mechanics/Critical_Damage'], ['Resistance Calculator', '#/mechanics/Reducing_Resistances'], ['Breakpoints', '#/breakpoints'], ['What PD2 Changed', '#/overview'], 'PvP Changes', 'Low Level Dueling', ['Abbreviations', 'Lexicon of Abbreviations'], 'Formula Info', 'Bugs'] },
     { name: 'Guides & Builds', icon: 'book', links: [['Build Directory', '#/guides'], ['Starter Builds', '#/guides?starter=1'], ['Community Links', '#/guides/links']] },
     { name: 'Patch Notes', icon: 'scroll', auto: 'seasons' },
-    { name: 'Help', icon: 'help', links: [['Help Center', '#/help'], ['Game Crashes & Errors', '#/help?cat=Game%20errors%20%26%20crashes'], ['Loot Filters', '#/filters'], ['Filter Code Finder', '#/filters/codes'], ['Public Filters', '#/filters/list'], ['Game Setup & Config', '#/filters/setup'], 'Singleplayer', 'Rules', 'Credits'] },
+    { name: 'Help', icon: 'help', links: [['Help Center', '#/help'], ['Game Crashes & Errors', '#/help?cat=Game%20errors%20%26%20crashes'], ['Loot Filters', '#/filters'], ['Filter Code Finder', '#/filters/codes'], ['Public Filters', '#/filters/list'], ['Game Setup & Config', '#/filters/setup'], ['Singleplayer', '#/about/singleplayer'], ['Rules', '#/about'], ['Credits', '#/about/credits']] },
     { name: 'More Pages', icon: 'list', auto: 'rest' },
   ];
   // Pages our own views replace; they stay reachable through search and A–Z.
-  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Item Bases|Runes|Mercenaries|Mercenary Skills|FAQ|Support FAQ|Breakpoints|Links|Item Filtering|Filter Info|Customization|Class Attributes|Item Quality Levels|New Items|Cosmetics|General Changes|Balance Changes|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
+  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Item Bases|Runes|Mercenaries|Mercenary Skills|FAQ|Support FAQ|Breakpoints|Links|Item Filtering|Filter Info|Customization|Class Attributes|Item Quality Levels|New Items|Cosmetics|General Changes|Balance Changes|Singleplayer|Rules|Credits|Arrows|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
 
   function buildSite() {
     const used = new Set();
@@ -378,6 +378,10 @@
       const [p0, qs = ''] = raw.split('?');
       const tab = p0.split('/')[1] || '';
       return view(() => window.PD2Overview.render(main, tab, qs), 'overview', 'What PD2 Changed · PD2 Wiki');
+    }
+    if (path === 'about' || path.startsWith('about/')) {
+      const tab = path.split('/')[1] || '';
+      return view(() => window.PD2About.render(main, tab, anchor), tab ? 'about/' + tab : 'about', 'About PD2 · PD2 Wiki', !!anchor);
     }
     if (path === 'new') return view(() => window.PD2Extras.newItems(main, anchor), 'new', 'New in PD2 · PD2 Wiki', !!anchor);
     if (path === 'cosmetics') return view(() => window.PD2Extras.cosmetics(main, anchor), 'cosmetics', 'Cosmetics · PD2 Wiki', !!anchor);

@@ -1,0 +1,21 @@
+/* About PD2: rules, singleplayer, credits — palette variables only, so every theme applies. */
+.rgroup{scroll-margin-top:calc(var(--bar-h) + 12px);margin-bottom:18px}
+.rule{display:flex;gap:12px;align-items:flex-start;margin:0 0 8px;padding:10px 14px;border:1px solid var(--edge);border-radius:0;background:var(--panel)}
+.rn{flex:none;min-width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--edge-hi);background:var(--void);color:var(--gold-hi);font-family:var(--font-display);font-size:12px}
+.rule .wiki{font-size:15.5px}
+.rmore{margin-top:4px;color:var(--muted);font-size:14.5px}
+.rmore dl{margin:0}
+.rmore dd{margin:2px 0 0 0;padding-left:12px;border-left:2px solid var(--edge)}
+.splist{list-style:none;margin:0;padding:0}
+.splist > li{padding:8px 0;border-bottom:1px solid var(--edge)}
+.splist > li:last-child{border-bottom:0}
+.spfix{margin-top:6px;padding:6px 10px;border-left:3px solid var(--gold);background:color-mix(in srgb,var(--gold) 8%,transparent);font-size:14.5px}
+.spfix .omod{color:var(--text)!important}
+.credits{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:12px}
+.credit{min-width:0;padding:12px 14px;border:1px solid var(--edge);border-radius:0;background:linear-gradient(180deg,var(--stone-2),var(--stone))}
+.credit h2{margin:0 0 8px;font-family:var(--font-display);font-size:13px;letter-spacing:.04em;color:var(--gold-hi)}
+.credit h2 small{font-family:var(--font-body);letter-spacing:0;color:var(--dim);font-size:12px}
+.credit ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px}
+.credit li{padding:1px 8px;border:1px solid var(--edge);background:var(--void);color:var(--text);font-size:14px}
+.thanks{margin:18px 0 0;padding:14px 18px;border-left:3px solid var(--gold);background:var(--panel);color:var(--muted)}
+.thanks p{margin:.3em 0}
