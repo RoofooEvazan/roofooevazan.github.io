@@ -30,6 +30,7 @@
     else if (type === 'rune') p = window.PD2Gear?.runeTip(arg);
     else if (type === 'boss') p = window.PD2World?.bossTip(arg);
     else if (type === 'craft') p = window.PD2Cube?.craftTip(arg);
+    else if (type === 'affix') p = window.PD2Affixes?.tip(arg);
     p = Promise.resolve(p).catch(() => '');
     cache.set(key, p);
     return p;

@@ -217,20 +217,54 @@
     const K = data.corruptions;
     const p = q(qs);
     const type = K.types.find(t => t.name === p.get('type')) || K.types[0];
+    const q0 = p.get('q') || '';
     const intro = K.blocks.find(b => /^equipment corruptions$/i.test(b.title));
     const others = K.blocks.filter(b => b !== intro && !/modifiers/i.test(b.title));
     root.innerHTML = `${head('corruptions', 'Corruptions')}
       <p class="lead">Cube a <b>Worldstone Shard</b> with an item to corrupt it: it may gain sockets, gain one of the modifiers below, or turn into a random rare. Corrupted items can't be corrupted again.</p>
       ${intro ? `<details class="about"><summary>Odds and rules for equipment</summary><div class="wiki">${intro.html}</div></details>` : ''}
-      <div class="chips corr-types" role="group" aria-label="Item type">${K.types.map(t => `<a class="chip${t === type ? ' on' : ''}" href="${url('cube/corruptions', { type: t.name })}">${esc(t.name)}</a>`).join('')}</div>
-      ${type ? `<h2 class="home-h">${esc(type.name)} corruptions</h2>
-      <div class="corr">${type.cols.map((c, i) => `<section class="corr-col r${i}">
-        <header><b>${esc(c.label)}</b>${c.chance != null ? `<span>${c.chance}% of modifier rolls</span>` : ''}</header>
-        <ul class="istats">${c.mods.map(m => `<li>${m.replace(/<br\s*\/?>/g, ' · ')}</li>`).join('')}</ul></section>`).join('')}</div>` : ''}
+      <div class="filters"><div class="frow">${searchBox('kq', q0, 'Find a corruption on any item, e.g. faster cast, sockets, resist')}</div>
+        <div class="chips corr-types" role="group" aria-label="Item type">${K.types.map(t => `<a class="chip${t === type ? ' on' : ''}" href="${url('cube/corruptions', { type: t.name })}">${esc(t.name)}</a>`).join('')}</div></div>
+      <div class="corr-box"></div>
       ${desecration(type)}
       ${others.map(b => `<section class="info-card" id="${esc(b.anchor)}"><h2 class="home-h">${esc(b.title)}</h2><div class="wiki">${b.html}</div></section>`).join('')}
       ${foot(K.page)}`;
     for (const el of root.querySelectorAll('.wiki')) enhanceFragment(el, P().byId(el.closest('.desec') ? data.desecration.page : K.page));
+    const box = root.querySelector('.corr-box');
+    const one = m => m.replace(/<br\s*\/?>/g, ' · ');
+    const plain = m => one(m).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    const TIER = ['Low', 'Mid', 'High'];
+    const draw = qq => {
+      const ts = qq.toLowerCase().split(/\s+/).filter(Boolean);
+      if (!ts.length) {
+        box.innerHTML = `<h2 class="home-h">${esc(type.name)} corruptions</h2>
+          <div class="corr">${type.cols.map((c, i) => `<section class="corr-col r${i}">
+            <header><b>${esc(c.label)}</b>${c.chance != null ? `<span>${c.chance}% of rolls</span>` : ''}</header>
+            <ul class="istats">${c.mods.map(m => `<li>${one(m)}</li>`).join('')}</ul></section>`).join('')}</div>`;
+        return;
+      }
+      // Every matching modifier against every item type: which rarity it rolls at, and how often.
+      const rows = new Map();
+      for (const t of K.types) t.cols.forEach((c, i) => {
+        for (const m of c.mods) {
+          const key = plain(m);
+          if (!ts.every(x => key.toLowerCase().includes(x))) continue;
+          if (!rows.has(key)) rows.set(key, { html: one(m), at: {} });
+          rows.get(key).at[t.name] = { i, label: c.label, chance: c.chance };
+        }
+      });
+      const list = [...rows.values()].sort((a, b) => Object.keys(b.at).length - Object.keys(a.at).length);
+      box.innerHTML = list.length ? `<p class="rcount">${list.length} modifier${list.length === 1 ? '' : 's'} match · cell = rarity tier and its share of modifier rolls on that item</p>
+        <div class="tw"><table class="restable corr-t"><thead><tr><th>Modifier</th>${K.types.map(t => `<th><a href="${url('cube/corruptions', { type: t.name })}">${esc(t.name)}</a></th>`).join('')}</tr></thead>
+        <tbody>${list.map(r => `<tr><td class="cm">${r.html}</td>${K.types.map(t => { const a = r.at[t.name]; return a ? `<td class="ct r${a.i}" title="${esc(a.label)}${a.chance != null ? ` · ${a.chance}% of modifier rolls` : ''}">${TIER[a.i] || esc(a.label)}${a.chance != null ? `<small>${a.chance}%</small>` : ''}</td>` : '<td class="ct none">—</td>'; }).join('')}</tr>`).join('')}</tbody></table></div>`
+        : `<div class="empty">No corruption matches “${esc(qq)}”.</div>`;
+    };
+    draw(q0);
+    let tm;
+    root.querySelector('#kq').addEventListener('input', e => {
+      clearTimeout(tm);
+      tm = setTimeout(() => { const v = e.target.value.trim(); history.replaceState(null, '', url('cube/corruptions', { type: p.get('type') || '', q: v })); draw(v); }, 150);
+    });
   }
 
   // Desecration (Season 10+): a second corruption on an already corrupted amulet, after Lucion.

@@ -12,7 +12,7 @@
   const load = () => {
     if (data) return Promise.resolve(data);
     if (!loading) loading = P().fetchJSON('data/affixes.json').then(d => {
-      for (const a of d.affixes) a._s = [a.name, a.attr.replace(/<[^>]+>/g, ' '), ...a.types].join(' ').toLowerCase();
+      for (const [i, a] of d.affixes.entries()) a._i = i, a._s = [a.name, a.attr.replace(/<[^>]+>/g, ' '), ...a.types].join(' ').toLowerCase();
       return (data = d);
     }).catch(e => { loading = null; throw e; });
     return loading;
@@ -117,6 +117,23 @@
     return finder(root, qs);
   }
 
+  // Hover card: everything the one-line row leaves out.
+  async function tip(i) {
+    const { esc } = P();
+    await load();
+    const a = data.affixes[+i];
+    if (!a) return '';
+    const unlink = h => String(h).replace(/<a\b[^>]*>|<\/a>/g, '');
+    return `<div class="hc-affix">
+      <div class="hc-head"><span><b class="hc-name">${esc(a.name)}</b><span class="hc-sub">${a.ps === 'P' ? 'Prefix' : 'Suffix'} · ${esc(a.cat)} · group ${a.group}</span></span></div>
+      <div class="hc-stat">${unlink(a.attr)}</div>
+      <ul class="hc-kv"><li><span>Affix level</span> ${a.amin}${a.amax ? '–' + a.amax : '+'}</li><li><span>Required level</span> ${a.rlvl ?? '?'}</li><li><span>Frequency</span> ${a.freq ?? '?'}</li></ul>
+      <div class="hc-lvl">Rolls on</div><p class="hc-desc">${a.types.map(esc).join(', ')}</p>
+      ${a.change ? `<div class="hc-lvl">Changed in PD2</div><p class="hc-desc">${unlink(a.change)}</p>` : ''}
+      <div class="hc-foot">Only one affix per group can roll · click to show just this group</div>
+    </div>`;
+  }
+
   function finder(root, qs) {
     const { esc, $, enhanceFragment } = P();
     const f = readQ(qs);
@@ -153,19 +170,32 @@
       const side = ps => {
         const list = hits.filter(a => a.ps === ps).sort((a, b) => (a.group - b.group) || (a.amin - b.amin));
         if (!list.length) return '';
+        // One line each; affixes in one group (only one can roll) sit together.
+        const max = Math.max(...list.map(a => a.freq || 0), 1);
+        let prev = null;
         return `<section class="afx-side"><h2 class="home-h">${ps === 'P' ? 'Prefixes' : 'Suffixes'} <small>${list.length}</small></h2>
-          <ul class="afx-list">${list.map(a => `<li${a.change ? ' class="chg"' : ''}>
-            <div class="afx-top"><b>${esc(a.name)}</b><span class="afx-attr">${a.attr}</span></div>
-            <div class="afx-meta"><span title="Affix level range">alvl ${a.amin}${a.amax ? '–' + a.amax : '+'}</span><span title="Required level">req ${a.rlvl ?? '?'}</span>
-              ${lvl != null && tot[ps] ? `<span title="Share of ${ps === 'P' ? 'prefix' : 'suffix'} rolls among these">${((a.freq || 0) / tot[ps] * 100).toFixed(1)}%</span>` : `<span title="Frequency weight">freq ${a.freq ?? '?'}</span>`}
-              <a href="${writeQ({ ...f, grp: String(a.group) })}" title="Affixes in the same group can't roll together">group ${a.group}</a>
-              <span class="afx-types">${a.types.map(esc).join(', ')}</span></div>
-            ${a.change ? `<div class="afx-chg">PD2: ${a.change}</div>` : ''}</li>`).join('')}</ul></section>`;
+          <div class="afx-rows"><div class="ar-head"><span>Stat</span><span>Affix</span><span title="Affix level range">alvl</span><span>${lvl != null ? 'Share' : 'Weight'}</span></div>
+          ${list.map(a => {
+            const newGrp = a.group !== prev;
+            prev = a.group;
+            const share = lvl != null && tot[ps] ? (a.freq || 0) / tot[ps] * 100 : null;
+            return `<div class="arow${newGrp ? ' g0' : ''}${a.change ? ' chg' : ''}" data-hc="affix:${a._i}" data-g="${a.group}" title="Click to show only group ${a.group}">
+              <span class="ar-attr">${a.attr}</span><b>${esc(a.name)}</b>
+              <span class="ar-lvl">${a.amin}${a.amax ? '–' + a.amax : '+'}</span>
+              <span class="ar-share"><i style="width:${Math.max(3, (a.freq || 0) / max * 100)}%"></i><em>${share != null ? share.toFixed(1) + '%' : a.freq ?? '?'}</em></span></div>`;
+          }).join('')}</div></section>`;
       };
       box.innerHTML = (side('P') + side('S')) || `<div class="empty">No affixes match.${lvl != null ? ' Try a higher item level.' : ''}</div>`;
       enhanceFragment(box, P().byId(data.page));
     };
     const sync = () => { history.replaceState(null, '', writeQ(f)); draw(); };
+    box.addEventListener('click', e => {
+      const r = e.target.closest('.arow');
+      if (!r || e.target.closest('a')) return;
+      f.grp = f.grp === r.dataset.g ? '' : r.dataset.g;
+      sync();
+      scrollTo({ top: root.querySelector('.rcount').getBoundingClientRect().top + scrollY - 80 });
+    });
     $('#as', root).addEventListener('change', e => { f.slot = e.target.value; sync(); });
     $('#ai', root).addEventListener('input', e => { f.ilvl = e.target.value; sync(); });
     $('#ab', root).addEventListener('change', e => {
@@ -206,5 +236,5 @@
     for (const el of $$('.wiki', root)) enhanceFragment(el, P().byId(data.page));
   }
 
-  window.PD2Affixes = { load, render, typeMatches, alvlOf, get data() { return data; } };
+  window.PD2Affixes = { load, render, typeMatches, alvlOf, tip, get data() { return data; } };
 })();
