@@ -406,8 +406,8 @@
     s.textContent = `
 .mw-controls{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr);gap:14px;margin:0 0 18px}
 .mw-field{display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:10px;background:linear-gradient(180deg,var(--stone-2),var(--stone));border:1px solid var(--edge)}
-.mw-field label,.mw-label{font-family:Cinzel,serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
-.mw-field small{color:var(--dim);font-size:13px;line-height:1.35;font-family:"Alegreya Sans",sans-serif;letter-spacing:0;text-transform:none}
+.mw-field label,.mw-label{font-family:var(--font-display);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.mw-field small{color:var(--dim);font-size:13px;line-height:1.35;font-family:var(--font-body);letter-spacing:0;text-transform:none}
 .mw-field input[type=number]{height:40px;width:100%;padding:0 10px;border-radius:8px;border:1px solid var(--edge);background:#0d0b08;color:var(--text);font:inherit;font-size:18px;font-variant-numeric:tabular-nums}
 .mw-field input[type=number]:focus{outline:none;border-color:var(--gold)}
 .mw-stats > div{display:flex;gap:8px}
@@ -444,7 +444,7 @@
 .mw-rank li.pick{border-color:var(--gold)}
 .mw-rank li.best{background:linear-gradient(90deg,rgba(217,178,95,.16),rgba(20,17,13,.7))}
 .mw-rank li.no{opacity:.45}
-.mw-pos{grid-area:pos;font-family:Cinzel,serif;color:var(--dim);text-align:center}
+.mw-pos{grid-area:pos;font-family:var(--font-display);color:var(--dim);text-align:center}
 .mw-rank li.best .mw-pos{color:var(--gold-hi)}
 .mw-name{grid-area:name;min-width:0}
 .mw-name b{display:block;color:var(--text);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -461,7 +461,7 @@
 .mw-foot{color:var(--dim);font-size:14px;margin:8px 0 0}
 .mw-chart{width:100%;min-height:240px;touch-action:pan-y}
 .mw-chart svg{display:block;width:100%;height:auto;overflow:visible}
-.mw-chart text{fill:var(--dim);font:12px "Alegreya Sans",sans-serif}
+.mw-chart text{fill:var(--dim);font:12px var(--font-body)}
 .mw-chart .g{stroke:#2a2016;stroke-width:1}
 .mw-chart .ln{fill:none;stroke:#5a4a33;stroke-width:1.5;stroke-linejoin:round}
 .mw-chart .ln.no{stroke:#2e261c}

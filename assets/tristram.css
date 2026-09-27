@@ -1,0 +1,93 @@
+/* Tristram theme: shared look for RoofooEvazan's PD2 pages.
+ *
+ * Cathedral night: pixel stone, candle windows, a blood-red rule and gold trim.
+ * Link it from any page of the site:
+ *   <link rel="stylesheet" href="https://roofooevazan.github.io/assets/tristram.css">
+ * and add class="tri" to <body> for the page ground (the Tristram plate behind
+ * everything, under a pixel grid and a flickering torch). The fonts are loaded
+ * by assets/site-nav.js, or add them yourself:
+ *   https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=Silkscreen:wght@400;700&display=swap
+ */
+:root{
+  color-scheme:dark;
+  --tri-bg:#100c0a;
+  --tri-panel:#1a1410;
+  --tri-panel-2:#261c16;
+  --tri-fg:#f1e2c6;
+  --tri-muted:#b59a76;
+  --tri-line:#5a4030;
+  --tri-accent:#8e261c;
+  --tri-accent-fg:#f6ead4;
+  --tri-gold:#d2b06a;
+  --tri-glow:#e7a15a;
+  --tri-shadow:#2a120e;
+  --tri-display:"Silkscreen","Courier New",monospace;
+  --tri-body:"Almendra",Palatino,Georgia,serif;
+}
+
+html{background:var(--tri-bg)}
+body.tri{
+  margin:0;
+  background:transparent;
+  color:var(--tri-fg);
+  font-family:var(--tri-body);
+}
+body.tri ::selection{background:var(--tri-accent);color:var(--tri-accent-fg)}
+
+/* Page ground: fixed behind all content. Painted on pseudo-elements so a page
+   needs no extra markup; the plate is dimmed hard so text stays readable. */
+body.tri::before,
+body.tri::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+}
+body.tri::before{
+  background:
+    linear-gradient(to top,var(--tri-bg) 0%,transparent 34%),
+    linear-gradient(to bottom,color-mix(in srgb,var(--tri-bg) 40%,transparent),transparent 28%),
+    linear-gradient(color-mix(in srgb,var(--tri-bg) var(--tri-dim,28%),transparent),color-mix(in srgb,var(--tri-bg) var(--tri-dim,28%),transparent)),
+    url("tristram.jpg") center top/cover no-repeat,
+    var(--tri-bg);
+}
+body.tri::after{
+  background:
+    radial-gradient(circle at 22% 42%,color-mix(in srgb,var(--tri-glow) 40%,transparent),transparent 34%),
+    linear-gradient(to right,color-mix(in srgb,var(--tri-bg) 35%,transparent) 1px,transparent 1px) 0 0/5px 5px,
+    linear-gradient(to bottom,color-mix(in srgb,var(--tri-bg) 35%,transparent) 1px,transparent 1px) 0 0/5px 5px;
+  opacity:.7;
+  animation:tri-torch 2.6s steps(3,end) infinite;
+}
+
+/* Rising embers: <div class="tri-embers" aria-hidden="true"><span></span>×7</div> */
+.tri-embers{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.tri-embers span{position:absolute;bottom:12%;width:3px;height:3px;border-radius:50%;background:var(--tri-glow);opacity:0;animation:tri-ember 7s linear infinite}
+.tri-embers span:nth-child(1){left:12%;animation-duration:6.5s}
+.tri-embers span:nth-child(2){left:28%;animation-delay:1.4s;animation-duration:8s}
+.tri-embers span:nth-child(3){left:46%;animation-delay:.6s;animation-duration:7.2s}
+.tri-embers span:nth-child(4){left:63%;animation-delay:2.1s;animation-duration:9s}
+.tri-embers span:nth-child(5){left:74%;animation-delay:3s}
+.tri-embers span:nth-child(6){left:86%;animation-delay:1.1s;animation-duration:6.8s}
+.tri-embers span:nth-child(7){left:54%;animation-delay:4s;animation-duration:8.4s}
+
+@keyframes tri-torch{0%,100%{opacity:.55}45%{opacity:.9}70%{opacity:.35}}
+@keyframes tri-ember{0%{transform:translateY(0) scale(1);opacity:0}12%{opacity:.85}100%{transform:translateY(-120px) scale(.4);opacity:0}}
+
+@media (prefers-reduced-motion:reduce){
+  body.tri::after,.tri-embers span{animation:none}
+  .tri-embers span{opacity:.4}
+}
+
+/* Buttons: the red "Open" and the outlined "Source". */
+.tri-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:2.75rem;padding:.4rem .75rem;
+  border:1px solid var(--tri-line);background:transparent;color:var(--tri-fg);
+  font-family:var(--tri-display);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;white-space:nowrap;cursor:pointer;
+}
+.tri-btn.primary{background:var(--tri-accent);border-color:var(--tri-accent);color:var(--tri-accent-fg)}
+.tri-btn:hover{filter:brightness(1.12)}
+.tri-btn:focus-visible{outline:2px solid var(--tri-gold);outline-offset:2px}

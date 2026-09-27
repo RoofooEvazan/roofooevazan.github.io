@@ -3,223 +3,207 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0b0906">
+<meta name="theme-color" content="#100c0a">
 <meta name="color-scheme" content="dark">
 <title>PD2 Calculators</title>
 <meta name="description" content="Project Diablo 2 calculators and simulators built on the game's reverse-engineered code: attack speed, advanced stats, hit chance, a damage atlas, map spawns with loot, and a loot filter builder.">
 <meta property="og:title" content="PD2 Calculators">
 <meta property="og:description" content="Project Diablo 2 calculators and simulators built on the game's reverse-engineered code.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22o%22%20cx%3D%22.5%22%20cy%3D%22.7%22%20r%3D%22.6%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23e0342a%22/%3E%3Cstop%20offset%3D%22.5%22%20stop-color%3D%22%238c1310%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%232a0404%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2229%22%20fill%3D%22url%28%23o%29%22%20stroke%3D%22%23b8974f%22%20stroke-width%3D%224%22/%3E%3Cellipse%20cx%3D%2224%22%20cy%3D%2220%22%20rx%3D%229%22%20ry%3D%225%22%20fill%3D%22%23fff%22%20opacity%3D%22.45%22/%3E%3C/svg%3E">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=Silkscreen:wght@400;700&display=swap">
+<link rel="stylesheet" href="assets/tristram.css">
 <style>
-:root{
-  color-scheme:dark;
-  --void:#070605;
-  --stone:#14110d;
-  --stone-2:#1b1712;
-  --edge:#3a3024;
-  --edge-hi:#6b5534;
-  --gold:#d9b25f;
-  --gold-hi:#f3d58c;
-  --text:#e8dfcf;
-  --muted:#a89c86;
-  --dim:#7d7262;
-  --ember:rgba(217,120,50,.08);
-}
 *{box-sizing:border-box}
-html{background:var(--void)}
-body{
-  margin:0;color:var(--text);background:var(--void);
-  font:17px/1.55 "Alegreya Sans",system-ui,sans-serif;
-  background-image:
-    radial-gradient(1200px 520px at 50% -140px,rgba(140,19,16,.22),transparent 70%),
-    radial-gradient(900px 600px at 50% 120%,var(--ember),transparent 70%);
-  min-height:100vh;
+body{font-size:1.05rem;line-height:1.5}
+h1,h2,h3,p,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:inherit}
+
+.town-window{height:30vh;min-height:9rem;max-height:22rem;position:relative;border-bottom:4px solid var(--tri-accent);box-shadow:inset 0 0 0 4px color-mix(in srgb,var(--tri-bg) 40%,transparent)}
+.window-caption{position:absolute;left:.8rem;bottom:.7rem;font-family:var(--tri-display);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;background:var(--tri-bg);color:var(--tri-fg);padding:.35rem .5rem}
+
+.sheet{position:relative;background:var(--tri-panel);border-top:1px solid var(--tri-line);box-shadow:inset 0 4px 0 var(--tri-gold),inset 0 -4px 0 var(--tri-shadow);padding-bottom:1rem}
+.sheet-in{max-width:72rem;margin:0 auto;padding:0 1rem}
+
+.mast{padding-top:1.4rem;padding-bottom:.4rem}
+.kicker{font-family:var(--tri-display);color:var(--tri-gold);letter-spacing:.04em;text-transform:uppercase;font-size:.78rem}
+h1{font-family:var(--tri-display);font-weight:700;letter-spacing:.04em;font-size:clamp(1rem,2.4vw,1.45rem);line-height:1.35;padding-top:.2rem}
+.by{padding-top:.35rem;font-size:.98rem;color:var(--tri-muted)}
+.by a,.colophon a,.fine a{text-decoration:underline;text-underline-offset:.18em}
+.by a:hover,.colophon a:hover,.fine a:hover{color:var(--tri-fg)}
+.lede{padding-top:.35rem;padding-bottom:.4rem;max-width:46rem;font-size:1.12rem}
+.lede b{color:var(--tri-gold);font-weight:400}
+
+.block{padding-top:1.4rem}
+h2{font-family:var(--tri-display);font-size:.78rem;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:var(--tri-gold);padding-bottom:.55rem}
+.quest-row{display:flex;gap:.8rem;justify-content:space-between;align-items:flex-start;padding:.8rem 0;border-top:1px solid var(--tri-line)}
+.quest-copy{min-width:0;max-width:52rem}
+.entry-name{font-family:var(--tri-display);font-weight:400;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:var(--tri-fg)}
+.entry-name a{text-decoration:none}
+.entry-name a:hover{color:var(--tri-gold)}
+.entry-name a:focus-visible{outline:2px solid var(--tri-gold);outline-offset:2px}
+.blurb{color:var(--tri-muted);font-size:.98rem;padding-top:.15rem}
+.marks{color:var(--tri-muted);font-size:.86rem;padding-top:.25rem;opacity:.85}
+.quest-actions{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;flex:none}
+
+.colophon,.fine{color:var(--tri-muted);font-size:.92rem;padding-top:1rem;max-width:52rem}
+.colophon{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--tri-line)}
+.colophon b{color:var(--tri-fg);font-weight:400}
+.fine{font-size:.84rem;padding-top:.5rem;opacity:.85}
+.fine:last-child{padding-bottom:1.2rem}
+
+@media (min-width:800px){.sheet-in{padding:0 1.25rem}}
+@media (max-width:640px){
+  .quest-row{flex-direction:column;align-items:stretch}
+  .quest-actions .tri-btn{flex:1}
 }
-a{color:var(--gold-hi)}
-a:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px;border-radius:6px}
-.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
-
-header.wrap{text-align:center;padding:56px 16px 34px}
-.crest{display:flex;align-items:center;justify-content:center;gap:22px}
-.orb{width:54px;height:54px;border-radius:50%;flex:none;border:3px solid #b8974f;box-shadow:0 0 0 2px #2a2116,0 6px 18px rgba(0,0,0,.6),inset 0 -6px 12px rgba(0,0,0,.45);position:relative}
-.orb::after{content:"";position:absolute;left:22%;top:16%;width:34%;height:20%;border-radius:50%;background:rgba(255,255,255,.4)}
-.orb.life{background:radial-gradient(circle at 50% 70%,#e0342a,#8c1310 50%,#2a0404)}
-.orb.mana{background:radial-gradient(circle at 50% 70%,#3a6ee0,#1f3f8a 50%,#060e2a)}
-h1{font-family:Cinzel,serif;font-weight:700;letter-spacing:.06em;margin:0;font-size:clamp(30px,5.4vw,50px);color:var(--gold);text-shadow:0 2px 0 #000,0 0 24px rgba(217,178,95,.18)}
-.byline{margin:6px 0 0;font-size:13px;letter-spacing:.08em;color:var(--dim)}
-.byline a{color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--edge-hi)}
-.byline a:hover{color:var(--gold-hi)}
-.intro{max-width:660px;margin:18px auto 0;color:var(--muted)}
-.intro b{color:var(--text);font-weight:500}
-.rule{display:flex;align-items:center;justify-content:center;gap:12px;margin:26px auto 0;max-width:420px;color:var(--edge-hi)}
-.rule::before,.rule::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--edge-hi),transparent)}
-.rule i{width:8px;height:8px;transform:rotate(45deg);background:var(--gold);display:block}
-
-h2{font-family:Cinzel,serif;font-weight:500;letter-spacing:.08em;font-size:15px;text-transform:uppercase;color:var(--gold);margin:0 0 14px;display:flex;align-items:center;gap:10px}
-h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--edge-hi),transparent)}
-
-.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:0 0 44px}
-.tool{position:relative;display:flex;flex-direction:column;gap:12px;padding:22px 22px 18px;border-radius:10px;
-  background:linear-gradient(180deg,var(--stone-2),var(--stone));border:1px solid var(--edge);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 10px 26px rgba(0,0,0,.45);transition:border-color .15s,transform .15s}
-.tool:hover,.tool:focus-within{border-color:var(--edge-hi);transform:translateY(-2px)}
-.tool.wide{grid-column:1/-1}
-.tool-head{display:flex;align-items:center;gap:14px}
-.glyph{width:46px;height:46px;flex:none;border-radius:10px;display:grid;place-items:center;background:#0d0b08;border:1px solid var(--edge);color:var(--gold)}
-.glyph svg{width:26px;height:26px}
-.tool h3{margin:0;font-family:Cinzel,serif;font-weight:700;font-size:20px;letter-spacing:.03em;line-height:1.2}
-.tool h3 a{color:var(--text);text-decoration:none}
-.tool h3 a::after{content:"";position:absolute;inset:0;border-radius:10px}
-.tool h3 a:hover{color:var(--gold-hi)}
-.tool p{margin:0;color:var(--muted);font-size:16px}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
-.tags li{font-size:12.5px;color:var(--muted);background:#0d0b08;border:1px solid var(--edge);border-radius:999px;padding:2px 10px}
-.tool-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:6px;font-size:14px}
-.open{color:var(--gold-hi);font-weight:700;letter-spacing:.02em}
-.source{position:relative;z-index:1;color:var(--dim);text-decoration:none}
-.source:hover{color:var(--gold-hi);text-decoration:underline}
-
-.others{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 44px}
-.other{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:8px;background:rgba(20,17,13,.7);border:1px solid var(--edge);text-decoration:none;color:inherit}
-.other:hover{border-color:var(--edge-hi)}
-.other b{display:block;color:var(--text);font-weight:700}
-.other span{color:var(--muted);font-size:15px}
-.other .glyph{width:36px;height:36px;border-radius:8px}
-.other .glyph svg{width:20px;height:20px}
-
-.note{border-left:3px solid var(--gold);background:rgba(20,17,13,.7);padding:14px 18px;border-radius:0 8px 8px 0;color:var(--muted);font-size:15.5px;margin:0 0 44px}
-.note b{color:var(--text)}
-
-footer.wrap{border-top:1px solid var(--edge);padding:22px 16px 40px;color:var(--dim);font-size:13.5px;text-align:center}
-footer p{margin:4px 0}
-
-@media (max-width:760px){
-  header.wrap{padding:36px 16px 26px}
-  .crest{gap:12px}
-  .orb{width:34px;height:34px;border-width:2px}
-  .tools,.others{grid-template-columns:1fr}
-  .tool{padding:18px 16px 16px}
-}
-@media (prefers-reduced-motion:reduce){.tool{transition:none}.tool:hover,.tool:focus-within{transform:none}}
 </style>
 </head>
-<body>
+<body class="tri">
 <script src="assets/site-nav.js"></script>
-<header class="wrap">
-  <div class="crest"><span class="orb life" aria-hidden="true"></span><h1>PD2 Calculators</h1><span class="orb mana" aria-hidden="true"></span></div>
-  <p class="byline">Made by <a href="https://github.com/RoofooEvazan">RoofooEvazan</a></p>
-  <p class="intro">Calculators and simulators for Project Diablo 2, built on <b>the game's own code</b>: the rules were reverse engineered from PD2's client files, and many were checked by running that code directly. Each tool shows how its numbers were found and what's still unverified.</p>
-  <div class="rule" aria-hidden="true"><i></i></div>
-</header>
+<div class="tri-embers" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
-<main class="wrap">
-  <h2>Wiki</h2>
-  <div class="tools">
-    <article class="tool wide">
-      <div class="tool-head">
-        <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7M8 11h5"/></svg></span>
-        <h3><a href="https://roofooevazan.github.io/wiki/">PD2 Wiki</a></h3>
-      </div>
-      <p>The whole Project Diablo 2 wiki, rebuilt for reading on any screen: instant search down to single runewords and skills, sortable and filterable tables, and a page outline that follows you. It re-syncs from the official wiki every day, and adds an interactive Act 2 merc weapon comparison.</p>
-      <ul class="tags"><li>Instant search</li><li>Sortable tables</li><li>Synced daily</li><li>Mobile friendly</li><li>Merc weapon compare</li></ul>
-      <div class="tool-foot"><span class="open">Open wiki →</span><a class="source" href="https://wiki.projectdiablo2.com/">Original wiki</a></div>
-    </article>
+<div class="town-window" aria-hidden="true"><p class="window-caption">Tristram road</p></div>
+
+<main class="sheet">
+  <div class="sheet-in">
+    <header class="mast">
+      <p class="kicker">RoofooEvazan</p>
+      <h1>PD2 Calculators</h1>
+      <p class="by">Made by <a href="https://github.com/RoofooEvazan">RoofooEvazan</a></p>
+    </header>
+    <p class="lede">Calculators and simulators for Project Diablo 2, built on <b>the game's own code</b>: the rules were reverse engineered from PD2's client files, and many were checked by running that code directly. Each tool shows how its numbers were found and what's still unverified.</p>
+
+    <section class="block" aria-labelledby="s-wiki">
+      <h2 id="s-wiki">Wiki</h2>
+      <ul class="quest">
+      <li class="quest-row">
+        <div class="quest-copy">
+          <h3 class="entry-name"><a href="https://roofooevazan.github.io/wiki/">PD2 Wiki</a></h3>
+          <p class="blurb">The whole Project Diablo 2 wiki, rebuilt for reading on any screen: instant search down to single runewords and skills, sortable and filterable tables, and a page outline that follows you. It re-syncs from the official wiki every day, and adds an interactive Act 2 merc weapon comparison.</p>
+          <p class="marks">Instant search · Sortable tables · Synced daily · Mobile friendly · Merc weapon compare</p>
+        </div>
+        <div class="quest-actions">
+          <a class="tri-btn primary" href="https://roofooevazan.github.io/wiki/" aria-label="Open wiki: PD2 Wiki">Open wiki</a>
+          <a class="tri-btn" href="https://wiki.projectdiablo2.com/" aria-label="Original wiki: PD2 Wiki">Original wiki</a>
+        </div>
+      </li>
+      </ul>
+    </section>
+
+    <section class="block" aria-labelledby="s-tools">
+      <h2 id="s-tools">Tools</h2>
+      <ul class="quest">
+      <li class="quest-row">
+        <div class="quest-copy">
+          <h3 class="entry-name"><a href="https://roofooevazan.github.io/pd2-ias-calc/">IAS Calculator</a></h3>
+          <p class="blurb">Frames per attack and breakpoints for every class, weapon, attack skill and speed skill, including werewolf and werebear speed.</p>
+          <p class="marks">Breakpoints · Frame grid · Fastest frames · Wereforms</p>
+        </div>
+        <div class="quest-actions">
+          <a class="tri-btn primary" href="https://roofooevazan.github.io/pd2-ias-calc/" aria-label="Open calculator: IAS Calculator">Open calculator</a>
+          <a class="tri-btn" href="https://github.com/RoofooEvazan/pd2-ias-calc" aria-label="Source: IAS Calculator">Source</a>
+        </div>
+      </li>
+      <li class="quest-row">
+        <div class="quest-copy">
+          <h3 class="entry-name"><a href="https://roofooevazan.github.io/pd2-advanced-stats/">Advanced Stats</a></h3>
+          <p class="blurb">Every advanced stat of a character, loaded from a PD2 Armory export or a single-player save and read in your browser.</p>
+          <p class="marks">Offense · Defense · Skill damage · Mercenary</p>
+        </div>
+        <div class="quest-actions">
+          <a class="tri-btn primary" href="https://roofooevazan.github.io/pd2-advanced-stats/" aria-label="Open calculator: Advanced Stats">Open calculator</a>
+          <a class="tri-btn" href="https://github.com/RoofooEvazan/pd2-advanced-stats" aria-label="Source: Advanced Stats">Source</a>
+        </div>
+      </li>
+      <li class="quest-row">
+        <div class="quest-copy">
+          <h3 class="entry-name"><a href="https://roofooevazan.github.io/pd2-hit-chance/">Hit Chance</a></h3>
+          <p class="blurb">Your chance to hit a monster and a monster's chance to hit you, with block, dodge, avoid and evade, from PD2's own hit roll.</p>
+          <p class="marks">Attack rating · Block · Dodge &amp; evade · Attack rating needed</p>
+        </div>
+        <div class="quest-actions">
+          <a class="tri-btn primary" href="https://roofooevazan.github.io/pd2-hit-chance/" aria-label="Open calculator: Hit Chance">Open calculator</a>
+          <a class="tri-btn" href="https://github.com/RoofooEvazan/pd2-hit-chance" aria-label="Source: Hit Chance">Source</a>
+        </div>
+      </li>
+      <li class="quest-row">
+        <div class="quest-copy">
+          <h3 class="entry-name"><a href="https://roofooevazan.github.io/pd2-damage-atlas/">Damage Atlas</a></h3>
+          <p class="blurb">Every damage calculation, skill by skill, as flow charts: formulas, interactions and quirks traced from the code, with a pipeline map and a hit lab.</p>
+          <p class="marks">Skill flow · Quirks · Pipeline map · Hit lab</p>
+        </div>
+        <div class="quest-actions">
+          <a class="tri-btn primary" href="https://roofooevazan.github.io/pd2-damage-atlas/" aria-label="Open atlas: Damage Atlas">Open atlas</a>
+          <a class="tri-btn" href="https://github.com/RoofooEvazan/pd2-damage-atlas" aria-label="Source: Damage Atlas">Source</a>
+        </div>
+      </li>
+      <li class="quest-row">
+        <div class="quest-copy">
+          <h3 class="entry-name"><a href="https://roofooevazan.github.io/pd2-spawn-simulator/">Spawn Simulator</a></h3>
+          <p class="blurb">An experimental model of map spawns: monster density, packs, elites and estimated XP per map, plus a loot mini game that clears the map and shows where every drop fell.</p>
+          <p class="marks">Density · Elites · XP · Loot run</p>
+        </div>
+        <div class="quest-actions">
+          <a class="tri-btn primary" href="https://roofooevazan.github.io/pd2-spawn-simulator/" aria-label="Open simulator: Spawn Simulator">Open simulator</a>
+          <a class="tri-btn" href="https://github.com/RoofooEvazan/pd2-spawn-simulator" aria-label="Source: Spawn Simulator">Source</a>
+        </div>
+      </li>
+      <li class="quest-row">
+        <div class="quest-copy">
+          <h3 class="entry-name"><a href="https://roofooevazan.github.io/pd2-base-finder/">Base Finder</a></h3>
+          <p class="blurb">The earliest area in the game where an item base can drop, and the earliest where it can roll the sockets you want, from PD2's own drop tables and item-level socket caps.</p>
+          <p class="marks">Earliest drop · Max sockets · Area drop list · Item level</p>
+        </div>
+        <div class="quest-actions">
+          <a class="tri-btn primary" href="https://roofooevazan.github.io/pd2-base-finder/" aria-label="Open finder: Base Finder">Open finder</a>
+          <a class="tri-btn" href="https://github.com/RoofooEvazan/pd2-base-finder" aria-label="Source: Base Finder">Source</a>
+        </div>
+      </li>
+      <li class="quest-row">
+        <div class="quest-copy">
+          <h3 class="entry-name"><a href="https://roofooevazan.github.io/Roofoo-s-PD2-Loot-Filter/">Loot Filter Builder</a></h3>
+          <p class="blurb">Make Roofoo's loot filter your own without touching filter code: color themes, drop sounds, star tiers, mystery drops, and what shows or hides on each filter level.</p>
+          <p class="marks">Themes · Drop sounds · Show / hide · Item tester</p>
+        </div>
+        <div class="quest-actions">
+          <a class="tri-btn primary" href="https://roofooevazan.github.io/Roofoo-s-PD2-Loot-Filter/" aria-label="Open builder: Loot Filter Builder">Open builder</a>
+          <a class="tri-btn" href="https://github.com/RoofooEvazan/Roofoo-s-PD2-Loot-Filter" aria-label="Source: Loot Filter Builder">Source</a>
+        </div>
+      </li>
+      </ul>
+    </section>
+
+    <section class="block" aria-labelledby="s-other">
+      <h2 id="s-other">Other projects</h2>
+      <ul class="quest">
+      <li class="quest-row">
+        <div class="quest-copy">
+          <h3 class="entry-name"><a href="https://github.com/RoofooEvazan/Roofoo-s-PD2-Loot-Filter#readme">Roofoo's PD2 Loot Filter</a></h3>
+          <p class="blurb">A fork of Kryszard's filter with late-game tweaks for FL7+ and FL8+. Opens the filter's README; customize it with the Loot Filter Builder above.</p>
+        </div>
+        <div class="quest-actions">
+          <a class="tri-btn" href="https://github.com/RoofooEvazan/Roofoo-s-PD2-Loot-Filter#readme" aria-label="GitHub: Roofoo's PD2 Loot Filter">GitHub</a>
+        </div>
+      </li>
+      <li class="quest-row">
+        <div class="quest-copy">
+          <h3 class="entry-name"><a href="https://github.com/RoofooEvazan/pd2-exploration-automap">Exploration Automap</a></h3>
+          <p class="blurb">An automap for PD2 / D2GL with separate campaign and map styles, boundary colors and a fixed reveal radius.</p>
+        </div>
+        <div class="quest-actions">
+          <a class="tri-btn" href="https://github.com/RoofooEvazan/pd2-exploration-automap" aria-label="GitHub: Exploration Automap">GitHub</a>
+        </div>
+      </li>
+      </ul>
+    </section>
+
+    <p class="colophon"><b>How to read these tools.</b> Rules marked <b>verified</b> were checked by running the game's own code on many inputs; <b>read</b> means they come from reading the reverse-engineered code without running it. The spawn simulator is experimental and says where it's approximate.</p>
+    <p class="fine">A fan-made project. Not affiliated with or endorsed by Blizzard Entertainment or the Project Diablo 2 team. Diablo is a trademark of Blizzard Entertainment.</p>
+      <p class="fine">No game assets are included, apart from short sound clips the Loot Filter Builder uses to preview drop sounds. Everything runs in your browser, with no tracking.</p>
   </div>
-
-  <h2>Tools</h2>
-  <div class="tools">
-    <article class="tool">
-      <div class="tool-head">
-        <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span>
-        <h3><a href="https://roofooevazan.github.io/pd2-ias-calc/">IAS Calculator</a></h3>
-      </div>
-      <p>Frames per attack and breakpoints for every class, weapon, attack skill and speed skill, including werewolf and werebear speed.</p>
-      <ul class="tags"><li>Breakpoints</li><li>Frame grid</li><li>Fastest frames</li><li>Wereforms</li></ul>
-      <div class="tool-foot"><span class="open">Open calculator →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-ias-calc">Source</a></div>
-    </article>
-
-    <article class="tool">
-      <div class="tool-head">
-        <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
-        <h3><a href="https://roofooevazan.github.io/pd2-advanced-stats/">Advanced Stats</a></h3>
-      </div>
-      <p>Every advanced stat of a character, loaded from a PD2 Armory export or a single-player save and read in your browser.</p>
-      <ul class="tags"><li>Offense</li><li>Defense</li><li>Skill damage</li><li>Mercenary</li></ul>
-      <div class="tool-foot"><span class="open">Open calculator →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-advanced-stats">Source</a></div>
-    </article>
-
-    <article class="tool">
-      <div class="tool-head">
-        <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg></span>
-        <h3><a href="https://roofooevazan.github.io/pd2-hit-chance/">Hit Chance</a></h3>
-      </div>
-      <p>Your chance to hit a monster and a monster's chance to hit you, with block, dodge, avoid and evade, from PD2's own hit roll.</p>
-      <ul class="tags"><li>Attack rating</li><li>Block</li><li>Dodge &amp; evade</li><li>Attack rating needed</li></ul>
-      <div class="tool-foot"><span class="open">Open calculator →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-hit-chance">Source</a></div>
-    </article>
-
-    <article class="tool">
-      <div class="tool-head">
-        <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="5" rx="1"/><rect x="15" y="3" width="6" height="5" rx="1"/><rect x="9" y="16" width="6" height="5" rx="1"/><path d="M6 8v3h12V8M12 11v5"/></svg></span>
-        <h3><a href="https://roofooevazan.github.io/pd2-damage-atlas/">Damage Atlas</a></h3>
-      </div>
-      <p>Every damage calculation, skill by skill, as flow charts: formulas, interactions and quirks traced from the code, with a pipeline map and a hit lab.</p>
-      <ul class="tags"><li>Skill flow</li><li>Quirks</li><li>Pipeline map</li><li>Hit lab</li></ul>
-      <div class="tool-foot"><span class="open">Open atlas →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-damage-atlas">Source</a></div>
-    </article>
-
-    <article class="tool">
-      <div class="tool-head">
-        <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg></span>
-        <h3><a href="https://roofooevazan.github.io/pd2-spawn-simulator/">Spawn Simulator</a></h3>
-      </div>
-      <p>An experimental model of map spawns: monster density, packs, elites and estimated XP per map, plus a loot mini game that clears the map and shows where every drop fell.</p>
-      <ul class="tags"><li>Density</li><li>Elites</li><li>XP</li><li>Loot run</li></ul>
-      <div class="tool-foot"><span class="open">Open simulator →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-spawn-simulator">Source</a></div>
-    </article>
-
-    <article class="tool">
-      <div class="tool-head">
-        <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/><circle cx="9" cy="11" r="1.2"/><circle cx="13" cy="11" r="1.2"/></svg></span>
-        <h3><a href="https://roofooevazan.github.io/pd2-base-finder/">Base Finder</a></h3>
-      </div>
-      <p>The earliest area in the game where an item base can drop, and the earliest where it can roll the sockets you want, from PD2's own drop tables and item-level socket caps.</p>
-      <ul class="tags"><li>Earliest drop</li><li>Max sockets</li><li>Area drop list</li><li>Item level</li></ul>
-      <div class="tool-foot"><span class="open">Open finder →</span><a class="source" href="https://github.com/RoofooEvazan/pd2-base-finder">Source</a></div>
-    </article>
-
-    <article class="tool">
-      <div class="tool-head">
-        <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg></span>
-        <h3><a href="https://roofooevazan.github.io/Roofoo-s-PD2-Loot-Filter/">Loot Filter Builder</a></h3>
-      </div>
-      <p>Make Roofoo's loot filter your own without touching filter code: color themes, drop sounds, star tiers, mystery drops, and what shows or hides on each filter level.</p>
-      <ul class="tags"><li>Themes</li><li>Drop sounds</li><li>Show / hide</li><li>Item tester</li></ul>
-      <div class="tool-foot"><span class="open">Open builder →</span><a class="source" href="https://github.com/RoofooEvazan/Roofoo-s-PD2-Loot-Filter">Source</a></div>
-    </article>
-  </div>
-
-  <h2>Other projects</h2>
-  <div class="others">
-    <a class="other" href="https://github.com/RoofooEvazan/Roofoo-s-PD2-Loot-Filter#readme">
-      <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg></span>
-      <span><b>Roofoo's PD2 Loot Filter</b><span>A fork of Kryszard's filter with late-game tweaks for FL7+ and FL8+. Opens the filter's README; customize it with the Loot Filter Builder above.</span></span>
-    </a>
-    <a class="other" href="https://github.com/RoofooEvazan/pd2-exploration-automap">
-      <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></span>
-      <span><b>Exploration Automap</b><span>An automap for PD2 / D2GL with separate campaign and map styles, boundary colors and a fixed reveal radius.</span></span>
-    </a>
-  </div>
-
-  <p class="note"><b>How to read these tools.</b> Rules marked <b>verified</b> were checked by running the game's own code on many inputs; <b>read</b> means they come from reading the reverse-engineered code without running it. The spawn simulator is experimental and says where it's approximate.</p>
 </main>
-
-<footer class="wrap">
-  <p>A fan-made project. Not affiliated with or endorsed by Blizzard Entertainment or the Project Diablo 2 team. Diablo is a trademark of Blizzard Entertainment.</p>
-  <p>No game assets are included, apart from short sound clips the Loot Filter Builder uses to preview drop sounds. Everything runs in your browser, with no tracking.</p>
-</footer>
 </body>
 </html>

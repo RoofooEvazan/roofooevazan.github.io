@@ -32,27 +32,35 @@
   }
 
   var css = [
-    '.rsn{position:relative;z-index:50;background:linear-gradient(180deg,#120e0a,#0b0906);border-bottom:1px solid #3a3024;font:500 14.5px/1.3 "Alegreya Sans",system-ui,sans-serif;color:#e8dfcf}',
+    '.rsn{position:relative;z-index:50;background:#100c0a;border-bottom:1px solid #5a4030;box-shadow:inset 0 -3px 0 #8e261c;font:400 15px/1.3 Almendra,Palatino,Georgia,serif;color:#f1e2c6}',
     '.rsn *{box-sizing:border-box}',
-    '.rsn-in{max-width:1280px;margin:0 auto;padding:0 16px;height:48px;display:flex;align-items:center;gap:18px}',
-    '.rsn-brand{display:flex;align-items:center;gap:9px;flex:none;color:#d9b25f;text-decoration:none;font-family:Cinzel,serif;font-weight:700;letter-spacing:.05em;font-size:15px}',
-    '.rsn-orb{width:18px;height:18px;border-radius:50%;border:2px solid #b8974f;background:radial-gradient(circle at 50% 70%,#e0342a,#8c1310 50%,#2a0404)}',
+    '.rsn-in{max-width:1280px;margin:0 auto;padding:0 16px 3px;height:51px;display:flex;align-items:center;gap:18px}',
+    '.rsn-brand{display:flex;align-items:center;gap:9px;flex:none;color:#d2b06a;text-decoration:none;font:400 12px/1 Silkscreen,"Courier New",monospace;letter-spacing:.06em;text-transform:uppercase}',
+    '.rsn-mark{width:14px;height:14px;flex:none;border:2px solid #d2b06a;background:radial-gradient(#8e261c 0 3px,transparent 3.5px),#100c0a}',
     '.rsn-links{display:flex;align-items:center;gap:2px;margin:0;padding:0;list-style:none;min-width:0;overflow:hidden}',
-    '.rsn-links a{display:block;padding:6px 10px;border-radius:6px;color:#a89c86;text-decoration:none;white-space:nowrap}',
-    '.rsn-links a:hover{color:#f3d58c;background:rgba(217,178,95,.07)}',
-    '.rsn-links a[aria-current=page]{color:#f3d58c;background:rgba(217,178,95,.12);box-shadow:inset 0 -2px 0 #d9b25f}',
-    '.rsn a:focus-visible,.rsn button:focus-visible{outline:2px solid #f3d58c;outline-offset:2px}',
-    '.rsn-toggle{display:none;margin-left:auto;align-items:center;gap:8px;height:34px;padding:0 12px;border-radius:6px;border:1px solid #3a3024;background:#14110d;color:#e8dfcf;font:inherit;cursor:pointer}',
+    '.rsn-links a{display:block;padding:6px 9px;color:#b59a76;text-decoration:none;white-space:nowrap}',
+    '.rsn-links a:hover{color:#f1e2c6;background:rgba(210,176,106,.08)}',
+    '.rsn-links a[aria-current=page]{color:#f6ead4;background:#8e261c}',
+    '.rsn a:focus-visible,.rsn button:focus-visible{outline:2px solid #d2b06a;outline-offset:2px}',
+    '.rsn-toggle{display:none;margin-left:auto;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid #5a4030;background:transparent;color:#f1e2c6;font:400 11px/1 Silkscreen,"Courier New",monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}',
     '.rsn-toggle svg{width:18px;height:18px}',
     '@media (max-width:1020px){',
     ' .rsn-toggle{display:inline-flex}',
-    ' .rsn-links{display:none;position:absolute;left:0;right:0;top:48px;flex-direction:column;align-items:stretch;gap:0;padding:6px 10px 12px;background:#0f0c09;border-bottom:1px solid #3a3024;box-shadow:0 14px 30px rgba(0,0,0,.6)}',
+    ' .rsn-links{display:none;position:absolute;left:0;right:0;top:51px;flex-direction:column;align-items:stretch;gap:0;padding:6px 10px 12px;background:#1a1410;border-bottom:4px solid #8e261c;box-shadow:inset 0 1px 0 #d2b06a,0 14px 30px rgba(0,0,0,.6)}',
     ' .rsn.open .rsn-links{display:flex}',
-    ' .rsn-links a{padding:11px 12px;font-size:16px}',
-    ' .rsn-links a[aria-current=page]{box-shadow:inset 3px 0 0 #d9b25f}',
+    ' .rsn-links a{padding:11px 12px;font-size:16px;border-top:1px solid #3a2a20}',
+    ' .rsn-links li:first-child a{border-top:0}',
     '}',
     '@media print{.rsn{display:none}}'
   ].join('\n');
+
+  // The Tristram fonts, for pages that don't load them already.
+  if (!document.querySelector('link[href*="family=Silkscreen"]')) {
+    var fonts = document.createElement('link');
+    fonts.rel = 'stylesheet';
+    fonts.href = 'https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=Silkscreen:wght@400;700&display=swap';
+    document.head.appendChild(fonts);
+  }
 
   var style = document.createElement('style');
   style.textContent = css;
@@ -68,7 +76,7 @@
   nav.setAttribute('aria-label', 'Site');
   nav.innerHTML =
     '<div class="rsn-in">' +
-      '<a class="rsn-brand" href="' + href('/') + '"><span class="rsn-orb" aria-hidden="true"></span>Roofoo’s PD2</a>' +
+      '<a class="rsn-brand" href="' + href('/') + '"><span class="rsn-mark" aria-hidden="true"></span>Roofoo’s PD2</a>' +
       '<button class="rsn-toggle" type="button" aria-expanded="false" aria-controls="rsn-links">' +
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</button>' +
       '<ul class="rsn-links" id="rsn-links">' + items + '</ul>' +

@@ -1,0 +1,59 @@
+/* Tristram theme for the wiki. Loaded last, after ../assets/tristram.css
+   and the wiki's own sheets. Silkscreen runs much wider than a book face,
+   so display text is sized down here; everything else comes from the
+   palette and fonts set in wiki.css. */
+
+/* The plate stays behind the page, dimmed further so long reading holds. */
+body.tri{--tri-dim:74%;background:transparent}
+
+/* ---------- top bar ---------- */
+.bar{background:rgba(16,12,10,.95);border-bottom:1px solid var(--edge);box-shadow:inset 0 -3px 0 var(--blood)}
+.wordmark{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;gap:9px}
+.bar .orb,.wordmark .orb{width:16px;height:16px;border-radius:0;border:2px solid var(--gold);box-shadow:none;background:radial-gradient(var(--blood) 0 3px,transparent 3.5px),var(--void)}
+.search input{background:var(--stone)}
+.search input:focus{box-shadow:0 0 0 3px rgba(210,176,106,.15)}
+.results{background:var(--stone);box-shadow:inset 0 3px 0 var(--gold),0 18px 40px rgba(0,0,0,.7)}
+.res-group{font-family:var(--font-display);font-weight:400;font-size:10.5px;letter-spacing:.06em}
+
+/* ---------- panels: the page sits on a stone sheet over the ground ---------- */
+.side{background:rgba(16,12,10,.82)}
+.main{background:color-mix(in srgb,var(--stone) 93%,transparent);box-shadow:inset 0 4px 0 var(--gold),inset 0 -4px 0 #2a120e;border-left:1px solid var(--edge);border-right:1px solid var(--edge)}
+.toc-rail{background:rgba(16,12,10,.6)}
+
+/* ---------- display type, resized for Silkscreen ---------- */
+.side-nav summary{font-size:11px;font-weight:400;letter-spacing:.05em}
+.side-nav li a[aria-current=page],.side-nav .top-link[aria-current=page]{color:var(--tri-accent-fg);background:var(--blood);box-shadow:none}
+.toc-title,.toc-inline > summary{font-size:11px;letter-spacing:.05em}
+.page-title{font-size:clamp(18px,2.4vw,26px);line-height:1.35;letter-spacing:.04em;text-shadow:none}
+.hero h1{font-size:clamp(20px,3vw,30px);line-height:1.3;letter-spacing:.04em;text-shadow:none}
+.home-h{font-size:12px;font-weight:400;letter-spacing:.05em}
+.home-h::after{background:var(--edge)}
+.tool-card b{font-size:14px;letter-spacing:.03em}
+.group h3{font-size:13px;letter-spacing:.03em}
+.az h3{font-size:14px}
+.log time{font-size:12px}
+
+.wiki h1,.wiki h2,.wiki h3{color:var(--gold-hi);letter-spacing:.03em}
+.wiki .mw-heading1 h1{font-size:21px}
+.wiki .mw-heading2 h2{font-size:17px}
+.wiki .mw-heading3 h3{font-size:14px}
+.wiki .home-menu-title{font-size:14px}
+
+.icard-title b{font-size:13px;letter-spacing:.02em;line-height:1.35}
+.setpanel-head b{font-size:14px}
+.tt-name{font-size:19px;line-height:1.3;text-shadow:none}
+.tile b{font-size:13px;letter-spacing:.02em}
+.tree h2{font-size:12px}
+.skill-head h2{font-size:19px}
+.lvlw-head label,.cls-intro > summary{font-size:12px}
+.mtitle b{font-size:13px;letter-spacing:.02em}
+.pn-title{font-size:15px}
+.corr-col header b{font-size:12px}
+.boss h3{font-family:var(--font-display);font-size:14px}
+.mw-field label,.mw-label{font-size:11px;letter-spacing:.05em}
+
+/* ---------- the red "Open" of the theme on the wiki's primary buttons ---------- */
+.tool-card{background:var(--stone-2);box-shadow:inset 0 0 0 1px rgba(210,176,106,.12)}
+.tool-card .glyph{background:var(--void);color:var(--gold)}
+.pill{background:var(--void)}
+.welcome{background:rgba(16,12,10,.6);border-left-color:var(--blood)}
