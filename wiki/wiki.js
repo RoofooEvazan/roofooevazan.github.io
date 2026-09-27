@@ -118,7 +118,7 @@
   // and every page nobody lists here still shows up under "More pages".
   const SITE = [
     { name: 'Items', icon: 'items', links: [['Item Database', '#/items'], ['Uniques', '#/items?t=unique'], ['Set Items', '#/items?t=set'], ['Runewords', '#/items?t=runeword'],
-      ['Affix Finder', '#/affixes'], ['Runes & Gems', '#/runes'], ['Item Bases', '#/bases'], ['Quality Levels', '#/bases/qlvl'], 'New Items', 'Cosmetics', 'Arrows'] },
+      ['Affix Finder', '#/affixes'], ['Runes & Gems', '#/runes'], ['Item Bases', '#/bases'], ['Quality Levels', '#/bases/qlvl'], ['New in PD2', '#/new'], ['Cosmetics', '#/cosmetics'], 'Arrows'] },
     { name: 'Skills', icon: 'skills', links: [...['Amazon', 'Assassin', 'Barbarian', 'Druid', 'Necromancer', 'Paladin', 'Sorceress'].map(c => [c, `#/skills/${c}`]),
       ['Skill Changes', 'Skill Changes'], ['Mercenary Skills', '#/mercs/a2'], ['Item-Only Skills', 'Item Skills'], ['Stat Planner', '#/classes']] },
     { name: 'Crafting & Cube', icon: 'craft', links: [['Cube Recipes', '#/cube'], ['Crafted Items', '#/cube/crafting'], ['Corruptions', '#/cube/corruptions'],
@@ -132,7 +132,7 @@
     { name: 'More Pages', icon: 'list', auto: 'rest' },
   ];
   // Pages our own views replace; they stay reachable through search and A–Z.
-  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Item Bases|Runes|Mercenaries|Mercenary Skills|FAQ|Support FAQ|Breakpoints|Links|Item Filtering|Filter Info|Customization|Class Attributes|Item Quality Levels|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
+  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Item Bases|Runes|Mercenaries|Mercenary Skills|FAQ|Support FAQ|Breakpoints|Links|Item Filtering|Filter Info|Customization|Class Attributes|Item Quality Levels|New Items|Cosmetics|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
 
   function buildSite() {
     const used = new Set();
@@ -374,6 +374,8 @@
       const tab = ['codes', 'list', 'setup'].includes(seg) ? seg : '';
       return view(() => window.PD2Filters.render(main, tab, tab ? '' : seg, qs, anchor), tab ? 'filters/' + tab : 'filters', 'Loot Filters · PD2 Wiki', !!anchor);
     }
+    if (path === 'new') return view(() => window.PD2Extras.newItems(main, anchor), 'new', 'New in PD2 · PD2 Wiki', !!anchor);
+    if (path === 'cosmetics') return view(() => window.PD2Extras.cosmetics(main, anchor), 'cosmetics', 'Cosmetics · PD2 Wiki', !!anchor);
     if (path === 'classes' || path.startsWith('classes?')) {
       return view(() => window.PD2Classes.render(main, raw.split('?')[1] || ''), 'classes', 'Stat Planner · PD2 Wiki');
     }
@@ -1047,7 +1049,7 @@
         ${tile('#/items?t=runeword', 'rune', 'Runewords', 'Filter by sockets, base and level', 'q-rw')}
         ${tile('#/items?ch=1&sort=changes', 'items', 'Changed in PD2', 'Items PD2 reworked the most')}
       </div>
-      <p class="tile-links"><a href="#/affixes">Affix finder</a><a href="#/runes">Runes &amp; gems</a><a href="#/bases">Item bases</a>${['New Items', 'Cosmetics'].map(t => pageLink(t)).filter(Boolean).join('')}</p>
+      <p class="tile-links"><a href="#/affixes">Affix finder</a><a href="#/runes">Runes &amp; gems</a><a href="#/bases">Item bases</a><a href="#/new">New in PD2</a><a href="#/cosmetics">Cosmetics</a></p>
 
       <h2 class="home-h">Skills${skillsN ? ` <small>${skillsN}</small>` : ''}</h2>
       <div class="classes">${window.PD2Skills.CLASSES.map(c => `<a href="#/skills/${c}"><span class="cls-orb cls-${c.toLowerCase()}" aria-hidden="true">${c[0]}</span>${c}</a>`).join('')}</div>

@@ -328,6 +328,8 @@ export async function extract(pages, dir) {
   const mercs = await extractMercs(await doc('Mercenaries'), await doc('Mercenary Skills'), targets);
   const classAttrs = await extractClassAttrs(await doc('Class Attributes'), targets);
   const qlvl = await extractQlvlIntro(await doc('Item Quality Levels'), targets);
+  const newItems = await extractNewItems(await doc('New Items'), targets);
+  const cosmetics = await extractCosmetics(await doc('Cosmetics'), targets);
 
   const skillIndexAll = Object.values(skills).flatMap(c => c.trees.flatMap(t => t.skills.map(k => ({ c: c.cls, n: k.name, a: k.anchor }))));
   const help = await extractHelp(await doc('FAQ'), await doc('Support FAQ'), targets);
@@ -338,7 +340,7 @@ export async function extract(pages, dir) {
   const fi = byTitle.get('Filter Info');
   if (fi) targets[`${fi.id}#`] = 'filters/list';
 
-  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs, classAttrs, qlvl }, guide: { help, guides, breakpoints }, filters };
+  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs, classAttrs, qlvl, newItems, cosmetics }, guide: { help, guides, breakpoints }, filters };
 }
 
 // ---------- maps ----------
@@ -1419,4 +1421,68 @@ async function extractQlvlIntro(r, targets) {
   const html = [...r.d.querySelector('.mw-parser-output').children].filter(e => !e.matches('table') && text(e)).map(e => clean(e.outerHTML)).join('');
   targets[`${r.page.id}#`] = 'bases/qlvl';
   return { page: r.page.id, html };
+}
+
+// ---------- new items & cosmetics ----------
+// New Items: per h1 section, a tree of list items: "Name (note)" with optional nested lists.
+async function extractNewItems(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const sections = [];
+  const node = li => {
+    const own = li.cloneNode(true);
+    for (const sub of [...own.querySelectorAll('ul,ol')]) sub.remove();
+    const t = text(own);
+    const a = own.querySelector('a[href^="/wiki/"]');
+    const m = t.match(/^(.*?)\s*\((.+)\)\s*$/);
+    let link = a ? decodeURIComponent(a.getAttribute('href').slice(6)).replace(/_/g, ' ') : '';
+    const kids = [...li.querySelectorAll(':scope > ul > li, :scope > ol > li')].map(node);
+    return { name: (m ? m[1] : t).replace(/:$/, '').trim(), note: m ? m[2] : '', link, kids };
+  };
+  for (const w of d.querySelectorAll('.mw-heading')) {
+    const hd = headingOf(w);
+    if (!hd || hd.level !== 1) continue;
+    const els = sectionAfter(w, 1);
+    const tree = els.filter(e => e.matches('ul')).flatMap(ul => [...ul.querySelectorAll(':scope > li')].map(node));
+    const intro = els.filter(e => !e.matches('ul') && text(e)).map(e => clean(e.outerHTML)).join('');
+    sections.push({ title: hd.text, anchor: hd.id, tree, intro });
+    targets[`${page.id}#${hd.id}`] = `new#${hd.id}`;
+  }
+  targets[`${page.id}#`] = 'new';
+  return { page: page.id, sections };
+}
+
+// Cosmetics: auras and alternate item skins, each with facts and pictures.
+async function extractCosmetics(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const groups = [];
+  let h1 = '', group = null;
+  for (const w of d.querySelectorAll('.mw-heading')) {
+    const hd = headingOf(w);
+    if (!hd) continue;
+    if (hd.level === 1) { h1 = hd.text; group = null; }
+    const els = sectionAfter(w, hd.level);
+    const info = els.find(e => e.matches('.item-info-box'));
+    const imgs = els.flatMap(e => [...e.querySelectorAll('img')]).map(im => ({ thumb: fixUrl(im.getAttribute('src')), full: largest(im), alt: im.getAttribute('alt') || '' }));
+    const hasEntry = info || imgs.length;
+    if (!hasEntry) {
+      const intro = els.filter(e => text(e)).map(e => clean(e.outerHTML)).join('');
+      group = { title: hd.level === 1 ? hd.text : hd.text, parent: h1, anchor: hd.id, intro, entries: [] };
+      groups.push(group);
+      targets[`${page.id}#${hd.id}`] = `cosmetics#${hd.id}`;
+      continue;
+    }
+    if (!group || (hd.level === 2 && /aura/i.test(h1))) {
+      // Aura sections are h2 entries directly under the h1 group.
+      if (!group || group.parent !== h1 && group.title !== h1) { group = { title: h1, parent: h1, anchor: '', intro: '', entries: [] }; groups.push(group); }
+    }
+    const facts = info ? readInfo(info) : { head: '', lines: [] };
+    const notes = els.filter(e => !e.matches('.item-info-box,.item-image-text,figure') && !e.querySelector('img') && text(e)).map(e => clean(e.outerHTML)).join('');
+    group.entries.push({ name: hd.text, anchor: hd.id, premium: /premium/i.test(hd.text), unique: !!hd.h.querySelector('.d2-gold'),
+      base: facts.head, facts: facts.lines.filter(l => l.label).map(l => ({ label: l.label, html: l.html })), imgs, notes });
+    targets[`${page.id}#${hd.id}`] = `cosmetics#${hd.id}`;
+  }
+  targets[`${page.id}#`] = 'cosmetics';
+  return { page: page.id, groups: groups.filter(g => g.entries.length || g.intro) };
 }
