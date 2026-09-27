@@ -323,7 +323,11 @@ export async function extract(pages, dir) {
   const mechanics = await extractMechanics(await doc('Game Mechanics'), targets);
   const affixes = await extractAffixes(await doc('Item Affixes'), targets);
 
-  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes };
+  const bases = await extractBases(await doc('Item Bases'), targets, items);
+  const runes = await extractRunes(await doc('Runes'), targets);
+  const mercs = await extractMercs(await doc('Mercenaries'), await doc('Mercenary Skills'), targets);
+
+  return { items, sets, skills, targets, maps, patches, cube, world: { zones, monsters }, mechanics, affixes, gear: { bases, runes, mercs } };
 }
 
 // ---------- maps ----------
@@ -926,4 +930,203 @@ async function extractAffixes(r, targets) {
   }
   targets[`${page.id}#`] = 'affixes';
   return { page: page.id, affixes, removed, bases, info };
+}
+
+// ---------- item bases, runes & gems, mercenaries ----------
+// Item Bases: each table lists Normal | Exceptional | Elite side by side; merge every
+// table into one record per base, keeping PD2's before/after values.
+async function extractBases(r, targets, items) {
+  if (!r) return null;
+  const { page, d } = r;
+  const byName = new Map();
+  const get = (name, tier) => {
+    if (!byName.has(name)) byName.set(name, { name, slug: slug(name), tier });
+    const b = byName.get(name);
+    if (tier && !b.tier) b.tier = tier;
+    return b;
+  };
+  const val = c => { const t = text(c); return t === '' ? null : t; };
+  const pair = (bc, ac) => {
+    const before = val(bc), after = ac ? val(ac) : null;
+    return after && after !== before ? { v: after, was: before } : before != null ? { v: before } : null;
+  };
+  const KEY = [
+    [/strength and dexterity/i, 'req'], [/base damage/i, 'dmg'], [/speed modifiers/i, 'wsm'], [/melee ranges/i, 'range'],
+    [/defense & required strength/i, 'def'], [/block chance/i, 'block'], [/maximum sockets/i, 'sockets'], [/durability/i, 'dur'],
+    [/required levels/i, 'rlvl'], [/qlvls/i, 'qlvl'],
+  ];
+  const info = [];
+  for (const table of d.querySelectorAll('table')) {
+    const cap = text(table.querySelector('caption'));
+    const key = (KEY.find(([re]) => re.test(cap)) || [])[1];
+    if (!key) continue;
+    const kind = /armor/i.test(cap) ? 'Armor' : /quiver/i.test(cap) ? 'Quiver' : /weapon/i.test(cap) ? 'Weapon' : /other/i.test(cap) ? 'Other' : '';
+    const g = grid(table);
+    const head = g[0].map(c => text(c));
+    // Column groups start at each "Item …" header.
+    const groups = [];
+    head.forEach((h, i) => { if (/^Item/.test(h)) groups.push({ at: i, tier: (h.match(/\((\w+)\)/) || [])[1] || '' }); });
+    groups.forEach((gr, gi) => {
+      const end = gi + 1 < groups.length ? groups[gi + 1].at : head.length;
+      gr.cols = {};
+      for (let i = gr.at + 1; i < end; i++) if (head[i]) gr.cols[head[i].toLowerCase()] = i;
+    });
+    for (const row of g.slice(1)) {
+      const fam = [];
+      for (const gr of groups) {
+        const name = text(row[gr.at]);
+        if (!name || /^\d/.test(name)) continue;
+        const b = get(name, gr.tier === 'Normal' || gr.tier === 'Exceptional' || gr.tier === 'Elite' ? gr.tier : '');
+        if (kind && !b.kind) b.kind = kind;
+        fam.push(name);
+        const c = k => row[gr.cols[k]];
+        if (key === 'req') { b.str = val(c('str')); b.dex = val(c('dex')); }
+        else if (key === 'def') { b.def = pair(c('before'), c('after')); if (c('str')) b.str = b.str || val(c('str')); b.kind = b.kind || 'Armor'; }
+        else if (key === 'dmg') { b.dmg = pair(c('before'), c('after')); b.avg = val(c('ø')); b.kind = b.kind || 'Weapon'; }
+        else if (key === 'dur') b.dur = c('durability') ? { v: val(c('durability')) } : pair(c('before'), c('after'));
+        else if (key === 'rlvl') b.rlvl = val(c('level'));
+        else if (key === 'qlvl') b.qlvl = val(c('qlvl'));
+        else b[key] = pair(c('before'), c('after'));
+      }
+      if (fam.length > 1) for (const n of fam) { const b = byName.get(n); if (!b.family) b.family = fam; }
+    }
+  }
+  // Weapon/armor type from the item database (uniques & sets name their base).
+  const typeOf = new Map();
+  for (const it of items) if (it.base && it.slot && it.slot !== 'Other') typeOf.set(it.base, it.sub || it.slot);
+  // Types the item database can't tell us (no unique/set on that base, or only "Weapon").
+  const byNameType = [
+    [/javelin|pilum|harpoon|spiculum|flying knife|throwing (axe|knife)|balanced (axe|knife)|war dart|winged|hurlbat|flying axe/i, 'Throwing'],
+    [/katar|quhab|suwayyah|claw|talon|cestus|hand scythe|scissors|wrist (blade|sword|spike)|hatchet hands|fascia|war fist/i, 'Claw'],
+    [/\bbow\b/i, 'Bow'], [/spear|pike/i, 'Spear'], [/blade$/i, 'Sword'], [/mace$/i, 'Mace'],
+    [/\borb\b|globe|sphere|jared's stone|heavenly stone|swirling crystal|demon heart|sparkling ball|dimensional shard/i, 'Orb'],
+    [/jawbone|carnage helm|fury visor|destroyer helm|conqueror crown|guardian crown|savage helmet|slayer guard|lion helm|rage mask|avenger guard|assault helmet|horned helm|barbarian helm/i, 'Helm'],
+    [/pelt|antlers|wolf head|hawk helm|falcon mask|spirit mask|totemic mask|blood spirit|sun spirit|earth spirit|sky spirit|dream spirit|alpha helm|griffon headdress|hunter's guise|sacred feathers/i, 'Helm'],
+    [/heraldic|protector shield|kurast shield|targe|rondache|aerin shield|crown shield|akaran|royal shield|gilded shield|zakarum shield|sacred (targe|rondache)|vortex shield/i, 'Shield'],
+    [/preserved head|zombie head|unraveller|gargoyle head|demon head|mummified trophy|fetish trophy|sexton trophy|cantor trophy|hierophant trophy|minion skull|hellspawn skull|overseer skull|succubus skull|bloodlord skull/i, 'Shield'],
+  ];
+  for (const b of byName.values()) {
+    let t = typeOf.get(b.name) || (b.family || []).map(n => typeOf.get(n)).find(x => x && x !== 'Weapon');
+    if (!t || t === 'Weapon' || t === 'Class Weapon') t = (byNameType.find(([re]) => re.test(b.name)) || [])[1] || t;
+    if (t) b.type = t;
+    // Boots and shields list kick/smite damage, but they're armor.
+    if (/^(Helm|Armor|Shield|Gloves|Boots|Belt)$/.test(b.type || '')) b.kind = 'Armor';
+    if (b.kind === 'Other') b.type = b.name;
+    b.changed = ['dmg', 'wsm', 'range', 'def', 'block', 'sockets', 'dur'].some(k => b[k]?.was != null);
+  }
+  for (const w of d.querySelectorAll('.mw-heading')) {
+    const hd = headingOf(w);
+    if (!hd) continue;
+    const html = sectionAfter(w, hd.level).filter(e => !(e.matches('table') && e.querySelectorAll('tr').length > 10)).map(e => clean(e.outerHTML)).join('');
+    if (html.replace(/<[^>]+>/g, '').trim()) info.push({ title: hd.text, anchor: hd.id, html });
+    targets[`${page.id}#${hd.id}`] = `bases/rules#${hd.id}`;
+  }
+  targets[`${page.id}#`] = 'bases';
+  return { page: page.id, bases: [...byName.values()].filter(b => b.kind), info };
+}
+
+async function extractRunes(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const runes = [], gems = [], info = [];
+  for (const table of d.querySelectorAll('table')) {
+    const g = grid(table);
+    const head = g[0].map(c => text(c).toLowerCase());
+    const ci = k => head.findIndex(h => h.startsWith(k));
+    if (head.includes('rune')) {
+      for (const row of g.slice(1)) {
+        const name = text(row[ci('name')]);
+        if (!name) continue;
+        runes.push({ n: +text(row[ci('#')]) || runes.length + 1, name, img: fixUrl(row[ci('rune')]?.querySelector('img')?.getAttribute('src')),
+          lvl: cellNum(row[ci('level')]), weapon: htmlOf(row[ci('weapon')]), armor: htmlOf(row[ci('chest')]), shield: htmlOf(row[ci('shield')]), group: text(row[ci('group')]) });
+      }
+    } else if (head.includes('gem')) {
+      for (const row of g.slice(1)) {
+        const name = text(row[ci('name')]);
+        if (!name) continue;
+        const m = name.match(/^(Chipped|Flawed|Flawless|Perfect)?\s*(.+)$/);
+        gems.push({ name, grade: m[1] || 'Normal', type: m[2], img: fixUrl(row[ci('gem')]?.querySelector('img')?.getAttribute('src')),
+          lvl: cellNum(row[ci('level')]), weapon: htmlOf(row[ci('weapon')]), armor: htmlOf(row[ci('chest')]), shield: htmlOf(row[ci('shield')]) });
+      }
+    }
+  }
+  for (const w of d.querySelectorAll('.mw-heading')) {
+    const hd = headingOf(w);
+    if (!hd) continue;
+    const html = sectionAfter(w, hd.level).filter(e => !e.matches('table')).map(e => clean(e.outerHTML)).join('');
+    info.push({ title: hd.text, anchor: hd.id, html });
+    targets[`${page.id}#${hd.id}`] = /gem/i.test(hd.text) ? 'runes/gems' : /jewel/i.test(hd.text) ? 'runes/jewels' : 'runes';
+  }
+  targets[`${page.id}#`] = 'runes';
+  return { page: page.id, runes, gems, info };
+}
+
+const MERC_KEYS = [['Rogue', 'a1'], ['Desert', 'a2'], ['Iron Wolf', 'a3'], ['Ascendant', 'a4'], ['Barbarian', 'a5']];
+const mercKey = s => (MERC_KEYS.find(([k]) => new RegExp(k, 'i').test(s)) || [])[1];
+
+async function extractMercs(r, rs, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const mercs = {};
+  const merc = (key, name) => (mercs[key] = mercs[key] || { key, name, levels: [], stats: {}, auras: [], skills: [] });
+  // Stats: per merc, three sideways tables (a row per stat, a column per level).
+  for (const li of d.querySelectorAll('li')) {
+    const label = text(li.querySelector(':scope > b'));
+    const key = mercKey(label);
+    if (!key || !li.querySelector('table')) continue;
+    const m = merc(key, label.replace(/\s*\|\s*$/, ''));
+    for (const table of li.querySelectorAll('table')) {
+      const g = grid(table);
+      const levels = g[0].slice(1).map(c => cellNum(c)).filter(v => v != null);
+      for (const row of g.slice(1)) {
+        const stat = text(row[0]).replace(/ /g, ' ');
+        if (!stat) continue;
+        m.stats[stat] = m.stats[stat] || {};
+        levels.forEach((lv, i) => { const v = text(row[i + 1]); if (v !== '') m.stats[stat][lv] = v; });
+      }
+      for (const lv of levels) if (!m.levels.includes(lv)) m.levels.push(lv);
+    }
+    m.levels.sort((a, b) => a - b);
+  }
+  // Auras by merc subtype.
+  const sections = [];
+  let cur = null;
+  for (const el of flatten(d.querySelector('.mw-parser-output'))) {
+    const hd = headingOf(el);
+    if (hd) { cur = { title: hd.text, anchor: hd.id, level: hd.level, html: '' }; sections.push(cur); targets[`${page.id}#${hd.id}`] = `mercs#${hd.id}`; continue; }
+    if (el.matches('table') && /mercenary/i.test(text(el.querySelector('th'))) && /aura/i.test(text(el))) {
+      const g = grid(el);
+      let last = '';
+      for (const row of g.slice(1)) {
+        const who = text(row[0]) || last; last = who;
+        const key = mercKey(who);
+        if (key) merc(key, who).auras.push({ subtype: text(row[1]), aura: htmlOf(row[2]) });
+      }
+      continue;
+    }
+    if (!cur || el.querySelector('table.scroll') || el.matches('ul') && el.querySelector('li > b + div table')) continue;
+    if (text(el)) cur.html += clean(el.outerHTML);
+  }
+  // Skills from the Mercenary Skills page: h1 = act, h2 = subtype/group, h3 = skill.
+  if (rs) {
+    let key = null, group = '';
+    for (const w of rs.d.querySelectorAll('.mw-heading')) {
+      const hd = headingOf(w);
+      if (!hd) continue;
+      if (hd.level === 1) { key = mercKey(hd.text); group = ''; targets[`${rs.page.id}#${hd.id}`] = key ? `mercs/${key}` : 'mercs'; continue; }
+      if (hd.level === 2) { group = hd.text; if (key) targets[`${rs.page.id}#${hd.id}`] = `mercs/${key}`; continue; }
+      if (hd.level !== 3 || !key || !mercs[key]) continue;
+      mercs[key].skills.push({ name: hd.text, group, anchor: hd.id, html: sectionAfter(w, 3).map(e => clean(e.outerHTML)).join('') });
+      targets[`${rs.page.id}#${hd.id}`] = `mercs/${key}#${hd.id}`;
+    }
+    const general = [];
+    for (const w of rs.d.querySelectorAll('.mw-heading')) {
+      const hd = headingOf(w);
+      if (hd && hd.level === 2 && /skill info|auras/i.test(hd.text)) general.push({ title: hd.text, anchor: hd.id, html: sectionAfter(w, 2).map(e => clean(e.outerHTML)).join('') });
+    }
+    targets[`${rs.page.id}#`] = 'mercs';
+    sections.push(...general.map(g => ({ ...g, level: 2, fromSkills: true })));
+  }
+  targets[`${page.id}#`] = 'mercs';
+  return { page: page.id, skillsPage: rs?.page.id, mercs: MERC_KEYS.map(([, k]) => mercs[k]).filter(Boolean), sections: sections.filter(s => s.html) };
 }

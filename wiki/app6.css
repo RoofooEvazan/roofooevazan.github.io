@@ -1,0 +1,66 @@
+/* Item bases, runes & gems, mercenaries — Tristram theme conventions:
+   square corners, var(--font-display) for labels, palette variables only. */
+
+/* item bases */
+.segs.kinds{margin-top:0}
+.btable{font-size:14px}
+.btable tr.chg td:first-child{box-shadow:inset 3px 0 0 var(--chg)}
+.btable .bn{min-width:210px}
+.bname{display:flex;align-items:center;gap:8px;color:var(--text);font-weight:700}
+.bname .tier{font-size:10.5px;font-family:var(--font-display);font-weight:400;border-radius:0}
+.fam{display:block;margin-top:2px;font-size:12.5px;color:var(--dim)}
+.fam b{color:var(--muted);font-weight:400}
+.fam a{color:var(--dim)}
+.fam a:hover{color:var(--gold-hi)}
+.blinks{display:flex;gap:10px;margin-top:2px;font-size:12px}
+.blinks a{color:var(--muted)}
+.btable td.r s{display:block;font-size:11.5px;color:var(--dim)}
+
+/* runes */
+.runes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:10px}
+.rune{padding:14px 16px;border:1px solid var(--edge);border-radius:0;background:linear-gradient(180deg,var(--stone-2),var(--stone));scroll-margin-top:calc(var(--bar-h) + 14px)}
+.rune:target{border-color:var(--gold)}
+.rune header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.rune header img{width:34px;height:34px;image-rendering:pixelated}
+.rune h2{margin:0;font-family:var(--font-display);font-size:15px;color:var(--q-rw);letter-spacing:.04em}
+.rune header p{margin:0;color:var(--dim);font-size:13px}
+.slots{margin:0}
+.slots div{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;padding:4px 0;border-bottom:1px solid var(--edge)}
+.slots div:last-child{border-bottom:0}
+.slots dt{color:var(--dim);font-size:13px}
+.slots dd{margin:0;color:var(--mod);font-size:14.5px}
+.slots dd .omod{display:block;font-size:12.5px;text-decoration:line-through}
+.rup,.ruses{margin:8px 0 0;font-size:13.5px;color:var(--muted)}
+.rup > span,.ruses > span{display:inline-block;margin-right:8px;font-family:var(--font-display);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--gold)}
+.rup b{color:var(--gold-hi)}
+.rup small{color:var(--dim)}
+.ruses a{display:inline-block;margin:2px 6px 2px 0;padding:0 7px;border:1px solid var(--edge);border-radius:0;color:var(--q-rw);font-size:13px;text-decoration:none!important}
+.ruses a:hover{border-color:var(--q-rw)}
+.gems{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(420px,100%),1fr));gap:14px}
+.gem{min-width:0}
+.gem .home-h img{width:22px;height:22px;margin-right:4px}
+.gem .restable{font-size:13.5px}
+.gem td.mn img{width:20px;height:20px;vertical-align:middle;margin-right:6px}
+
+/* mercenaries */
+.mercs-tabs{flex-wrap:wrap}
+.merc-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.merc-head .home-h{flex:1;margin:14px 0 8px}
+.merc-links{display:flex;flex-wrap:wrap;gap:6px}
+.merc-lvl{border-radius:0}
+.merc-lvl .lvlw-vals dd{font-size:16px}
+.auras{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.aura{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:1px solid var(--edge);border-radius:0;background:var(--panel)}
+.aura b{font-family:var(--font-display);font-weight:400;font-size:11px;letter-spacing:.04em;color:var(--dim);text-transform:uppercase}
+.aura .wiki{font-size:15px}
+.mskills{display:grid;gap:6px;margin-bottom:10px}
+.mskill{border:1px solid var(--edge);border-radius:0;background:var(--panel);scroll-margin-top:calc(var(--bar-h) + 12px)}
+.mskill > summary{cursor:pointer;padding:8px 14px;color:var(--text)}
+.mskill[open] > summary{color:var(--gold-hi);border-bottom:1px solid var(--edge)}
+.mskill > .wiki{padding:6px 14px 10px;font-size:15px}
+.about{border-radius:0}
+
+@media (max-width:520px){
+  .runes-grid,.gems{grid-template-columns:1fr}
+  .slots div{grid-template-columns:80px minmax(0,1fr)}
+}

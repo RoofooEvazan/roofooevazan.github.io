@@ -247,6 +247,7 @@ async function main() {
     if (ex.maps?.maps.length > 10) await put(join(OUT, 'maps.json'), JSON.stringify(ex.maps) + '\n');
     if (ex.cube?.recipes?.recipes.length > 30 && ex.cube?.crafts?.crafts.length > 20) await put(join(OUT, 'cube.json'), JSON.stringify(ex.cube) + '\n');
     if (ex.world?.zones?.zones.length > 60 && ex.world?.monsters?.bosses.length > 5) await put(join(OUT, 'world.json'), JSON.stringify(ex.world) + '\n');
+    if (ex.gear?.bases?.bases.length > 200 && ex.gear?.runes?.runes.length > 30 && ex.gear?.mercs?.mercs.length >= 4) await put(join(OUT, 'gear.json'), JSON.stringify(ex.gear) + '\n');
     if (ex.mechanics?.topics.length > 5) await put(join(OUT, 'mechanics.json'), JSON.stringify(ex.mechanics) + '\n');
     if (ex.affixes?.affixes.length > 500) await put(join(OUT, 'affixes.json'), JSON.stringify(ex.affixes) + '\n');
     if (ex.patches?.seasons.length > 5) await put(join(OUT, 'patches.json'), JSON.stringify(ex.patches) + '\n');

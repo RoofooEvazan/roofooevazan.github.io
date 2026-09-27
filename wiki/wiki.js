@@ -118,13 +118,13 @@
   // and every page nobody lists here still shows up under "More pages".
   const SITE = [
     { name: 'Items', icon: 'items', links: [['Item Database', '#/items'], ['Uniques', '#/items?t=unique'], ['Set Items', '#/items?t=set'], ['Runewords', '#/items?t=runeword'],
-      ['Affix Finder', '#/affixes'], ['Runes & Gems', 'Runes'], 'Item Bases', 'Item Quality Levels', 'New Items', 'Cosmetics', 'Arrows'] },
+      ['Affix Finder', '#/affixes'], ['Runes & Gems', '#/runes'], ['Item Bases', '#/bases'], 'Item Quality Levels', 'New Items', 'Cosmetics', 'Arrows'] },
     { name: 'Skills', icon: 'skills', links: [...['Amazon', 'Assassin', 'Barbarian', 'Druid', 'Necromancer', 'Paladin', 'Sorceress'].map(c => [c, `#/skills/${c}`]),
-      ['Skill Changes', 'Skill Changes'], 'Mercenary Skills', ['Item-Only Skills', 'Item Skills'], 'Class Attributes'] },
+      ['Skill Changes', 'Skill Changes'], ['Mercenary Skills', '#/mercs/a2'], ['Item-Only Skills', 'Item Skills'], 'Class Attributes'] },
     { name: 'Crafting & Cube', icon: 'craft', links: [['Cube Recipes', '#/cube'], ['Crafted Items', '#/cube/crafting'], ['Corruptions', '#/cube/corruptions'],
       ['How Crafting Works', '#/cube/guide'], 'Desecration'] },
     { name: 'Endgame', icon: 'map', links: [['Map Explorer', '#/maps'], ['Map Events', '#/maps/events'], ['Modifying Maps', '#/maps/modify'], ['Map Affixes', '#/maps/affixes'],
-      ['Zones', '#/zones'], ['Monsters & Ubers', '#/monsters'], 'Mercenaries', ['Merc Weapon Compare', '#/' + MERC_ROUTE]] },
+      ['Zones', '#/zones'], ['Monsters & Ubers', '#/monsters'], ['Mercenaries', '#/mercs'], ['Merc Weapon Compare', '#/' + MERC_ROUTE]] },
     { name: 'Mechanics', icon: 'gear', links: [['Game Mechanics', '#/mechanics'], ['Crit & Leech Calculators', '#/mechanics/Critical_Damage'], ['Resistance Calculator', '#/mechanics/Reducing_Resistances'], 'Breakpoints', 'General Changes', 'Balance Changes', 'PvP Changes', 'Low Level Dueling', ['Abbreviations', 'Lexicon of Abbreviations'], 'Formula Info', 'Bugs'] },
     { name: 'Guides & Builds', icon: 'book', auto: 'guides' },
     { name: 'Patch Notes', icon: 'scroll', auto: 'seasons' },
@@ -132,7 +132,7 @@
     { name: 'More Pages', icon: 'list', auto: 'rest' },
   ];
   // Pages our own views replace; they stay reachable through search and A–Z.
-  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
+  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Zones|Monsters|Game Mechanics|Item Affixes|Item Bases|Runes|Mercenaries|Mercenary Skills|Recipes|Crafting|Corruptions|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
 
   function buildSite() {
     const used = new Set();
@@ -349,6 +349,24 @@
       return view(() => window.PD2Affixes.render(main, tab, qs), 'affixes', 'Item Affixes · PD2 Wiki').then(() => {
         if (anchor) requestAnimationFrame(() => document.getElementById(anchor)?.scrollIntoView({ block: 'start' }));
       });
+    }
+    if (path === 'bases' || path.startsWith('bases?') || path.startsWith('bases/')) {
+      const [p0, qs = ''] = raw.split('?');
+      const tab = p0.split('/')[1] || '';
+      return view(() => window.PD2Gear.bases(main, tab, qs), 'bases', 'Item Bases · PD2 Wiki').then(() => {
+        if (anchor) requestAnimationFrame(() => document.getElementById(anchor)?.scrollIntoView({ block: 'start' }));
+        else restore();
+      });
+    }
+    if (path === 'runes' || path.startsWith('runes/')) {
+      const tab = path.split('/')[1] || '';
+      return view(() => window.PD2Gear.runes(main, tab), 'runes', 'Runes & Gems · PD2 Wiki').then(() => {
+        if (anchor) requestAnimationFrame(() => document.getElementById(anchor)?.scrollIntoView({ block: 'start' }));
+      });
+    }
+    if (path === 'mercs' || path.startsWith('mercs/')) {
+      const k = path.split('/')[1] || '';
+      return view(() => window.PD2Gear.mercs(main, k, anchor), 'mercs', 'Mercenaries · PD2 Wiki', !!anchor);
     }
     if (path.startsWith('map/')) return view(() => window.PD2Maps.detail(main, path.slice(4)), 'maps', 'Map · PD2 Wiki');
     if (path === 'patches' || path.startsWith('patches/')) {
@@ -732,6 +750,7 @@
     window.PD2Maps.load().catch(() => {});
     window.PD2Cube.load().catch(() => {});
     window.PD2World.load().catch(() => {});
+    window.PD2Gear.load().catch(() => {});
     if (S.search) return Promise.resolve(S.search);
     if (!S.searchLoading) {
       S.searchLoading = fetchJSON('data/search.json').then(list => {
@@ -831,12 +850,19 @@
       }
       const r = searchAll(q, { items: 6, skills: 4, pages: 4, heads: 4, hits: 4 });
       let html = '';
+      // An exact rune name ("ber") goes straight to the rune.
+      const exactRune = (window.PD2Gear.data?.runes.runes || []).find(x => x.name.toLowerCase() === q.toLowerCase());
+      if (exactRune) html += `<div class="res-group">Rune</div><a class="res" role="option" href="#/runes#${exactRune.name.toLowerCase()}"><span class="res-ico">${exactRune.img ? `<img src="${esc(exactRune.img)}" alt="">` : ICONS.rune}</span><span><b>${esc(exactRune.name)} Rune</b><span class="crumb">#${exactRune.n} · level ${exactRune.lvl ?? '?'} · ${esc(exactRune.group)}</span></span></a>`;
       const statN = q.length >= 3 ? window.PD2Items.countMatches(q) : 0;
       if (r.items.length || statN) html += '<div class="res-group">Items</div>' + r.items.map(it => itemRes(it, q)).join('') +
         (statN > r.items.length ? `<a class="res" role="option" href="#/items?q=${encodeURIComponent(q)}"><span class="res-ico">${ICONS.items}</span><span><b>${statN} items with “${esc(q)}”</b><span class="crumb">Open in the item database</span></span></a>` : '');
       if (r.skills.length) html += '<div class="res-group">Skills</div>' + r.skills.map(skillRes).join('');
       const crafts = window.PD2Cube.search(q, 3);
       if (crafts.length) html += '<div class="res-group">Crafted items</div>' + crafts.map(c => `<a class="res" role="option" href="#/cube/crafting?type=${encodeURIComponent(c.type)}&slot=${encodeURIComponent(c.slot)}"><span class="res-ico">${c.img ? `<img src="${esc(c.img)}" alt="">` : ICONS.craft}</span><span><b>${esc(c.name)}</b><span class="crumb">${esc(c.recipe.join(' + '))}</span></span></a>`).join('');
+      const gear = window.PD2Gear.search(q, 4).filter(g => !exactRune || g.r !== exactRune);
+      if (gear.length) html += '<div class="res-group">Runes &amp; bases</div>' + gear.map(g => g.kind === 'rune'
+        ? `<a class="res" role="option" href="#/runes#${g.r.name.toLowerCase()}"><span class="res-ico">${g.r.img ? `<img src="${esc(g.r.img)}" alt="">` : ICONS.rune}</span><span><b>${esc(g.r.name)} Rune</b><span class="crumb">#${g.r.n} · level ${g.r.lvl ?? '?'}</span></span></a>`
+        : `<a class="res" role="option" href="#/bases?kind=${encodeURIComponent(g.b.kind)}&q=${encodeURIComponent(g.b.name)}"><span class="res-ico">${ICONS.items}</span><span><b>${esc(g.b.name)}</b><span class="crumb">${esc([g.b.tier, g.b.type].filter(Boolean).join(' ') || g.b.kind)} base</span></span></a>`).join('');
       const world = window.PD2World.search(q, 4);
       if (world.length) html += '<div class="res-group">Monsters &amp; zones</div>' + world.map(w => w.kind === 'boss'
         ? `<a class="res" role="option" href="#/monsters#${w.b.slug}"><span class="res-ico">${ICONS.skull}</span><span><b>${esc(w.b.name)}</b><span class="crumb">${esc(w.b.group)}</span></span></a>`
@@ -993,11 +1019,11 @@
         ${tile('#/items?t=runeword', 'rune', 'Runewords', 'Filter by sockets, base and level', 'q-rw')}
         ${tile('#/items?ch=1&sort=changes', 'items', 'Changed in PD2', 'Items PD2 reworked the most')}
       </div>
-      <p class="tile-links"><a href="#/affixes">Affix finder</a>${['Runes', 'Item Bases', 'New Items', 'Cosmetics'].map(t => pageLink(t, t === 'Runes' ? 'Runes & Gems' : '')).filter(Boolean).join('')}</p>
+      <p class="tile-links"><a href="#/affixes">Affix finder</a><a href="#/runes">Runes &amp; gems</a><a href="#/bases">Item bases</a>${['New Items', 'Cosmetics'].map(t => pageLink(t)).filter(Boolean).join('')}</p>
 
       <h2 class="home-h">Skills${skillsN ? ` <small>${skillsN}</small>` : ''}</h2>
       <div class="classes">${window.PD2Skills.CLASSES.map(c => `<a href="#/skills/${c}"><span class="cls-orb cls-${c.toLowerCase()}" aria-hidden="true">${c[0]}</span>${c}</a>`).join('')}</div>
-      <p class="tile-links">${[['Skill Changes', 'Skill overview'], ['Mercenary Skills'], ['Item Skills', 'Item-only skills'], ['Class Attributes']].map(([t, l]) => pageLink(t, l)).filter(Boolean).join('')}</p>
+      <p class="tile-links">${[['Skill Changes', 'Skill overview'], ['Item Skills', 'Item-only skills'], ['Class Attributes']].map(([t, l]) => pageLink(t, l)).filter(Boolean).join('')}<a href="#/mercs">Mercenaries</a></p>
 
       <h2 class="home-h">Play</h2>
       <div class="tiles">
