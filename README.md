@@ -1,4 +1,4 @@
-# PD2 Calculators
+# PD2 Hub
 
 The main page that links all of RoofooEvazan's Project Diablo 2 tools together. The tools are built on the game's own code, reverse engineered from PD2's client files.
 

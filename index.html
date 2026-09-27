@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#100c0a">
 <meta name="color-scheme" content="dark">
-<title>PD2 Calculators</title>
+<title>PD2 Hub</title>
 <meta name="description" content="Project Diablo 2 calculators and simulators built on the game's reverse-engineered code: attack speed, advanced stats, hit chance, a damage atlas, map spawns with loot, and a loot filter builder.">
-<meta property="og:title" content="PD2 Calculators">
+<meta property="og:title" content="PD2 Hub">
 <meta property="og:description" content="Project Diablo 2 calculators and simulators built on the game's reverse-engineered code.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,10 +39,10 @@ body.tri::before{
 .on-plate{text-shadow:0 1px 0 #000,0 0 6px rgba(0,0,0,.95),0 0 18px rgba(0,0,0,.8)}
 
 header.wrap{text-align:center;padding:56px 16px 30px}
-.kicker{margin:0;font-family:var(--tri-display);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--tri-gold)}
 h1{margin:.35rem 0 0;font-family:var(--tri-display);font-weight:700;font-size:clamp(1.5rem,4.6vw,2.6rem);letter-spacing:.05em;line-height:1.2;color:var(--tri-fg)}
-.byline{margin:.5rem 0 0;font-size:.98rem;color:var(--tri-fg)}
-.byline a{text-decoration:underline;text-underline-offset:.18em}
+/* The attribution: one quiet line under the title. */
+.byline{margin:.45rem 0 0;font-size:.86rem;letter-spacing:.02em;color:var(--tri-muted)}
+.byline a{color:inherit;text-decoration:underline dotted;text-underline-offset:.2em}
 .byline a:hover{color:var(--tri-gold)}
 .intro{max-width:660px;margin:1rem auto 0;font-size:1.12rem;color:var(--tri-fg)}
 .intro b{color:var(--tri-gold);font-weight:400}
@@ -111,9 +111,8 @@ footer p{margin:4px 0}
 <div class="tri-embers" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
 <header class="wrap on-plate">
-  <p class="kicker">RoofooEvazan</p>
-  <h1>PD2 Calculators</h1>
-  <p class="byline">Made by <a href="https://github.com/RoofooEvazan">RoofooEvazan</a></p>
+  <h1>PD2 Hub</h1>
+  <p class="byline">by <a href="https://github.com/RoofooEvazan">RoofooEvazan</a></p>
   <p class="intro">Calculators and simulators for Project Diablo 2, built on <b>the game's own code</b>: the rules were reverse engineered from PD2's client files, and many were checked by running that code directly. Each tool shows how its numbers were found and what's still unverified.</p>
   <div class="rule" aria-hidden="true"></div>
 </header>

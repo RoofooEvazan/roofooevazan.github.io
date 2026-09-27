@@ -109,7 +109,7 @@
   }).join('');
   nav.innerHTML =
     '<div class="rsn-in">' +
-      '<a class="rsn-brand" href="' + href('/') + '"><span class="rsn-mark" aria-hidden="true"></span><span class="rsn-name">Roofoo’s PD2</span></a>' +
+      '<a class="rsn-brand" href="' + href('/') + '"><span class="rsn-mark" aria-hidden="true"></span><span class="rsn-name">PD2 Hub</span></a>' +
       '<ul class="rsn-links" id="rsn-links">' + items + '</ul>' +
       '<div class="rsn-theme" role="group" aria-label="Theme">' + switches + '</div>' +
       '<button class="rsn-toggle" type="button" aria-expanded="false" aria-controls="rsn-links" aria-label="Menu">' +
