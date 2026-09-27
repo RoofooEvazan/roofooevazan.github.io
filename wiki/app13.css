@@ -2,10 +2,10 @@
 .seg-x{border-left:1px solid var(--edge)!important}
 .items-intro{margin-bottom:6px}
 .skill-vs{margin:12px 0 14px;padding:10px 14px;border-left:3px solid var(--gold);background:color-mix(in srgb,var(--gold) 7%,transparent)}
-.skill-vs h3{margin:0 0 6px;font-family:var(--font-display);font-size:13px;letter-spacing:.04em;color:var(--gold-hi)}
+.skill-vs h3{margin:0 0 6px;font-family:var(--font-display);font-size:14px;letter-spacing:.04em;color:var(--gold-hi)}
 .skill-vs ul{margin:0 0 6px;padding-left:18px}
 .skill-vs p{margin:6px 0}
-.skill-vs .more{font-size:14px}
+.skill-vs .more{font-size:15px}
 .skill-req .wiki{display:inline}
 
 .chgl{display:grid;gap:0;border:1px solid var(--edge);background:var(--void);margin-bottom:10px}
@@ -29,7 +29,7 @@ a.chg-name:not([href]){color:var(--text)}
 .lld .wiki dl{margin:.2em 0 .6em}
 
 .gl-colors{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:4px 16px;margin:0 0 14px;padding:10px 14px;border:1px solid var(--edge);background:var(--panel)}
-.gl-color{display:flex;gap:8px;min-width:0;font-size:14px}
+.gl-color{display:flex;gap:8px;min-width:0;font-size:15px}
 .gl-color b{flex:none;min-width:74px;font-weight:600}
 .gl-color span{color:var(--muted)}
 .gl-bar{margin-bottom:6px}

@@ -2,18 +2,18 @@
 .planner .cf.cb{flex-direction:row;align-items:center;gap:8px;align-self:end;padding-bottom:8px}
 .planner .cf.cb input{width:18px;height:18px;accent-color:var(--gold)}
 .pl-actions{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
-.pl-actions button.chip{cursor:pointer;font:inherit;font-size:14px}
-.pl-table{font-size:14.5px}
+.pl-actions button.chip{cursor:pointer;font:inherit;font-size:15px}
+.pl-table{font-size:15.5px}
 .pl-table td{vertical-align:middle}
 .stepper{display:inline-flex;align-items:stretch}
-.stepper button{width:38px;border:1px solid var(--edge);border-radius:0;background:var(--void);color:var(--gold-hi);cursor:pointer;font:inherit;font-size:13px}
+.stepper button{width:38px;border:1px solid var(--edge);border-radius:0;background:var(--void);color:var(--gold-hi);cursor:pointer;font:inherit;font-size:14px}
 .stepper button:hover{border-color:var(--gold)}
-.stepper input,.pl-items{width:70px;height:34px;padding:0 8px;border:1px solid var(--edge);border-radius:0;background:var(--void);color:var(--text);font:inherit;font-size:15px;text-align:center}
+.stepper input,.pl-items{width:70px;height:34px;padding:0 8px;border:1px solid var(--edge);border-radius:0;background:var(--void);color:var(--text);font:inherit;font-size:16px;text-align:center}
 .stepper input{border-left:0;border-right:0}
-.pl-total{font-weight:700;color:var(--gold-hi);font-size:16px}
+.pl-total{font-weight:700;color:var(--gold-hi);font-size:16.5px}
 .cmp tr.cur td,.pl-table tr.chg td{background:color-mix(in srgb,var(--gold) 8%,transparent)}
 .restable tr.chg td:first-child{box-shadow:inset 3px 0 0 var(--chg)}
-.qtable{font-size:14px}
+.qtable{font-size:15px}
 .qtable td.qn a{color:var(--text)}
 .qtable td.qn a:hover{color:var(--gold-hi)}
 .qtable td.ql{color:var(--gold-hi);font-variant-numeric:tabular-nums}
