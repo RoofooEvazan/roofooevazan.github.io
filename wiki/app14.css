@@ -603,3 +603,40 @@ h3.pn-title{font-size:14.5px}
 .sres2 p{flex-basis:100%;margin:1px 0 0;color:var(--muted);font-size:13.5px}
 .sres2 mark{background:color-mix(in srgb,var(--gold) 35%,transparent);color:var(--text)}
 .smore{margin:6px 0 0;font-size:14px}
+
+/* ---------- home: larger text, links as buttons ---------- */
+.home-sub{font-size:17.5px}
+.home-sub span{font-size:14.5px}
+.home-pop{max-width:600px;gap:6px}
+.home-pop > span:first-child{font-size:12.5px}
+.home-pop .chip{padding:5px 13px;font-size:15.5px;border-color:var(--edge-hi);color:var(--text)}
+.home-pop .chip:hover{border-color:var(--gold);color:var(--gold-hi)}
+.home-kbd{font-size:14px}
+.season-card{padding:14px 16px;gap:4px}
+.sc-k{font-size:12.5px}
+.season-card b{font-size:17.5px}
+.sc-d{font-size:15.5px}
+.sc-links{padding-top:8px}
+.sc-links span{display:inline-block;padding:5px 12px;border:1px solid var(--gold);color:var(--gold-hi);font-size:15px}
+.season-card:hover .sc-links span{background:color-mix(in srgb,var(--gold) 14%,transparent)}
+.quick{gap:8px}
+.qt{padding:10px 12px;font-size:16px;gap:10px}
+.qt svg{width:19px;height:19px}
+.qt:hover{background:color-mix(in srgb,var(--gold) 8%,transparent)}
+.dir{gap:12px}
+.dir-sec{padding:12px 14px 12px}
+.dir-sec h2{font-size:14.5px;margin:0 0 10px}
+.dir-sec h2 svg{width:18px;height:18px}
+.dir-sec ul{gap:6px}
+.dir-sec li a{display:inline-block;padding:5px 11px;border:1px solid var(--edge);background:var(--void);color:var(--text);font-size:15.5px;line-height:1.3;text-decoration:none!important}
+.dir-sec li a:hover{border-color:var(--gold);color:var(--gold-hi);background:color-mix(in srgb,var(--gold) 8%,transparent)}
+.dir-cls{gap:6px;margin:0 0 8px}
+.dir-cls a{padding:5px 8px;border:1px solid var(--edge);background:var(--void);font-size:15.5px}
+.dir-cls a:hover{border-color:var(--gold)}
+.dir-cls .cls-orb{width:22px;height:22px;font-size:11px}
+.home-recent .home-h{font-size:14.5px}
+.home-recent .changes li{font-size:16.5px;padding:9px 0}
+.home-recent .changes li > span:last-child{font-size:14.5px}
+.home-recent .charea{font-size:13px}
+.home-recent .more-link{display:inline-block;margin-top:10px;padding:6px 14px;border:1px solid var(--gold);color:var(--gold-hi);font-size:15px}
+.home-recent .more-link:hover{background:color-mix(in srgb,var(--gold) 12%,transparent)}
