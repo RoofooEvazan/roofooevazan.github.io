@@ -306,5 +306,223 @@ export async function extract(pages, dir) {
     if (trees.some(t => t.skills.length)) skills[cls] = { cls, page: r.page.id, intro: intro.join(''), trees };
   }
 
-  return { items, sets, skills, targets };
+  const maps = await extractMaps(await doc('Maps'), targets);
+  const patches = await extractPatches(await doc('Patch Notes'), targets, pages, doc);
+  const recent = byTitle.get('Recent Patch Notes');
+  if (recent) targets[`${recent.id}#`] = 'patches';
+
+  return { items, sets, skills, targets, maps, patches };
+}
+
+// ---------- maps ----------
+const ELEMENTS = ['phys', 'magic', 'fire', 'light', 'cold', 'poison'];
+const largest = img => {
+  const ss = img.getAttribute('srcset');
+  if (ss) return fixUrl(ss.split(',').pop().trim().split(/\s+/)[0]);
+  return fixUrl(img.getAttribute('src')).replace(/\/thumb(\/[^/]+\/[^/]+\/[^/]+)\/[^/]+$/, '$1');
+};
+
+async function extractMaps(r, targets) {
+  if (!r) return null;
+  const { page, d } = r;
+  const maps = [];
+  const info = [];
+  const events = [];
+  let tier = '', inMaps = false;
+  const TAB = { Map_Events: 'events', Modification: 'modify', Affixes: 'affixes' };
+  for (const w of d.querySelectorAll('.mw-heading')) {
+    const hd = headingOf(w);
+    if (!hd) continue;
+    if (hd.level === 2) { inMaps = /individual maps/i.test(hd.text); continue; }
+    if (hd.level === 3 && !inMaps) {
+      const els = sectionAfter(w, 3);
+      if (hd.id === 'Map_Events') {
+        let quote = null;
+        for (const el of els) {
+          if (el.tagName === 'UL' && el.querySelector('.d2-red')) quote = text(el);
+          else if (el.tagName === 'DL' && quote !== null) { events.push({ quote, html: clean(el.querySelector('dd')?.innerHTML || el.innerHTML) }); quote = null; }
+          else if (el.tagName === 'P' && text(el)) info.push({ tab: 'events', html: clean(el.outerHTML) });
+        }
+      } else if (TAB[hd.id]) {
+        info.push({ tab: TAB[hd.id], title: hd.text, html: els.map(e => clean(e.outerHTML)).join('') });
+      }
+      targets[`${page.id}#${hd.id}`] = TAB[hd.id] ? `maps/${TAB[hd.id]}` : 'maps';
+      continue;
+    }
+    if (hd.level === 3 && inMaps) {
+      const t = hd.text.match(/Tier\s*(\d)/i);
+      tier = /dungeon/i.test(hd.text) ? 'Dungeon' : /unique/i.test(hd.text) ? 'Unique' : t ? 'T' + t[1] : hd.text;
+      targets[`${page.id}#${hd.id}`] = `maps?tier=${tier}`;
+      continue;
+    }
+    if (hd.level !== 4 || !inMaps) continue;
+    const holder = d.createElement('div');
+    for (const el of sectionAfter(w, 4)) holder.appendChild(el.cloneNode(true));
+    const icon = fixUrl(hd.h.querySelector('img')?.getAttribute('src'));
+    const table = [...holder.querySelectorAll('table')].find(t => /monster/i.test(text(t.querySelector('th'))));
+    const monsters = [];
+    if (table) {
+      const trs = [...table.querySelectorAll('tr')];
+      const head = [...trs[0].children].map(c => text(c).toLowerCase());
+      const col = k => head.findIndex(h => h.startsWith(k));
+      for (const row of trs.slice(1)) {
+        const c = [...row.children];
+        if (!c.length) continue;
+        const res = {};
+        for (const e of ELEMENTS) {
+          const cell = c[col(e)];
+          const v = cell ? parseInt(text(cell), 10) : NaN;
+          res[e] = Number.isFinite(v) ? v : 0;
+        }
+        const nm = text(c[0]);
+        monsters.push({
+          name: nm.replace(/\*$/, ''), minion: !!c[0].querySelector('i'), boss: /\*$/.test(nm),
+          res, type: col('type') >= 0 ? text(c[col('type')]) : '', drain: col('drain') >= 0 ? parseInt(text(c[col('drain')]), 10) || null : null,
+        });
+      }
+      table.remove();
+    }
+    const shots = [...holder.querySelectorAll('img')].map(im => ({ thumb: fixUrl(im.getAttribute('src')), full: largest(im) }));
+    for (const im of [...holder.querySelectorAll('img')]) (im.closest('p') || im).remove();
+    const notes = [...holder.querySelectorAll('li')].map(li => clean(li.innerHTML));
+    for (const ul of [...holder.querySelectorAll('ul')]) ul.remove();
+    const desc = [...holder.querySelectorAll('p')].filter(p => text(p)).map(p => clean(p.outerHTML)).join('');
+    const immune = {};
+    for (const e of ELEMENTS) { const n = monsters.filter(m => !m.minion && m.res[e] >= 100).length; if (n) immune[e] = n; }
+    const m = {
+      slug: slug(hd.text), name: hd.text, tier, icon, monsters, notes, desc, shots, immune,
+      types: [...new Set(monsters.map(x => x.type).filter(Boolean))], anchor: hd.id,
+    };
+    maps.push(m);
+    targets[`${page.id}#${hd.id}`] = `map/${m.slug}`;
+  }
+  targets[`${page.id}#`] = 'maps';
+  return { page: page.id, maps, events, info };
+}
+
+// ---------- patch notes ----------
+const TITLE_CASE = s => /[a-z]/.test(s) ? s : s.toLowerCase().replace(/\b([a-z])/g, c => c.toUpperCase()).replace(/\bPvp\b/g, 'PvP').replace(/\bD2gl\b/g, 'D2GL');
+const CLASS_RE = /\b(Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress)\b/i;
+function catOf(t, parent) {
+  const s = t.toLowerCase();
+  if (/\bpatch\b|patches|^\d{4}-\d\d-\d\d|unknown date|hotfix/.test(s)) return 'Hotfixes';
+  if (CLASS_RE.test(t) || /skill|class balance/.test(s)) return 'Classes';
+  if (/pvp|dueling/.test(s)) return 'PvP';
+  if (/\bmaps?\b|map events|dungeon|uber|map shuffle|\bzones?\b/.test(s)) return 'Maps & Ubers';
+  if (/item|affix|unique|runeword|\brunes?\b|\bsets?\b|bases|craft|corrupt|gem|jewel|charm/.test(s)) return 'Items';
+  if (/merc/.test(s)) return 'Mercenaries';
+  if (parent) return parent;
+  return 'General';
+}
+// Plain-text change lines. A short header ("Grief:", or a bold "Zeal" paragraph) followed
+// by a nested list becomes one line, "Grief: point · point", so every line reads on its own.
+function linesOf(el) {
+  const out = [];
+  const isShort = t => t.length <= 40 || /:$/.test(t);
+  const listText = ul => [...ul.querySelectorAll('li')].map(li => {
+    const cl = li.cloneNode(true);
+    for (const sub of [...cl.querySelectorAll('ul,ol')]) sub.remove();
+    return text(cl);
+  }).filter(Boolean).join(' · ');
+  const walk = n => {
+    const kids = [...(n.children || [])];
+    for (let i = 0; i < kids.length; i++) {
+      const c = kids[i];
+      if (c.tagName === 'LI') {
+        const cl = c.cloneNode(true);
+        for (const sub of [...cl.querySelectorAll('ul,ol')]) sub.remove();
+        const t = text(cl);
+        const nested = c.querySelector(':scope > ul, :scope > ol');
+        if (t && nested && isShort(t)) { out.push(`${t.replace(/:$/, '')}: ${listText(nested)}`); continue; }
+        if (t) out.push(t);
+        walk(c);
+      } else if (c.tagName === 'P' || c.tagName === 'DD') {
+        const t = text(c);
+        const next = kids[i + 1];
+        if (t && next && /^(UL|OL)$/.test(next.tagName) && isShort(t)) { out.push(`${t.replace(/:$/, '')}: ${listText(next)}`); i++; continue; }
+        if (t) out.push(t);
+      } else walk(c);
+    }
+  };
+  walk(el);
+  return out;
+}
+
+async function extractPatches(r, targets, pages, doc) {
+  if (!r) return null;
+  const { page, d } = r;
+  const root = d.querySelector('.mw-parser-output');
+  const seasons = [];
+  let season = null, block = null;
+  const stack = [];
+  // Each season arrives wrapped in a collapsible table (and some in divs); walk into any
+  // wrapper that holds headings.
+  const flat = [];
+  const walk = n => { for (const c of n.children) { if (/^(DIV|TABLE|TBODY|TR|TD)$/.test(c.tagName) && !c.matches('.mw-heading') && c.querySelector('.mw-heading')) walk(c); else if (c.tagName !== 'CAPTION') flat.push(c); } };
+  if (root) walk(root);
+  for (const el of flat) {
+    const hd = headingOf(el);
+    if (hd) {
+      const sm = hd.level === 1 && hd.text.match(/^Season\s+(\d+)\s+(.*?)\s*[-–—]\s*(.+)$/i);
+      if (sm || (hd.level === 1 && /upcoming/i.test(hd.text))) {
+        season = sm ? { n: +sm[1], name: sm[2].trim(), date: sm[3].trim(), anchor: hd.id, blocks: [] }
+          : { n: 0, name: 'Upcoming spoilers', date: '', anchor: hd.id, blocks: [], upcoming: true };
+        seasons.push(season);
+        block = null; stack.length = 0;
+        targets[`${page.id}#${hd.id}`] = `patches/${season.upcoming ? 'upcoming' : 's' + season.n}`;
+        continue;
+      }
+      if (!season) continue;
+      if (hd.level === 1 && /patch notes/i.test(hd.text)) { block = null; stack.length = 0; continue; }
+      while (stack.length && stack[stack.length - 1].level >= hd.level) stack.pop();
+      const parent = stack[stack.length - 1];
+      const title = TITLE_CASE(hd.text);
+      block = { title, level: hd.level, anchor: hd.id, cat: catOf(title, parent?.cat), parts: [] };
+      const cm = title.match(CLASS_RE);
+      if (cm) block.cls = cm[1][0].toUpperCase() + cm[1].slice(1).toLowerCase();
+      else if (parent?.cls) block.cls = parent.cls;
+      if (parent) block.parent = parent.anchor;
+      season.blocks.push(block);
+      stack.push(block);
+      targets[`${page.id}#${hd.id}`] = `patches/${season.upcoming ? 'upcoming' : 's' + season.n}#${hd.id}`;
+      continue;
+    }
+    if (!season) continue;
+    if (block) block.parts.push(el);
+    else {
+      season.intro = season.intro || { title: '', cat: 'General', level: 1, anchor: season.anchor, parts: [] };
+      season.intro.parts.push(el);
+    }
+  }
+  // Serialise, keeping plain-text lines for searching and for item/skill histories.
+  for (const s of seasons) {
+    const fin = b => {
+      const box = d.createElement('div');
+      for (const p of b.parts) box.appendChild(p.cloneNode(true));
+      b.html = clean(box.innerHTML);
+      b.lines = linesOf(box);
+      delete b.parts;
+    };
+    if (s.intro) fin(s.intro);
+    for (const b of s.blocks) fin(b);
+    s.blocks = s.blocks.filter(b => b.lines.length || b.html || s.blocks.some(x => x.parent === b.anchor));
+    const dt = Date.parse(s.date.replace(/(\d+)(st|nd|rd|th)/, '$1'));
+    if (Number.isFinite(dt)) s.iso = new Date(dt + 12 * 3600e3).toISOString().slice(0, 10);
+  }
+  // Season pages and their sections point at the same view.
+  for (const p of pages) {
+    const m = p.title.match(/^Patch:Season (\d+)$/);
+    if (!m) continue;
+    const s = seasons.find(x => x.n === +m[1]);
+    if (!s) continue;
+    targets[`${p.id}#`] = `patches/s${s.n}`;
+    const rr = await doc(p.title);
+    for (const w of rr.d.querySelectorAll('.mw-heading')) {
+      const hd = headingOf(w);
+      const b = hd && s.blocks.find(x => x.title === TITLE_CASE(hd.text));
+      if (b) targets[`${p.id}#${hd.id}`] = `patches/s${s.n}#${b.anchor}`;
+    }
+  }
+  targets[`${page.id}#`] = 'patches';
+  return { page: page.id, seasons };
 }

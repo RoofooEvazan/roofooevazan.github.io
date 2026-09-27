@@ -264,6 +264,8 @@
         </div>
       </div>`;
     for (const el of root.querySelectorAll('.tt-stats, .tt-info, .diff, .setpanel, .inote, .istats')) enhanceFragment(el, page);
+    const side = root.querySelector('.iside');
+    window.PD2Patches?.historyHtml(it.name).then(h => { if (h && side.isConnected) side.querySelector('.attrib').insertAdjacentHTML('beforebegin', h); });
   }
 
   // ---------- item entries inside ordinary pages ----------

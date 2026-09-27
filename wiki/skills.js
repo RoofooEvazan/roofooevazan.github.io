@@ -76,6 +76,8 @@
     const body = $('.skill-body', det);
     enhanceFragment(body, page);
     levelTables(body);
+    const art = det.querySelector('.skill');
+    window.PD2Patches?.historyHtml(sel.name).then(h => { if (h && art.isConnected) art.insertAdjacentHTML('beforeend', h); });
     if (anchor) requestAnimationFrame(() => det.scrollIntoView({ block: 'start', behavior: 'smooth' }));
   }
 

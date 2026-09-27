@@ -238,11 +238,15 @@ async function main() {
   // stops parsing, keep the previous files rather than publishing empty ones.
   let targets = prev.targets || {};
   let skillIndex = prev.skillIndex || [];
+  let seasons = prev.seasons || [];
   try {
     const ex = await extract(pages, OUT);
     if (ex.items.length < 300) throw new Error(`only ${ex.items.length} items found`);
     await put(join(OUT, 'items.json'), JSON.stringify({ items: ex.items, sets: ex.sets }) + '\n');
     for (const [cls, data] of Object.entries(ex.skills)) await put(join(OUT, 'skills', `${cls}.json`), JSON.stringify(data) + '\n');
+    if (ex.maps?.maps.length > 10) await put(join(OUT, 'maps.json'), JSON.stringify(ex.maps) + '\n');
+    if (ex.patches?.seasons.length > 5) await put(join(OUT, 'patches.json'), JSON.stringify(ex.patches) + '\n');
+    if (ex.patches?.seasons.length > 5) seasons = ex.patches.seasons.map(x => ({ key: x.upcoming ? 'upcoming' : 's' + x.n, n: x.n, name: x.name, iso: x.iso || '' }));
     targets = ex.targets;
     skillIndex = Object.values(ex.skills).flatMap(c => c.trees.flatMap(t => t.skills.map(k => ({ c: c.cls, n: k.name, a: k.anchor, l: k.lvl, t: t.name, i: k.img }))));
     console.log(`extracted ${ex.items.length} items, ${ex.sets.length} sets, ${Object.keys(ex.skills).length} skill classes`);
@@ -258,6 +262,7 @@ async function main() {
     redirects,
     targets,
     skillIndex,
+    seasons,
   };
   const indexChanged = await put(join(OUT, 'index.json'), index);
 

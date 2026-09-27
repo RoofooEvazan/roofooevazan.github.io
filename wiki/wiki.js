@@ -75,7 +75,11 @@
     return res.json();
   }
   function fmtDate(iso) {
-    return iso ? new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+    if (!iso) return '';
+    // Plain dates ("2026-04-24") are calendar days, not UTC midnight.
+    const m = /^(\d{4})-(\d\d)-(\d\d)$/.exec(iso);
+    const d = m ? new Date(+m[1], +m[2] - 1, +m[3]) : new Date(iso);
+    return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
   }
   function ago(iso) {
     if (!iso) return '';
@@ -118,15 +122,16 @@
     { name: 'Skills', icon: 'skills', links: [...['Amazon', 'Assassin', 'Barbarian', 'Druid', 'Necromancer', 'Paladin', 'Sorceress'].map(c => [c, `#/skills/${c}`]),
       ['Skill Changes', 'Skill Changes'], 'Mercenary Skills', ['Item-Only Skills', 'Item Skills'], 'Class Attributes'] },
     { name: 'Crafting & Cube', icon: 'craft', links: ['Crafting', 'Recipes', 'Corruptions', 'Desecration'] },
-    { name: 'Endgame', icon: 'map', links: ['Maps', 'Zones', 'Monsters', 'Mercenaries', ['Merc Weapon Compare', '#/' + MERC_ROUTE], 'Seasons'] },
+    { name: 'Endgame', icon: 'map', links: [['Map Explorer', '#/maps'], ['Map Events', '#/maps/events'], ['Modifying Maps', '#/maps/modify'], ['Map Affixes', '#/maps/affixes'],
+      'Zones', 'Monsters', 'Mercenaries', ['Merc Weapon Compare', '#/' + MERC_ROUTE]] },
     { name: 'Mechanics', icon: 'gear', links: ['Game Mechanics', 'Breakpoints', 'General Changes', 'Balance Changes', 'PvP Changes', 'Low Level Dueling', ['Abbreviations', 'Lexicon of Abbreviations'], 'Formula Info', 'Bugs'] },
     { name: 'Guides & Builds', icon: 'book', auto: 'guides' },
-    { name: 'Patch Notes', icon: 'scroll', auto: 'patches' },
+    { name: 'Patch Notes', icon: 'scroll', auto: 'seasons' },
     { name: 'Help', icon: 'help', links: ['FAQ', 'Support FAQ', 'Item Filtering', 'Filter Info', 'Customization', 'Singleplayer', ['Links & Guides', 'Links'], 'Rules', 'Credits'] },
     { name: 'More Pages', icon: 'list', auto: 'rest' },
   ];
   // Pages our own views replace; they stay reachable through search and A–Z.
-  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction)$/;
+  const COVERED = /^(Axes|Maces|Swords|Daggers|Throwing|Spears|Polearms|Bows|Crossbows|Staves|Wands|Scepters|Class Weapons|Helms|Chests|Shields|Gloves|Boots|Belts|Quivers|Amulets|Rings|Charms|Jewel|Normal|Exceptional|Elite|RW\w+|All .*|.* Runewords|New Runewords|New Equipment|MagicPrefixSuffix|Main Page.*|To Do|Amazon|Assassin|Barbarian|Druid|Necromancer|Paladin|Sorceress|Item Codes|Key|Introduction|Maps|Patch Notes|Recent Patch Notes|Patch:.*|Season \d+)$/;
 
   function buildSite() {
     const used = new Set();
@@ -149,14 +154,19 @@
     const take = test => rest.filter(p => !p._t && test(p) && (p._t = true));
     const sortP = a => a.sort((x, y) => displayName(x).localeCompare(displayName(y), undefined, { numeric: true }));
     const autos = {
-      patches: [...take(p => /^Patch:/.test(p.title)).sort((a, b) => (+(b.title.match(/\d+/) || [0])[0]) - (+(a.title.match(/\d+/) || [0])[0])),
+      patchPages: [...take(p => /^Patch:/.test(p.title)).sort((a, b) => (+(b.title.match(/\d+/) || [0])[0]) - (+(a.title.match(/\d+/) || [0])[0])),
         ...take(p => /Patch Notes|^Season \d+$/.test(p.title))],
       guides: sortP(take(p => /^Guide:|guide|^Starter |^\w+Assassin$|Build/i.test(p.title))),
     };
+    const today = new Date().toISOString().slice(0, 10);
+    autos.seasons = [
+      ...(S.index.seasons || []).map(x => ({ label: x.key === 'upcoming' ? 'Upcoming spoilers' : `Season ${x.n} · ${x.name}${x.iso > today ? ' (upcoming)' : ''}`, href: `#/patches/${x.key}`, route: `patches/${x.key}` })),
+      ...take(p => /^Seasons$|Balance Changes/.test(p.title)).map(p => ({ label: displayName(p), href: pageHref(p.title), id: p.id })),
+    ];
     autos.rest = sortP(take(() => true));
     for (const p of S.index.pages) delete p._t;
     for (const sec of sections) {
-      if (sec.auto) sec.links = autos[sec.auto].map(p => ({ label: displayName(p), href: pageHref(p.title), id: p.id }));
+      if (sec.auto) sec.links = autos[sec.auto].map(p => p.href ? p : ({ label: displayName(p), href: pageHref(p.title), id: p.id }));
       for (const l of sec.links) if (l.id && !S.groupOf.has(l.id)) S.groupOf.set(l.id, sec.name);
     }
     S.sections = sections.filter(s => s.links.length);
@@ -309,6 +319,16 @@
     if (path.startsWith('item/')) {
       const it = path.slice(5);
       return view(() => window.PD2Items.detail(main, it), 'items', 'Item · PD2 Wiki').then(() => { markItemSide(); scrollTo(0, 0); });
+    }
+    if (path === 'maps' || path.startsWith('maps?') || path.startsWith('maps/')) {
+      const [p0, qs = ''] = raw.split('?');
+      const tab = p0.split('/')[1] || '';
+      return view(() => window.PD2Maps.list(main, qs, tab), tab ? 'maps/' + tab : 'maps', 'Maps · PD2 Wiki').then(restore);
+    }
+    if (path.startsWith('map/')) return view(() => window.PD2Maps.detail(main, path.slice(4)), 'maps', 'Map · PD2 Wiki');
+    if (path === 'patches' || path.startsWith('patches/')) {
+      const k = path.split('/')[1] || '';
+      return view(() => window.PD2Patches.render(main, k, anchor), 'patches/' + (k || (S.index.seasons || []).find(x => x.key !== 'upcoming' && x.iso <= new Date().toISOString().slice(0, 10))?.key || ''), 'Patch Notes · PD2 Wiki', !!anchor);
     }
     if (path === 'skills' || path.startsWith('skills/')) {
       const [, cls, id] = path.split('/');
@@ -684,6 +704,7 @@
   // ---------- search ----------
   function loadSearch() {
     window.PD2Items.load().catch(() => {});
+    window.PD2Maps.load().catch(() => {});
     if (S.search) return Promise.resolve(S.search);
     if (!S.searchLoading) {
       S.searchLoading = fetchJSON('data/search.json').then(list => {
@@ -787,6 +808,8 @@
       if (r.items.length || statN) html += '<div class="res-group">Items</div>' + r.items.map(it => itemRes(it, q)).join('') +
         (statN > r.items.length ? `<a class="res" role="option" href="#/items?q=${encodeURIComponent(q)}"><span class="res-ico">${ICONS.items}</span><span><b>${statN} items with “${esc(q)}”</b><span class="crumb">Open in the item database</span></span></a>` : '');
       if (r.skills.length) html += '<div class="res-group">Skills</div>' + r.skills.map(skillRes).join('');
+      const maps = window.PD2Maps.search(q, 3);
+      if (maps.length) html += '<div class="res-group">Maps</div>' + maps.map(m => `<a class="res" role="option" href="#/map/${m.slug}"><span class="res-ico">${m.icon ? `<img src="${esc(m.icon)}" alt="">` : ICONS.map}</span><span><b>${esc(m.name)}</b><span class="crumb">${esc(m.tier)} map · ${m.monsters.length} monster types</span></span></a>`).join('');
       if (r.pages.length) html += '<div class="res-group">Pages</div>' + r.pages.map(({ p }) =>
         `<a class="res" role="option" href="${pageHref(p.title)}"${hlAttr(q)}><span><b>${esc(displayName(p))}</b><span class="crumb">${esc(S.groupOf.get(p.id) || '')}</span></span></a>`).join('');
       if (r.heads.length) html += '<div class="res-group">Sections</div>' + r.heads.map(({ e }) =>
@@ -946,7 +969,7 @@
       <h2 class="home-h">Play</h2>
       <div class="tiles">
         ${tile(pageHref('Crafting'), 'craft', 'Crafting & Cube', 'Crafts, cube recipes and corruptions')}
-        ${tile(pageHref('Maps'), 'map', 'Maps & Endgame', 'Map tiers, events, dungeons and zones')}
+        ${tile('#/maps', 'map', 'Map Explorer', 'Every map, filtered by what your build can kill')}
         ${tile(pageHref('Monsters'), 'skull', 'Monsters', 'Bosses, ubers and what changed')}
         ${tile('#/' + MERC_ROUTE, 'merc', 'Merc Weapon Compare', 'Best Act 2 merc weapon for your IAS')}
         ${tile(pageHref('Game Mechanics'), 'gear', 'Mechanics', 'Breakpoints, formulas and general changes')}
