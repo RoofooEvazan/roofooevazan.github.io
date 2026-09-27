@@ -110,6 +110,22 @@
   }
 
   // ---------- monsters ----------
+  // First bullet of a boss's notes, as plain text, for its one-line summary.
+  const firstNote = html => {
+    const t = document.createElement('template');
+    t.innerHTML = html;
+    const li = t.content.querySelector('li') || t.content.querySelector('p');
+    if (li) for (const sub of li.querySelectorAll('ul, ol')) sub.remove();
+    return (li || t.content).textContent.replace(/\s+/g, ' ').trim();
+  };
+  const resCells = r => EL.map(([k, l]) => {
+    const v = r?.res?.[k];
+    if (v == null) return `<td class="r el-${k} dim">—</td>`;
+    return `<td class="r el-${k}${v >= 100 ? ' imm-cell' : v >= 75 ? ' hi' : ''}" title="${l} resistance">${v}</td>`;
+  }).join('');
+
+  // Monsters: each group is one table (resists, where it's found, first note); hover a row
+  // for the full notes, click it to open them in place.
   async function monsters(root, anchor) {
     const { esc, $, $$, enhanceFragment } = P();
     root.innerHTML = '<div class="loading">Loading monsters…</div>';
@@ -117,41 +133,74 @@
     const M = data.monsters;
     const zoneBy = new Map(data.zones.zones.map(z => [z.slug, z]));
     const info = t => M.info.find(i => i.title.toLowerCase() === t.toLowerCase());
-    const res = r => `<div class="resrow">${EL.map(([k, l]) => { const v = r?.res?.[k] ?? 0; return `<span class="el el-${k}${v >= 100 ? ' imm' : ''}" title="${l} resistance"><i>${l.slice(0, 4)}</i><b>${v}</b></span>`; }).join('')}</div>`;
-    const extra = s => {
-      if (!s) return '';
-      const keys = [['type', 'Type'], ['drain', 'Drain'], ['block', 'Block'], ['base-hp', 'Base HP'], ['crit chance', 'Crit'], ['monster level', 'Level'], ['base-defense', 'Defense']];
-      const kv = keys.filter(([k]) => s[k]).map(([k, l]) => `<li><span>${l}</span><b>${esc(s[k])}</b></li>`).join('');
-      return kv ? `<ul class="kv mkv">${kv}</ul>` : '';
-    };
-    const card = b => `<article class="boss" id="${esc(b.slug)}">
-      <header><h3>${esc(b.name)}</h3>${b.stats?.type ? `<em>${esc(b.stats.type)}</em>` : ''}</header>
-      ${b.stats ? res(b.stats) + extra(b.stats) : ''}
-      ${b.zones.length ? `<p class="found">Found in ${b.zones.map(s => zoneBy.get(s)).filter(Boolean).map(z => `<a href="#/zones?q=${encodeURIComponent(z.name)}">${esc(z.name)}</a>${z.lvl.h ? ` <small>lvl ${z.lvl.h} in Hell</small>` : ''}`).join(', ')}</p>` : ''}
-      <div class="wiki bnotes">${b.html}</div>
-    </article>`;
+    const where = b => b.zones.map(s => zoneBy.get(s)).filter(Boolean).map(z => `<a href="#/zones?q=${encodeURIComponent(z.name)}">${esc(z.name)}</a>${z.lvl.h ? ` <small>${z.lvl.h}</small>` : ''}`).join(', ');
+    // Resistance columns only where the wiki lists them (act bosses have none).
+    const head = res => `<thead><tr><th>Name</th>${res ? EL.map(([e, n]) => `<th class="el-${e}" title="${n} resistance">${n.slice(0, 4)}</th>`).join('') : ''}<th>Found in <small>(Hell lvl)</small></th><th>Notes</th></tr></thead>`;
+    const row = (b, res) => `<tr class="brow" id="${esc(b.slug)}" data-hc="boss:${esc(b.slug)}" tabindex="0" aria-expanded="false">
+        <td class="mn"><b>${esc(b.name)}</b>${b.stats?.type ? ` <em>${esc(b.stats.type)}</em>` : ''}</td>
+        ${res ? resCells(b.stats) : ''}
+        <td class="bwhere">${where(b) || '<span class="dim">—</span>'}</td>
+        <td class="bsum"><span>${esc(firstNote(b.html))}</span></td></tr>
+      <tr class="bdet" hidden><td colspan="${(res ? EL.length : 0) + 3}"><div class="wiki bnotes">${b.html}</div></td></tr>`;
     const uberRows = M.stats.filter(s => s.where === 'Ubers');
+    const prime = info('Prime Evils');
     root.innerHTML = `${crumbs}<h1 class="page-title">Monsters</h1>${tabs('monsters')}
-      <div class="chips mjump" role="group" aria-label="Jump to">${GROUPS.map(([k, l]) => `<a class="chip" href="#/monsters#g-${k.replace(/\s/g, '-')}">${l}</a>`).join('')}<a class="chip" href="#/monsters#g-regular">Regular monsters</a></div>
+      <p class="lead">Resistances of 100 or more (immune) are filled in. Hover a monster for its PD2 changes, or click it to open them.</p>
       ${GROUPS.map(([k, l]) => {
         const bs = M.bosses.filter(b => b.group === k);
         if (!bs.length) return '';
-        const intro = k === 'Key Holders' ? info('Key Holders') : k === 'Ubers' ? info('Ubers') : info('Prime Evils');
+        const intro = k === 'Key Holders' ? info('Key Holders') : k === 'Ubers' ? info('Ubers') : prime;
         return `<section class="mgroup" id="g-${k.replace(/\s/g, '-')}"><h2 class="home-h">${l}</h2>
-          ${intro ? `<div class="wiki mintro">${intro.html}</div>` : ''}
-          ${k === 'Ubers' && uberRows.length ? `<div class="tw"><table class="restable"><thead><tr><th>Uber</th>${EL.map(([e, n]) => `<th class="el-${e}">${n.slice(0, 4)}</th>`).join('')}<th>Level</th><th>Base HP</th><th>Block</th><th>Crit</th></tr></thead>
-            <tbody>${uberRows.map(s => `<tr><td class="mn">${esc(s.name)}</td>${EL.map(([e]) => { const v = parseInt(s[e], 10) || 0; return `<td class="r el-${e}${v >= 100 ? ' imm-cell' : v >= 75 ? ' hi' : ''}">${v || '—'}</td>`; }).join('')}<td class="r">${esc(s['monster level'] || '')}</td><td class="r">${esc(s['base-hp'] || '')}</td><td class="r">${esc(s.block || '')}</td><td class="r">${esc(s['crit chance'] || '')}</td></tr>`).join('')}</tbody></table></div>` : ''}
-          <div class="bosses">${bs.map(card).join('')}</div></section>`;
+          ${intro ? `<details class="about"><summary>${k === 'Act Bosses' ? 'What PD2 changed for every act boss' : `About ${esc(l.toLowerCase())}`}</summary><div class="wiki">${intro.html}</div></details>` : ''}
+          <div class="tw"><table class="restable btbl">${head(bs.some(b => b.stats))}<tbody>${bs.map(b => row(b, bs.some(x => x.stats))).join('')}</tbody></table></div>
+          ${k === 'Ubers' && uberRows.length ? `<h3 class="sub-h">Uber stats</h3><div class="tw"><table class="restable"><thead><tr><th>Uber</th>${EL.map(([e, n]) => `<th class="el-${e}">${n.slice(0, 4)}</th>`).join('')}<th>Level</th><th>Base HP</th><th>Block</th><th>Crit</th></tr></thead>
+            <tbody>${uberRows.map(s => `<tr><td class="mn">${esc(s.name)}</td>${resCells(s)}<td class="r">${esc(s['monster level'] || '')}</td><td class="r">${esc(s['base-hp'] || '')}</td><td class="r">${esc(s.block || '')}</td><td class="r">${esc(s['crit chance'] || '')}</td></tr>`).join('')}</tbody></table></div>` : ''}
+        </section>`;
       }).join('')}
       <section class="mgroup" id="g-regular"><h2 class="home-h">Regular monsters</h2>
-        ${['Regular Monsters', 'Monster Aura Stats'].map(info).filter(Boolean).map(i => `${/aura/i.test(i.title) ? `<h3 class="sub-h">${esc(i.title)}</h3>` : ''}<div class="wiki">${i.html}</div>`).join('')}
+        ${['Regular Monsters', 'Monster Aura Stats'].map(info).filter(Boolean).map(i => `<details class="about"><summary>${esc(i.title)}</summary><div class="wiki">${i.html}</div></details>`).join('')}
         <p><a href="#/maps">Map monsters and their resistances are in the Map Explorer →</a></p></section>
       ${foot(M.page)}`;
     for (const el of $$('.wiki', root)) enhanceFragment(el, P().byId(M.page));
+    const toggle = (tr, open) => {
+      const det = tr.nextElementSibling;
+      open = open ?? det.hidden;
+      det.hidden = !open;
+      tr.setAttribute('aria-expanded', String(open));
+    };
+    root.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      const tr = e.target.closest('tr.brow');
+      if (tr) toggle(tr);
+    });
+    root.addEventListener('keydown', e => {
+      const tr = e.target.closest?.('tr.brow');
+      if (tr && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggle(tr); }
+    });
     if (anchor) requestAnimationFrame(() => {
       const el = document.getElementById(anchor);
-      if (el) { el.scrollIntoView({ block: 'start' }); el.classList.add('flash'); }
+      if (!el) return;
+      if (el.matches('tr.brow')) toggle(el, true);
+      el.scrollIntoView({ block: 'start' });
+      el.classList.add('flash');
     });
+  }
+
+  // Hover card: resistances, where it's found and every note.
+  async function bossTip(slug) {
+    const { esc } = P();
+    await load();
+    const b = data.monsters.bosses.find(x => x.slug === slug);
+    if (!b) return '';
+    const zoneBy = new Map(data.zones.zones.map(z => [z.slug, z]));
+    const zs = b.zones.map(s => zoneBy.get(s)).filter(Boolean).map(z => esc(z.name) + (z.lvl.h ? ` (${z.lvl.h})` : '')).join(', ');
+    const notes = String(b.html).replace(/<a\b[^>]*>|<\/a>/g, '');
+    return `<div class="hc-boss">
+      <div class="hc-head"><span><b class="hc-name">${esc(b.name)}</b><span class="hc-sub">${esc(b.group)}${b.stats?.type ? ' · ' + esc(b.stats.type) : ''}</span></span></div>
+      ${b.stats ? `<div class="hc-res">${EL.map(([k, l]) => { const v = b.stats.res?.[k] ?? 0; return `<span class="el-${k}${v >= 100 ? ' imm' : ''}"><i>${l.slice(0, 4)}</i>${v}</span>`; }).join('')}</div>` : ''}
+      ${zs ? `<div class="hc-req">Found in ${zs}</div>` : ''}
+      <div class="hc-notes">${notes}</div>
+    </div>`;
   }
 
   function search(q, n) {
@@ -163,5 +212,5 @@
     return out.slice(0, n);
   }
 
-  window.PD2World = { load, zones, monsters, search, get data() { return data; } };
+  window.PD2World = { load, zones, monsters, search, bossTip, get data() { return data; } };
 })();

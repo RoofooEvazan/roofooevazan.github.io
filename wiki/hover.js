@@ -28,6 +28,8 @@
     else if (type === 'skill') { const j = arg.indexOf('/'); p = window.PD2Skills?.tip(arg.slice(0, j), arg.slice(j + 1)); }
     else if (type === 'map') p = window.PD2Maps?.tip(arg);
     else if (type === 'rune') p = window.PD2Gear?.runeTip(arg);
+    else if (type === 'boss') p = window.PD2World?.bossTip(arg);
+    else if (type === 'craft') p = window.PD2Cube?.craftTip(arg);
     p = Promise.resolve(p).catch(() => '');
     cache.set(key, p);
     return p;

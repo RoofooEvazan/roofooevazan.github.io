@@ -119,6 +119,39 @@
     if (f.sec && !f.q) requestAnimationFrame(() => document.getElementById(f.sec)?.scrollIntoView({ block: 'start' }));
   }
 
+  // Crafts as one line each: picture, name, the gem and rune that make it, fixed stats.
+  // The full recipe, old values and notes are on hover.
+  const VIEW = 'pd2wiki-cview';
+  const getView = () => { try { return localStorage.getItem(VIEW) || 'list'; } catch { return 'list'; } };
+  const saveView = v => { try { localStorage.setItem(VIEW, v); } catch {} };
+  const shortIng = x => x.replace(/^Perfect /, 'P. ').replace(/\s*Rune\s*\(#\d+\)/, '');
+  const statText = h => String(h || '').replace(/<[^>]+>/g, '').replace(/&#160;|&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+  function craftRow(c) {
+    const { esc } = P();
+    const [gem, rune] = [c.recipe.find(x => /perfect|gem|skull/i.test(x)), c.recipe.find(x => /rune/i.test(x))];
+    const st = c.stats.filter(x => x.st !== 'removed');
+    return `<div class="crow ct-${c.type.toLowerCase()}" id="${esc(c.slug)}" data-hc="craft:${esc(c.slug)}" tabindex="0">
+      <span class="ir-img">${c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy">` : ''}</span>
+      <span class="ir-name"><b>${esc(c.name)}</b><span>${esc(c.recipe[0] || c.slot)}</span></span>
+      <span class="cr-ing">${gem ? `<span class="ing gem">${esc(shortIng(gem))}</span>` : ''}${rune ? `<span class="ing rune" data-hc="rune:${esc(shortIng(rune))}">${esc(shortIng(rune))}</span>` : ''}</span>
+      <span class="ir-stats">${st.map(x => `<span class="${x.st !== 'same' ? 'cs-' + x.st : ''}">${esc(statText(x.html))}</span>`).join('<i>·</i>')}</span>
+    </div>`;
+  }
+
+  async function craftTip(slug) {
+    const { esc } = P();
+    await load();
+    const c = data.crafts.crafts.find(x => x.slug === slug);
+    if (!c) return '';
+    return `<div class="hc-item ct-${c.type.toLowerCase()}">
+      <div class="hc-head">${c.img ? `<img src="${esc(c.img)}" alt="">` : ''}<span><b class="hc-name">${esc(c.name)}</b><span class="hc-sub">${esc(c.type)} craft · ${esc(c.slot)}</span></span></div>
+      <div class="hc-req">${c.recipe.map(esc).join(' + ')}</div>
+      <ul class="istats">${c.stats.map(x => x.st === 'removed' ? `<li class="st st-removed"><s>${esc(x.old || '')}</s></li>` : `<li class="st st-${x.st}">${statText(x.html)}${x.old ? ` <span class="hc-was">was ${esc(x.old)}</span>` : ''}</li>`).join('')}
+        <li class="st st-rand">+ up to 4 random affixes</li></ul>
+      ${c.notes ? `<div class="hc-foot">${statText(c.notes)}</div>` : ''}
+    </div>`;
+  }
+
   function crafting(root, qs) {
     const { esc, $, enhanceFragment } = P();
     const C = data.crafts;
@@ -133,7 +166,8 @@
         <div class="chips craft-types" role="group" aria-label="Craft type">${['', ...types].map(t => `<a class="chip${f.type === t ? ' on' : ''}${t ? ' ct-' + t.toLowerCase() : ''}" href="${url('cube/crafting', { type: t, slot: f.slot, q: f.q })}">${t || 'All types'}</a>`).join('')}</div>
         <div class="chips" role="group" aria-label="Slot">${['', ...slots].map(s => `<a class="chip${f.slot === s ? ' on' : ''}" href="${url('cube/crafting', { type: f.type, slot: s, q: f.q })}">${s || 'All slots'}</a>`).join('')}</div>
       </div>
-      <div class="rcount" aria-live="polite"></div>
+      <div class="rbar"><div class="rcount" aria-live="polite"></div>
+        <div class="vtoggle" role="group" aria-label="Layout"><button type="button" data-v="list">List</button><button type="button" data-v="cards">Cards</button></div></div>
       <div class="crafts"></div>
       ${foot(C.page)}`;
     const box = $('.crafts', root), count = $('.rcount', root);
@@ -154,11 +188,19 @@
       // One type: its slots side by side. One slot: every type's version to compare.
       const by = ff.type || !ff.slot ? types.filter(t => hits.some(c => c.type === t)).map(t => [t, `${t} <small>${esc(CRAFT_TYPES[t])}</small>`, hits.filter(c => c.type === t)])
         : [[ff.slot, `${esc(ff.slot)} crafts`, hits]];
-      box.innerHTML = hits.length ? by.map(([, title, cs]) => `<h2 class="home-h">${title}</h2><div class="igrid">${cs.map(card).join('')}</div>`).join('')
+      const list = getView() === 'list';
+      for (const b of root.querySelectorAll('.vtoggle button')) b.classList.toggle('on', (b.dataset.v === 'list') === list);
+      box.innerHTML = hits.length ? by.map(([, title, cs]) => `<h2 class="home-h">${title}</h2>${list ? `<div class="clist">${cs.map(craftRow).join('')}</div>` : `<div class="igrid">${cs.map(card).join('')}</div>`}`).join('')
         : `<div class="empty">No crafts match. <a href="#/cube/crafting">Clear filters</a></div>`;
       enhanceFragment(box, P().byId(C.page));
     };
     draw(f);
+    $('.vtoggle', root).addEventListener('click', e => {
+      const b = e.target.closest('[data-v]');
+      if (!b) return;
+      saveView(b.dataset.v);
+      draw(f);
+    });
     let t;
     $('#fq', root).addEventListener('input', e => {
       clearTimeout(t);
@@ -219,5 +261,5 @@
     return data.crafts.crafts.filter(c => c.name.toLowerCase().includes(ql)).slice(0, n);
   }
 
-  window.PD2Cube = { load, render, search, get data() { return data; } };
+  window.PD2Cube = { load, render, search, craftTip, get data() { return data; } };
 })();

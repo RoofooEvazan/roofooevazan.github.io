@@ -166,3 +166,46 @@ a[data-hc]{cursor:pointer}
   .filters .frow{gap:6px}
   .season-card{padding:9px 12px}
 }
+
+/* ---------- monsters: one table per group, notes on hover or click ---------- */
+.btbl .mn b{color:var(--q-unique);font-weight:600}
+.btbl .mn em{font-style:normal;font-size:12px;color:var(--dim)}
+.btbl tr.brow{cursor:pointer}
+.btbl tr.brow:hover td,.btbl tr.brow[aria-expanded=true] td{background:color-mix(in srgb,var(--gold) 6%,transparent)}
+.btbl tr.brow:focus-visible{outline:1px solid var(--gold);outline-offset:-1px}
+.btbl tr.brow.flash td{background:color-mix(in srgb,var(--gold) 14%,transparent)}
+.btbl td.dim{color:var(--dim)}
+.btbl .bwhere{text-align:left;font-size:13.5px;white-space:nowrap}
+.btbl .bwhere small{color:var(--dim)}
+.btbl .bsum{text-align:left;max-width:360px;min-width:180px}
+.btbl .bsum span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted);font-size:13.5px}
+.btbl tr.bdet td{text-align:left;background:var(--void);padding:8px 14px 10px}
+.btbl tr.bdet .bnotes{font-size:14.5px}
+.hc-res{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin:0 0 6px}
+.hc-res span{display:flex;flex-direction:column;align-items:center;padding:2px 0;border:1px solid var(--edge);font-size:13px;font-variant-numeric:tabular-nums}
+.hc-res i{font-style:normal;font-size:10.5px;color:var(--el)}
+.hc-res .imm{background:var(--el);color:var(--void)}
+.hc-res .imm i{color:var(--void)}
+.hc-notes{font-size:13px;color:var(--text)}
+.hc-notes ul{margin:0;padding-left:16px}
+.hc-notes li{margin:1px 0}
+.hc-boss{max-width:360px}
+
+/* ---------- crafted items: one line per craft ---------- */
+.clist{display:flex;flex-direction:column;border:1px solid var(--edge);background:var(--panel);margin-bottom:6px}
+.crow{display:grid;grid-template-columns:34px minmax(150px,200px) 150px minmax(0,1fr);align-items:center;gap:0 12px;padding:4px 10px;border-bottom:1px solid var(--edge);cursor:default}
+.crow:last-child{border-bottom:0}
+.crow:hover,.crow:focus-visible{background:color-mix(in srgb,var(--q) 8%,transparent);outline:none}
+.cr-ing{display:flex;gap:4px;flex-wrap:wrap}
+.cr-ing .ing{font-size:12.5px;padding:0 7px}
+.cr-ing .ing.rune{color:#f0b46a;border-color:rgba(227,154,67,.35)}
+.cr-ing .ing.gem{color:#c9b8ff}
+.crow .ir-stats .cs-new{color:var(--new)}
+.crow .ir-stats .cs-changed{color:var(--chg)}
+.hc-was{color:var(--dim);font-size:12px}
+@media (max-width:700px){
+  .crow{grid-template-columns:30px minmax(0,1fr) auto;grid-template-areas:"img name ing" "img stats stats";padding:6px 8px}
+  .crow .ir-img{grid-area:img;width:30px}.crow .ir-name{grid-area:name}.cr-ing{grid-area:ing}.crow .ir-stats{grid-area:stats;font-size:13px}
+}
+.hc-boss .hc-notes{max-height:300px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent);mask-image:linear-gradient(180deg,#000 82%,transparent)}
+.hc-boss::after{content:"Click the row for all notes";display:block;margin-top:4px;color:var(--dim);font-size:12px}
