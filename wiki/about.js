@@ -71,8 +71,8 @@
       const { fmtDate } = P();
       const len = r => r.upcoming ? 'upcoming' : r.current ? `${r.days} days so far` : r.days ? `${/\+/.test(r.daysText || '') ? esc(r.daysText) : r.days} days` : '';
       root.innerHTML = `${head('seasons', 'Seasons')}
-        <p class="lead">Every PD2 ladder season and league, how long each ran, and what was special about it. Click a season for its patch notes.</p>
-        <ol class="tl">${rows.map(r => `<li class="${r.league ? 'league' : ''}${r.current ? ' now' : ''}${r.upcoming ? ' soon' : ''}">
+        <p class="lead">Every PD2 ladder season and league, newest first: how long each ran and what was special about it. Click a season for its patch notes.</p>
+        <ol class="tl">${[...rows].reverse().map(r => `<li class="${r.league ? 'league' : ''}${r.current ? ' now' : ''}${r.upcoming ? ' soon' : ''}">
           <a class="tl-name" href="${r.n ? `#/patches/s${r.n}` : '#/patches'}"><b>${r.n ? `Season ${r.n}` : 'League'}</b><span>${esc(r.title)}</span></a>
           <span class="tl-date">${esc(fmtDate(r.start))}</span>
           <span class="tl-bar"><i style="width:${r.days ? Math.max(4, r.days / max * 100) : 4}%"></i><em>${len(r)}</em></span>

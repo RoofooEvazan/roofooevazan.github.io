@@ -1089,27 +1089,44 @@
     $('#home-search-btn').addEventListener('click', () => { $('#q').focus(); });
   }
 
+  // Where a page's link lands, as a short label ("Skills", "Patch notes").
+  const AREA = { skills: 'Skills', item: 'Items', items: 'Items', patches: 'Patch notes', maps: 'Maps', map: 'Maps', cube: 'Crafting', zones: 'Zones', monsters: 'Monsters',
+    mechanics: 'Mechanics', affixes: 'Affixes', bases: 'Item bases', runes: 'Runes', mercs: 'Mercenaries', filters: 'Loot filters', overview: 'What PD2 changed', about: 'About PD2',
+    new: 'New in PD2', cosmetics: 'Cosmetics', classes: 'Stat planner', help: 'Help', guides: 'Guides', breakpoints: 'Breakpoints', pvp: 'PvP', glossary: 'Glossary' };
+  const areaOf = href => href.startsWith('#/') ? AREA[href.slice(2).split(/[/?#]/)[0]] || '' : '';
+
+  // One list, newest day first: every page edited on the wiki that day, where it lands here,
+  // and the editor's summary from the sync log when there is one.
   async function changesView() {
     const log = await loadChanges();
-    const recent = [...S.index.pages].filter(p => p.edited).sort((a, b) => b.edited.localeCompare(a.edited)).slice(0, 40);
-    const link = t => { const r = resolve(t); return r ? `<a href="${hrefFor(r.page)}">${esc(displayName(r.page))}</a>` : esc(t); };
-    const entries = log.map(e => {
-      const rows = [];
-      if (e.initial) rows.push(`<li><span class="tag">Import</span> First copy of all ${e.initial} pages</li>`);
-      for (const t of e.added || []) rows.push(`<li><span class="tag">New</span> ${link(t)}</li>`);
-      for (const u of e.updated || []) rows.push(`<li><span class="tag">Updated</span> ${link(u.title)}${u.summary ? ` <span class="sum">— ${esc(u.summary)}</span>` : ''}</li>`);
-      for (const t of e.removed || []) rows.push(`<li><span class="tag">Removed</span> ${esc(t)}</li>`);
-      if (e.sheet) rows.push(`<li><span class="tag">Tool</span> <a href="#/${MERC_ROUTE}">Merc weapon data</a> updated from the spreadsheet</li>`);
-      return `<li><time datetime="${esc(e.date)}">${esc(fmtDate(e.date))}</time><ul>${rows.join('')}</ul></li>`;
-    }).join('');
+    const summary = new Map(), added = new Set();
+    for (const e of [...log].reverse()) {
+      // "/* Section */ text" is how MediaWiki marks which section an edit touched.
+      for (const u of e.updated || []) if (u.summary) summary.set(u.title, u.summary.replace(/\/\*\s*(.*?)\s*\*\/\s*/, (m, sec) => `edited ${sec}${m.trim() === u.summary.trim() ? '' : ': '}`).trim());
+      for (const t of e.added || []) added.add(t);
+    }
+    const shown = p => p.edited && !/\/[a-z]{2}(-[a-z]+)?$/.test(p.title) && !/[^\x00-\x7F]/.test(p.title);
+    const recent = [...S.index.pages].filter(shown).sort((a, b) => b.edited.localeCompare(a.edited)).slice(0, 80);
+    const days = [];
+    for (const p of recent) {
+      const d = p.edited.slice(0, 10);
+      if (days.at(-1)?.d !== d) days.push({ d, pages: [] });
+      days.at(-1).pages.push(p);
+    }
+    const lastSync = log[0]?.date;
+    const removed = log.flatMap(e => (e.removed || []).map(t => ({ t, d: e.date }))).slice(0, 10);
+    const sheet = log.find(e => e.sheet);
     main.innerHTML = `
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Wiki</a></nav>
       <h1 class="page-title">Recent Changes</h1>
-      <div class="page-meta">Checked against the PD2 Wiki every 24 hours.
-        <a href="${WIKI}/wiki/Special:RecentChanges" target="_blank" rel="noopener">The wiki's own change log ${ICONS.ext}</a></div>
-      <h2 class="home-h">Latest edits</h2>
-      <ul class="changes">${recent.map(p => `<li><a href="${hrefFor(p)}">${esc(displayName(p))}</a><span title="${esc(new Date(p.edited).toLocaleString())}">${esc(fmtDate(p.edited))}</span></li>`).join('')}</ul>
-      <h2 class="home-h">Sync log</h2>
-      ${entries ? `<ul class="log">${entries}</ul>` : '<p>No syncs logged yet.</p>'}`;
+      <p class="lead">Pages edited on the PD2 Wiki, newest first, and where each one lives here. This copy checks the wiki every 24 hours${lastSync ? `; the last change it picked up was ${esc(ago(lastSync))}` : ''}.
+        <a href="${WIKI}/wiki/Special:RecentChanges" target="_blank" rel="noopener">The wiki's own change log ${ICONS.ext}</a></p>
+      <div class="chlist">${days.map(day => `<section class="chday"><h2><time datetime="${day.d}">${esc(fmtDate(day.d))}</time><small>${day.pages.length} page${day.pages.length === 1 ? '' : 's'}</small></h2>
+        <ul>${day.pages.map(p => {
+          const href = hrefFor(p), area = areaOf(href);
+          return `<li><a href="${href}">${esc(displayName(p))}</a>${added.has(p.title) ? '<em class="chnew">new</em>' : ''}${area ? `<span class="charea">${esc(area)}</span>` : ''}${summary.get(p.title) ? `<span class="chsum">${esc(summary.get(p.title))}</span>` : ''}</li>`;
+        }).join('')}</ul></section>`).join('')}</div>
+      ${removed.length || sheet ? `<details class="about"><summary>Removed pages and tool updates</summary><ul class="log">${removed.map(r => `<li><time>${esc(fmtDate(r.d))}</time> Removed from the wiki: ${esc(r.t)}</li>`).join('')}${sheet ? `<li><time>${esc(fmtDate(sheet.date))}</time> <a href="#/${MERC_ROUTE}">Merc weapon data</a> updated from the spreadsheet</li>` : ''}</ul></details>` : ''}`;
   }
 
   function allPagesView() {
