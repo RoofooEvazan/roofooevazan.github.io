@@ -48,8 +48,8 @@
       const hits = H.items.filter(i => (!f.cat || i.cat === f.cat) && ts.every(t => i._s.includes(t)));
       count.textContent = `${hits.length} answer${hits.length === 1 ? '' : 's'}`;
       const groups = [...new Set(hits.map(i => i.cat))];
-      box.innerHTML = groups.map(g => `<h2 class="home-h">${esc(g)}</h2>${hits.filter(i => i.cat === g).map(i => `
-        <details class="qa" id="${esc(i.id)}"${ts.length && hits.length <= 3 ? ' open' : ''}><summary>${esc(i.q)}</summary><div class="wiki">${i.html}</div></details>`).join('')}`).join('')
+      box.innerHTML = groups.map(g => `<section class="qa-grp"><h2 class="home-h">${esc(g)} <small>${hits.filter(i => i.cat === g).length}</small></h2><div class="qa-grid">${hits.filter(i => i.cat === g).map(i => `
+        <details class="qa" id="${esc(i.id)}"${ts.length && hits.length <= 3 ? ' open' : ''}><summary data-hc="faq:${esc(i.id)}">${esc(i.q)}</summary><div class="wiki">${i.html}</div></details>`).join('')}</div></section>`).join('')
         || `<div class="empty">No answers match. Try fewer words.</div>`;
       for (const el of $$('.qa .wiki', box)) enhanceFragment(el, P().byId(H.items.find(i => i.id === el.parentElement.id)?.page));
     };
@@ -58,6 +58,20 @@
     let t;
     $('#hq', root).addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { f.q = e.target.value.trim(); draw(); }, 150); });
     if (anchor) requestAnimationFrame(() => { const el = document.getElementById(anchor); if (el) { el.open = true; el.scrollIntoView({ block: 'start' }); } });
+  }
+
+  // Hover card: the start of an answer, so most questions never need opening.
+  async function faqTip(id) {
+    const { esc } = P();
+    await load();
+    const it = data.help.items.find(i => i.id === id);
+    if (!it) return '';
+    const tpl = document.createElement('template');
+    tpl.innerHTML = it.html;
+    const text = tpl.content.textContent.replace(/\s+/g, ' ').trim();
+    return `<div class="hc-faq"><b class="hc-name">${esc(it.q)}</b>
+      <p class="hc-desc">${esc(text.length > 520 ? text.slice(0, 500).replace(/\s+\S*$/, '') + '…' : text)}</p>
+      <div class="hc-foot">${esc(it.cat)} · click to open${text.length > 520 ? ' the full answer' : ''}</div></div>`;
   }
 
   // ---------- build directory ----------
@@ -266,5 +280,5 @@
     return data.help.items.filter(i => i.q.toLowerCase().includes(ql)).slice(0, n);
   }
 
-  window.PD2Guide = { load, help, guides, guideHeader, breakpoints, search, get data() { return data; } };
+  window.PD2Guide = { load, help, guides, guideHeader, breakpoints, search, faqTip, get data() { return data; } };
 })();

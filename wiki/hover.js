@@ -6,7 +6,7 @@
   'use strict';
   const fine = matchMedia('(hover: hover) and (pointer: fine)');
   const SEL = 'a[href^="#/item/"], a[href^="#/skills/"], a[href^="#/map/"], [data-hc]';
-  const SKIP = '.hc, .icard, .tooltip, .results';
+  const SKIP = '.hc, .icard, .tooltip, .results, details[open] > summary';
   const cache = new Map();
   let box = null, cur = null, timer = 0, seq = 0, px = 0, py = 0;
 
@@ -31,6 +31,7 @@
     else if (type === 'boss') p = window.PD2World?.bossTip(arg);
     else if (type === 'craft') p = window.PD2Cube?.craftTip(arg);
     else if (type === 'affix') p = window.PD2Affixes?.tip(arg);
+    else if (type === 'faq') p = window.PD2Guide?.faqTip(arg);
     p = Promise.resolve(p).catch(() => '');
     cache.set(key, p);
     return p;

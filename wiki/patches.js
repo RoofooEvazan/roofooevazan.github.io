@@ -66,6 +66,7 @@
             <div class="chips pn-cls" role="group" aria-label="Class"${f.cat === 'Classes' ? '' : ' hidden'}>
               ${CLASSES.filter(c => season.blocks.some(b => b.cls === c)).map(c => `<button type="button" class="chip${f.cls === c ? ' on' : ''}" data-cls="${c}">${c}</button>`).join('')}</div>
           </div>
+          <div class="pn-tools"><span class="pn-toggle"><button type="button" class="chip" data-all="1">Expand all</button><button type="button" class="chip" data-all="0">Collapse all</button></span></div>
           <div class="pn-body"></div>
           <p class="attrib">From <a href="${page ? wikiUrl(page.title, season.anchor) : '#'}" target="_blank" rel="noopener">Patch Notes</a> on the Project Diablo 2 Wiki, shared under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</p>
         </div>
@@ -80,7 +81,12 @@
       if (f.q.trim().length >= 2) { body.innerHTML = searchAll(f.q.trim()); return; }
       body.innerHTML = seasonHtml(season, f);
       enhanceFragment(body, page);
+      $('.pn-tools', root).hidden = !$('.pn-body > details.pn-sec', root);
     };
+    $('.pn-tools', root).addEventListener('click', e => {
+      const all = e.target.closest('[data-all]');
+      if (all) for (const d of $$('.pn-body > details.pn-sec', root)) d.open = all.dataset.all === '1';
+    });
     $('.pn-cats', root).addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (!b) return; f.cat = b.dataset.cat; if (f.cat !== 'Classes') f.cls = ''; show(); });
     $('.pn-cls', root).addEventListener('click', e => { const b = e.target.closest('[data-cls]'); if (!b) return; f.cls = f.cls === b.dataset.cls ? '' : b.dataset.cls; show(); });
     let t;
@@ -89,7 +95,11 @@
     show();
     if (anchor) {
       const el = document.getElementById(anchor);
-      if (el) { el.closest('details')?.setAttribute('open', ''); requestAnimationFrame(() => el.scrollIntoView({ block: 'start' })); }
+      if (el) {
+        if (el.matches('details')) el.open = true;
+        for (let d = el.closest('details'); d; d = d.parentElement?.closest('details')) d.open = true;
+        requestAnimationFrame(() => el.scrollIntoView({ block: 'start' }));
+      }
     }
     const cur = $('.pn-seasons a.on', root);
     if (cur && matchMedia('(max-width: 900px)').matches) cur.scrollIntoView({ inline: 'center', block: 'nearest' });
@@ -108,10 +118,18 @@
       if (b.cat === 'Hotfixes' && depth > 0) {
         return `<details class="pn-fix" id="${esc(b.anchor)}"><summary>${esc(b.title)}<span>${b.lines.length} change${b.lines.length === 1 ? '' : 's'}</span></summary>${inner}</details>`;
       }
-      const h = depth === 0 ? 'h2' : 'h3';
-      return `<section class="pn-sec d${Math.min(depth, 2)}" id="${esc(b.anchor)}"><${h} class="pn-title">${tag}${esc(b.title)}${depth === 0 ? `<em class="pn-cat">${esc(b.cat)}</em>` : ''}</${h}>${inner}</section>`;
+      if (depth === 0) {
+        // Top sections fold to one line with their size; a filter opens what it matches.
+        const n = count(b);
+        const open = f.cat || f.cls || b === first;
+        return `<details class="pn-sec d0" id="${esc(b.anchor)}"${open ? ' open' : ''}>
+          <summary class="pn-title">${tag}<span>${esc(b.title)}</span><em class="pn-cat">${esc(b.cat)}</em><span class="pn-n">${n} change${n === 1 ? '' : 's'}</span></summary>${inner}</details>`;
+      }
+      return `<section class="pn-sec d${Math.min(depth, 2)}" id="${esc(b.anchor)}"><h3 class="pn-title">${tag}${esc(b.title)}</h3>${inner}</section>`;
     };
+    const count = b => (keep(b) ? b.lines.length : 0) + (kids.get(b.anchor) || []).reduce((a, k) => a + count(k), 0);
     const tops = season.blocks.filter(b => !b.parent);
+    const first = tops.find(visible);
     const intro = season.intro && !f.cat && season.intro.html ? `<div class="wiki pn-intro">${season.intro.html}</div>` : '';
     const out = intro + tops.map(b => one(b, 0)).join('');
     return out || `<div class="empty">Nothing in this season for that filter.</div>`;
