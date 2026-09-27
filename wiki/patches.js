@@ -153,9 +153,27 @@
         ${hits.length > 60 ? `<p class="muted">+${hits.length - 60} more in this season</p>` : ''}</section>`).join('');
   }
 
+  // Patch history for an item or skill name, from data/history/<first letter>.json (built by
+  // the sync with the same matching as fullHistory below), so item and skill pages don't
+  // download every season's notes. Falls back to scanning the notes for other names.
+  const shards = new Map();
+  async function history(name, limit = 30) {
+    const k = /^[a-z]/i.test(name) ? name[0].toLowerCase() : '_';
+    if (!shards.has(k)) shards.set(k, P().fetchJSON(`data/history/${k}.json`).catch(() => null));
+    const shard = await shards.get(k);
+    const seasons = P().S.index.seasons || [];
+    if (shard && seasons.length) {
+      return (shard[name] || []).slice(0, limit).map(([si, anchor, title, line]) => {
+        const s = seasons[si] || {};
+        return { s: { key: s.key, n: s.n, name: s.name, upcoming: s.key === 'upcoming' }, b: { anchor, title }, line };
+      });
+    }
+    return fullHistory(name, limit);
+  }
+
   // Lines that mention `name` as a whole word (case-sensitive, so "Death" the runeword
   // doesn't match every "death"), newest season first.
-  async function history(name, limit = 30) {
+  async function fullHistory(name, limit = 30) {
     await load();
     const re = new RegExp(`(^|[^A-Za-z'])${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![A-Za-z])`);
     const out = [];

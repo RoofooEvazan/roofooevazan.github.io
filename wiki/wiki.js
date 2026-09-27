@@ -69,8 +69,11 @@
     return pageHref(page.title, anchor);
   }
 
+  // Data files carry the sync's version stamp (index.json "v"), so they can be cached until
+  // a sync changes them; the index itself and anything else is always checked.
   async function fetchJSON(url) {
-    const res = await fetch(url, { cache: 'no-cache' });
+    const versioned = S.index?.v && url.startsWith('data/') && !url.endsWith('index.json');
+    const res = await fetch(versioned ? `${url}?v=${S.index.v}` : url, { cache: versioned ? 'default' : 'no-cache' });
     if (!res.ok) throw new Error(`${res.status} loading ${url}`);
     return res.json();
   }
@@ -176,7 +179,8 @@
   // ---------- boot ----------
   async function boot() {
     try {
-      S.index = await fetchJSON('data/index.json');
+      // index.html starts this download in <head>, alongside the scripts.
+      S.index = await (window.PD2_INDEX || fetchJSON('data/index.json'));
     } catch (e) {
       main.innerHTML = `<div class="error"><b>Couldn't load the wiki.</b><br>${esc(e.message)}</div>`;
       return;
@@ -188,6 +192,11 @@
     setupChrome();
     window.addEventListener('hashchange', () => route());
     route();
+    // Keeps data and pages on the device between visits (see sw.js).
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+      const reg = () => navigator.serviceWorker.register('sw.js').catch(() => {});
+      if (document.readyState === 'complete') setTimeout(reg, 1000); else addEventListener('load', reg);
+    }
   }
 
   function renderSidebar() {
@@ -450,7 +459,9 @@
   // ---------- page ----------
   async function getHtml(id) {
     if (S.html.has(id)) return S.html.get(id);
-    const res = await fetch(`data/pages/${id}.html`, { cache: 'no-cache' });
+    // Each page's revision is in the index, so a cached copy is only reused while it's current.
+    const rev = S.byId.get(id)?.rev;
+    const res = await fetch(`data/pages/${id}.html${rev ? `?r=${rev}` : ''}`, { cache: rev ? 'default' : 'no-cache' });
     if (!res.ok) throw new Error(`${res.status} loading page ${id}`);
     const html = await res.text();
     S.html.set(id, html);

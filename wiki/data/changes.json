@@ -1,5 +1,37 @@
 [
  {
+  "date": "2026-09-27T22:56:21.559Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "All Necromancer Skills",
+    "edited": "2023-09-09T17:11:05Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Skills",
+    "edited": "2026-06-20T22:47:43Z",
+    "summary": "Link to Merc skills"
+   },
+   {
+    "title": "All Sorceress Skills",
+    "edited": "2023-09-09T17:11:45Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "Curses",
+    "edited": "2026-09-27T08:53:53Z",
+    "summary": "/* Amplify Damage */ Added Anvilguard Strap to When struck sources."
+   },
+   {
+    "title": "Lightning Spells",
+    "edited": "2026-09-27T08:29:55Z",
+    "summary": "/* Static Field */ Added Aetherwing to when struck sources"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-09-27T00:26:39.679Z",
   "added": [
    "Guilds"

@@ -8,6 +8,7 @@
 // Usage: node tools/wiki-sync/sync.mjs [--full]   (--full re-fetches every page)
 
 import { mkdir, readFile, writeFile, readdir, unlink } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -59,6 +60,53 @@ async function apiAll(params, pick) {
 
 async function readJSON(file, fallback) {
   try { return JSON.parse(await readFile(file, 'utf8')); } catch { return fallback; }
+}
+
+// Level tables ("1 2 3 … 60", "116 120 124 …") flatten to long runs of bare numbers that
+// nobody searches for; they make up about an eighth of the search index.
+const dropNumberRuns = t => t.replace(/(?:[-+]?\d+(?:[.,]\d+)?%?\s+){7,}[-+]?\d+(?:[.,]\d+)?%?/g, ' … ').replace(/\s{2,}/g, ' ');
+
+// Patch history for every item and skill name, split by first letter, so an item or skill
+// page loads a few kilobytes instead of all the patch notes. Same matching as the reader's
+// patches.js history(): whole-word, case-sensitive, grouped lines trimmed to the name.
+function historyShards(patches, names) {
+  const escRe = x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const shards = {};
+  for (const name of new Set(names)) {
+    const re = new RegExp(`(^|[^A-Za-z'])${escRe(name)}(?![A-Za-z])`);
+    const out = [];
+    outer: for (const [si, s] of patches.seasons.entries()) for (const b of s.blocks) for (const l of b.lines) {
+      if (!re.test(l)) continue;
+      let line = l;
+      const i = l.indexOf(': ');
+      if (l.includes(' · ') && i > 0) {
+        const head = l.slice(0, i), parts = l.slice(i + 2).split(' · ');
+        const mine = parts.filter(x => re.test(x));
+        if (re.test(head)) line = l.length > 320 ? l.slice(0, 317) + '…' : l;
+        else if (mine.length) line = `${head}: ${mine.join(' · ')}`;
+      }
+      out.push([si, b.anchor, b.title, line]);
+      if (out.length >= 30) break outer;
+    }
+    if (!out.length) continue;
+    const k = historyKey(name);
+    (shards[k] ||= {})[name] = out;
+  }
+  return shards;
+}
+const historyKey = name => (/^[a-z]/i.test(name) ? name[0].toLowerCase() : '_');
+
+async function dataVersion(dir) {
+  const h = createHash('sha1');
+  const walk = async d => {
+    for (const f of (await readdir(d, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
+      const full = join(d, f.name);
+      if (f.isDirectory()) { if (f.name !== 'pages') await walk(full); }
+      else if (f.name.endsWith('.json') && f.name !== 'index.json') h.update(f.name).update(await readFile(full));
+    }
+  };
+  await walk(dir);
+  return h.digest('hex').slice(0, 10);
 }
 
 // Writes only when the content changed; returns whether it did.
@@ -255,6 +303,10 @@ async function main() {
     if (ex.affixes?.affixes.length > 500) await put(join(OUT, 'affixes.json'), JSON.stringify(ex.affixes) + '\n');
     if (ex.patches?.seasons.length > 5) await put(join(OUT, 'patches.json'), JSON.stringify(ex.patches) + '\n');
     if (ex.patches?.seasons.length > 5) seasons = ex.patches.seasons.map(x => ({ key: x.upcoming ? 'upcoming' : 's' + x.n, n: x.n, name: x.name, iso: x.iso || '' }));
+    if (ex.patches?.seasons.length > 5) {
+      const names = [...ex.items.map(i => i.name), ...Object.values(ex.skills).flatMap(c => c.trees.flatMap(t => t.skills.map(k => k.name)))];
+      for (const [k, map] of Object.entries(historyShards(ex.patches, names))) await put(join(OUT, 'history', `${k}.json`), JSON.stringify(map) + '\n');
+    }
     targets = ex.targets;
     skillIndex = Object.values(ex.skills).flatMap(c => c.trees.flatMap(t => t.skills.map(k => ({ c: c.cls, n: k.name, a: k.anchor, l: k.lvl, t: t.name, i: k.img }))));
     console.log(`extracted ${ex.items.length} items, ${ex.sets.length} sets, ${Object.keys(ex.skills).length} skill classes`);
@@ -272,7 +324,6 @@ async function main() {
     skillIndex,
     seasons,
   };
-  const indexChanged = await put(join(OUT, 'index.json'), index);
 
   // Pages like "All Topics" and "Patch Notes" transclude other pages whole, so the same
   // section text shows up many times. Index each text once, under the smallest page it's on.
@@ -285,7 +336,7 @@ async function main() {
       if (t.length > 40 && seen.has(key)) return false;
       seen.add(key);
       return true;
-    }) }))
+    }).map(([a, h, t]) => [a, h, dropNumberRuns(t)]) }))
     .sort((a, b) => a.id - b.id);
   await put(join(OUT, 'search.json'), JSON.stringify(deduped) + '\n');
   const sheetChanged = await syncSheet();
@@ -301,6 +352,11 @@ async function main() {
     });
     await put(join(OUT, 'changes.json'), log.slice(0, 120));
   }
+
+  // Written last: "v" changes whenever any other data file does, so the reader can cache
+  // data files under that version and only download them again after a sync changed them.
+  index.v = await dataVersion(OUT);
+  const indexChanged = await put(join(OUT, 'index.json'), index);
 
   console.log(`${live.length} pages, fetched ${fetched}: ${added.length} added, ${updated.length} updated, ${removed.length} removed; index ${indexChanged ? 'changed' : 'unchanged'}; sheet ${sheetChanged ? 'changed' : 'unchanged'}`);
   if (process.env.GITHUB_OUTPUT) {

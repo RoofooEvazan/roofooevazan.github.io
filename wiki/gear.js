@@ -118,14 +118,18 @@
         <td>${esc(b.type || '')}</td>
         ${W ? `<td class="r">${vv(b.dmg)}</td><td class="r">${esc(b.avg || '')}</td><td class="r">${vv(b.wsm)}</td><td class="r">${vv(b.range)}</td><td class="r">${esc(b.str || '')}</td><td class="r">${esc(b.dex || '')}</td>`
           : A ? `<td class="r">${vv(b.def)}</td><td class="r">${esc(b.str || '')}</td><td class="r">${vv(b.block)}</td>` : ''}
-        <td class="r">${vv(b.sockets)}</td>${A ? `<td class="r">${vv(b.dur)}</td>` : ''}<td class="r">${esc(b.rlvl || '')}</td><td class="r">${esc(b.qlvl || '')}</td></tr>
-        <tr class="bdet" hidden><td colspan="${W ? 11 : A ? 9 : 5}">${fam(b)}${links(b)}</td></tr>`).join('')}</tbody>`;
+        <td class="r">${vv(b.sockets)}</td>${A ? `<td class="r">${vv(b.dur)}</td>` : ''}<td class="r">${esc(b.rlvl || '')}</td><td class="r">${esc(b.qlvl || '')}</td></tr>`).join('')}</tbody>`;
+      // The detail line is built when a row is opened, not for all 500 bases up front.
+      table._detail = slug => { const b = rows.find(x => x.slug === slug); return b ? `<tr class="bdet"><td colspan="${W ? 11 : A ? 9 : 5}">${fam(b)}${links(b)}</td></tr>` : ''; };
     };
     // Click a base for its upgrade path and shortcuts.
     table.addEventListener('click', e => {
       if (e.target.closest('a')) return;
       const tr = e.target.closest('tbody tr:not(.bdet)');
-      if (tr?.nextElementSibling?.classList.contains('bdet')) { const d = tr.nextElementSibling; d.hidden = !d.hidden; tr.classList.toggle('open', !d.hidden); }
+      if (!tr) return;
+      if (tr.nextElementSibling?.classList.contains('bdet')) tr.nextElementSibling.remove();
+      else tr.insertAdjacentHTML('afterend', table._detail(tr.id.replace(/^b-/, '')));
+      tr.classList.toggle('open', tr.nextElementSibling?.classList.contains('bdet') || false);
     });
     draw(f);
     const live = patch => { Object.assign(f, patch); history.replaceState(null, '', writeQ(f)); draw(f); };
