@@ -36,6 +36,12 @@
   // All the pages share the roofooevazan.github.io origin, so one saved value
   // follows the visitor from page to page. It is applied here, before the page
   // below the bar draws; assets/tristram.css holds both themes' colors.
+  // RoofooEvazan's channels, as icons beside the theme switch.
+  var SOCIALS = [
+    { label: 'YouTube', href: 'https://www.youtube.com/@RoofooEvazan', path: 'M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .6 12a31 31 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-4.8 31 31 0 0 0-.4-4.8zM9.7 15.1V8.9l5.5 3.1z' },
+    { label: 'Twitch', href: 'https://www.twitch.tv/roofooevazan', path: 'M4.3 2 3 5.4v13.8h4.7V22h2.6l2.7-2.8h3.8l5.2-5.2V2zm16 11.1-2.9 2.9h-4.8l-2.5 2.5V16H6.2V3.7h14.1zm-3-6.4h-1.7v5h1.7zm-4.8 0h-1.7v5h1.7z' }
+  ];
+
   var THEMES = [
     { id: 'tristram', label: 'Tristram', color: '#100c0a' },
     { id: 'chaos', label: 'Chaos', color: '#090807' }
@@ -65,21 +71,25 @@
     '.rsn-links a:hover{color:var(--tri-fg,#f1e2c6);background:color-mix(in srgb,var(--tri-gold,#d2b06a) 10%,transparent)}',
     '.rsn-links a[aria-current=page]{color:var(--tri-accent-fg,#f6ead4);background:var(--tri-accent,#8e261c)}',
     '.rsn a:focus-visible,.rsn button:focus-visible{outline:2px solid var(--tri-gold,#d2b06a);outline-offset:2px}',
-    '.rsn-theme{display:flex;flex:none;margin-left:auto;border:1px solid var(--tri-line,#5a4030)}',
+    '.rsn-social{display:flex;flex:none;margin-left:auto}',
+    '.rsn-social a{display:grid;place-items:center;width:32px;height:32px;color:var(--tri-muted,#b59a76)}',
+    '.rsn-social a:hover{color:var(--tri-gold,#d2b06a)}',
+    '.rsn-social svg{width:17px;height:17px}',
+    '.rsn-theme{display:flex;flex:none;border:1px solid var(--tri-line,#5a4030)}',
     '.rsn-theme button{height:32px;padding:0 10px;border:0;background:transparent;color:var(--tri-muted,#b59a76);font:700 10px/1 var(--tri-display,"Tri Minus",Silkscreen,monospace);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}',
     '.rsn-theme button:hover{color:var(--tri-fg,#f1e2c6)}',
     '.rsn-theme button[aria-pressed=true]{background:var(--tri-accent,#8e261c);color:var(--tri-accent-fg,#f6ead4);cursor:default}',
     '.rsn-toggle{display:none;align-items:center;gap:8px;height:34px;padding:0 12px;border:1px solid var(--tri-line,#5a4030);background:transparent;color:var(--tri-fg,#f1e2c6);font:700 11px/1 var(--tri-display,"Tri Minus",Silkscreen,monospace);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}',
     '.rsn-toggle svg{width:18px;height:18px}',
-    '@media (max-width:1120px){',
-    ' .rsn-in{gap:10px}',
-    ' .rsn-toggle{display:inline-flex}',
-    ' .rsn-links{display:none;position:absolute;left:0;right:0;top:51px;flex-direction:column;align-items:stretch;gap:0;padding:6px 10px 12px;background:var(--tri-panel,#1a1410);border-bottom:4px solid var(--tri-accent,#8e261c);box-shadow:inset 0 1px 0 var(--tri-gold,#d2b06a),0 14px 30px rgba(0,0,0,.6)}',
-    ' .rsn.open .rsn-links{display:flex}',
-    ' .rsn-links a{padding:11px 12px;font-size:16px;border-top:1px solid color-mix(in srgb,var(--tri-line,#5a4030) 60%,transparent)}',
-    ' .rsn-links li:first-child a{border-top:0}',
-    '}',
-    '@media (max-width:440px){ .rsn-name,.rsn-word{display:none} .rsn-toggle{padding:0 9px} }',
+    // .compact: the links don't fit on one line (set by fit() below), so they
+    // fold into the Menu button.
+    '.rsn.compact .rsn-in{gap:10px}',
+    '.rsn.compact .rsn-toggle{display:inline-flex}',
+    '.rsn.compact .rsn-links{display:none;position:absolute;left:0;right:0;top:51px;flex-direction:column;align-items:stretch;gap:0;padding:6px 10px 12px;background:var(--tri-panel,#1a1410);border-bottom:4px solid var(--tri-accent,#8e261c);box-shadow:inset 0 1px 0 var(--tri-gold,#d2b06a),0 14px 30px rgba(0,0,0,.6)}',
+    '.rsn.compact.open .rsn-links{display:flex}',
+    '.rsn.compact .rsn-links a{padding:11px 12px;font-size:16px;border-top:1px solid color-mix(in srgb,var(--tri-line,#5a4030) 60%,transparent)}',
+    '.rsn.compact .rsn-links li:first-child a{border-top:0}',
+    '@media (max-width:440px){ .rsn-name,.rsn-word{display:none} .rsn.compact .rsn-in{gap:6px;padding-left:12px;padding-right:12px} .rsn-toggle{padding:0 9px} .rsn-social a{width:28px} .rsn-theme button{padding:0 8px} }',
     '@media print{.rsn{display:none}}'
   ].join('\n');
 
@@ -104,6 +114,10 @@
   var nav = document.createElement('nav');
   nav.className = 'rsn';
   nav.setAttribute('aria-label', 'Site');
+  var socials = SOCIALS.map(function (l) {
+    return '<a href="' + l.href + '" aria-label="RoofooEvazan on ' + l.label + '" title="' + l.label + '">' +
+      '<svg viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="' + l.path + '"/></svg></a>';
+  }).join('');
   var switches = THEMES.map(function (t) {
     return '<button type="button" data-theme="' + t.id + '" aria-pressed="false">' + t.label + '</button>';
   }).join('');
@@ -111,6 +125,7 @@
     '<div class="rsn-in">' +
       '<a class="rsn-brand" href="' + href('/') + '"><span class="rsn-mark" aria-hidden="true"></span><span class="rsn-name">PD2 Hub</span></a>' +
       '<ul class="rsn-links" id="rsn-links">' + items + '</ul>' +
+      '<div class="rsn-social">' + socials + '</div>' +
       '<div class="rsn-theme" role="group" aria-label="Theme">' + switches + '</div>' +
       '<button class="rsn-toggle" type="button" aria-expanded="false" aria-controls="rsn-links" aria-label="Menu">' +
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="rsn-word">Menu</span></button>' +
@@ -149,4 +164,20 @@
   btn.addEventListener('click', function (e) { e.stopPropagation(); setOpen(!nav.classList.contains('open')); });
   document.addEventListener('click', function (e) { if (!nav.contains(e.target)) setOpen(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+
+  // Fold the links into the Menu button whenever they don't fit on one line.
+  // Measured rather than a fixed breakpoint, so adding a page, a font swap or
+  // the theme switch can never clip the last links.
+  var list = nav.querySelector('.rsn-links');
+  function fit() {
+    var wasOpen = nav.classList.contains('open');
+    nav.classList.remove('compact');
+    var tight = list.scrollWidth > list.clientWidth + 1;
+    nav.classList.toggle('compact', tight);
+    if (!tight && wasOpen) setOpen(false);
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  new MutationObserver(fit).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 })();
