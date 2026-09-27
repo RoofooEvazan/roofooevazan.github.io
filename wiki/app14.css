@@ -427,3 +427,35 @@ h3.pn-title{font-size:14.5px}
   .sk-layout #skill-detail .hint{margin-top:0;padding:16px;border:1px dashed var(--edge);color:var(--dim)}
   .sk-layout .skill{margin-top:0}
 }
+
+/* ---------- breakpoints: my character ---------- */
+.bp-me{padding:12px 14px;margin:0 0 10px}
+.bp-me-t td{vertical-align:middle;padding-top:.3em;padding-bottom:.3em}
+.bp-me-t tr.grp td{border-top:1px solid var(--edge-hi)}
+.bp-me-t td.st{text-align:left;white-space:nowrap}
+.bp-me-t td.st a{color:var(--gold-hi);font-weight:600}
+.bp-me-t td.st small{color:var(--dim);margin-left:4px}
+.bp-me-t td.an{text-align:left;color:var(--muted);font-size:13.5px}
+.bp-me-t td.fr b{font-size:17px;color:var(--text)}
+.bp-me-t td.nx{text-align:left;font-size:13.5px;white-space:nowrap}
+.bp-me-t td.nx .need{margin-left:6px;padding:0 5px;border:1px solid color-mix(in srgb,var(--chg) 55%,transparent);color:var(--chg);font-size:12px}
+.bp-me-t td.nx .maxed{color:var(--new)}
+.bp-me-t td.ld{text-align:left;white-space:nowrap}
+.bp-me-t td.ld span{display:inline-block;min-width:26px;margin:0 1px;padding:0 3px;border:1px solid var(--edge);color:var(--dim);font-size:11.5px;text-align:center;font-variant-numeric:tabular-nums}
+.bp-me-t td.ld span.past{color:var(--muted)}
+.bp-me-t td.ld span.on{border-color:var(--gold);background:var(--gold);color:var(--void);font-weight:700}
+
+/* ---------- game mechanics: results side by side ---------- */
+.calc{padding:12px 14px;margin:10px 0 14px}
+.calc h2{margin:0 0 8px;font-size:15px}
+.cgrid{gap:8px 12px}
+.cf input,.cf select{height:34px;font-size:15px}
+.cout{gap:8px;margin-top:10px;padding-top:10px}
+.stat{flex:1 1 150px;min-width:0;padding:7px 10px}
+.stat b{font-size:19px}
+.stat.big b{font-size:22px}
+.stat span{font-size:12.5px}
+.cnote{font-size:13px}
+.mech{gap:18px}
+.mech-topics a{padding:4px 10px;font-size:14px}
+.mech-rel{margin:12px 0 4px 12px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}.mech-topics ol.mech-rel-l a{font-size:13.5px}@media (max-width:900px){.mech-rel,.mech-rel-l{display:none}}

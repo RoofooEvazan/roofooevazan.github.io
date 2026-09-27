@@ -125,7 +125,8 @@
     root.innerHTML = `
       <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Wiki</a><span aria-hidden="true">›</span><a href="#/mechanics">Game Mechanics</a></nav>
       <div class="mech">
-        <nav class="mech-topics" aria-label="Topics"><ol>${data.topics.map(t => `<li><a href="#/mechanics/${encodeURIComponent(t.anchor)}" class="${t === topic ? 'on' : ''}"${t === topic ? ' aria-current="page"' : ''}>${esc(t.title)}${CALCS[t.anchor] ? '<i title="Has a calculator">calc</i>' : ''}</a></li>`).join('')}</ol></nav>
+        <nav class="mech-topics" aria-label="Topics"><ol>${data.topics.map(t => `<li><a href="#/mechanics/${encodeURIComponent(t.anchor)}" class="${t === topic ? 'on' : ''}"${t === topic ? ' aria-current="page"' : ''}>${esc(t.title)}${CALCS[t.anchor] ? '<i title="Has a calculator">calc</i>' : ''}</a></li>`).join('')}</ol>
+          <p class="mech-rel">Related tools</p><ol class="mech-rel-l"><li><a href="#/breakpoints">Breakpoints</a></li><li><a href="#/classes">Stat planner</a></li><li><a href="/pd2-ias-calc/">IAS calculator</a></li><li><a href="#/glossary">Abbreviations</a></li></ol></nav>
         <article class="mech-main">
           <h1 class="page-title">${esc(topic.title)}</h1>
           ${topic.subs.length ? `<div class="chips mech-subs">${topic.subs.map(s => `<a class="chip" href="#/mechanics/${encodeURIComponent(topic.anchor)}#${encodeURIComponent(s.anchor)}">${esc(s.title)}</a>`).join('')}</div>` : ''}

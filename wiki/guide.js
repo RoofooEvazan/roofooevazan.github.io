@@ -161,6 +161,49 @@
       <div class="hc-foot">${b.page ? `On this wiki${m?.words ? ` · about ${Math.max(1, Math.round(m.words / 230))} min read` : ''}` : `Opens ${esc(b.host || 'an outside site')}`}</div></div>`;
   }
 
+  // "My character": one class, three numbers, every animation's frames for cast rate,
+  // hit recovery and block rate side by side, with what the next breakpoint needs.
+  function myBreakpoints(root, head, B) {
+    const { esc, $ } = P();
+    const STATS = [['fcr', 'Faster Cast Rate', 'Cast rate'], ['fhr', 'Faster Hit Recovery', 'Hit recovery'], ['fbr', 'Faster Block Rate', 'Block rate']];
+    const tables = Object.fromEntries(STATS.map(([k, st]) => [k, B.tables.find(t => t.stat === st)]));
+    const who = r => r.name.replace(/\s*\(.*\)$/, '');
+    const whos = [...new Set(STATS.flatMap(([k]) => (tables[k]?.rows || []).map(who)))];
+    const saved = { cls: 'Sorceress', fcr: 105, fhr: 42, fbr: 0, ...(getS().me || {}) };
+    root.innerHTML = `${head}
+      <p class="lead">Enter your character's cast rate, hit recovery and block rate to see your frames for every animation at once, and how much more you need for the next breakpoint. The other tabs have the full charts; attack speed depends on the weapon, so it has its own tab.</p>
+      <section class="calc bp-me">
+        <div class="cgrid">
+          <label class="cf wide"><span>Class or mercenary</span><select id="me-cls">${whos.map(w => `<option${w === saved.cls ? ' selected' : ''}>${esc(w)}</option>`).join('')}</select></label>
+          ${STATS.map(([k, , l]) => `<label class="cf"><span>${l} %</span><input type="number" id="me-${k}" min="0" value="${esc(saved[k])}"></label>`).join('')}
+        </div>
+      </section>
+      <div class="tw"><table class="restable bp-me-t"><thead><tr><th>Stat</th><th>Animation</th><th>Frames now</th><th>Next breakpoint</th><th>Ladder</th></tr></thead><tbody></tbody></table></div>
+      <p class="muted">Fewer frames is faster. Frames are at 25 per second, so 8 frames is 0.32 seconds.</p>
+      ${attrib(B.page)}`;
+    const body = $('tbody', root);
+    const draw = () => {
+      const cls = $('#me-cls', root).value;
+      const vals = Object.fromEntries(STATS.map(([k]) => [k, Math.max(0, +$('#me-' + k, root).value || 0)]));
+      setS({ ...getS(), me: { cls, ...vals } });
+      body.innerHTML = STATS.flatMap(([k, , label]) => {
+        const rows = (tables[k]?.rows || []).filter(r => who(r) === cls);
+        return rows.map((r, i) => {
+          const v = vals[k];
+          let cur = r.bps[0], next = null;
+          for (const bp of r.bps) { if (bp[0] <= v) cur = bp; else { next = bp; break; } }
+          const variant = (r.name.match(/\((.*)\)$/) || [])[1] || '—';
+          return `<tr${i === 0 ? ' class="grp"' : ''}><td class="st">${i === 0 ? `<a href="#/breakpoints/${k}">${label}</a> <small>${v}%</small>` : ''}</td><td class="an">${esc(variant)}</td>
+            <td class="r fr"><b>${cur[1]}</b></td>
+            <td class="nx">${next ? `<b>${next[1]} frames</b> at ${next[0]}% <span class="need">+${next[0] - v}%</span>` : '<span class="maxed">fastest</span>'}</td>
+            <td class="ld">${r.bps.map(bp => `<span class="${bp === cur ? 'on' : bp[0] <= v ? 'past' : ''}" title="${bp[1]} frames at ${bp[0]}%">${bp[0]}</span>`).join('')}</td></tr>`;
+        });
+      }).join('') || '<tr><td colspan="5" class="empty">No breakpoints listed for that choice.</td></tr>';
+    };
+    root.querySelector('.bp-me').addEventListener('input', draw);
+    draw();
+  }
+
   // A strip of facts above a wiki-hosted guide's page.
   async function guideHeader(page) {
     try { await load(); } catch { return ''; }
@@ -175,7 +218,7 @@
   }
 
   // ---------- breakpoints ----------
-  const TABS = [['fcr', 'Cast rate', 'Faster Cast Rate'], ['fhr', 'Hit recovery', 'Faster Hit Recovery'], ['fbr', 'Block rate', 'Faster Block Rate'],
+  const TABS = [['', 'My character', ''], ['fcr', 'Cast rate', 'Faster Cast Rate'], ['fhr', 'Hit recovery', 'Faster Hit Recovery'], ['fbr', 'Block rate', 'Faster Block Rate'],
     ['ias', 'Attack speed', 'Attack Speed'], ['thresholds', 'Diminishing returns'], ['changes', 'What PD2 changed']];
   const eias = i => Math.floor(120 * i / (120 + i));
   const STORE = 'pd2wiki-bp';
@@ -190,10 +233,11 @@
     const page = byId(B.page);
     const tab = TABS.find(t => t[0] === tabId) || TABS[0];
     const info = t => B.info.find(i => i.title.toLowerCase() === t.toLowerCase());
-    const segs = `<div class="segs bp-tabs" role="group">${TABS.map(([k, l]) => `<a class="seg${k === tab[0] ? ' on' : ''}" href="#/breakpoints/${k}">${l}</a>`).join('')}</div>`;
+    const segs = `<div class="segs bp-tabs" role="group">${TABS.map(([k, l]) => `<a class="seg${k === tab[0] ? ' on' : ''}" href="#/breakpoints${k ? '/' + k : ''}">${l}</a>`).join('')}</div>`;
     const head = `<nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Wiki</a><span aria-hidden="true">›</span><a href="#/mechanics">Mechanics</a></nav><h1 class="page-title">Breakpoints</h1>${segs}`;
     const save = getS();
 
+    if (tab[0] === '') return myBreakpoints(root, head, B);
     if (tab[0] === 'changes') {
       root.innerHTML = `${head}<section class="info-card"><div class="wiki">${info('Changes')?.html || ''}</div></section>${attrib(B.page)}`;
       enhanceFragment($('.wiki', root), page);
