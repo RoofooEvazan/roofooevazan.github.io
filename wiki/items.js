@@ -57,45 +57,98 @@
     return `<li class="${cls}">${html}</li>`;
   };
 
+  // ---------- PD2 versus Lord of Destruction ----------
+  // "new": PD2 added the item; "changed": a LoD item PD2 changed; "same": as in LoD.
+  const originOf = it => it.pd2 === 'new' || (it.stats.length && it.stats.every(s => s.st === 'new')) ? 'new' : it.changes ? 'changed' : 'same';
+  const marker = it => {
+    const o = originOf(it);
+    if (o === 'new') return '<span class="pdm pdm-new" title="PD2 added this item; it isn\'t in Lord of Destruction">New in PD2</span>';
+    if (o === 'same') return '<span class="pdm pdm-same" title="Same stats as in Lord of Destruction">Same as LoD</span>';
+    const parts = [['new', 'added'], ['changed', 'changed'], ['removed', 'removed']].map(([st, w]) => [it.stats.filter(s => s.st === st).length, w]).filter(([n]) => n);
+    return `<span class="pdm pdm-chg" title="PD2 ${parts.map(([n, w]) => `${w} ${n} stat${n === 1 ? '' : 's'}`).join(', ')}">● ${it.changes} changed by PD2</span>`;
+  };
+  // The item's stats as its tooltip shows them, with what PD2 did to each: the old value
+  // under a changed stat, a "new" tag on an added one, removed ones struck out at the end.
+  const ttStats = (it, links) => {
+    const { esc } = P();
+    // On an item PD2 added, every stat is "new"; marking each one would only be noise.
+    const tagNew = originOf(it) !== 'new';
+    const line = s => `<li class="tts tts-${s.st === 'new' && !tagNew ? 'same' : s.st}">${links ? s.html : unlink(s.html)}${s.st === 'new' && tagNew ? ' <em class="tts-tag">new</em>' : ''}${s.st === 'changed' && s.old ? `<small>was ${esc(s.old)}</small>` : ''}</li>`;
+    return it.stats.filter(s => s.st !== 'removed').map(line).join('') +
+      it.stats.filter(s => s.st === 'removed').map(s => `<li class="tts tts-removed"><s>${esc(s.old || strip(s.html))}</s> <em class="tts-tag">removed</em></li>`).join('');
+  };
+  const ttInfo = it => {
+    const { esc } = P();
+    const info = it.info.filter(l => !l.base && /defense|damage|block|sockets/i.test(l.label || '')).slice(0, 3);
+    const req = [it.req?.lvl && `Level ${it.req.lvl}`, it.req?.str && `${it.req.str} Str`, it.req?.dex && `${it.req.dex} Dex`].filter(Boolean).join(' · ');
+    return `${info.length ? `<ul class="tti">${info.map(l => `<li><span>${esc(l.label)}</span> ${unlink(l.html)}</li>`).join('')}</ul>` : ''}${req ? `<div class="ttr">Requires ${esc(req)}</div>` : ''}`;
+  };
+
+  // A card is the item's in-game tooltip, with PD2's changes marked on it.
   function card(it, opts = {}) {
+    const { esc } = P();
     const k = kindOf(it);
-    const shown = it.stats.filter(s => s.st !== 'removed');
-    const max = opts.full ? shown.length : 6;
-    const more = shown.length - max;
     const tag = opts.tag || 'a';
     const href = tag === 'a' ? ` href="#/item/${it.slug}"` : '';
-    return `<${tag} class="icard ${k.cls}"${href}${opts.id ? ` id="${P().esc(opts.id)}"` : ''}>
-      <div class="icard-top">
-        ${it.img ? `<span class="icard-img"><img src="${P().esc(it.img)}" alt="" loading="lazy" decoding="async"></span>` : ''}
-        <div class="icard-title"><b>${P().esc(it.name)}</b><span>${P().esc(subtitle(it))}</span></div>
-        ${it.lvl ? `<span class="icard-lvl" title="Required level">${it.lvl}</span>` : ''}
-      </div>
+    return `<${tag} class="icard tcard ${k.cls} o-${originOf(it)}"${href}${opts.id ? ` id="${esc(opts.id)}"` : ''}>
+      ${it.img ? `<span class="tc-img"><img src="${esc(it.img)}" alt="" loading="lazy" decoding="async"></span>` : ''}
+      <b class="tc-name">${esc(it.name)}</b>
+      <span class="tc-base">${esc(subtitle(it))}</span>
       ${runes(it)}
-      <ul class="istats">${shown.slice(0, max).map(s => statLi(s, false)).join('')}</ul>
-      <div class="icard-foot">
-        <span>${more > 0 ? `+${more} more` : k.one}${it.tier ? ` · ${it.tier}` : ''}</span>
-        ${it.changes ? `<span class="chg" title="Stats PD2 added, changed or removed">${it.changes} PD2 change${it.changes === 1 ? '' : 's'}</span>` : ''}
-      </div>
+      ${ttInfo(it)}
+      <ul class="tc-stats">${ttStats(it, false)}</ul>
+      <span class="tc-foot">${marker(it)}</span>
     </${tag}>`;
   }
 
-  // One line per item: picture, name and base, level and its first stats; the rest on hover.
+  // One clean line per item: picture, name, base, level and what PD2 did to it. Clicking a
+  // row opens its tooltip in place (see the handler below), so the list never has to be left.
   const VIEW = 'pd2wiki-iview';
   const getView = () => { try { return localStorage.getItem(VIEW) || 'list'; } catch { return 'list'; } };
   const saveView = v => { try { localStorage.setItem(VIEW, v); } catch {} };
   function row(it) {
     const { esc } = P();
     const k = kindOf(it);
-    const shown = it.stats.filter(s => s.st !== 'removed');
-    const sum = shown.slice(0, 3).map(s => esc(strip(s.html))).join('<i>·</i>');
-    return `<a class="irow ${k.cls}" href="#/item/${it.slug}">
+    return `<div class="irow ${k.cls} o-${originOf(it)}" data-slug="${it.slug}" role="button" tabindex="0" aria-expanded="false">
+      <span class="ir-chev" aria-hidden="true"></span>
       <span class="ir-img">${it.img ? `<img src="${esc(it.img)}" alt="" loading="lazy" decoding="async">` : ''}</span>
-      <span class="ir-name"><b>${esc(it.name)}</b><span>${esc(subtitle(it))}</span></span>
-      <span class="ir-lvl" title="Required level">${it.lvl || ''}</span>
-      <span class="ir-stats">${sum}${shown.length > 3 ? ` <em>+${shown.length - 3}</em>` : ''}</span>
-      <span class="ir-chg">${it.changes ? `<span class="chg" title="Stats PD2 added, changed or removed">${it.changes}</span>` : ''}</span>
-    </a>`;
+      <b class="ir-name">${esc(it.name)}</b>
+      <span class="ir-base">${esc(subtitle(it))}</span>
+      <span class="ir-lvl" title="Required level">${it.lvl ? `lvl ${it.lvl}` : ''}</span>
+      <span class="ir-pd">${marker(it)}</span>
+    </div>`;
   }
+  function rowDetail(it) {
+    const { esc } = P();
+    const set = it.setSlug && D.sets.get(it.setSlug);
+    return `<div class="irow-det ${kindOf(it).cls}">
+      <div class="ird-tt">${runes(it)}${ttInfo(it)}<ul class="tc-stats">${ttStats(it, true)}</ul></div>
+      <div class="ird-side">
+        <a class="ird-open" href="#/item/${it.slug}">Full item page →</a>
+        ${set ? `<a href="#/items?t=set&set=${set.slug}">All of ${esc(set.name)} →</a>` : ''}
+        ${it.notes ? '<span class="ird-note">Has notes on its page</span>' : ''}</div>
+    </div>`;
+  }
+  // Open or close a row, wherever rows are shown (item list, search, New in PD2).
+  const toggleRow = r => {
+    const open = r.nextElementSibling?.classList.contains('irow-det');
+    if (open) r.nextElementSibling.remove();
+    else {
+      const it = D.bySlug.get(r.dataset.slug);
+      if (!it) return;
+      r.insertAdjacentHTML('afterend', rowDetail(it));
+      P().enhanceFragment(r.nextElementSibling, P().byId(it.page));
+    }
+    r.setAttribute('aria-expanded', String(!open));
+  };
+  document.addEventListener('click', e => {
+    const r = e.target.closest('.irow[data-slug]');
+    if (r && !e.target.closest('a')) toggleRow(r);
+  });
+  document.addEventListener('keydown', e => {
+    const r = e.target.closest?.('.irow[data-slug]');
+    if (r && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggleRow(r); }
+  });
 
   // Hover card: the item's full tooltip, for links to it anywhere on the site.
   async function tip(slug) {
@@ -111,8 +164,8 @@
       ${runes(it)}
       ${info.length ? `<ul class="hc-kv">${info.map(l => `<li><span>${esc(l.label)}</span> ${unlink(l.html)}</li>`).join('')}</ul>` : ''}
       ${req ? `<div class="hc-req">Requires ${esc(req)}</div>` : ''}
-      <ul class="istats">${it.stats.filter(s => s.st !== 'removed').map(s => statLi(s, false)).join('')}</ul>
-      ${it.changes ? `<div class="hc-foot"><span class="st-dot st-changed"></span>${it.changes} PD2 change${it.changes === 1 ? '' : 's'}</div>` : ''}
+      <ul class="tc-stats hc-tts">${ttStats(it, false)}</ul>
+      <div class="hc-foot">${marker(it)}</div>
     </div>`;
   }
 

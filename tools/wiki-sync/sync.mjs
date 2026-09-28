@@ -290,6 +290,12 @@ async function main() {
   try {
     const ex = await extract(pages, OUT);
     if (ex.items.length < 300) throw new Error(`only ${ex.items.length} items found`);
+    // Items PD2 added (not in Lord of Destruction): listed on the New Items page's
+    // Equipment section, or every stat marked new.
+    const newNames = new Set();
+    const walkNew = n => { newNames.add(n.name.toLowerCase()); (n.kids || []).forEach(walkNew); };
+    for (const s of ex.gear?.newItems?.sections || []) if (/^equipment$/i.test(s.title)) s.tree.forEach(walkNew);
+    for (const it of ex.items) if (newNames.has(it.name.toLowerCase()) || (it.stats.length && it.stats.every(s => s.st === 'new'))) it.pd2 = 'new';
     await put(join(OUT, 'items.json'), JSON.stringify({ items: ex.items, sets: ex.sets }) + '\n');
     for (const [cls, data] of Object.entries(ex.skills)) await put(join(OUT, 'skills', `${cls}.json`), JSON.stringify(data) + '\n');
     if (ex.skillChanges?.classes.length >= 5) await put(join(OUT, 'skills', 'changes.json'), JSON.stringify(ex.skillChanges) + '\n');

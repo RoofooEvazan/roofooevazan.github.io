@@ -652,3 +652,57 @@ a.brow .cls-orb{width:20px;height:20px;font-size:11px;border-width:1px}
 .skill-btn span{overflow-wrap:anywhere}
 .sres2 > li{min-width:0}.sres2 > li > a,.sres2 p,.sres2 .crumb{overflow-wrap:anywhere;min-width:0}
 .qt span{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.25}
+
+/* ---------- item cards: the in-game tooltip, with PD2's changes marked ---------- */
+.igrid:has(> .tcard){grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr));align-items:start;gap:12px}
+.tcard{display:flex;flex-direction:column;align-items:center;gap:3px;padding:14px 14px 10px;text-align:center;background:rgba(8,6,4,.94);border:1px solid var(--edge);color:var(--text);text-decoration:none!important;transition:border-color .15s,box-shadow .15s}
+.tcard:hover,.tcard:focus-visible{border-color:var(--q);box-shadow:0 0 0 1px color-mix(in srgb,var(--q) 40%,transparent),0 10px 26px rgba(0,0,0,.5);outline:none}
+.tc-img{display:grid;place-items:center;height:62px;margin-bottom:2px}
+.tc-img img{max-height:62px;max-width:80px;object-fit:contain}
+.tc-name{font-family:var(--font-display);font-weight:700;font-size:16.5px;line-height:1.25;letter-spacing:.03em;color:var(--q)}
+.tc-base{color:var(--muted);font-size:14.5px}
+.tcard .runes{justify-content:center;margin:3px 0 1px}
+.tti{list-style:none;margin:4px 0 0;padding:0;font-size:14px;color:var(--text)}
+.tti span{color:var(--muted)}
+.ttr{margin-top:2px;color:var(--muted);font-size:13.5px}
+.tc-stats{list-style:none;margin:8px 0 0;padding:0;width:100%;font-size:15px;line-height:1.35}
+.tts{padding:2px 0;color:var(--mod)}
+.tts .nmod,.tts .omod{color:inherit!important}
+.tts small{display:block;font-size:12.5px;color:var(--dim);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--dim) 55%,transparent)}
+.tts-changed{color:var(--chg)}
+.tts-new{color:var(--new)}
+.tts-removed{color:var(--dim)}
+.tts-tag{font-style:normal;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:0 4px;border:1px solid currentColor;vertical-align:1px;margin-left:3px;opacity:.9}
+.tts-new .tts-tag{color:var(--new)}
+.tts-removed s{color:var(--dim)}
+.tc-foot{margin-top:9px;padding-top:7px;border-top:1px solid var(--edge);width:100%}
+.pdm{font-size:13px;white-space:nowrap}
+.pdm-chg{color:var(--chg)}
+.pdm-new{color:var(--new)}
+.pdm-same{color:var(--dim)}
+.hc-tts{margin-top:4px}
+.hc-tts .tts{font-size:13.5px;text-align:left}
+
+/* ---------- item list: clean rows that open in place ---------- */
+.ilist .irow{display:grid;grid-template-columns:12px 34px minmax(0,1.3fr) minmax(0,1fr) 60px 150px;align-items:center;gap:0 12px;padding:6px 12px;border-bottom:1px solid var(--edge);color:var(--text);cursor:pointer;min-width:0}
+.ilist .irow:hover,.ilist .irow:focus-visible{background:color-mix(in srgb,var(--q) 8%,transparent);outline:none}
+.ilist .irow[aria-expanded=true]{background:color-mix(in srgb,var(--q) 10%,transparent);border-bottom-color:transparent}
+.ir-chev{width:8px;height:8px;border-right:2px solid var(--dim);border-bottom:2px solid var(--dim);transform:rotate(-45deg);transition:transform .15s}
+.irow[aria-expanded=true] .ir-chev{transform:rotate(45deg);border-color:var(--gold)}
+.ilist .ir-name{color:var(--q);font-weight:600;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ir-base{color:var(--muted);font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ilist .ir-lvl{color:var(--muted);font-size:14px;text-align:right}
+.ir-pd{text-align:right}
+.irow-det{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:10px 22px;padding:10px 16px 14px 60px;border-bottom:1px solid var(--edge);background:rgba(8,6,4,.6)}
+.ird-tt .tc-stats{margin-top:4px}
+.ird-tt .runes{margin-bottom:4px}
+.ird-side{display:flex;flex-direction:column;gap:8px;align-items:flex-start;font-size:14.5px}
+.ird-open{padding:5px 12px;border:1px solid var(--gold);color:var(--gold-hi)}
+.ird-open:hover{background:color-mix(in srgb,var(--gold) 12%,transparent)}
+.ird-note{color:var(--dim);font-size:13px}
+@media (max-width:700px){
+  .ilist .irow{grid-template-columns:10px 30px minmax(0,1fr) auto;grid-template-areas:"c i n l" "c i b p";padding:7px 10px}
+  .ir-chev{grid-area:c}.ilist .ir-img{grid-area:i}.ilist .ir-name{grid-area:n}.ir-base{grid-area:b}.ilist .ir-lvl{grid-area:l}.ir-pd{grid-area:p}
+  .irow-det{grid-template-columns:minmax(0,1fr);padding:8px 12px 12px}
+}
+.ilist .irow.q-unique{--q:var(--q-unique)}.ilist .irow.q-set{--q:var(--q-set)}.ilist .irow.q-rw{--q:var(--q-rw)}
