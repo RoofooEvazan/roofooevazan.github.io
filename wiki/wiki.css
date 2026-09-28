@@ -41,7 +41,7 @@ mark{background:rgba(243,213,140,.28);color:var(--gold-hi);border-radius:0;paddi
 .icon-btn svg{width:20px;height:20px}
 
 /* ---------- top bar ---------- */
-.bar{position:sticky;top:0;z-index:40;background:rgba(11,9,6,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--edge)}
+.bar{position:sticky;top:0;z-index:40;background:rgba(11,9,6,.94);border-bottom:1px solid var(--edge)}
 .bar-in{max-width:1480px;margin:0 auto;height:var(--bar-h);padding:0 16px;display:flex;align-items:center;gap:14px}
 .menu-btn{display:none}
 .wordmark{display:flex;align-items:center;gap:10px;flex:none;width:calc(var(--side-w) - 30px);font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:.05em;color:var(--gold);text-decoration:none!important}

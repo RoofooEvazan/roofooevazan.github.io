@@ -654,7 +654,7 @@ a.brow .cls-orb{width:20px;height:20px;font-size:11px;border-width:1px}
 .qt span{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.25}
 
 /* ---------- item cards: the in-game tooltip, with PD2's changes marked ---------- */
-.igrid:has(> .tcard){grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr));align-items:start;gap:12px}
+.igrid{grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr));align-items:start;gap:12px}
 .tcard{display:flex;flex-direction:column;align-items:center;gap:3px;padding:14px 14px 10px;text-align:center;background:rgba(8,6,4,.94);border:1px solid var(--edge);color:var(--text);text-decoration:none!important;transition:border-color .15s,box-shadow .15s}
 .tcard:hover,.tcard:focus-visible{border-color:var(--q);box-shadow:0 0 0 1px color-mix(in srgb,var(--q) 40%,transparent),0 10px 26px rgba(0,0,0,.5);outline:none}
 .tc-img{display:grid;place-items:center;height:62px;margin-bottom:2px}
@@ -706,3 +706,6 @@ a.brow .cls-orb{width:20px;height:20px;font-size:11px;border-width:1px}
   .irow-det{grid-template-columns:minmax(0,1fr);padding:8px 12px 12px}
 }
 .ilist .irow.q-unique{--q:var(--q-unique)}.ilist .irow.q-set{--q:var(--q-set)}.ilist .irow.q-rw{--q:var(--q-rw)}
+
+/* Hover feedback is instant: no fades on highlight colors or borders. */
+.icard,.tcard,.tile,.mcard,.tool-card,.mshot img,.btable .blinks{transition:none}

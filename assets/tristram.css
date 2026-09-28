@@ -54,12 +54,16 @@ body.tri::before{
     url("chaos.jpg") center/cover no-repeat,
     var(--tri-bg);
   animation:tri-drift 46s ease-in-out infinite alternate;
+  will-change:transform;
 }
+/* The glow blends normally: over the near-black ground that looks the same as
+   "screen", without re-blending the whole viewport on every frame. Both layers
+   animate only transform/opacity, which the GPU composites without repainting. */
 body.tri::after{
   background:radial-gradient(ellipse at 50% 118%,color-mix(in srgb,var(--tri-glow) 55%,transparent),transparent 46%);
-  mix-blend-mode:screen;
   opacity:1;
   animation:tri-torch 5.5s ease-in-out infinite;
+  will-change:opacity;
 }
 
 /* Rising embers: <div class="tri-embers" aria-hidden="true"><span></span>×7</div> */

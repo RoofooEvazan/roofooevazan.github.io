@@ -42,9 +42,14 @@
     return p;
   }
 
+  // The card's size is measured once per card (and again when an image loads), not on
+  // every mouse move, and it moves at most once per frame, so the mouse stays smooth.
+  let w = 0, h = 0, frame = 0;
+  const measure = () => { if (box && !box.hidden) { w = box.offsetWidth; h = box.offsetHeight; place(); } };
+  const schedule = () => { if (!frame) frame = requestAnimationFrame(() => { frame = 0; place(); }); };
   function place() {
     if (!box || box.hidden) return;
-    const w = box.offsetWidth, h = box.offsetHeight, gap = 18;
+    const gap = 18;
     let x = px + gap, y = py + gap;
     if (x + w > innerWidth - 8) x = Math.max(8, px - w - gap);
     if (y + h > innerHeight - 8) y = Math.max(8, innerHeight - h - 8);
@@ -60,13 +65,14 @@
     }
     box.innerHTML = html;
     box.hidden = false;
-    place();
+    measure();
     // Images change the size once they load.
-    for (const img of box.querySelectorAll('img')) if (!img.complete) img.addEventListener('load', place, { once: true });
+    for (const img of box.querySelectorAll('img')) if (!img.complete) img.addEventListener('load', measure, { once: true });
   }
 
   function hide() {
     clearTimeout(timer);
+    if (!cur && (!box || box.hidden)) return;
     seq++;
     cur = null;
     if (box) box.hidden = true;
@@ -74,7 +80,7 @@
 
   document.addEventListener('pointermove', e => {
     px = e.clientX; py = e.clientY;
-    if (cur) place();
+    if (cur && box && !box.hidden) schedule();
   }, { passive: true });
 
   document.addEventListener('pointerover', e => {
@@ -91,7 +97,7 @@
       const html = await build(key);
       if (my !== seq || !html || !el.isConnected) return;
       show(html);
-    }, 110);
+    }, 60);
   });
 
   document.addEventListener('pointerout', e => {
