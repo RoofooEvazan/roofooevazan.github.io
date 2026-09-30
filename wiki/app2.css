@@ -97,7 +97,7 @@
 h2.pn-title{font-size:20px}
 h3.pn-title{font-size:16.5px;color:var(--gold)}
 .pn-title .cls-orb{width:24px;height:24px;font-size:13px}
-.pn-cat{margin-left:auto;font-family:var(--font-body);font-style:normal;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.pn-cat{margin-left:auto;font-family:var(--font-display);font-style:normal;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
 .pn-text{font-size:16.5px}
 .pn-text ul{padding-left:1.2em}
 .pn-fix{margin:8px 0;border:1px solid var(--edge);border-radius:0;background:var(--panel);scroll-margin-top:calc(var(--bar-h) + 12px)}

@@ -44,7 +44,7 @@
 
   // Colors come from the theme (--tri-*), with Chaos values as the fallback.
   var css = [
-    '.rsn{position:relative;z-index:50;background:var(--tri-bg,#090807);border-bottom:1px solid var(--tri-line,#6e5230);box-shadow:inset 0 -3px 0 var(--tri-accent,#c4924a);font:400 15px/1.3 var(--tri-body,Alegreya,Palatino,Georgia,serif);color:var(--tri-fg,#f0e6d6)}',
+    '.rsn{position:relative;z-index:50;background:var(--tri-bg,#090807);border-bottom:1px solid var(--tri-line,#6e5230);box-shadow:inset 0 -3px 0 var(--tri-accent,#c4924a);font:400 15px/1.3 var(--tri-body,"Barlow Semi Condensed","Arial Narrow",sans-serif);color:var(--tri-fg,#f0e6d6)}',
     '.rsn *{box-sizing:border-box}',
     '.rsn-in{max-width:1280px;margin:0 auto;padding:0 16px 3px;height:51px;display:flex;align-items:center;gap:18px}',
     '.rsn-brand{display:flex;align-items:center;gap:9px;flex:none;color:var(--tri-gold,#c4924a);text-decoration:none;font:700 12px/1 var(--tri-display,"Barlow Condensed","Arial Narrow",sans-serif);letter-spacing:.06em;text-transform:uppercase}',
@@ -72,12 +72,13 @@
     '@media print{.rsn{display:none}}'
   ].join('\n');
 
-  // The theme fonts (Alegreya for body text, Barlow Condensed for headings), for
-  // pages whose own font link doesn't include the heading font yet.
-  if (!document.querySelector('link[href*="Barlow+Condensed"]')) {
+  // The theme fonts (Barlow Semi Condensed for body text, Barlow Condensed for
+  // headings, JetBrains Mono for codes), for
+  // pages whose own font link doesn't include the body font yet.
+  if (!document.querySelector('link[href*="Barlow+Semi+Condensed"]')) {
     var fonts = document.createElement('link');
     fonts.rel = 'stylesheet';
-    fonts.href = 'https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap';
+    fonts.href = 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow+Semi+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap';
     document.head.appendChild(fonts);
   }
 

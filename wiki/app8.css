@@ -3,7 +3,7 @@
 .fcodes td{vertical-align:top}
 .fcodes .fm,.fcodes th:nth-child(2){text-align:left}
 .fcodes .fc{white-space:nowrap}
-.code{display:inline-block;margin:0 4px 4px 0;padding:1px 8px;border:1px solid var(--edge-hi);border-radius:0;background:var(--void);color:var(--gold-hi);font:14px/1.5 ui-monospace,Consolas,monospace;cursor:copy}
+.code{display:inline-block;margin:0 4px 4px 0;padding:1px 8px;border:1px solid var(--edge-hi);border-radius:0;background:var(--void);color:var(--gold-hi);font:13.5px/1.5 var(--font-mono);cursor:copy}
 .code:hover{border-color:var(--gold)}
 .fk{font-family:var(--font-display);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--dim);margin-right:4px}
 .fctx{display:inline-block;margin-bottom:2px;padding:0 6px;border:1px solid var(--edge);color:var(--muted);font-size:13.5px}

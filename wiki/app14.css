@@ -585,7 +585,7 @@ a.brow .cls-orb{width:20px;height:20px;font-size:11px;border-width:1px}
 .home-pop > span:first-child{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-right:2px}
 .home-pop .chip{padding:2px 9px;font-size:14.5px}
 .home-kbd{flex-basis:100%;color:var(--dim);font-size:13.5px;margin-top:2px}
-.home-kbd kbd{border:1px solid var(--edge);padding:0 5px;font:13px ui-monospace,monospace}
+.home-kbd kbd{border:1px solid var(--edge);padding:0 5px;font:13px var(--font-mono)}
 .home-recent .changes li{display:flex;gap:8px;align-items:baseline}
 .home-recent .changes li > span:last-child{margin-left:auto}
 

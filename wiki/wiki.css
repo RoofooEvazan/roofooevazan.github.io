@@ -15,7 +15,8 @@
   --dim:#86735f;
   --blood:#c4924a;
   --font-display:"Barlow Condensed","Arial Narrow",sans-serif;
-  --font-body:"Alegreya",Palatino,Georgia,serif;
+  --font-body:"Barlow Semi Condensed","Arial Narrow",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
   --bar-h:56px;
   --side-w:264px;
   --toc-w:236px;
@@ -53,11 +54,11 @@ mark{background:rgba(243,213,140,.28);color:var(--gold-hi);border-radius:0;paddi
 .search input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,178,95,.15)}
 .search input::-webkit-search-cancel-button{-webkit-appearance:none}
 .search-ico{position:absolute;left:12px;top:10px;width:20px;height:20px;color:var(--dim);pointer-events:none}
-.search-kbd{position:absolute;right:10px;top:9px;min-width:22px;height:22px;display:grid;place-items:center;border:1px solid var(--edge);border-radius:0;font:13px/1 ui-monospace,monospace;color:var(--dim)}
+.search-kbd{position:absolute;right:10px;top:9px;min-width:22px;height:22px;display:grid;place-items:center;border:1px solid var(--edge);border-radius:0;font:13px/1 var(--font-mono);color:var(--dim)}
 .search-field input:focus ~ .search-kbd,.search-field input:not(:placeholder-shown) ~ .search-kbd{display:none}
 
 .results{position:absolute;left:0;right:0;top:46px;max-height:min(70vh,560px);overflow:auto;overscroll-behavior:contain;background:#100d0a;border:1px solid var(--edge-hi);border-radius:0;box-shadow:0 18px 40px rgba(0,0,0,.7);padding:6px}
-.res-group{padding:8px 10px 4px;font:600 12.5px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.res-group{padding:8px 10px 4px;font:600 13.5px/1 var(--font-display);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
 .res{display:block;padding:8px 10px;border-radius:0;color:var(--body);text-decoration:none!important;cursor:pointer}
 .res b{display:block;color:var(--text);font-weight:500}
 .res .crumb{color:var(--muted);font-size:14.5px}

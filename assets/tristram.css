@@ -7,7 +7,7 @@
  * and add class="tri" to <body> for the page ground (the seal plate behind
  * everything, drifting slowly, with the lava glow). The fonts are loaded by
  * assets/site-nav.js, or add them yourself:
- *   https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap
+ *   https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow+Semi+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap
  */
 :root{
   color-scheme:dark;
@@ -23,7 +23,7 @@
   --tri-glow:#c4472a;
   --tri-shadow:#050403;
   --tri-display:"Barlow Condensed","Arial Narrow",sans-serif;
-  --tri-body:"Alegreya",Palatino,Georgia,serif;
+  --tri-body:"Barlow Semi Condensed","Arial Narrow",sans-serif;
 }
 
 html{background:var(--tri-bg)}
