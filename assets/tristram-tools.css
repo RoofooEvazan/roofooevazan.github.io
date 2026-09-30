@@ -5,7 +5,7 @@
  * Spawn Simulator, Base Finder) share one "stone and gold" design: the same
  * variables (--void, --stone, --gold, --display…) and the same HD dungeon
  * skin (gilded panels, stone tab buttons, gold-gradient titles). This sheet
- * turns that design into the Chaos theme: black stone, dull brass, Cinzel.
+ * turns that design into the Chaos theme: black stone, dull brass, Barlow Condensed.
  * Load it after the page's own styles, together with tristram.css, and put
  * class="tri" on <body>:
  *   <link rel="stylesheet" href="https://roofooevazan.github.io/assets/tristram.css">
@@ -23,7 +23,7 @@
   --gold:#c4924a;
   --gold-hi:#e0b878;
   --blood:#a8321f;
-  --display:"Cinzel",Palatino,Georgia,serif;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif;
   --body:"Alegreya",Palatino,Georgia,serif;
   --heat-slow:#1a1511;
 }

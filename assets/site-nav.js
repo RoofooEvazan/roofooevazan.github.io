@@ -47,7 +47,7 @@
     '.rsn{position:relative;z-index:50;background:var(--tri-bg,#090807);border-bottom:1px solid var(--tri-line,#6e5230);box-shadow:inset 0 -3px 0 var(--tri-accent,#c4924a);font:400 15px/1.3 var(--tri-body,Alegreya,Palatino,Georgia,serif);color:var(--tri-fg,#f0e6d6)}',
     '.rsn *{box-sizing:border-box}',
     '.rsn-in{max-width:1280px;margin:0 auto;padding:0 16px 3px;height:51px;display:flex;align-items:center;gap:18px}',
-    '.rsn-brand{display:flex;align-items:center;gap:9px;flex:none;color:var(--tri-gold,#c4924a);text-decoration:none;font:700 12px/1 var(--tri-display,"Cinzel",Georgia,serif);letter-spacing:.06em;text-transform:uppercase}',
+    '.rsn-brand{display:flex;align-items:center;gap:9px;flex:none;color:var(--tri-gold,#c4924a);text-decoration:none;font:700 12px/1 var(--tri-display,"Barlow Condensed","Arial Narrow",sans-serif);letter-spacing:.06em;text-transform:uppercase}',
     '.rsn-mark{width:14px;height:14px;flex:none;border:2px solid var(--tri-gold,#c4924a);background:radial-gradient(var(--tri-accent,#c4924a) 0 3px,transparent 3.5px),var(--tri-bg,#090807)}',
     '.rsn-links{display:flex;align-items:center;gap:2px;margin:0;padding:0;list-style:none;min-width:0;overflow:hidden}',
     '.rsn-links a{display:block;padding:6px 9px;color:var(--tri-muted,#a89480);text-decoration:none;white-space:nowrap}',
@@ -58,7 +58,7 @@
     '.rsn-social a{display:grid;place-items:center;width:32px;height:32px;color:var(--tri-muted,#a89480)}',
     '.rsn-social a:hover{color:var(--tri-gold,#c4924a)}',
     '.rsn-social svg{width:17px;height:17px}',
-    '.rsn-toggle{display:none;align-items:center;gap:8px;height:34px;padding:0 12px;border:1px solid var(--tri-line,#6e5230);background:transparent;color:var(--tri-fg,#f0e6d6);font:700 11px/1 var(--tri-display,"Cinzel",Georgia,serif);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}',
+    '.rsn-toggle{display:none;align-items:center;gap:8px;height:34px;padding:0 12px;border:1px solid var(--tri-line,#6e5230);background:transparent;color:var(--tri-fg,#f0e6d6);font:700 11px/1 var(--tri-display,"Barlow Condensed","Arial Narrow",sans-serif);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}',
     '.rsn-toggle svg{width:18px;height:18px}',
     // .compact: the links don't fit on one line (set by fit() below), so they
     // fold into the Menu button.
@@ -72,12 +72,12 @@
     '@media print{.rsn{display:none}}'
   ].join('\n');
 
-  // The theme fonts, for pages that don't load them all already (Alegreya is
-  // the body text; pages with an older font link still get it from here).
-  if (!document.querySelector('link[href*="family=Alegreya:"]')) {
+  // The theme fonts (Alegreya for body text, Barlow Condensed for headings), for
+  // pages whose own font link doesn't include the heading font yet.
+  if (!document.querySelector('link[href*="Barlow+Condensed"]')) {
     var fonts = document.createElement('link');
     fonts.rel = 'stylesheet';
-    fonts.href = 'https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Cinzel:wght@500;700&display=swap';
+    fonts.href = 'https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap';
     document.head.appendChild(fonts);
   }
 
