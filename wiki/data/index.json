@@ -371,9 +371,9 @@
    "title": "All Amazon Skills",
    "display": "All Amazon Skills",
    "rev": 17341,
-   "touched": "2026-07-11T20:14:26Z",
+   "touched": "2026-10-01T01:12:25Z",
    "edited": "2023-09-09T16:56:26Z",
-   "len": 233712,
+   "len": 233691,
    "intro": "This page lists all Amazon skills & stats. Also see: Amazon Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 20 Dexterity 25 • Attack Rating 95 +5 • Defense 6 +0.25 Vitality "
   },
   {
@@ -381,7 +381,7 @@
    "title": "All Assassin Skills",
    "display": "All Assassin Skills",
    "rev": 17343,
-   "touched": "2026-07-29T03:16:09Z",
+   "touched": "2026-09-30T19:40:59Z",
    "edited": "2023-09-09T16:59:41Z",
    "len": 305123,
    "intro": "This page lists all Assassin skills & stats. Also see: Assassin Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 20 Dexterity 20 • Attack Rating 80 +5 • Defense 5 +0.25 Vital"
@@ -391,7 +391,7 @@
    "title": "All Barbarian Skills",
    "display": "All Barbarian Skills",
    "rev": 17344,
-   "touched": "2026-07-01T16:01:17Z",
+   "touched": "2026-09-30T19:43:58Z",
    "edited": "2023-09-09T17:00:19Z",
    "len": 203113,
    "intro": "This page lists all Barbarian skills & stats. Also see: Barbarian Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 30 Dexterity 20 • Attack Rating 85 +5 • Defense 5 +0.25 Vit"
@@ -401,9 +401,9 @@
    "title": "All Druid Skills",
    "display": "All Druid Skills",
    "rev": 17345,
-   "touched": "2026-09-18T22:50:11Z",
+   "touched": "2026-09-30T20:05:26Z",
    "edited": "2023-09-09T17:10:26Z",
-   "len": 288442,
+   "len": 288440,
    "intro": "This page lists all Druid skills & stats. Also see: Druid Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 15 Dexterity 20 • Attack Rating 70 +5 • Defense 5 +0.25 Vitality 25"
   },
   {
@@ -421,9 +421,9 @@
    "title": "All Necromancer Skills",
    "display": "All Necromancer Skills",
    "rev": 17346,
-   "touched": "2026-09-27T08:53:54Z",
+   "touched": "2026-09-30T19:59:51Z",
    "edited": "2023-09-09T17:11:05Z",
-   "len": 292268,
+   "len": 292290,
    "intro": "This page lists all Necromancer skills & stats. Also see: Necromancer Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 15 Dexterity 25 • Attack Rating 80 +5 • Defense 6 +0.25"
   },
   {
@@ -431,9 +431,9 @@
    "title": "All Paladin Skills",
    "display": "All Paladin Skills",
    "rev": 17347,
-   "touched": "2026-09-22T12:47:23Z",
+   "touched": "2026-10-01T01:09:20Z",
    "edited": "2023-09-09T17:11:27Z",
-   "len": 264311,
+   "len": 264368,
    "intro": "This page lists all Paladin skills & stats. Also see: Paladin Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 25 Dexterity 20 • Attack Rating 85 +5 • Defense 5 +0.25 Vitalit"
   },
   {
@@ -461,9 +461,9 @@
    "title": "All Skills",
    "display": "All Skills",
    "rev": 23804,
-   "touched": "2026-09-27T08:53:54Z",
+   "touched": "2026-10-01T01:12:25Z",
    "edited": "2026-06-20T22:47:43Z",
-   "len": 1850325,
+   "len": 1850358,
    "intro": "Below is a compilation of all skills. Note that mercenaries may use different versions of the skills listed here. Also see: Skill Overview, Mercenary Skills Other skill compilation lists: All Amazon Skills All Assassin S"
   },
   {
@@ -471,9 +471,9 @@
    "title": "All Sorceress Skills",
    "display": "All Sorceress Skills",
    "rev": 17348,
-   "touched": "2026-09-27T08:29:56Z",
+   "touched": "2026-10-01T00:40:02Z",
    "edited": "2023-09-09T17:11:45Z",
-   "len": 257465,
+   "len": 257442,
    "intro": "This page lists all Sorceress skills & stats. Also see: Sorceress Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 10 Dexterity 25 • Attack Rating 75 +5 • Defense 6 +0.25 Vit"
   },
   {
@@ -481,9 +481,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-09-25T12:45:28Z",
+   "touched": "2026-10-01T01:32:03Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1665906,
+   "len": 1655659,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -660,10 +660,10 @@
    "id": 590,
    "title": "Breakpoints",
    "display": "Breakpoints",
-   "rev": 23510,
-   "touched": "2026-05-29T18:10:38Z",
-   "edited": "2026-05-29T18:10:38Z",
-   "len": 197946,
+   "rev": 23995,
+   "touched": "2026-10-01T01:32:03Z",
+   "edited": "2026-10-01T01:32:03Z",
+   "len": 199638,
    "intro": "This page lists breakpoint and threshold values, and covers changes relative to the vanilla game. Expand/Collapse All Changes Most breakpoint values haven't changed, and all threshold values remain unchanged. There is a "
   },
   {
@@ -740,10 +740,10 @@
    "id": 105,
    "title": "Cold Spells",
    "display": "Cold Spells",
-   "rev": 23822,
-   "touched": "2026-06-22T16:08:59Z",
-   "edited": "2026-06-22T16:08:59Z",
-   "len": 81466,
+   "rev": 23989,
+   "touched": "2026-10-01T00:40:02Z",
+   "edited": "2026-10-01T00:40:02Z",
+   "len": 81443,
    "intro": "This page lists Sorceress skills from the Cold Spells skill tree. Other Sorceress skills: Lightning Spells, Fire Spells, All Sorceress Skills Expand/Collapse All"
   },
   {
@@ -770,10 +770,10 @@
    "id": 101,
    "title": "Combat Skills (Paladin)",
    "display": "Combat Skills (Paladin)",
-   "rev": 23937,
-   "touched": "2026-07-21T21:44:06Z",
-   "edited": "2026-07-21T21:44:06Z",
-   "len": 109604,
+   "rev": 23990,
+   "touched": "2026-10-01T01:09:20Z",
+   "edited": "2026-10-01T01:09:20Z",
+   "len": 109667,
    "intro": "This page lists Paladin skills from the Combat Skills skill tree. Other Paladin skills: Defensive Auras, Offensive Auras, All Paladin Skills Expand/Collapse All"
   },
   {
@@ -870,9 +870,9 @@
    "id": 97,
    "title": "Defensive Auras",
    "display": "Defensive Auras",
-   "rev": 23746,
-   "touched": "2026-06-07T19:57:44Z",
-   "edited": "2026-06-07T19:57:44Z",
+   "rev": 23969,
+   "touched": "2026-09-30T18:53:47Z",
+   "edited": "2026-09-30T18:53:47Z",
    "len": 69857,
    "intro": "This page lists Paladin skills from the Defensive Auras skill tree. Other Paladin skills: Offensive Auras, Combat Skills, All Paladin Skills Expand/Collapse All"
   },
@@ -930,9 +930,9 @@
    "id": 112,
    "title": "Elemental Skills",
    "display": "Elemental Skills",
-   "rev": 23891,
-   "touched": "2026-06-29T02:08:01Z",
-   "edited": "2026-06-29T02:08:01Z",
+   "rev": 23976,
+   "touched": "2026-09-30T19:48:00Z",
+   "edited": "2026-09-30T19:48:00Z",
    "len": 105094,
    "intro": "This page lists Druid skills from the Elemental skill tree. Other Druid skills: Shape Shifting, Summoning, All Druid Skills Expand/Collapse All"
   },
@@ -1570,10 +1570,10 @@
    "id": 99,
    "title": "Offensive Auras",
    "display": "Offensive Auras",
-   "rev": 23949,
-   "touched": "2026-09-22T12:47:22Z",
-   "edited": "2026-09-22T12:47:22Z",
-   "len": 84519,
+   "rev": 23972,
+   "touched": "2026-09-30T19:14:21Z",
+   "edited": "2026-09-30T19:14:21Z",
+   "len": 84513,
    "intro": "This page lists Paladin skills from the Offensive Auras skill tree. Other Paladin skills: Defensive Auras, Combat Skills, All Paladin Skills Expand/Collapse All"
   },
   {
@@ -1600,10 +1600,10 @@
    "id": 66,
    "title": "Passive and Magic Skills",
    "display": "Passive and Magic Skills",
-   "rev": 23619,
-   "touched": "2026-05-31T17:05:02Z",
-   "edited": "2026-05-31T17:05:02Z",
-   "len": 73610,
+   "rev": 23991,
+   "touched": "2026-10-01T01:12:25Z",
+   "edited": "2026-10-01T01:12:25Z",
+   "len": 73589,
    "intro": "This page lists Amazon skills from the Passive and Magic Skills skill tree. Other Amazon skills: Javelin and Spear Skills, Bow and Crossbow Skills, All Amazon Skills Expand/Collapse All"
   },
   {
@@ -1770,10 +1770,10 @@
    "id": 80,
    "title": "Poison and Bone Spells",
    "display": "Poison and Bone Spells",
-   "rev": 23719,
-   "touched": "2026-06-04T20:57:20Z",
-   "edited": "2026-06-04T20:57:20Z",
-   "len": 79765,
+   "rev": 23981,
+   "touched": "2026-09-30T19:59:51Z",
+   "edited": "2026-09-30T19:59:51Z",
+   "len": 79787,
    "intro": "This page lists Necromancer skills from the Poison and Bone Spells skill tree. Other Necromancer skills: Summoning Spells, Curses, All Necromancer Skills Expand/Collapse All"
   },
   {
@@ -2000,10 +2000,10 @@
    "id": 114,
    "title": "Shape Shifting Skills",
    "display": "Shape Shifting Skills",
-   "rev": 23929,
-   "touched": "2026-07-18T09:24:15Z",
-   "edited": "2026-07-18T09:24:15Z",
-   "len": 81762,
+   "rev": 23977,
+   "touched": "2026-09-30T19:49:28Z",
+   "edited": "2026-09-30T19:49:28Z",
+   "len": 81761,
    "intro": "This page lists Druid skills from the Shape Shifting skill tree. Other Druid skills: Elemental, Summoning, All Druid Skills Expand/Collapse All"
   },
   {
@@ -2150,10 +2150,10 @@
    "id": 116,
    "title": "Summoning Skills (Druid)",
    "display": "Summoning Skills (Druid)",
-   "rev": 23947,
-   "touched": "2026-09-18T22:50:10Z",
-   "edited": "2026-09-18T22:50:10Z",
-   "len": 101270,
+   "rev": 23987,
+   "touched": "2026-09-30T20:05:26Z",
+   "edited": "2026-09-30T20:05:26Z",
+   "len": 101269,
    "intro": "This page lists Druid skills from the Summoning skill tree. Other Druid skills: Elemental, Shape Shifting, All Druid Skills Expand/Collapse All"
   },
   {
@@ -2260,9 +2260,9 @@
    "id": 75,
    "title": "Traps",
    "display": "Traps",
-   "rev": 23802,
-   "touched": "2026-06-19T19:11:23Z",
-   "edited": "2026-06-19T19:11:23Z",
+   "rev": 23974,
+   "touched": "2026-09-30T19:40:58Z",
+   "edited": "2026-09-30T19:40:58Z",
    "len": 102895,
    "intro": "This page lists Assassin skills from the Traps skill tree. Other Assassin skills: Martial Arts, Shadow Disciplines, All Assassin Skills Expand/Collapse All"
   },
@@ -2290,9 +2290,9 @@
    "id": 84,
    "title": "Warcries",
    "display": "Warcries",
-   "rev": 23756,
-   "touched": "2026-06-09T00:11:07Z",
-   "edited": "2026-06-09T00:11:07Z",
+   "rev": 23975,
+   "touched": "2026-09-30T19:43:57Z",
+   "edited": "2026-09-30T19:43:57Z",
    "len": 53614,
    "intro": "This page lists Barbarian skills from the Warcries skill tree. Other Barbarian skills: Combat Masteries, Combat Skills, All Barbarian Skills Expand/Collapse All"
   },
@@ -9931,5 +9931,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "9f647bac74"
+ "v": "27f4aa0f9b"
 }
