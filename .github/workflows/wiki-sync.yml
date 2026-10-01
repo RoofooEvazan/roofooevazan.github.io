@@ -1,11 +1,11 @@
-# Copies the PD2 wiki (and the Act 2 merc weapon sheet) into wiki/data/ once a day,
-# and commits whatever changed so GitHub Pages republishes /wiki/.
-# Run it by hand from the Actions tab ("Run workflow"); tick "full" to re-fetch every page.
+# Copies the PD2 wiki (and the Act 2 merc weapon sheet) into wiki/data/ and commits whatever
+# changed so GitHub Pages republishes /wiki/.
+# The daily run moved to a Windows scheduled task on Roofoo's PC (tools/wiki-sync/local-sync.ps1):
+# since 2026-09-27 wiki.projectdiablo2.com answers GitHub's runners with HTTP 403. This stays for a
+# manual try from the Actions tab ("Run workflow"; tick "full" to re-fetch every page).
 name: Wiki sync
 
 on:
-  schedule:
-    - cron: '23 7 * * *'
   workflow_dispatch:
     inputs:
       full:
