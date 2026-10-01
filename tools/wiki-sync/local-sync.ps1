@@ -10,26 +10,30 @@ $ErrorActionPreference = 'Stop'
 $repo = Resolve-Path (Join-Path $PSScriptRoot '..\..')
 $log = Join-Path $PSScriptRoot 'local-sync.log'
 function Say($m) { "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')  $m" | Tee-Object -FilePath $log -Append | Out-Host }
-function Git { & git -C $repo @args; if ($LASTEXITCODE) { throw "git $args failed ($LASTEXITCODE)" } }
+function Invoke-Git { & git.exe -C $repo @args; if ($LASTEXITCODE) { throw "git $args failed ($LASTEXITCODE)" } }
 
 try {
   Say 'sync start'
-  Git pull --rebase --quiet
+  Invoke-Git pull --rebase --quiet
   if (-not (Test-Path (Join-Path $PSScriptRoot 'node_modules'))) { & npm ci --prefix $PSScriptRoot --silent; if ($LASTEXITCODE) { throw 'npm ci failed' } }
   # the sync writes its one-line summary to $GITHUB_OUTPUT, as on GitHub
   $out = New-TemporaryFile
   $env:GITHUB_OUTPUT = $out.FullName
   $args2 = @((Join-Path $PSScriptRoot 'sync.mjs')); if ($Full) { $args2 += '--full' }
+  # (its stderr lines are logged, not fatal: Windows PowerShell turns redirected stderr into errors)
+  $ErrorActionPreference = 'Continue'
   & node @args2 2>&1 | ForEach-Object { Say "  $_" }
-  if ($LASTEXITCODE) { throw "sync.mjs failed ($LASTEXITCODE)" }
+  $code = $LASTEXITCODE
+  $ErrorActionPreference = 'Stop'
+  if ($code) { throw "sync.mjs failed ($code)" }
   $summary = (Get-Content $out.FullName | Where-Object { $_ -like 'summary=*' } | Select-Object -First 1) -replace '^summary=', ''
   Remove-Item $out.FullName -ErrorAction SilentlyContinue
-  Git add wiki/data
+  Invoke-Git add wiki/data
   & git -C $repo diff --cached --quiet
   if ($LASTEXITCODE -eq 0) { Say 'nothing changed on the wiki'; return }
   if (-not $summary) { $summary = 'refresh' }
-  Git commit --quiet -m "Wiki sync: $summary" -m 'Run from the local scheduled task (tools/wiki-sync/local-sync.ps1).'
-  Git push --quiet
+  Invoke-Git commit --quiet -m "Wiki sync: $summary" -m 'Run from the local scheduled task (tools/wiki-sync/local-sync.ps1).'
+  Invoke-Git push --quiet
   Say "pushed: $summary"
 } catch {
   Say "FAILED: $_"
