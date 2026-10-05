@@ -1,5 +1,27 @@
 [
  {
+  "date": "2026-10-05T14:23:27.085Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "All Barbarian Skills",
+    "edited": "2023-09-09T17:00:19Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Skills",
+    "edited": "2026-06-20T22:47:43Z",
+    "summary": "Link to Merc skills"
+   },
+   {
+    "title": "Combat Skills (Barbarian)",
+    "edited": "2026-10-05T03:26:01Z",
+    "summary": "/* Concentrate */"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-10-04T14:23:26.055Z",
   "added": [],
   "updated": [
