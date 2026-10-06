@@ -481,9 +481,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-10-01T10:32:06Z",
+   "touched": "2026-10-06T06:21:57Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1655677,
+   "len": 1655925,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -1800,11 +1800,11 @@
    "id": 2197,
    "title": "PvP Changes",
    "display": "PvP Changes",
-   "rev": 23275,
-   "touched": "2026-05-19T21:44:16Z",
-   "edited": "2026-05-19T21:44:16Z",
-   "len": 25698,
-   "intro": "This page lists player-vs-player changes relative to the vanilla game. All changes that affect PvP combat apply to PvP arenas only unless otherwise noted."
+   "rev": 24002,
+   "touched": "2026-10-06T06:21:57Z",
+   "edited": "2026-10-06T06:21:57Z",
+   "len": 25946,
+   "intro": "This page lists player-vs-player changes relative to the vanilla game. All changes mentioned here only apply with the PvP arenas unless otherwise noted."
   },
   {
    "id": 5515,
@@ -9932,5 +9932,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "205a04d43a"
+ "v": "b979e53f68"
 }
