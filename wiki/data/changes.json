@@ -1,5 +1,32 @@
 [
  {
+  "date": "2026-10-07T14:23:29.152Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "All Amazon Skills",
+    "edited": "2023-09-09T16:56:26Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Skills",
+    "edited": "2026-06-20T22:47:43Z",
+    "summary": "Link to Merc skills"
+   },
+   {
+    "title": "Item Skills",
+    "edited": "2026-10-06T16:04:24Z",
+    "summary": "added cow and delirium forms, commented out for now"
+   },
+   {
+    "title": "Javelin and Spear Skills",
+    "edited": "2026-10-07T01:57:04Z",
+    "summary": "/* Javelin and Spear Mastery */ incorrect"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-10-06T14:23:24.990Z",
   "added": [],
   "updated": [
