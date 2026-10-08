@@ -401,9 +401,9 @@
    "title": "All Druid Skills",
    "display": "All Druid Skills",
    "rev": 17345,
-   "touched": "2026-09-30T20:05:26Z",
+   "touched": "2026-10-08T02:06:49Z",
    "edited": "2023-09-09T17:10:26Z",
-   "len": 288440,
+   "len": 288533,
    "intro": "This page lists all Druid skills & stats. Also see: Druid Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 15 Dexterity 20 • Attack Rating 70 +5 • Defense 5 +0.25 Vitality 25"
   },
   {
@@ -461,9 +461,9 @@
    "title": "All Skills",
    "display": "All Skills",
    "rev": 23804,
-   "touched": "2026-10-07T01:57:05Z",
+   "touched": "2026-10-08T02:06:49Z",
    "edited": "2026-06-20T22:47:43Z",
-   "len": 1850410,
+   "len": 1850503,
    "intro": "Below is a compilation of all skills. Note that mercenaries may use different versions of the skills listed here. Also see: Skill Overview, Mercenary Skills Other skill compilation lists: All Amazon Skills All Assassin S"
   },
   {
@@ -481,9 +481,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-10-06T06:21:57Z",
+   "touched": "2026-10-08T06:57:31Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1655925,
+   "len": 1656166,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -1290,9 +1290,9 @@
    "id": 5408,
    "title": "Item Skills",
    "display": "Item Skills",
-   "rev": 24003,
-   "touched": "2026-10-06T16:04:24Z",
-   "edited": "2026-10-06T16:04:24Z",
+   "rev": 24005,
+   "touched": "2026-10-08T00:10:36Z",
+   "edited": "2026-10-08T00:10:36Z",
    "len": 19421,
    "intro": "The following are original skills in Project Diablo 2 provided by items or set bonuses that are not otherwise available to any classes via skill points. These skills are either OSkills or skills cast automatically by ite"
   },
@@ -1480,10 +1480,10 @@
    "id": 2,
    "title": "Monsters",
    "display": "Monsters",
-   "rev": 23935,
-   "touched": "2026-07-20T23:33:41Z",
-   "edited": "2026-07-20T23:33:41Z",
-   "len": 28323,
+   "rev": 24010,
+   "touched": "2026-10-08T06:57:30Z",
+   "edited": "2026-10-08T06:57:30Z",
+   "len": 28564,
    "intro": "This article is marked as a stub, meaning it is incomplete or out of date. You can help Project Diablo 2 Wiki by adding missing information, or updating it. Reason: This page has outdated or missing info (from S5 changes"
   },
   {
@@ -2150,10 +2150,10 @@
    "id": 116,
    "title": "Summoning Skills (Druid)",
    "display": "Summoning Skills (Druid)",
-   "rev": 23987,
-   "touched": "2026-09-30T20:05:26Z",
-   "edited": "2026-09-30T20:05:26Z",
-   "len": 101269,
+   "rev": 24008,
+   "touched": "2026-10-08T02:06:48Z",
+   "edited": "2026-10-08T02:06:48Z",
+   "len": 101362,
    "intro": "This page lists Druid skills from the Summoning skill tree. Other Druid skills: Elemental, Shape Shifting, All Druid Skills Expand/Collapse All"
   },
   {
@@ -9932,5 +9932,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "cf3eafd938"
+ "v": "a0dba84b07"
 }
