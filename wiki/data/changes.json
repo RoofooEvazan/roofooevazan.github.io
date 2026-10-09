@@ -1,5 +1,42 @@
 [
  {
+  "date": "2026-10-09T14:23:33.255Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "All Skills",
+    "edited": "2026-06-20T22:47:43Z",
+    "summary": "Link to Merc skills"
+   },
+   {
+    "title": "All Sorceress Skills",
+    "edited": "2023-09-09T17:11:45Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Topics",
+    "edited": "2023-09-09T16:57:53Z",
+    "summary": "added topics"
+   },
+   {
+    "title": "Lightning Spells",
+    "edited": "2026-10-09T07:46:36Z",
+    "summary": "/* Static Field */"
+   },
+   {
+    "title": "Monsters",
+    "edited": "2026-10-09T02:55:32Z",
+    "summary": "/* Rathma and Mendeln */ Visual overhaul"
+   },
+   {
+    "title": "Seasons",
+    "edited": "2026-10-08T22:18:13Z",
+    "summary": "/* Timeline */"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-10-08T14:23:34.997Z",
   "added": [],
   "updated": [

@@ -461,7 +461,7 @@
    "title": "All Skills",
    "display": "All Skills",
    "rev": 23804,
-   "touched": "2026-10-08T02:06:49Z",
+   "touched": "2026-10-09T07:46:36Z",
    "edited": "2026-06-20T22:47:43Z",
    "len": 1850503,
    "intro": "Below is a compilation of all skills. Note that mercenaries may use different versions of the skills listed here. Also see: Skill Overview, Mercenary Skills Other skill compilation lists: All Amazon Skills All Assassin S"
@@ -471,7 +471,7 @@
    "title": "All Sorceress Skills",
    "display": "All Sorceress Skills",
    "rev": 17348,
-   "touched": "2026-10-01T00:40:02Z",
+   "touched": "2026-10-09T07:46:36Z",
    "edited": "2023-09-09T17:11:45Z",
    "len": 257442,
    "intro": "This page lists all Sorceress skills & stats. Also see: Sorceress Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 10 Dexterity 25 • Attack Rating 75 +5 • Defense 6 +0.25 Vit"
@@ -481,9 +481,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-10-08T06:57:31Z",
+   "touched": "2026-10-09T02:55:32Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1656166,
+   "len": 1690232,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -1350,9 +1350,9 @@
    "id": 106,
    "title": "Lightning Spells",
    "display": "Lightning Spells",
-   "rev": 23962,
-   "touched": "2026-09-27T08:29:55Z",
-   "edited": "2026-09-27T08:29:55Z",
+   "rev": 24023,
+   "touched": "2026-10-09T07:46:36Z",
+   "edited": "2026-10-09T07:46:36Z",
    "len": 70252,
    "intro": "This page lists Sorceress skills from the Lightning Spells skill tree. Other Sorceress skills: Cold Spells, Fire Spells, All Sorceress Skills Expand/Collapse All"
   },
@@ -1480,10 +1480,10 @@
    "id": 2,
    "title": "Monsters",
    "display": "Monsters",
-   "rev": 24010,
-   "touched": "2026-10-08T06:57:30Z",
-   "edited": "2026-10-08T06:57:30Z",
-   "len": 28564,
+   "rev": 24022,
+   "touched": "2026-10-09T02:55:32Z",
+   "edited": "2026-10-09T02:55:32Z",
+   "len": 62611,
    "intro": "This article is marked as a stub, meaning it is incomplete or out of date. You can help Project Diablo 2 Wiki by adding missing information, or updating it. Reason: This page has outdated or missing info (from S5 changes"
   },
   {
@@ -1970,10 +1970,10 @@
    "id": 5208,
    "title": "Seasons",
    "display": "Seasons",
-   "rev": 19973,
-   "touched": "2026-04-18T21:59:31Z",
-   "edited": "2025-05-22T23:47:59Z",
-   "len": 11755,
+   "rev": 24017,
+   "touched": "2026-10-08T22:18:13Z",
+   "edited": "2026-10-08T22:18:13Z",
+   "len": 12179,
    "intro": "This page lists information about seasons and gamemodes."
   },
   {
@@ -7336,9 +7336,28 @@
   "2#Ubers": "monsters#Ubers",
   "2#Uber_Tristram_Prime_Evils": "monsters#uber-tristram-prime-evils",
   "2#Uber_Ancients": "monsters#uber-ancients",
+  "2#Pinnacle_Bosses": "monsters#pinnacle-bosses",
+  "2#Encounter_overview": "monsters#encounter-overview",
   "2#Diablo-Clone": "monsters#diablo-clone",
+  "2#Encounter_overview_2": "monsters#encounter-overview",
+  "2#Monster_statistics": "monsters#monster-statistics",
+  "2#Fight_progression": "monsters#fight-progression",
+  "2#Diablo-Clone_Skills_and_attacks": "monsters#diablo-clone-skills-and-attacks",
+  "2#Cold_novas_and_pillar_positioning": "monsters#cold-novas-and-pillar-positioning",
+  "2#Rewards": "monsters#rewards",
   "2#Rathma_and_Mendeln": "monsters#rathma-and-mendeln",
+  "2#Encounter_overview_3": "monsters#encounter-overview",
+  "2#Monster_statistics_2": "monsters#monster-statistics",
+  "2#Fight_progression_2": "monsters#fight-progression",
+  "2#Rathma_and_Mendeln_Skills_and_attacks": "monsters#rathma-and-mendeln-skills-and-attacks",
+  "2#Rewards_2": "monsters#rewards",
   "2#Lucion": "monsters#lucion",
+  "2#Encounter_overview_4": "monsters#encounter-overview",
+  "2#Monster_statistics_3": "monsters#monster-statistics",
+  "2#Fight_progression_3": "monsters#fight-progression",
+  "2#Lucion_Skills_and_attacks": "monsters#lucion-skills-and-attacks",
+  "2#Lightning_novas_and_positioning": "monsters#lightning-novas-and-positioning",
+  "2#Rewards_3": "monsters#rewards",
   "2#": "monsters",
   "4771#Numbers_(Rounding)": "mechanics/Numbers_(Rounding)",
   "4771#Melee_Splash": "mechanics/Melee_Splash",
@@ -9932,5 +9951,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "a0dba84b07"
+ "v": "bc991736fc"
 }
