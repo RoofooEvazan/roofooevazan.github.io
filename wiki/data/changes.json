@@ -1,5 +1,27 @@
 [
  {
+  "date": "2026-10-10T14:23:27.226Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "All Topics",
+    "edited": "2023-09-09T16:57:53Z",
+    "summary": "added topics"
+   },
+   {
+    "title": "Game Mechanics",
+    "edited": "2026-10-10T04:00:28Z",
+    "summary": "/* Reducing Resistances */ Wanted to include a section on plr as that is a more niche but important aspect of poison builds, and is somehow a game mechanic and related to resists."
+   },
+   {
+    "title": "Monsters",
+    "edited": "2026-10-10T08:29:29Z",
+    "summary": "/* Fight progression */ Further updates on life-sharing and what happens after one clone dies."
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-10-09T14:23:33.255Z",
   "added": [],
   "updated": [

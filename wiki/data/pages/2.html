@@ -798,7 +798,8 @@ The additional buffs that they gain are:
 <td>2</td>
 <td>17
 </td></tr></tbody></table>
-<ul><li>Poison resistance reduces poison damage per frame; <b>PLR</b> (poison length reduction) affects its duration.</li>
+<ul><li>PLR is increased, among other things, slightly per tier. At tier 1 Diablo-Clone's plr is 53, at tier 2 56.</li>
+<li>Poison resistance reduces poison damage per frame; <b>PLR</b> (poison length reduction) affects its duration.</li>
 <li>Curse reduction: 95% leaves 5% of the original duration; the skeletons cannot be cursed.</li>
 <li>Drain effectiveness scales ordinary life and mana steal, separately from difficulty penalties.</li>
 <li>Diablo-Clone cannot be chilled.</li>
@@ -934,8 +935,8 @@ The additional buffs that they gain are:
 <div class="mw-heading mw-heading4"><h4 id="Cold_novas_and_pillar_positioning">Cold novas and pillar positioning</h4></div>
 <p><b>The transition novas deal cold damage.</b>
 </p>
-<ul><li>Diablo-Clone will gain the <a href="/wiki/Salvation" class="mw-redirect" title="Salvation">Salvation</a> aura visual and accompanying sound, and move toward the centre before casting. This is your cue to seek cover. If blocked, he will teleport to the center.</li>
-<li>Each sequence contains six novas. Successive novas become more dangerous.</li>
+<ul><li>Diablo-Clone will gain the <a href="/wiki/Salvation" class="mw-redirect" title="Salvation">Salvation</a> aura visual and accompanying sound, and move toward the centre before casting. This is your cue to seek cover. If blocked, he will teleport to the centre.</li>
+<li>Each sequence contains six novas. Successive novas become more dangerous: the first nova carries -50 enemy cold resist, the next -75, all the way up to -175 for the final nova. Good luck with that!</li>
 <li>The novas consist of outward-moving projectiles that pillars (or bodies) can intercept.</li>
 <li>Cold resistance helps against cold damage, but hiding behind a pillar is the intended way to avoid these projectiles.</li></ul>
 <div class="mw-heading mw-heading4"><h4 id="Rewards">Rewards</h4></div>
@@ -1511,7 +1512,12 @@ The additional buffs that they gain are:
 </td>
 <td>Mendeln becomes vulnerable and both bosses continue attacking until their shared life is depleted. No further scheduled Void Knight waves or poison-sequence transitions remain.
 </td></tr></tbody></table>
-<ul><li>The life-sharing mechanic means your damage is halved, but applied to both bosses regardless of who you hit. As of S13 your poison length is also halved, which means poison builds will deal less damage than non-poison builds.</li></ul>
+<p><b>Life-Sharing and <i>RathmaDeath</i></b>
+</p><p>In the final fight, damage dealt to either boss is shared between both. Damage is calculated using the struck boss's resistances, then halved and applied equally to Rathma and Mendeln. The other boss's resistances are not checked again. As of S13 your poison length is also halved, which means poison builds will deal less damage than non-poison builds.
+</p><p>This makes target selection important: attacking the boss with lower resistance to your damage type deals more shared damage. Area attacks that hit both bosses produce separate hits, each of which is shared between the pair.
+</p><p>When Mendeln can be damaged, but Rathma can't, Rathma will receive no damage from the life-sharing mechanic. This is why, often, Mendeln will die before Rathma.
+</p><p>After the first death of the two, the remaining boss still only receives 50% of the damage, as if life is shared. Furthermore, the dying boss casts "RathmaDeath" which, in theory gives +20% poison and cold skill damage, and 10% magic skill damage to the survivor. However, at this time only the 20% poison damage is given (possible bug).
+</p>
 <div class="mw-heading mw-heading4"><h4 id="Rathma_and_Mendeln_Skills_and_attacks">Rathma and Mendeln Skills and attacks</h4></div>
 <table class="wikitable" style="width:100%;">
 <tbody><tr>
@@ -1947,7 +1953,8 @@ The additional buffs that they gain are:
 </td>
 <td>Lightning ground hazards are produced by the encounter controller.
 </td></tr></tbody></table>
-<ul><li>Anguished Mothers have a <a href="/wiki/Smite" class="mw-redirect" title="Smite">Smite-like</a> skill that can stun the player.</li></ul>
+<ul><li>During Lucion's dash, which ends with a small red nova, some projectiles and ground effects can pass through him without dealing damage. This can also prevent skills like <a href="/wiki/Poison_Nova" class="mw-redirect" title="Poison Nova">Poison Nova</a> from applying or refreshing poison. Poison, or presumably other dot applied to the target like <a href="/wiki/Open_Wounds?action=edit&amp;redlink=1" class="new" title="Open Wounds (page does not exist)">Open Wounds</a> already applied continues to deal damage. This does not mean he cannot be damaged by other sources e.g. physical hits (untested).</li>
+<li>Anguished Mothers have a <a href="/wiki/Smite" class="mw-redirect" title="Smite">Smite-like</a> skill that can stun the player.</li></ul>
 <div class="mw-heading mw-heading4"><h4 id="Lightning_novas_and_positioning">Lightning novas and positioning</h4></div>
 <ul><li>Watch Lucion's movement toward the centre and the start of the nova animation.</li>
 <li>The nova uses slow, weaker wave to allow you time to seek the right position and the fast lightning waves can be deadly.</li></ul>

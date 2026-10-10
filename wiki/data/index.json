@@ -481,9 +481,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-10-09T02:55:32Z",
+   "touched": "2026-10-10T08:29:30Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1690232,
+   "len": 1693096,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -1020,10 +1020,10 @@
    "id": 4771,
    "title": "Game Mechanics",
    "display": "Game Mechanics",
-   "rev": 23950,
-   "touched": "2026-09-23T23:54:21Z",
-   "edited": "2026-09-23T23:54:21Z",
-   "len": 90869,
+   "rev": 24027,
+   "touched": "2026-10-10T04:00:28Z",
+   "edited": "2026-10-10T04:00:28Z",
+   "len": 91967,
    "intro": ""
   },
   {
@@ -1480,10 +1480,10 @@
    "id": 2,
    "title": "Monsters",
    "display": "Monsters",
-   "rev": 24022,
-   "touched": "2026-10-09T02:55:32Z",
-   "edited": "2026-10-09T02:55:32Z",
-   "len": 62611,
+   "rev": 24029,
+   "touched": "2026-10-10T08:29:29Z",
+   "edited": "2026-10-10T08:29:29Z",
+   "len": 64377,
    "intro": "This article is marked as a stub, meaning it is incomplete or out of date. You can help Project Diablo 2 Wiki by adding missing information, or updating it. Reason: This page has outdated or missing info (from S5 changes"
   },
   {
@@ -7380,6 +7380,7 @@
   "4771#Breaking_Immunes": "mechanics/Reducing_Resistances#Breaking_Immunes",
   "4771#Effectiveness_vs_Immunes": "mechanics/Reducing_Resistances#Effectiveness_vs_Immunes",
   "4771#Effectiveness_vs_Negative_Resistance": "mechanics/Reducing_Resistances#Effectiveness_vs_Negative_Resistance",
+  "4771#Poison_Length_Reduced": "mechanics/Reducing_Resistances#Poison_Length_Reduced",
   "4771#Item_drop_mechanics": "mechanics/Item_drop_mechanics",
   "4771#Item_drop_Basics": "mechanics/Item_drop_mechanics#Item_drop_Basics",
   "4771#What's_different_in_PD2?": "mechanics/Item_drop_mechanics#What's_different_in_PD2?",
@@ -9951,5 +9952,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "bc991736fc"
+ "v": "a9a17e5030"
 }
