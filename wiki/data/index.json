@@ -411,7 +411,7 @@
    "title": "All Items",
    "display": "All Items",
    "rev": 21738,
-   "touched": "2026-08-25T01:29:44Z",
+   "touched": "2026-10-11T05:07:11Z",
    "edited": "2025-12-03T12:16:51Z",
    "len": 1349959,
    "intro": "Below is a compilation of all \"named\" items - unique/set/runeword items and some others, whose affixes are all explicitly determined rather than generated randomly. Crafted items also have some predetermined affixes, but"
@@ -441,7 +441,7 @@
    "title": "All Runewords",
    "display": "All Runewords",
    "rev": 21613,
-   "touched": "2026-08-09T05:00:50Z",
+   "touched": "2026-10-11T05:07:11Z",
    "edited": "2025-11-27T17:00:54Z",
    "len": 168408,
    "intro": "Below is a compilation of all runeword items. Helms"
@@ -1200,11 +1200,11 @@
    "id": 5860,
    "title": "Guilds",
    "display": "Guilds",
-   "rev": 23961,
-   "touched": "2026-09-27T00:08:31Z",
-   "edited": "2026-09-27T00:08:31Z",
-   "len": 201,
-   "intro": "Shell/placeholder for the Season 14 \"Guilds\" feature Guilds"
+   "rev": 24043,
+   "touched": "2026-10-11T13:59:22Z",
+   "edited": "2026-10-11T13:59:22Z",
+   "len": 2195,
+   "intro": "Shell/placeholder for the Season 14 \"Guilds\" feature Beta issues: Currently no vendors appear though unlocked, no new guild halls past tier 3 Guilds"
   },
   {
    "id": 4838,
@@ -1261,7 +1261,7 @@
    "title": "Item Codes",
    "display": "Item Codes",
    "rev": 23045,
-   "touched": "2026-05-09T12:10:38Z",
+   "touched": "2026-10-11T04:03:22Z",
    "edited": "2026-05-09T12:10:38Z",
    "len": 94217,
    "intro": "This page lists item codes and info about beta commands. Expand/Collapse All"
@@ -1410,10 +1410,10 @@
    "id": 1,
    "title": "Main Page",
    "display": "Main Page",
-   "rev": 23958,
-   "touched": "2026-09-26T23:43:02Z",
-   "edited": "2026-09-26T23:43:02Z",
-   "len": 7785,
+   "rev": 24032,
+   "touched": "2026-10-10T20:26:33Z",
+   "edited": "2026-10-10T20:26:33Z",
+   "len": 7803,
    "intro": "Welcome to the Project Diablo 2 Wiki! Project Diablo 2 is a mod for and by passionate Diablo 2 fans. We aim to maintain the Diablo II: Lord of Destruction experience and provide consistent ladder resets while improving o"
   },
   {
@@ -1531,7 +1531,7 @@
    "title": "New Equipment",
    "display": "New Equipment",
    "rev": 19646,
-   "touched": "2026-07-18T00:08:11Z",
+   "touched": "2026-10-11T05:07:11Z",
    "edited": "2025-05-18T21:37:13Z",
    "len": 117355,
    "intro": "Below is a compilation of all new \"named\" (runeword/set/unique) equipment items. No old items are included here, even if they've been changed substantially compared to their vanilla counterparts. For a list of all new it"
@@ -1551,7 +1551,7 @@
    "title": "New Runewords",
    "display": "New Runewords",
    "rev": 22898,
-   "touched": "2026-07-18T00:08:11Z",
+   "touched": "2026-10-11T05:07:11Z",
    "edited": "2026-05-04T14:18:51Z",
    "len": 34859,
    "intro": "Below is a compilation of all new runewords added in Project Diablo 2. For all runewords, see: All Runewords. Also see: New Equipment. Note: Runewords are included as \"new\" on this page based on Diablo II: Lord of Destru"
@@ -1611,9 +1611,9 @@
    "title": "Patch Notes",
    "display": "Patch Notes",
    "rev": 23999,
-   "touched": "2026-10-04T01:59:30Z",
+   "touched": "2026-10-10T20:18:12Z",
    "edited": "2026-10-04T01:59:30Z",
-   "len": 849654,
+   "len": 849932,
    "intro": "This page lists patch notes for each season. Seasons are listed most recent first, but in-season patches are at the bottom of their corresponding season. Table of Contents Note: The Table of Contents is inside this colla"
   },
   {
@@ -1670,11 +1670,11 @@
    "id": 5858,
    "title": "Patch:Season 14",
    "display": "Patch:Season 14",
-   "rev": 23960,
-   "touched": "2026-09-26T23:47:42Z",
-   "edited": "2026-09-26T23:47:42Z",
-   "len": 980,
-   "intro": "Season 14 Alliance - October 23rd 2026 Patch Notes S14 (not available yet) Project Diablo 2 Season 14 Alliance Patch Notes Will be published with the Closed Beta around October 10, 2026"
+   "rev": 24031,
+   "touched": "2026-10-10T20:18:12Z",
+   "edited": "2026-10-10T20:18:12Z",
+   "len": 1256,
+   "intro": "Season 14 Alliance - October 23rd 2026 Patch Notes S14 (tentative - beta) Project Diablo 2 Season 14 Alliance Patch Notes https://docs.google.com/document/d/1-ynVRb-5s4gTHAN86t1qQ6Yu6sdjS3F_WY09v6qoAGU/edit?usp=drivesdk "
   },
   {
    "id": 5096,
@@ -1821,9 +1821,9 @@
    "title": "Recent Patch Notes",
    "display": "Recent Patch Notes",
    "rev": 21048,
-   "touched": "2026-10-04T01:59:31Z",
+   "touched": "2026-10-10T20:18:12Z",
    "edited": "2025-08-31T00:54:58Z",
-   "len": 900013,
+   "len": 900291,
    "intro": "This page is a candidate for deletion. If you disagree with its deletion, please discuss your reasons on its associated talk page. If the tag persists for over a week with no action taken, contact the #wiki-editing Disco"
   },
   {
@@ -1871,7 +1871,7 @@
    "title": "Runes",
    "display": "Runes",
    "rev": 22033,
-   "touched": "2025-12-20T20:14:18Z",
+   "touched": "2026-10-11T06:58:09Z",
    "edited": "2025-12-20T20:14:18Z",
    "len": 37950,
    "intro": "This page lists PD2 changes for insertables (runes, gems, jewels) relative to the vanilla game."
@@ -1910,9 +1910,9 @@
    "id": 124,
    "title": "RWShields",
    "display": "RWShields",
-   "rev": 22602,
-   "touched": "2026-04-24T02:44:05Z",
-   "edited": "2026-04-24T02:44:05Z",
+   "rev": 24033,
+   "touched": "2026-10-11T05:07:10Z",
+   "edited": "2026-10-11T05:07:10Z",
    "len": 17803,
    "intro": "This page lists all shield runewords. Other runewords: Quivers, Helms, Chests, Weapons, All Runewords"
   },
@@ -2011,7 +2011,7 @@
    "title": "Shields",
    "display": "Shields",
    "rev": 22631,
-   "touched": "2026-08-25T01:29:44Z",
+   "touched": "2026-10-11T05:07:11Z",
    "edited": "2026-04-24T14:48:26Z",
    "len": 105279,
    "intro": ""
@@ -9952,5 +9952,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "a9a17e5030"
+ "v": "1f90bb5b49"
 }
