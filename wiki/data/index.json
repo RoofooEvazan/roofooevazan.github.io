@@ -481,9 +481,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-10-10T08:29:30Z",
+   "touched": "2026-10-11T15:34:26Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1693096,
+   "len": 1693113,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -1040,11 +1040,11 @@
    "id": 5237,
    "title": "GfMfAssassinGuide",
    "display": "GfMfAssassinGuide",
-   "rev": 18301,
-   "touched": "2024-07-14T14:58:35Z",
-   "edited": "2024-07-14T14:58:35Z",
-   "len": 6469,
-   "intro": "Hi there, Why don't we do guides directly inside the wiki ? Just wondering if I should do it here or not. Let's say that's a yes :p"
+   "rev": 24050,
+   "touched": "2026-10-11T15:32:26Z",
+   "edited": "2026-10-11T15:32:26Z",
+   "len": 357,
+   "intro": ""
   },
   {
    "id": 29,
@@ -1080,10 +1080,10 @@
    "id": 5282,
    "title": "Guide:DeathSentryAssassin",
    "display": "Guide:DeathSentryAssassin",
-   "rev": 21076,
-   "touched": "2025-08-31T02:11:52Z",
-   "edited": "2025-08-31T02:11:52Z",
-   "len": 6057,
+   "rev": 24047,
+   "touched": "2026-10-11T15:32:06Z",
+   "edited": "2026-10-11T15:32:06Z",
+   "len": 357,
    "intro": ""
   },
   {
@@ -1110,30 +1110,30 @@
    "id": 5285,
    "title": "Guide:NajovaGuideFromZagdem",
    "display": "Guide:NajovaGuideFromZagdem",
-   "rev": 21072,
-   "touched": "2025-08-31T02:09:55Z",
-   "edited": "2025-08-31T02:09:55Z",
-   "len": 4048,
+   "rev": 24046,
+   "touched": "2026-10-11T15:31:59Z",
+   "edited": "2026-10-11T15:31:59Z",
+   "len": 357,
    "intro": ""
   },
   {
    "id": 5283,
    "title": "Guide:Orphan's Call Assassin",
    "display": "Guide:Orphan's Call Assassin",
-   "rev": 21056,
-   "touched": "2025-08-31T02:02:58Z",
-   "edited": "2025-08-31T02:02:58Z",
-   "len": 4546,
+   "rev": 24048,
+   "touched": "2026-10-11T15:32:12Z",
+   "edited": "2026-10-11T15:32:12Z",
+   "len": 357,
    "intro": ""
   },
   {
    "id": 5284,
    "title": "Guide:ResetGuide",
    "display": "Guide:ResetGuide",
-   "rev": 21070,
-   "touched": "2025-08-31T02:09:08Z",
-   "edited": "2025-08-31T02:09:08Z",
-   "len": 11324,
+   "rev": 24049,
+   "touched": "2026-10-11T15:32:20Z",
+   "edited": "2026-10-11T15:32:20Z",
+   "len": 357,
    "intro": ""
   },
   {
@@ -1180,31 +1180,31 @@
    "id": 5286,
    "title": "Guide:ZagdemFrostKick",
    "display": "Guide:ZagdemFrostKick",
-   "rev": 21068,
-   "touched": "2025-08-31T02:07:59Z",
-   "edited": "2025-08-31T02:07:59Z",
-   "len": 5754,
+   "rev": 24045,
+   "touched": "2026-10-11T15:31:51Z",
+   "edited": "2026-10-11T15:31:51Z",
+   "len": 357,
    "intro": ""
   },
   {
    "id": 5287,
    "title": "Guide:ZagdemTraviZealPala",
    "display": "Guide:ZagdemTraviZealPala",
-   "rev": 21066,
-   "touched": "2025-08-31T02:07:49Z",
-   "edited": "2025-08-31T02:07:49Z",
-   "len": 9566,
+   "rev": 24044,
+   "touched": "2026-10-11T15:31:37Z",
+   "edited": "2026-10-11T15:31:37Z",
+   "len": 357,
    "intro": ""
   },
   {
    "id": 5860,
    "title": "Guilds",
    "display": "Guilds",
-   "rev": 24043,
-   "touched": "2026-10-11T13:59:22Z",
-   "edited": "2026-10-11T13:59:22Z",
-   "len": 2195,
-   "intro": "Shell/placeholder for the Season 14 \"Guilds\" feature Beta issues: Currently no vendors appear though unlocked, no new guild halls past tier 3 Guilds"
+   "rev": 24057,
+   "touched": "2026-10-12T07:15:35Z",
+   "edited": "2026-10-12T07:15:35Z",
+   "len": 4263,
+   "intro": "Beta issues: Currently no vendors appear though unlocked, no new guild halls past tier 3, Trophy case + Message board not spawned Guilds The Guild feature was added in Season 14 and is based on features that Blizzard Nor"
   },
   {
    "id": 4838,
@@ -1360,10 +1360,10 @@
    "id": 533,
    "title": "Links",
    "display": "Links",
-   "rev": 23996,
-   "touched": "2026-10-01T10:32:05Z",
-   "edited": "2026-10-01T10:32:05Z",
-   "len": 79300,
+   "rev": 24052,
+   "touched": "2026-10-11T15:34:26Z",
+   "edited": "2026-10-11T15:34:26Z",
+   "len": 79317,
    "intro": "This page is an information hub for everything PD2-related - it includes hyperlinks for tools, guides, and other info that isn't on the wiki itself."
   },
   {
@@ -9952,5 +9952,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "1f90bb5b49"
+ "v": "46a0aa81d8"
 }
