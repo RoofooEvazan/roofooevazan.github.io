@@ -196,6 +196,35 @@ This page lists changes to monsters in PD2 relative to the vanilla game.
 <td>58</td>
 <td>60
 </td></tr></tbody></table>
+<div class="mw-heading mw-heading4"><h4 id="Monster_Curse_Stats">Monster Curse Stats</h4></div>
+<p>These values describe the generic monster versions of these curses. Bosses and special monsters may use custom versions with different effects.
+</p>
+<table class="wikitable">
+<tbody><tr>
+<th>Curse
+</th>
+<th>Effect on the cursed target
+</th></tr>
+<tr>
+<td>Amplify Damage
+</td>
+<td>−50 percentage points of physical resistance.
+</td></tr>
+<tr>
+<td>Weaken
+</td>
+<td>−50% enhanced physical damage.
+</td></tr>
+<tr>
+<td>Decrepify
+</td>
+<td>−30% movement speed, attack rate, faster cast rate and leap speed; −10 percentage points of physical resistance.
+</td></tr>
+<tr>
+<td>Lower Resist
+</td>
+<td>−25 percentage points of fire, lightning, cold and poison resistance.
+</td></tr></tbody></table>
 <div class="mw-heading mw-heading2"><h2 id="Prime_Evils">Prime Evils</h2></div>
 <p>Monsters with the Prime Evil tag all come with additional buffs. Prime Evil monsters include:
 </p>
@@ -538,11 +567,119 @@ The additional buffs that they gain are:
 <li>These ubers no longer drop <a href="/wiki/Standard_of_Heroes" class="mw-redirect" title="Standard of Heroes">Standard of Heroes</a></li></ul>
 <dl><dd><small>Uber Diablo is sometimes referred to as "Pandemonium Diablo" with "Uber Diablo" being reserved for Diablo-Clone, but that nomenclature is avoided here.</small></dd></dl>
 <div class="mw-heading mw-heading3"><h3 id="Uber_Ancients">Uber Ancients</h3></div>
-<ul><li>New encounter featuring uber versions of Madawc, Talic, and Korlic that is accessed with <a href="/wiki/Relic_of_the_Ancients" class="mw-redirect" title="Relic of the Ancients">Relic of the Ancients</a></li>
-<li>Players can choose to fight 1, 2, or all 3 of the ancients by toggling their statues prior to starting the fight</li>
-<li>When defeated, a <a href="/wiki/Standard_of_Heroes" class="mw-redirect" title="Standard of Heroes">Standard of Heroes</a> will drop. If more than one ancient was fought, each additional ancient beyond the first adds a chance for another to drop.</li></ul>
-<div class="mw-heading mw-heading3"><h3 id="Pinnacle_Bosses">Pinnacle Bosses</h3></div>
+<p>Uber Ancients is an encounter against enhanced versions of Talic, Madawc and Korlic, accessed with a <a href="/wiki/Relic_of_the_Ancients" class="mw-redirect" title="Relic of the Ancients">Relic of the Ancients</a>. Choose which Ancients to fight before starting the encounter.
+</p>
 <div class="mw-heading mw-heading4"><h4 id="Encounter_overview">Encounter overview</h4></div>
+<table class="wikitable" style="width:100%;">
+<tbody><tr>
+<th>Entry item
+</th>
+<td><a href="/wiki/Relic_of_the_Ancients" class="mw-redirect" title="Relic of the Ancients">Relic of the Ancients</a>
+</td></tr>
+<tr>
+<th>Fight selection
+</th>
+<td>Toggle the statues before starting to select one, two or all three Ancients. The selected Ancients fight together.
+</td></tr>
+<tr>
+<th>Main hazards
+</th>
+<td>Whirlwind, burning ground, meteors, lightning storms, cursed axes, life-draining axes, Leap Attack and stuns.
+</td></tr>
+<tr>
+<th>Reward
+</th>
+<td>Defeat all selected Ancients to receive one <a href="/wiki/Standard_of_Heroes" class="mw-redirect" title="Standard of Heroes">Standard of Heroes</a> per Ancient fought.
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading4"><h4 id="Auras,_skills_and_attacks"><span id="Auras.2C_skills_and_attacks"></span>Auras, skills and attacks</h4></div>
+<table class="wikitable" style="width:100%;">
+<tbody><tr>
+<th>Ancient
+</th>
+<th>Fixed aura
+</th>
+<th>Skills and attacks
+</th>
+<th>Main danger
+</th></tr>
+<tr>
+<td>Talic
+</td>
+<td>Level 22 Vigor
+</td>
+<td>Whirlwind, a Smite-based melee attack with knockback and Blaze. A separate Meteor skill creates a target-marker effect but has no configured damaging impact.
+</td>
+<td>Fast movement, physical and fire attacks, and burning ground.
+</td></tr>
+<tr>
+<td>Madawc
+</td>
+<td>
+</td>
+<td>Double Throw, Lightning Storm, cursed axes, life-draining axes and <a href="/wiki/Battle_Orders" class="mw-redirect" title="Battle Orders">Battle Orders</a>
+</td>
+<td>Ranged pressure and lightning storms. His cursed axe lowers physical resistance by 15%; his life-draining axe applies a separate life-drain effect.
+</td></tr>
+<tr>
+<td>Korlic
+</td>
+<td>Custom Holy Freeze
+</td>
+<td>Leap Attack, a stunning melee attack, <a href="/wiki/Battle_Command" class="mw-redirect" title="Battle Command">Battle Command</a> and <a href="/wiki/Battle_Cry" class="mw-redirect" title="Battle Cry">Battle Cry</a>.
+</td>
+<td>Leap attacks and stuns, supported by cold damage and warcries. His Holy Freeze applies a 20% movement-speed penalty, and his Battle Cry reduces physical resistance by 17%.
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading4"><h4 id="Monster_statistics">Monster statistics</h4></div>
+<table class="wikitable">
+<tbody><tr>
+<th>Monster</th>
+<th>Base level</th>
+<th>Type</th>
+<th>Phys</th>
+<th>Magic</th>
+<th>Fire</th>
+<th>Light</th>
+<th>Cold</th>
+<th>Poison
+</th></tr>
+<tr>
+<td>Talic</td>
+<td>90</td>
+<td></td>
+<td><span style="color:#c4b16f;">20</span></td>
+<td><span style="color:orange;">20</span></td>
+<td><span style="color:#ff4040;">50</span></td>
+<td><span style="color:#ffff40;">50</span></td>
+<td><span style="color:#6464ff;">50</span></td>
+<td><span style="color:#00ff00;">50</span>
+</td></tr>
+<tr>
+<td>Madawc</td>
+<td>90</td>
+<td></td>
+<td><span style="color:#c4b16f;">20</span></td>
+<td><span style="color:orange;">20</span></td>
+<td><span style="color:#ff4040;">50</span></td>
+<td><span style="color:#ffff40;">50</span></td>
+<td><span style="color:#6464ff;">50</span></td>
+<td><span style="color:#00ff00;">50</span>
+</td></tr>
+<tr>
+<td>Korlic</td>
+<td>90</td>
+<td></td>
+<td><span style="color:#c4b16f;">20</span></td>
+<td><span style="color:orange;">20</span></td>
+<td><span style="color:#ff4040;">50</span></td>
+<td><span style="color:#ffff40;">50</span></td>
+<td><span style="color:#6464ff;">50</span></td>
+<td><span style="color:#00ff00;">50</span>
+</td></tr></tbody></table>
+<div class="mw-heading mw-heading4"><h4 id="Rewards">Rewards</h4></div>
+<p>Completing the selected fight awards one <a href="/wiki/Standard_of_Heroes" class="mw-redirect" title="Standard of Heroes">Standard of Heroes</a> for each Ancient fought: one for a single Ancient, two for a pair, or three for all three.
+</p>
+<div class="mw-heading mw-heading3"><h3 id="Pinnacle_Bosses">Pinnacle Bosses</h3></div>
+<div class="mw-heading mw-heading4"><h4 id="Diablo-Clone,_Rathma_and_Mendeln,_and_Lucion_Encounter_overviews"><span id="Diablo-Clone.2C_Rathma_and_Mendeln.2C_and_Lucion_Encounter_overviews"></span>Diablo-Clone, Rathma and Mendeln, and Lucion Encounter overviews</h4></div>
 <table class="wikitable" style="width:100%; table-layout:fixed;">
 <tbody><tr>
 <th style="width:13%;">
@@ -647,7 +784,7 @@ The additional buffs that they gain are:
 </td></tr></tbody></table>
 <p><b>Damage range:</b> Diablo-Clone becomes immune to damage when no player is within approximately 10 yards of him. When in this state the <a href="/wiki/Salvation" class="mw-redirect" title="Salvation">Salvation</a> aura graphic appears at his feet. Ranged characters must remain close enough to damage him.
 </p>
-<div class="mw-heading mw-heading4"><h4 id="Monster_statistics">Monster statistics</h4></div>
+<div class="mw-heading mw-heading4"><h4 id="Monster_statistics_2">Monster statistics</h4></div>
 <p>The following are the base Hell-difficulty values in the Season 13 monster data, before additional encounter and tier modifiers.
 </p>
 <table class="wikitable">
@@ -939,7 +1076,7 @@ The additional buffs that they gain are:
 <li>Each sequence contains six novas. Successive novas become more dangerous: the first nova carries -50 enemy cold resist, the next -75, all the way up to -175 for the final nova. Good luck with that!</li>
 <li>The novas consist of outward-moving projectiles that pillars (or bodies) can intercept.</li>
 <li>Cold resistance helps against cold damage, but hiding behind a pillar is the intended way to avoid these projectiles.</li></ul>
-<div class="mw-heading mw-heading4"><h4 id="Rewards">Rewards</h4></div>
+<div class="mw-heading mw-heading4"><h4 id="Rewards_2">Rewards</h4></div>
 <p>Defeating Diablo-Clone guarantees an <a href="/wiki/Annihilus" class="mw-redirect" title="Annihilus">Annihilus</a>. Tier 1 and Tier 2 also have a 1 in 200 chance to drop one of five exclusive unique items. The exclusive items are <a href="/wiki/Overlord%27s_Helm" class="mw-redirect" title="Overlord&#39;s Helm">Overlord's Helm</a>, <a href="/wiki/Dark_Abyss" class="mw-redirect" title="Dark Abyss">Dark Abyss</a>, <a href="/wiki/Itherael%27s_Path" class="mw-redirect" title="Itherael&#39;s Path">Itherael's Path</a>, <a href="/wiki/Hadriel%27s_Hand" class="mw-redirect" title="Hadriel&#39;s Hand">Hadriel's Hand</a> and <a href="/wiki/Aidan%27s_Scar" class="mw-redirect" title="Aidan&#39;s Scar">Aidan's Scar</a>.
 </p>
 <div class="mw-heading mw-heading3"><h3 id="Rathma_and_Mendeln">Rathma and Mendeln</h3></div>
@@ -984,7 +1121,7 @@ The additional buffs that they gain are:
 </td></tr></tbody></table>
 <p><b>Final pair:</b> Rathma and Mendeln share life. Damage dealt to either boss reduces their shared life pool; you do not need to defeat two independent life bars.
 </p>
-<div class="mw-heading mw-heading4"><h4 id="Monster_statistics_2">Monster statistics</h4></div>
+<div class="mw-heading mw-heading4"><h4 id="Monster_statistics_3">Monster statistics</h4></div>
 <p>The following are the base Hell-difficulty values in the Season 13 monster data, before additional encounter and tier modifiers. Resistances, PLR, curse reduction, drain and block are percentages.
 </p>
 <table class="wikitable">
@@ -1655,7 +1792,7 @@ The additional buffs that they gain are:
 </td>
 <td>The knight variant determines its projectile damage. Their curses can compound other encounter hazards.
 </td></tr></tbody></table>
-<div class="mw-heading mw-heading4"><h4 id="Rewards_2">Rewards</h4></div>
+<div class="mw-heading mw-heading4"><h4 id="Rewards_3">Rewards</h4></div>
 <p>Defeating the final pair guarantees a <a href="/wiki/Tainted_Worldstone_Shard" class="mw-redirect" title="Tainted Worldstone Shard">Tainted Worldstone Shard</a>, used to corrupt an <a href="/wiki/Annihilus" class="mw-redirect" title="Annihilus">Annihilus</a>.
 </p><p><b>Tier 1–2:</b> 1 in 200 chance for one of <a href="/wiki/The_Third_Eye" class="mw-redirect" title="The Third Eye">The Third Eye</a>, <a href="/wiki/Band_of_Skulls" class="mw-redirect" title="Band of Skulls">Band of Skulls</a> or <a href="/wiki/Cage_of_the_Unsullied" class="mw-redirect" title="Cage of the Unsullied">Cage of the Unsullied</a>. Each item has an equal chance within this roll.
 </p><p><b>Separate utility-item roll:</b> an equal chance to select one of <a href="/wiki/Skeleton_Key" class="mw-redirect" title="Skeleton Key">Skeleton Key</a>, <a href="/wiki/Horadric_Almanac" class="mw-redirect" title="Horadric Almanac">Horadric Almanac</a> or <a href="/wiki/Horadric_Navigator" class="mw-redirect" title="Horadric Navigator">Horadric Navigator</a>. The chance for any one of these items is 1 in 50 in Tier 0, 1 in 44 in Tier 1, and 1 in 38 in Tier 2.
@@ -1701,7 +1838,7 @@ The additional buffs that they gain are:
 </th>
 <td>Access to the Temple of the Triune for an amulet <a href="/wiki/Desecration" title="Desecration">desecration</a> attempt. A successful desecration is not guaranteed.
 </td></tr></tbody></table>
-<div class="mw-heading mw-heading4"><h4 id="Monster_statistics_3">Monster statistics</h4></div>
+<div class="mw-heading mw-heading4"><h4 id="Monster_statistics_4">Monster statistics</h4></div>
 <p>The following are the base Hell-difficulty values in the Season 13 monster data, before additional encounter and tier modifiers. Resistances, PLR, curse reduction, drain and block are percentages.
 </p>
 <table class="wikitable">
@@ -1958,7 +2095,7 @@ The additional buffs that they gain are:
 <div class="mw-heading mw-heading4"><h4 id="Lightning_novas_and_positioning">Lightning novas and positioning</h4></div>
 <ul><li>Watch Lucion's movement toward the centre and the start of the nova animation.</li>
 <li>The nova uses slow, weaker wave to allow you time to seek the right position and the fast lightning waves can be deadly.</li></ul>
-<div class="mw-heading mw-heading4"><h4 id="Rewards_3">Rewards</h4></div>
+<div class="mw-heading mw-heading4"><h4 id="Rewards_4">Rewards</h4></div>
 <p>Defeating Lucion grants access to the Temple of the Triune. An amulet <a href="/wiki/Desecration" title="Desecration">desecration</a> can add a second corruption modifier, but success is not guaranteed.
 </p>
 <table class="wikitable">
