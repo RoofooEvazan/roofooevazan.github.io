@@ -51,7 +51,7 @@
 <td>&#160;&#160;&#160;&#160;&#8226; Life
 </td>
 <td>40</td>
-<td>+1</td>
+<td><span class="nmod">+1.25</span></td>
 <td>+2
 </td></tr>
 <tr>
@@ -72,12 +72,9 @@
 <td>&#160;&#160;&#160;&#160;&#8226; Mana
 </td>
 <td>35</td>
-<td>+2</td>
+<td><span class="nmod">+3</span></td>
 <td>+2
 </td></tr></tbody></table>
-<p><b>Vanilla Attributes:</b>
-</p>
-<ul><li><span class="omod">74 stamina</span> at level 1</li></ul>
 <p>Individual skill tree pages:
 </p>
 <ul><li><a href="/wiki/Cold_Spells" title="Cold Spells">Cold Spells</a></li>
@@ -787,6 +784,9 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Fixed ranged attacks with enchants not properly gaining mastery bonuses</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Level 8-16 damage scaling increased from 5-6 to 6-7</li>
@@ -1037,7 +1037,7 @@
 <td>826
 </td></tr>
 <tr>
-<th scope="row">Cold&#160;Length&#160;(seconds)
+<th scope="row">Cold Length (seconds)
 </th>
 <td>8</td>
 <td>8.2</td>
@@ -1166,13 +1166,16 @@
 </td></tr></tbody></table>
 <p><b>Frost Nova receives bonuses from:</b>
 </p>
-<ul><li>Ice Bolt: +7% Damage per Level</li>
-<li>Shiver Armor: +7% Damage per Level</li></ul>
+<ul><li>Ice Bolt: +8% Damage per Level</li>
+<li>Shiver Armor: +8% Damage per Level</li></ul>
 <table class="non-table mw-collapsible mw-collapsed">
 <caption>Changelog
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Synergies increased from 7% to 8%</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Radius slightly reduced</li>
@@ -2018,12 +2021,15 @@
 </td></tr></tbody></table>
 <p><b>Shiver Armor receives bonuses from:</b>
 </p>
-<ul><li>Cold Enchant: +20% Damage per Level</li></ul>
+<ul><li>Frost Nova: +20% Damage per Level</li></ul>
 <table class="non-table mw-collapsible mw-collapsed">
 <caption>Changelog
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Cold enchant synergy replaced with frost nova</li></ul>
 <p><b>Season 12:</b>
 </p>
 <ul><li>Gives +10% faster block rate + 2% per base level</li>
@@ -2353,7 +2359,8 @@
 <li><b>Required Level:</b> 24</li>
 <li><b>Required Skills:</b> Cold Enchant [1], Shiver Armor [12]</li></ul>
 </div>
-<ul><li><b>Mana Cost</b>: 17</li></ul>
+<ul><li><b>Damage Radius</b>: 2.66 Yards</li>
+<li><b>Mana Cost</b>: 17</li></ul>
 <table class="wikitable scroll">
 <tbody><tr>
 <th scope="col">Level
@@ -2792,7 +2799,7 @@
 </td></tr></tbody></table>
 <p><b>Chilling Armor receives bonuses from:</b>
 </p>
-<ul><li>Cold Enchant: +20% Damage per Level</li></ul>
+<ul><li>Blizzard: +20% Damage per Level</li></ul>
 <p><b>Other Sources:</b> <a href="/wiki/Blackoak_Shield" class="mw-redirect" title="Blackoak Shield">Blackoak Shield</a> (level 11)
 </p>
 <table class="non-table mw-collapsible mw-collapsed">
@@ -2800,6 +2807,10 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Now deals aoe damage on hit similar to blizzard</li>
+<li>Cold enchant synergy replaced with blizzard</li></ul>
 <p><b>Season 12:</b>
 </p>
 <ul><li>Gives +5% successful chance to block + 1% per base level</li></ul>
@@ -4837,7 +4848,7 @@
 <li><b>Required Level:</b> 1</li>
 <li><b>Required Skills:</b> None</li></ul>
 </div>
-<ul><li><b>Reduces enemy's current Life by 25% if current Life is above 55/70/85% (Normal/Nightmare/Hell) of Max Life.</b></li>
+<ul><li><b>Reduces enemy's current Life by 8%, to a minimum of 55/70/85% (Normal/Nightmare/Hell) of Max Life.</b></li>
 <li><b>Duration:</b> 5 Seconds (Up to 9 Seconds with Synergy)</li></ul>
 <table class="wikitable scroll">
 <tbody><tr>
@@ -5033,25 +5044,30 @@
 <td><p>9.33
 </p></td></tr></tbody></table>
 <p>Static Field can break Lightning Immunity. See <a href="/wiki/Game_Mechanics#Reducing_Resistances" title="Game Mechanics">Reducing Resistances</a> for more information. 
-</p><p>Static Field's 25% Life reduction is Lightning Damage, reduced (or increased) normally by enemy Lightning Resistance.
-</p><p>Because the current Life check is before the damage calculation, Static Field's total damage can exceed the 55/70/85% cap. (see example below)
-</p>
-<table class="non-table mw-collapsible mw-collapsed">
-<caption>Static Field Damage Example
-</caption>
-<tbody><tr>
-<td>
-<p>Level 33 Static Field (-32%) is cast against an Enemy with 50% Lightning Resistance in Hell difficulty 
-</p><p><b>Cast 1:</b> 12.5% Damage (25% * 50% Resistance)
-</p><p>Enemy reduced to 87.5% HP and 18% Lightning Resistance 
-</p><p><b>Cast 2:</b> 17.9375% Damage ((25% of 87.5% or 21.875%) * 18% Resistance)
-</p><p>Enemy reduced to 69.5625% Life and still at 18% Lightning Resistance
-</p><p><b>Cast 3:</b> Enemy is below 85% Life, damage portion of Static Field does not effect enemy (Resistance debuff still refreshed)
-</p>
-</td></tr></tbody></table>
-<p><b>Static Field receives bonuses from:</b>
+</p><p>Static Field's 8% Life reduction is Lightning Damage, reduced (or increased) normally by enemy Lightning Resistance.
+</p><p><b>Static Field receives bonuses from:</b>
 </p>
 <ul><li>Lightning Mastery: +0.2 Seconds Duration per Level</li></ul>
+<p>Static Field's above properties describe it when cast by a Player. When cast automatically by an item (see below), the following properties apply:
+</p>
+<table class="wikitable">
+<caption>Auto-Cast Static Field Skill Changes
+</caption>
+<tbody><tr>
+<th scope="col">Property
+</th>
+<th scope="col">Value
+</th></tr>
+<tr>
+<th scope="row">Radius (yards)
+</th>
+<td><center>10.66</center>
+</td></tr>
+<tr>
+<th scope="row">Duration
+</th>
+<td><center>13 Seconds</center>
+</td></tr></tbody></table>
 <p><b>When Struck Sources:</b> <a href="/wiki/Aetherwing" class="mw-redirect" title="Aetherwing">Aetherwing</a> (35% cast level 40), <a href="/wiki/Epiphany" class="mw-redirect" title="Epiphany">Epiphany</a> (25% cast level 27), Cow King's Leathers Set Bonuses (25% Chance cast Level 18), <a href="/wiki/Hwanin%27s_Refuge" class="mw-redirect" title="Hwanin&#39;s Refuge">Hwanin's Refuge</a> (20% cast level 9) 
 </p><p><b>On Striking Sources:</b> <a href="/wiki/Stormspire" class="mw-redirect" title="Stormspire">Stormspire</a> (75% cast level 40), <a href="/wiki/Stormlash" class="mw-redirect" title="Stormlash">Stormlash</a> &amp; <a href="/wiki/Schaefer%27s_Hammer" class="mw-redirect" title="Schaefer&#39;s Hammer">Schaefer's Hammer</a> (20% cast level 25),  <a href="/wiki/Hwanin%27s_Justice" class="mw-redirect" title="Hwanin&#39;s Justice">Hwanin's Justice</a> (20% cast level 16), <a href="/wiki/Crescent_Moon_(Weapon)" class="mw-redirect" title="Crescent Moon (Weapon)">Crescent Moon (Weapon)</a> (24/12% cast level 13)
 </p><p><b>On Casting Sources:</b> <a href="/wiki/Spire_of_Lazarus" class="mw-redirect" title="Spire of Lazarus">Spire of Lazarus</a> (30% cast level 15)
@@ -5061,6 +5077,11 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Current life damage reduced from 25% to 8%</li>
+<li>Static Field procs now have a maximum range of 16</li>
+<li>Fixed Static Field exceeding its intended damage limit of 85% in hell</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Base lightning pierce increased from -2% to -5%</li>
@@ -5911,6 +5932,9 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Improved tooltip description</li></ul>
 <p><b>Season 11:</b>
 </p>
 <ul><li>-% damage debuff can now reach 0% instead of having a minimum debuff of -15%</li>
@@ -7596,7 +7620,7 @@
 <td>738
 </td></tr>
 <tr>
-<th scope="row">Attack Rating +%
+<th scope="row">Attack Rating +
 </th>
 <td>20</td>
 <td>30</td>
@@ -7664,6 +7688,10 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Fixed Warmth granting percentage attack rating instead of flat attack rating</li>
+<li>Now correctly grants 20 attack rating at level 1 and 10 additional attack rating per level</li></ul>
 <p><b>Season 1:</b>
 </p>
 <ul><li>now also adds flat attack rating (10 + 10 per level)</li></ul>
@@ -8402,6 +8430,9 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Fixed issues with casting between skills such as teleport, blink, etc</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Base fire pierce increased from -2% to -5%</li>
@@ -8442,7 +8473,7 @@
 <li><b>Required Skills:</b> Inferno [1]</li></ul>
 </div>
 <ul><li><b>Cooldown</b>: 2 Seconds</li>
-<li><b>Caster has Cannot be Frozen while Blaze is active</b></li>
+<li><b>Caster has Cannot be Frozen and Phasing while Blaze is active</b></li>
 <li><b>Explosion Radius</b>: 3.33 Yards</li>
 <li><b>Burning Duration (Explosion)</b>: 1.4 Seconds (35 frames)</li>
 <li><b>Burning Duration (Trail)</b>: 2.4 Seconds (60 frames)</li></ul>
@@ -8770,67 +8801,67 @@
 <tr>
 <th scope="row">Movement Speed +%
 </th>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>29</td>
+<td>30</td>
+<td>31</td>
+<td>32</td>
 <td>33</td>
+<td>34</td>
 <td>35</td>
+<td>36</td>
 <td>37</td>
 <td>38</td>
+<td>39</td>
 <td>40</td>
 <td>41</td>
-<td><p>41</p></td>
 <td>42</td>
 <td>43</td>
-<td><p>43</p></td>
 <td>44</td>
-<td><p>44</p></td>
 <td>45</td>
-<td><p>45</p></td>
-<td><p>45</p></td>
 <td>46</td>
 <td>47</td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
 <td>48</td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
 <td>49</td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td>50
-</td></tr>
+<td>50</td>
+<td>51</td>
+<td>52</td>
+<td>53</td>
+<td>54</td>
+<td>55</td>
+<td>56</td>
+<td>57</td>
+<td>58</td>
+<td>59</td>
+<td>60</td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60
+</p></td></tr>
 <tr>
 <th scope="row">Duration (seconds)
 </th>
@@ -8959,7 +8990,8 @@
 <td>40</td>
 <td>40.5
 </td></tr></tbody></table>
-<p>Despite the in-game skill description, both components of Blaze are per-second Burning damage.
+<p>Phasing allows you to move through other player &amp; monster hitboxes while Blaze is active.
+</p><p>Despite the in-game skill description, both components of Blaze are per-second Burning damage.
 </p><p>Blaze's damage is "Burning" Damage, which is applied every frame (x3 times due to how burning ground works). Values here are per second (75x the game file data) and rounded. See below for unrounded per-frame data:
 </p>
 <table class="wikitable mw-collapsible mw-collapsed scroll">
@@ -9293,6 +9325,13 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Velocity scaling changed from a diminishing return scaling that goes from 30-50% to 25% +1% per level (caps at 60%)</li>
+<li>Now grants the player phasing during the duration
+<ul><li>Note: Phasing allows the player to walk through enemies</li></ul></li>
+<li>Fixed burning ground incorrectly receiving a damage synergy from Warmth
+<ul><li>Burning ground’s Fire Wall synergy increased from 3% to 6% per base point, matching the skill</li></ul></li></ul>
 <p><b>Season 11:</b>
 </p>
 <ul><li>Tooltip now explains that the player is granted cannot be frozen during the duration of blaze</li></ul>
@@ -10459,6 +10498,9 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Projectile speed increased by 25%</li></ul>
 <p><b>Season 5:</b>
 </p>
 <ul><li>No longer benefits from resistance penetration</li>
@@ -10820,6 +10862,9 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Fixed ranged attacks with enchants not properly gaining mastery bonuses</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Level 1-8 damage scaling increased from 6-8 to 8-10</li>
@@ -11606,6 +11651,9 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Fixed burning ground receiving a synergy from Fire Wall instead of Inferno</li></ul>
 <p><b>Season 6:</b>
 </p>
 <ul><li>Meteor physical damage now scales from fire mastery and +% fire damage sources</li>
@@ -12215,6 +12263,10 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Projectile speed increased by 25%</li>
+<li>Fixed a bug with fireball/hydra fireball hitting twice under certain conditions</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Now pierces</li>

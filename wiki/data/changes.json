@@ -1,5 +1,357 @@
 [
  {
+  "date": "2026-10-24T14:25:43.956Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "Act 2 Mercenary Runewords",
+    "edited": "2026-10-23T15:39:38Z",
+    "summary": "note about zon weaps"
+   },
+   {
+    "title": "Act 3 Mercenary Runewords",
+    "edited": "2025-06-04T13:28:53Z",
+    "summary": "Undo revision [[Special:Diff/20255|20255]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "Act 5 Mercenary Runewords",
+    "edited": "2025-06-04T13:28:42Z",
+    "summary": "Undo revision [[Special:Diff/20254|20254]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "All Items",
+    "edited": "2025-12-03T12:16:51Z",
+    "summary": "added quivers"
+   },
+   {
+    "title": "All Necromancer Skills",
+    "edited": "2023-09-09T17:11:05Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Paladin Skills",
+    "edited": "2023-09-09T17:11:27Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Runewords",
+    "edited": "2025-11-27T17:00:54Z",
+    "summary": "Added quiver runewords"
+   },
+   {
+    "title": "All Set Items",
+    "edited": "2022-04-06T23:45:25Z",
+    "summary": "add headers"
+   },
+   {
+    "title": "All Skills",
+    "edited": "2026-06-20T22:47:43Z",
+    "summary": "Link to Merc skills"
+   },
+   {
+    "title": "All Sorceress Skills",
+    "edited": "2023-09-09T17:11:45Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Topics",
+    "edited": "2023-09-09T16:57:53Z",
+    "summary": "added topics"
+   },
+   {
+    "title": "All Unique Non-Weapons",
+    "edited": "2025-11-29T02:32:18Z",
+    "summary": "added quivers to all uniques"
+   },
+   {
+    "title": "All Unique Weapons",
+    "edited": "2022-08-03T02:13:47Z",
+    "summary": ""
+   },
+   {
+    "title": "Amulets",
+    "edited": "2026-10-23T16:54:28Z",
+    "summary": "/* Seraph's Hymn */"
+   },
+   {
+    "title": "Axe Runewords",
+    "edited": "2026-03-31T21:10:26Z",
+    "summary": "Switch to transcluded menu"
+   },
+   {
+    "title": "Axes",
+    "edited": "2026-10-23T16:48:20Z",
+    "summary": "/* Rakescar */"
+   },
+   {
+    "title": "Bows",
+    "edited": "2026-10-23T16:35:09Z",
+    "summary": "/* Witherstring */"
+   },
+   {
+    "title": "Chests",
+    "edited": "2026-10-23T16:52:07Z",
+    "summary": "/* Templar's Might */"
+   },
+   {
+    "title": "Class Attributes",
+    "edited": "2026-10-24T00:30:26Z",
+    "summary": "/* Paladin Attributes */"
+   },
+   {
+    "title": "Class Weapons",
+    "edited": "2026-10-23T17:21:25Z",
+    "summary": "/* Armageddon's Blade */ teaser"
+   },
+   {
+    "title": "Cold Spells",
+    "edited": "2026-10-23T22:09:59Z",
+    "summary": "/* Chilling Armor */ s14"
+   },
+   {
+    "title": "Combat Skills (Paladin)",
+    "edited": "2026-10-24T02:45:43Z",
+    "summary": "/* Sacrifice */"
+   },
+   {
+    "title": "Corruptions",
+    "edited": "2026-10-23T14:45:20Z",
+    "summary": "/* Equipment Corruptions */"
+   },
+   {
+    "title": "Cosmetics",
+    "edited": "2026-10-23T14:51:56Z",
+    "summary": "/* War Traveler */"
+   },
+   {
+    "title": "Crossbows",
+    "edited": "2026-10-23T16:50:40Z",
+    "summary": "/* Leadcrow */"
+   },
+   {
+    "title": "Curses",
+    "edited": "2026-10-23T21:41:05Z",
+    "summary": "/* Weaken */ s14 proc change"
+   },
+   {
+    "title": "Customization",
+    "edited": "2023-01-19T18:26:39Z",
+    "summary": "Removed page from translation"
+   },
+   {
+    "title": "Daggers",
+    "edited": "2026-10-23T16:38:30Z",
+    "summary": "/* Stormspike */"
+   },
+   {
+    "title": "Elite",
+    "edited": "2026-10-23T14:35:40Z",
+    "summary": "/* Immortal King's Stone Crusher */ s14 change"
+   },
+   {
+    "title": "Exceptional",
+    "edited": "2026-10-23T14:28:32Z",
+    "summary": "/* Set Bonuses for Cow King's Leathers */ cow form"
+   },
+   {
+    "title": "Filter Info",
+    "edited": "2026-10-23T15:29:33Z",
+    "summary": "/* List of Public Filters */"
+   },
+   {
+    "title": "Fire Spells",
+    "edited": "2026-10-23T22:17:25Z",
+    "summary": "/* Blaze */ s14 changes"
+   },
+   {
+    "title": "Gloves",
+    "edited": "2026-10-23T16:47:42Z",
+    "summary": "/* Frostburn */"
+   },
+   {
+    "title": "Hammer Runewords",
+    "edited": "2025-06-04T13:26:48Z",
+    "summary": "Undo revision [[Special:Diff/20245|20245]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "Helms",
+    "edited": "2026-10-23T17:01:54Z",
+    "summary": "/* Halaberd's Reign */"
+   },
+   {
+    "title": "Item Affixes",
+    "edited": "2026-10-24T09:44:32Z",
+    "summary": "/* Grand Charm Affixes */ Updated affixes S14"
+   },
+   {
+    "title": "Item Bases",
+    "edited": "2026-10-23T17:13:17Z",
+    "summary": "/* Sockets */ new s14 sockets"
+   },
+   {
+    "title": "Item Filtering",
+    "edited": "2026-04-30T07:22:00Z",
+    "summary": ""
+   },
+   {
+    "title": "Item Skills",
+    "edited": "2026-10-23T17:27:17Z",
+    "summary": "/* Cow Form */"
+   },
+   {
+    "title": "Lightning Spells",
+    "edited": "2026-10-23T22:00:27Z",
+    "summary": "/* Teleport */ s14"
+   },
+   {
+    "title": "Links",
+    "edited": "2026-10-23T22:24:23Z",
+    "summary": "/* Active Play & Economy Tools */ pd2 trader note"
+   },
+   {
+    "title": "Mace Runewords",
+    "edited": "2025-06-04T13:26:21Z",
+    "summary": "Undo revision [[Special:Diff/20243|20243]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "Maces",
+    "edited": "2026-10-23T16:57:58Z",
+    "summary": "/* The Cranium Basher */"
+   },
+   {
+    "title": "Main Page",
+    "edited": "2026-10-23T22:21:59Z",
+    "summary": ""
+   },
+   {
+    "title": "New Equipment",
+    "edited": "2025-05-18T21:37:13Z",
+    "summary": ""
+   },
+   {
+    "title": "New Runewords",
+    "edited": "2026-05-04T14:18:51Z",
+    "summary": "/* Quivers */"
+   },
+   {
+    "title": "Offensive Auras",
+    "edited": "2026-10-24T02:07:11Z",
+    "summary": "/* Thorns */ s14"
+   },
+   {
+    "title": "Patch Notes",
+    "edited": "2026-10-23T17:36:01Z",
+    "summary": ""
+   },
+   {
+    "title": "Polearm Runewords",
+    "edited": "2026-03-31T21:23:30Z",
+    "summary": "Working on a proper a2 page"
+   },
+   {
+    "title": "Quivers",
+    "edited": "2026-10-23T16:59:59Z",
+    "summary": "/* Doom's Finger */"
+   },
+   {
+    "title": "Recipes",
+    "edited": "2026-06-27T00:34:49Z",
+    "summary": "/* Other Modification Recipes */ added mirror notes (jewel, mirrored tag on both items)"
+   },
+   {
+    "title": "Runes",
+    "edited": "2026-10-23T16:10:02Z",
+    "summary": "/* Runes */"
+   },
+   {
+    "title": "RWChests",
+    "edited": "2026-10-23T16:17:46Z",
+    "summary": "/* Dragon */"
+   },
+   {
+    "title": "RWHelms",
+    "edited": "2026-10-23T16:13:12Z",
+    "summary": "/* Flickering Flame */"
+   },
+   {
+    "title": "RWShields",
+    "edited": "2026-10-23T16:20:59Z",
+    "summary": "/* Phoenix */"
+   },
+   {
+    "title": "RWWeapons",
+    "edited": "2026-10-23T18:40:50Z",
+    "summary": "/* Madness */"
+   },
+   {
+    "title": "Scepter Runewords",
+    "edited": "2025-06-04T13:27:51Z",
+    "summary": "Undo revision [[Special:Diff/20250|20250]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "Scepters",
+    "edited": "2026-10-23T16:29:58Z",
+    "summary": "/* The Fetid Sprinkler */"
+   },
+   {
+    "title": "Shields",
+    "edited": "2026-10-23T14:37:04Z",
+    "summary": "/* Elite Shields */ oops"
+   },
+   {
+    "title": "Spears",
+    "edited": "2026-10-23T16:46:37Z",
+    "summary": "/* Viperfork */"
+   },
+   {
+    "title": "Staff Runewords",
+    "edited": "2025-06-04T13:28:31Z",
+    "summary": "Undo revision [[Special:Diff/20253|20253]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "Staves",
+    "edited": "2026-10-23T16:58:49Z",
+    "summary": "/* Skull Collector */"
+   },
+   {
+    "title": "Sword Runewords",
+    "edited": "2025-06-04T13:27:06Z",
+    "summary": "Undo revision [[Special:Diff/20246|20246]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "Swords",
+    "edited": "2026-10-23T16:57:09Z",
+    "summary": "/* Plague Bearer */"
+   },
+   {
+    "title": "Throwing",
+    "edited": "2026-10-23T16:55:55Z",
+    "summary": "/* Warshrike */"
+   },
+   {
+    "title": "Throwing Runewords",
+    "edited": "2026-10-23T15:28:35Z",
+    "summary": "added jealousy"
+   },
+   {
+    "title": "Tipped Mace Runewords",
+    "edited": "2025-06-04T13:26:04Z",
+    "summary": "Undo revision [[Special:Diff/20242|20242]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "To Do",
+    "edited": "2026-10-24T02:21:43Z",
+    "summary": "/* Paladin */"
+   },
+   {
+    "title": "Wands",
+    "edited": "2026-10-23T16:28:23Z",
+    "summary": "/* Maelstrom */ s14"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-10-23T14:24:27.484Z",
   "added": [
    "Ghgjhjhjh",

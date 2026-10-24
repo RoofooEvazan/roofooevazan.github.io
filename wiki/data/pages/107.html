@@ -437,7 +437,7 @@
 <td>738
 </td></tr>
 <tr>
-<th scope="row">Attack Rating +%
+<th scope="row">Attack Rating +
 </th>
 <td>20</td>
 <td>30</td>
@@ -505,6 +505,10 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Fixed Warmth granting percentage attack rating instead of flat attack rating</li>
+<li>Now correctly grants 20 attack rating at level 1 and 10 additional attack rating per level</li></ul>
 <p><b>Season 1:</b>
 </p>
 <ul><li>now also adds flat attack rating (10 + 10 per level)</li></ul>
@@ -1243,6 +1247,9 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Fixed issues with casting between skills such as teleport, blink, etc</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Base fire pierce increased from -2% to -5%</li>
@@ -1283,7 +1290,7 @@
 <li><b>Required Skills:</b> Inferno [1]</li></ul>
 </div>
 <ul><li><b>Cooldown</b>: 2 Seconds</li>
-<li><b>Caster has Cannot be Frozen while Blaze is active</b></li>
+<li><b>Caster has Cannot be Frozen and Phasing while Blaze is active</b></li>
 <li><b>Explosion Radius</b>: 3.33 Yards</li>
 <li><b>Burning Duration (Explosion)</b>: 1.4 Seconds (35 frames)</li>
 <li><b>Burning Duration (Trail)</b>: 2.4 Seconds (60 frames)</li></ul>
@@ -1611,67 +1618,67 @@
 <tr>
 <th scope="row">Movement Speed +%
 </th>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>29</td>
+<td>30</td>
+<td>31</td>
+<td>32</td>
 <td>33</td>
+<td>34</td>
 <td>35</td>
+<td>36</td>
 <td>37</td>
 <td>38</td>
+<td>39</td>
 <td>40</td>
 <td>41</td>
-<td><p>41</p></td>
 <td>42</td>
 <td>43</td>
-<td><p>43</p></td>
 <td>44</td>
-<td><p>44</p></td>
 <td>45</td>
-<td><p>45</p></td>
-<td><p>45</p></td>
 <td>46</td>
 <td>47</td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
-<td><p>47</p></td>
 <td>48</td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
-<td><p>48</p></td>
 <td>49</td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td><p>49</p></td>
-<td>50
-</td></tr>
+<td>50</td>
+<td>51</td>
+<td>52</td>
+<td>53</td>
+<td>54</td>
+<td>55</td>
+<td>56</td>
+<td>57</td>
+<td>58</td>
+<td>59</td>
+<td>60</td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>60
+</p></td></tr>
 <tr>
 <th scope="row">Duration (seconds)
 </th>
@@ -1800,7 +1807,8 @@
 <td>40</td>
 <td>40.5
 </td></tr></tbody></table>
-<p>Despite the in-game skill description, both components of Blaze are per-second Burning damage.
+<p>Phasing allows you to move through other player &amp; monster hitboxes while Blaze is active.
+</p><p>Despite the in-game skill description, both components of Blaze are per-second Burning damage.
 </p><p>Blaze's damage is "Burning" Damage, which is applied every frame (x3 times due to how burning ground works). Values here are per second (75x the game file data) and rounded. See below for unrounded per-frame data:
 </p>
 <table class="wikitable mw-collapsible mw-collapsed scroll">
@@ -2134,6 +2142,13 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Velocity scaling changed from a diminishing return scaling that goes from 30-50% to 25% +1% per level (caps at 60%)</li>
+<li>Now grants the player phasing during the duration
+<ul><li>Note: Phasing allows the player to walk through enemies</li></ul></li>
+<li>Fixed burning ground incorrectly receiving a damage synergy from Warmth
+<ul><li>Burning ground’s Fire Wall synergy increased from 3% to 6% per base point, matching the skill</li></ul></li></ul>
 <p><b>Season 11:</b>
 </p>
 <ul><li>Tooltip now explains that the player is granted cannot be frozen during the duration of blaze</li></ul>
@@ -3300,6 +3315,9 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Projectile speed increased by 25%</li></ul>
 <p><b>Season 5:</b>
 </p>
 <ul><li>No longer benefits from resistance penetration</li>
@@ -3661,6 +3679,9 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Fixed ranged attacks with enchants not properly gaining mastery bonuses</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Level 1-8 damage scaling increased from 6-8 to 8-10</li>
@@ -4447,6 +4468,9 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Fixed burning ground receiving a synergy from Fire Wall instead of Inferno</li></ul>
 <p><b>Season 6:</b>
 </p>
 <ul><li>Meteor physical damage now scales from fire mastery and +% fire damage sources</li>
@@ -5056,6 +5080,10 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Projectile speed increased by 25%</li>
+<li>Fixed a bug with fireball/hydra fireball hitting twice under certain conditions</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Now pierces</li>

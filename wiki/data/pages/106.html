@@ -688,7 +688,7 @@
 <li><b>Required Level:</b> 1</li>
 <li><b>Required Skills:</b> None</li></ul>
 </div>
-<ul><li><b>Reduces enemy's current Life by 25% if current Life is above 55/70/85% (Normal/Nightmare/Hell) of Max Life.</b></li>
+<ul><li><b>Reduces enemy's current Life by 8%, to a minimum of 55/70/85% (Normal/Nightmare/Hell) of Max Life.</b></li>
 <li><b>Duration:</b> 5 Seconds (Up to 9 Seconds with Synergy)</li></ul>
 <table class="wikitable scroll">
 <tbody><tr>
@@ -884,25 +884,30 @@
 <td><p>9.33
 </p></td></tr></tbody></table>
 <p>Static Field can break Lightning Immunity. See <a href="/wiki/Game_Mechanics#Reducing_Resistances" title="Game Mechanics">Reducing Resistances</a> for more information. 
-</p><p>Static Field's 25% Life reduction is Lightning Damage, reduced (or increased) normally by enemy Lightning Resistance.
-</p><p>Because the current Life check is before the damage calculation, Static Field's total damage can exceed the 55/70/85% cap. (see example below)
-</p>
-<table class="non-table mw-collapsible mw-collapsed">
-<caption>Static Field Damage Example
-</caption>
-<tbody><tr>
-<td>
-<p>Level 33 Static Field (-32%) is cast against an Enemy with 50% Lightning Resistance in Hell difficulty 
-</p><p><b>Cast 1:</b> 12.5% Damage (25% * 50% Resistance)
-</p><p>Enemy reduced to 87.5% HP and 18% Lightning Resistance 
-</p><p><b>Cast 2:</b> 17.9375% Damage ((25% of 87.5% or 21.875%) * 18% Resistance)
-</p><p>Enemy reduced to 69.5625% Life and still at 18% Lightning Resistance
-</p><p><b>Cast 3:</b> Enemy is below 85% Life, damage portion of Static Field does not effect enemy (Resistance debuff still refreshed)
-</p>
-</td></tr></tbody></table>
-<p><b>Static Field receives bonuses from:</b>
+</p><p>Static Field's 8% Life reduction is Lightning Damage, reduced (or increased) normally by enemy Lightning Resistance.
+</p><p><b>Static Field receives bonuses from:</b>
 </p>
 <ul><li>Lightning Mastery: +0.2 Seconds Duration per Level</li></ul>
+<p>Static Field's above properties describe it when cast by a Player. When cast automatically by an item (see below), the following properties apply:
+</p>
+<table class="wikitable">
+<caption>Auto-Cast Static Field Skill Changes
+</caption>
+<tbody><tr>
+<th scope="col">Property
+</th>
+<th scope="col">Value
+</th></tr>
+<tr>
+<th scope="row">Radius (yards)
+</th>
+<td><center>10.66</center>
+</td></tr>
+<tr>
+<th scope="row">Duration
+</th>
+<td><center>13 Seconds</center>
+</td></tr></tbody></table>
 <p><b>When Struck Sources:</b> <a href="/wiki/Aetherwing" class="mw-redirect" title="Aetherwing">Aetherwing</a> (35% cast level 40), <a href="/wiki/Epiphany" class="mw-redirect" title="Epiphany">Epiphany</a> (25% cast level 27), Cow King's Leathers Set Bonuses (25% Chance cast Level 18), <a href="/wiki/Hwanin%27s_Refuge" class="mw-redirect" title="Hwanin&#39;s Refuge">Hwanin's Refuge</a> (20% cast level 9) 
 </p><p><b>On Striking Sources:</b> <a href="/wiki/Stormspire" class="mw-redirect" title="Stormspire">Stormspire</a> (75% cast level 40), <a href="/wiki/Stormlash" class="mw-redirect" title="Stormlash">Stormlash</a> &amp; <a href="/wiki/Schaefer%27s_Hammer" class="mw-redirect" title="Schaefer&#39;s Hammer">Schaefer's Hammer</a> (20% cast level 25),  <a href="/wiki/Hwanin%27s_Justice" class="mw-redirect" title="Hwanin&#39;s Justice">Hwanin's Justice</a> (20% cast level 16), <a href="/wiki/Crescent_Moon_(Weapon)" class="mw-redirect" title="Crescent Moon (Weapon)">Crescent Moon (Weapon)</a> (24/12% cast level 13)
 </p><p><b>On Casting Sources:</b> <a href="/wiki/Spire_of_Lazarus" class="mw-redirect" title="Spire of Lazarus">Spire of Lazarus</a> (30% cast level 15)
@@ -912,6 +917,11 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Current life damage reduced from 25% to 8%</li>
+<li>Static Field procs now have a maximum range of 16</li>
+<li>Fixed Static Field exceeding its intended damage limit of 85% in hell</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Base lightning pierce increased from -2% to -5%</li>
@@ -1762,6 +1772,9 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Improved tooltip description</li></ul>
 <p><b>Season 11:</b>
 </p>
 <ul><li>-% damage debuff can now reach 0% instead of having a minimum debuff of -15%</li>

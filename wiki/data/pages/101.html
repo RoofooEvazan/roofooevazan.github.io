@@ -723,7 +723,8 @@
 <li><b>Required Level:</b> 1</li>
 <li><b>Required Skills:</b> None</li></ul>
 </div>
-<ul><li><b>Mana Cost</b>: 2</li></ul>
+<ul><li><b>Melee Splash Radius</b>: +20%</li>
+<li><b>Mana Cost</b>: 2</li></ul>
 <table class="wikitable scroll">
 <tbody><tr>
 <th scope="col">Level
@@ -1033,12 +1034,18 @@
 <td>25
 </td></tr></tbody></table>
 <p>Smite has not mechanically changed in Project Diablo 2, but many items and Skills that made Smite so powerful in Lord of Destruction (e.g., <a href="/wiki/Grief" class="mw-redirect" title="Grief">Grief</a>, <a href="/wiki/Life_Tap" class="mw-redirect" title="Life Tap">Life Tap</a>) have changed. 
+</p><p><a href="/wiki/Game_Mechanics#Life_and_Mana_Steal" title="Game Mechanics">Life &amp; Mana Steal</a> work on Smite Damage in Project Diablo 2.
 </p>
 <table class="non-table mw-collapsible mw-collapsed">
 <caption>Changelog
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Fixed several desync issues</li>
+<li>Increased melee splash radius by 20%</li>
+<li>Now benefits from life steal and mana steal</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Base crushing blow efficiency increased from +10% to +15%</li>
@@ -1082,8 +1089,9 @@
 <li><b>Required Level:</b> 6</li>
 <li><b>Required Skills:</b> Zeal[1]</li></ul>
 </div>
-<ul><li><b>Mana Cost</b>: 0</li>
-<li><b>Damage to Self</b>: 3% of maximum life</li></ul>
+<ul><li><b>Melee Splash Radius</b>: +20%</li>
+<li><b>Damage to Self</b>: 3% of Maximum Life</li>
+<li><b>Mana Cost</b>: 0</li></ul>
 <table class="wikitable scroll">
 <tbody><tr>
 <th scope="col">Level
@@ -1341,10 +1349,34 @@
 <td>948</td>
 <td>964
 </td></tr></tbody></table>
-<ul><li>The explosion uses 5% of the average base monster life, rather than 5% of that monster's fully modified maximum life.</li>
-<li>Critical strike and deadly strike do not apply to the Sacrifice hit or the overkill damage.</li>
-<li>Missing a strike can still incur the life cost.</li>
-<li>Explosion timing after kill is dependent on the animation of the mob that dies. For example, the number of frames between killing a fallen and explosion will be ~14 frames, whereas an enslaved will be ~12 frames.</li></ul>
+<p>For a detailed explanation of Sacrifice's mechanics, see below.
+</p>
+<table class="non-table mw-collapsible mw-collapsed">
+<caption>Sacrifice Mechanics
+</caption>
+<tbody><tr>
+<td>
+<dl><dt>Sacrifice Attack</dt>
+<dd>Sacrifice is a normal Melee Attack with <a href="/wiki/Game_Mechanics#Melee_Splash" title="Game Mechanics">Splash</a>, with one important caveat:
+<dl><dd>Critical Strike and Deadly strike do not apply to any part Sacrifice (Melee hit, Overkill, or Explosion).</dd></dl></dd></dl>
+<dl><dt>Sacrifice Self-Damage</dt>
+<dd>Sacrifice's Damage to Self will deal exactly 3% of your maximum Life and cannot be mitigated in any way.</dd>
+<dd>Sacrifice's Damage to Self will only apply when Sacrifice actually hits an enemy, with the specific exception of when an enemy moves out of melee range between the beginning of an attack animation and when it would have otherwise hit.</dd>
+<dd>Life Steal/Tap, Life After Each Hit, and Life after each Kill apply after Sacrifice's self-damage.</dd>
+<dt>Sacrifice Overkill</dt>
+<dd>Sacrifice's Overkill damage is equal to the damage dealt to an enemy in excess of its remaining life.</dd>
+<dd>All instant, concurrent sources of attack damage count for Overkill - Physical, Fire, Cold, Lightning, and Magic Damage all affect Overkill damage.
+<dl><dd>Percentage-based damage (Crushing Blow and Static Field) occur before normal damage and therefore indirectly increase Overkill damage.</dd>
+<dd>Non-instant damage (For Example: Poison Damage or Open Wounds applied with the attack) does not count in the Overkill calculation.</dd>
+<dd>Non-attack damage (For Example: a Holy Fire aura tick doing damage the same frame as your attack) also does not count in the Overkill calculation.</dd></dl></dd></dl>
+<dl><dt>Sacrifice Explosion</dt>
+<dd>When an enemy is killed by Sacrifice, it explodes.</dd>
+<dd>The explosion deals 5% of the enemy's Maximum Life and 125% of the Overkill damage (see above).
+<dl><dd>Sacrifice's Explosion damage is calculated using the average base life of the monster type killed, not the actual maximum life of the specific enemy. (Life modifiers such as map affixes or monster quality do not affect the explosion calculation)</dd></dl></dd>
+<dd>Sacrifice Explosion Damage is Physical Damage.
+<dl><dd>Physical Resistance Pierce -% effects Sacrifice Explosion Damage.</dd></dl></dd>
+<dd>Sacrifice's Explosion occurs about 0.5 seconds after the enemy is killed, however the specific delay is dependent on the enemy that dies. For example, the number of frames between killing a Fallen and the explosion will be 14 frames, whereas an Enslaved will be 12 frames.</dd></dl>
+</td></tr></tbody></table>
 <p><b>Sacrifice Receives Bonuses From:</b>
 </p>
 <ul><li>Redemption: +25% Damage per Level</li>
@@ -1354,6 +1386,11 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Fixed several desync issues</li>
+<li>Increased melee splash radius by 20%</li>
+<li>Now benefits from life steal and mana steal</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Maximum radius reduced by 16%</li>
@@ -3038,7 +3075,7 @@
 <td>746
 </td></tr>
 <tr>
-<th scope="row">Magic&#160;Damage&#160;(max)
+<th scope="row">Magic Damage (max)
 </th>
 <td>16</td>
 <td>24</td>
@@ -3165,7 +3202,8 @@
 <td>19.5</td>
 <td>19.75
 </td></tr></tbody></table>
-<p>Blessed Hammer receives increased damage from <a href="/wiki/Concentration" class="mw-redirect" title="Concentration">Concentration</a>.
+<p>Blessed Hammers phase through walls and other objects in Project Diablo 2.
+</p><p>Blessed Hammer receives increased damage from <a href="/wiki/Concentration" class="mw-redirect" title="Concentration">Concentration</a>.
 </p><p><b>Blessed Hammer Receives Bonuses From:</b>
 </p>
 <ul><li>Blessed Aim: +12% Magic Damage per Level</li>
@@ -3175,6 +3213,9 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Hammers now phase through walls and objects</li></ul>
 <p><b>Season 6:</b>
 </p>
 <ul><li>Blessed hammer no longer improperly displays dealing bonus damage to undead</li></ul>
@@ -4128,7 +4169,6 @@
 <li><b>Required Level:</b> 24</li>
 <li><b>Required Skills:</b> Holy Bolt [1], Holy Light [12], Blessed Hammer [18]</li></ul>
 </div>
-<ul><li><b>Fires 4 Holy Bolts</b></li></ul>
 <table class="wikitable scroll">
 <tbody><tr>
 <th scope="col">Level
@@ -4514,7 +4554,7 @@
 <td>24.5</td>
 <td>24.75
 </td></tr></tbody></table>
-<p>Holy Bolts from Fist of the Heavens do not Heal.
+<p>Fist of the Heavens strikes the primary target with Lightning, then releases Holy Bolts from the target's location targeting each nearby enemy (up to 50). These Bolts pierce enemies but do not Heal.
 </p><p><b>Fist of the Heavens Receives Bonuses From:</b>
 </p>
 <ul><li>Holy Bolt: +11% Damage per Level</li>
@@ -4525,6 +4565,11 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Reworked the holy bolts to deal damage to enemies they pierce through instead of just the target the bolt was initially targeting</li>
+<li>Added a 3 frame next-hit delay to Holy Bolt projectiles to prevent repeated damage ticks against the same enemy</li>
+<li>Fixed only 4 of fist of heavens holy bolts dealing damage</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Increased projectile speed of the holy bolts by 25%</li>
