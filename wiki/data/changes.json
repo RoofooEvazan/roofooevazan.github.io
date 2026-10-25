@@ -1,5 +1,227 @@
 [
  {
+  "date": "2026-10-25T14:24:15.528Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "Act 2 Mercenary Runewords",
+    "edited": "2026-10-24T14:48:50Z",
+    "summary": "/* 4-Sockets */ macness"
+   },
+   {
+    "title": "Act 3 Mercenary Runewords",
+    "edited": "2026-10-24T14:49:26Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Act 5 Mercenary Runewords",
+    "edited": "2026-10-24T14:49:49Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "All Items",
+    "edited": "2025-12-03T12:16:51Z",
+    "summary": "added quivers"
+   },
+   {
+    "title": "All Necromancer Skills",
+    "edited": "2023-09-09T17:11:05Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Skills",
+    "edited": "2026-06-20T22:47:43Z",
+    "summary": "Link to Merc skills"
+   },
+   {
+    "title": "All Topics",
+    "edited": "2023-09-09T16:57:53Z",
+    "summary": "added topics"
+   },
+   {
+    "title": "All Unique Non-Weapons",
+    "edited": "2025-11-29T02:32:18Z",
+    "summary": "added quivers to all uniques"
+   },
+   {
+    "title": "All Unique Weapons",
+    "edited": "2022-08-03T02:13:47Z",
+    "summary": ""
+   },
+   {
+    "title": "Axe Runewords",
+    "edited": "2026-10-24T14:43:05Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Axes",
+    "edited": "2026-10-24T15:04:44Z",
+    "summary": "/* Hellslayer */"
+   },
+   {
+    "title": "Belts",
+    "edited": "2026-10-24T15:11:57Z",
+    "summary": "/* String of Ears */"
+   },
+   {
+    "title": "Boots",
+    "edited": "2026-10-24T15:12:24Z",
+    "summary": "/* War Traveler */"
+   },
+   {
+    "title": "Bow Runewords",
+    "edited": "2026-10-24T14:47:10Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Chests",
+    "edited": "2026-10-24T15:11:29Z",
+    "summary": "/* Spirit Shroud */"
+   },
+   {
+    "title": "Class Attributes",
+    "edited": "2026-10-25T00:17:32Z",
+    "summary": "/* Necromancer Attributes */"
+   },
+   {
+    "title": "Cosmetics",
+    "edited": "2026-10-25T02:06:19Z",
+    "summary": "/* Discovery (Premium) */"
+   },
+   {
+    "title": "Crossbows",
+    "edited": "2026-10-24T15:04:20Z",
+    "summary": "/* Buriza-Do Kyanon */"
+   },
+   {
+    "title": "Curses",
+    "edited": "2026-10-25T00:44:49Z",
+    "summary": "/* Lower Resist */ s14"
+   },
+   {
+    "title": "Daggers",
+    "edited": "2026-10-24T15:03:46Z",
+    "summary": "/* Fleshripper */"
+   },
+   {
+    "title": "Gloves",
+    "edited": "2026-10-24T15:07:23Z",
+    "summary": "/* Venom Grip */"
+   },
+   {
+    "title": "Hammer Runewords",
+    "edited": "2026-10-24T14:45:02Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Helms",
+    "edited": "2026-10-24T15:08:25Z",
+    "summary": "/* Giant Skull */"
+   },
+   {
+    "title": "Item Bases",
+    "edited": "2026-10-24T14:39:47Z",
+    "summary": "/* Sockets */ added low ilvl info"
+   },
+   {
+    "title": "Item Codes",
+    "edited": "2026-10-24T20:51:19Z",
+    "summary": "/* PD2 Items */ Spelling fix for maps"
+   },
+   {
+    "title": "Item Filtering",
+    "edited": "2026-04-30T07:22:00Z",
+    "summary": ""
+   },
+   {
+    "title": "Item Skills",
+    "edited": "2026-10-25T01:35:30Z",
+    "summary": "/* Blade Dance */"
+   },
+   {
+    "title": "Mace Runewords",
+    "edited": "2026-10-24T14:43:51Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Maces",
+    "edited": "2026-10-24T15:03:13Z",
+    "summary": "/* Earth Shifter */"
+   },
+   {
+    "title": "Main Page",
+    "edited": "2026-10-24T14:32:55Z",
+    "summary": "Affix changes up"
+   },
+   {
+    "title": "Mercenary Skills",
+    "edited": "2026-10-25T01:23:08Z",
+    "summary": "/* Fire Ball (Mercenary-Only) */ s14 bug fix"
+   },
+   {
+    "title": "New Equipment",
+    "edited": "2025-05-18T21:37:13Z",
+    "summary": ""
+   },
+   {
+    "title": "Poison and Bone Spells",
+    "edited": "2026-10-25T01:09:17Z",
+    "summary": "/* Poison Strike */ s14"
+   },
+   {
+    "title": "Polearm Runewords",
+    "edited": "2026-10-24T14:46:42Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Polearms",
+    "edited": "2026-10-24T15:02:37Z",
+    "summary": "/* Stormspire */"
+   },
+   {
+    "title": "Scepter Runewords",
+    "edited": "2026-10-24T14:48:22Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Shields",
+    "edited": "2026-10-24T15:10:38Z",
+    "summary": "/* Medusa's Gaze */"
+   },
+   {
+    "title": "Staff Runewords",
+    "edited": "2026-10-24T14:47:44Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Summoning Spells",
+    "edited": "2026-10-25T00:56:39Z",
+    "summary": "/* Raise Skeleton Archer */ s14 changes"
+   },
+   {
+    "title": "Sword Runewords",
+    "edited": "2026-10-24T14:45:33Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Swords",
+    "edited": "2026-10-24T15:06:29Z",
+    "summary": "/* The Grandfather */"
+   },
+   {
+    "title": "Tipped Mace Runewords",
+    "edited": "2026-10-24T14:44:36Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "To Do",
+    "edited": "2026-10-25T01:14:16Z",
+    "summary": "/* Necromancer */"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-10-24T14:25:43.956Z",
   "added": [],
   "updated": [
