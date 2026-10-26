@@ -1,5 +1,42 @@
 [
  {
+  "date": "2026-10-26T14:24:14.327Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "All Items",
+    "edited": "2025-12-03T12:16:51Z",
+    "summary": "added quivers"
+   },
+   {
+    "title": "All Topics",
+    "edited": "2023-09-09T16:57:53Z",
+    "summary": "added topics"
+   },
+   {
+    "title": "All Unique Weapons",
+    "edited": "2022-08-03T02:13:47Z",
+    "summary": ""
+   },
+   {
+    "title": "Class Weapons",
+    "edited": "2026-10-25T22:42:01Z",
+    "summary": "/* Armageddon's Blade */"
+   },
+   {
+    "title": "Guilds",
+    "edited": "2026-10-25T19:31:42Z",
+    "summary": "clear mode details"
+   },
+   {
+    "title": "Links",
+    "edited": "2026-10-26T12:54:03Z",
+    "summary": "/* Character Planning & Theorycrafting */ new version of the Hiim skill planner"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-10-25T14:24:15.528Z",
   "added": [],
   "updated": [

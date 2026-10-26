@@ -415,7 +415,7 @@
    "title": "All Items",
    "display": "All Items",
    "rev": 21738,
-   "touched": "2026-10-24T15:12:24Z",
+   "touched": "2026-10-25T22:42:02Z",
    "edited": "2025-12-03T12:16:51Z",
    "len": 1360634,
    "intro": "Below is a compilation of all \"named\" items - unique/set/runeword items and some others, whose affixes are all explicitly determined rather than generated randomly. Crafted items also have some predetermined affixes, but"
@@ -485,9 +485,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-10-24T14:39:47Z",
+   "touched": "2026-10-26T12:54:04Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1800275,
+   "len": 1800261,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -505,7 +505,7 @@
    "title": "All Unique Weapons",
    "display": "All Unique Weapons",
    "rev": 14758,
-   "touched": "2026-10-24T15:06:30Z",
+   "touched": "2026-10-25T22:42:02Z",
    "edited": "2022-08-03T02:13:47Z",
    "len": 508738,
    "intro": "Below is a compilation of all unique weapons: Axes"
@@ -714,9 +714,9 @@
    "id": 18,
    "title": "Class Weapons",
    "display": "Class Weapons",
-   "rev": 24517,
-   "touched": "2026-10-23T17:21:25Z",
-   "edited": "2026-10-23T17:21:25Z",
+   "rev": 24650,
+   "touched": "2026-10-25T22:42:01Z",
+   "edited": "2026-10-25T22:42:01Z",
    "len": 53623,
    "intro": ""
   },
@@ -945,7 +945,7 @@
    "title": "Elite",
    "display": "Elite",
    "rev": 24403,
-   "touched": "2026-10-23T14:35:40Z",
+   "touched": "2026-10-26T01:56:17Z",
    "edited": "2026-10-23T14:35:40Z",
    "len": 82492,
    "intro": "This page lists the major class-focused set items. Also see: All Set Items"
@@ -1214,10 +1214,10 @@
    "id": 5860,
    "title": "Guilds",
    "display": "Guilds",
-   "rev": 24324,
-   "touched": "2026-10-22T19:53:23Z",
-   "edited": "2026-10-22T19:53:23Z",
-   "len": 12982,
+   "rev": 24649,
+   "touched": "2026-10-25T19:31:42Z",
+   "edited": "2026-10-25T19:31:42Z",
+   "len": 13049,
    "intro": "This article is marked as a stub, meaning it is incomplete or out of date. You can help Project Diablo 2 Wiki by adding missing information, or updating it. Reason: work in progress/incomplete Guilds Steeg Stone in the G"
   },
   {
@@ -1404,10 +1404,10 @@
    "id": 533,
    "title": "Links",
    "display": "Links",
-   "rev": 24542,
-   "touched": "2026-10-23T22:24:23Z",
-   "edited": "2026-10-23T22:24:23Z",
-   "len": 79550,
+   "rev": 24651,
+   "touched": "2026-10-26T12:54:03Z",
+   "edited": "2026-10-26T12:54:03Z",
+   "len": 79536,
    "intro": "This page is an information hub for everything PD2-related - it includes hyperlinks for tools, guides, and other info that isn't on the wiki itself."
   },
   {
@@ -1575,7 +1575,7 @@
    "title": "New Equipment",
    "display": "New Equipment",
    "rev": 19646,
-   "touched": "2026-10-24T15:12:24Z",
+   "touched": "2026-10-25T22:42:02Z",
    "edited": "2025-05-18T21:37:13Z",
    "len": 117372,
    "intro": "Below is a compilation of all new \"named\" (runeword/set/unique) equipment items. No old items are included here, even if they've been changed substantially compared to their vanilla counterparts. For a list of all new it"
@@ -10123,5 +10123,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "eb05515ea1"
+ "v": "800fe7099e"
 }
