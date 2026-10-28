@@ -345,7 +345,7 @@
    "title": "Act 2 Mercenary Runewords",
    "display": "Act 2 Mercenary Runewords",
    "rev": 24589,
-   "touched": "2026-10-24T14:48:50Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-10-24T14:48:50Z",
    "len": 61335,
    "intro": "Below is a compilation of all weapon runewords equippable by Act 2 Mercenaries. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Ru"
@@ -355,9 +355,9 @@
    "title": "Act 3 Mercenary Runewords",
    "display": "Act 3 Mercenary Runewords",
    "rev": 24590,
-   "touched": "2026-10-24T14:49:26Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-10-24T14:49:26Z",
-   "len": 72438,
+   "len": 72422,
    "intro": "Below is a compilation of all weapon runewords equippable by Act 3 Mercenaries. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Ru"
   },
   {
@@ -365,9 +365,9 @@
    "title": "Act 5 Mercenary Runewords",
    "display": "Act 5 Mercenary Runewords",
    "rev": 24591,
-   "touched": "2026-10-24T14:49:49Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-10-24T14:49:49Z",
-   "len": 72975,
+   "len": 72959,
    "intro": "Below is a compilation of all weapon runewords equippable by Act 5 Mercenaries. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Ru"
   },
   {
@@ -375,9 +375,9 @@
    "title": "All Amazon Skills",
    "display": "All Amazon Skills",
    "rev": 17341,
-   "touched": "2026-10-25T00:17:32Z",
+   "touched": "2026-10-28T03:16:56Z",
    "edited": "2023-09-09T16:56:26Z",
-   "len": 233589,
+   "len": 233457,
    "intro": "This page lists all Amazon skills & stats. Also see: Amazon Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 20 Dexterity 25 • Attack Rating 95 +5 • Defense 6 +0.25 Vitality "
   },
   {
@@ -385,9 +385,9 @@
    "title": "All Assassin Skills",
    "display": "All Assassin Skills",
    "rev": 17343,
-   "touched": "2026-10-25T00:17:32Z",
+   "touched": "2026-10-28T03:16:56Z",
    "edited": "2023-09-09T16:59:41Z",
-   "len": 305141,
+   "len": 311623,
    "intro": "This page lists all Assassin skills & stats. Also see: Assassin Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 20 Dexterity 20 • Attack Rating 80 +5 • Defense 5 +0.25 Vital"
   },
   {
@@ -395,9 +395,9 @@
    "title": "All Barbarian Skills",
    "display": "All Barbarian Skills",
    "rev": 17344,
-   "touched": "2026-10-25T00:17:32Z",
+   "touched": "2026-10-28T03:16:56Z",
    "edited": "2023-09-09T17:00:19Z",
-   "len": 203264,
+   "len": 204704,
    "intro": "This page lists all Barbarian skills & stats. Also see: Barbarian Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 30 Dexterity 20 • Attack Rating 85 +5 • Defense 5 +0.25 Vit"
   },
   {
@@ -405,9 +405,9 @@
    "title": "All Druid Skills",
    "display": "All Druid Skills",
    "rev": 17345,
-   "touched": "2026-10-25T00:17:32Z",
+   "touched": "2026-10-28T03:16:56Z",
    "edited": "2023-09-09T17:10:26Z",
-   "len": 288533,
+   "len": 302987,
    "intro": "This page lists all Druid skills & stats. Also see: Druid Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 15 Dexterity 20 • Attack Rating 70 +5 • Defense 5 +0.25 Vitality 25"
   },
   {
@@ -415,9 +415,9 @@
    "title": "All Items",
    "display": "All Items",
    "rev": 21738,
-   "touched": "2026-10-25T22:42:02Z",
+   "touched": "2026-10-27T17:16:41Z",
    "edited": "2025-12-03T12:16:51Z",
-   "len": 1360634,
+   "len": 1360570,
    "intro": "Below is a compilation of all \"named\" items - unique/set/runeword items and some others, whose affixes are all explicitly determined rather than generated randomly. Crafted items also have some predetermined affixes, but"
   },
   {
@@ -425,7 +425,7 @@
    "title": "All Necromancer Skills",
    "display": "All Necromancer Skills",
    "rev": 17346,
-   "touched": "2026-10-25T01:09:17Z",
+   "touched": "2026-10-28T03:16:56Z",
    "edited": "2023-09-09T17:11:05Z",
    "len": 298683,
    "intro": "This page lists all Necromancer skills & stats. Also see: Necromancer Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 15 Dexterity 25 • Attack Rating 80 +5 • Defense 6 +0.25"
@@ -435,7 +435,7 @@
    "title": "All Paladin Skills",
    "display": "All Paladin Skills",
    "rev": 17347,
-   "touched": "2026-10-25T00:17:32Z",
+   "touched": "2026-10-28T03:16:56Z",
    "edited": "2023-09-09T17:11:27Z",
    "len": 269190,
    "intro": "This page lists all Paladin skills & stats. Also see: Paladin Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 25 Dexterity 20 • Attack Rating 85 +5 • Defense 5 +0.25 Vitalit"
@@ -445,9 +445,9 @@
    "title": "All Runewords",
    "display": "All Runewords",
    "rev": 21613,
-   "touched": "2026-10-23T18:40:57Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2025-11-27T17:00:54Z",
-   "len": 172423,
+   "len": 172407,
    "intro": "Below is a compilation of all runeword items. Helms"
   },
   {
@@ -465,9 +465,9 @@
    "title": "All Skills",
    "display": "All Skills",
    "rev": 23804,
-   "touched": "2026-10-25T01:35:30Z",
+   "touched": "2026-10-28T02:43:48Z",
    "edited": "2026-06-20T22:47:43Z",
-   "len": 1867190,
+   "len": 1889912,
    "intro": "Below is a compilation of all skills. Note that mercenaries may use different versions of the skills listed here. Also see: Skill Overview, Mercenary Skills Other skill compilation lists: All Amazon Skills All Assassin S"
   },
   {
@@ -475,7 +475,7 @@
    "title": "All Sorceress Skills",
    "display": "All Sorceress Skills",
    "rev": 17348,
-   "touched": "2026-10-25T00:17:32Z",
+   "touched": "2026-10-28T03:16:56Z",
    "edited": "2023-09-09T17:11:45Z",
    "len": 259069,
    "intro": "This page lists all Sorceress skills & stats. Also see: Sorceress Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 10 Dexterity 25 • Attack Rating 75 +5 • Defense 6 +0.25 Vit"
@@ -485,9 +485,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-10-26T12:54:04Z",
+   "touched": "2026-10-28T00:42:16Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1800261,
+   "len": 1800996,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -495,9 +495,9 @@
    "title": "All Unique Non-Weapons",
    "display": "All Unique Non-Weapons",
    "rev": 21711,
-   "touched": "2026-10-24T15:12:24Z",
+   "touched": "2026-10-27T17:16:41Z",
    "edited": "2025-11-29T02:32:18Z",
-   "len": 365705,
+   "len": 365673,
    "intro": "Below is a compilation of all unique non-weapons: Helms"
   },
   {
@@ -505,9 +505,9 @@
    "title": "All Unique Weapons",
    "display": "All Unique Weapons",
    "rev": 14758,
-   "touched": "2026-10-25T22:42:02Z",
+   "touched": "2026-10-27T17:15:02Z",
    "edited": "2022-08-03T02:13:47Z",
-   "len": 508738,
+   "len": 508722,
    "intro": "Below is a compilation of all unique weapons: Axes"
   },
   {
@@ -565,9 +565,9 @@
    "title": "Axe Runewords",
    "display": "Axe Runewords",
    "rev": 24580,
-   "touched": "2026-10-24T14:43:05Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-10-24T14:43:05Z",
-   "len": 50209,
+   "len": 50193,
    "intro": "Below is a compilation of all axe runewords. Also see: Weapon Runewords. Other weapon runeword compilation lists: Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Ham"
   },
   {
@@ -645,7 +645,7 @@
    "title": "Bow Runewords",
    "display": "Bow Runewords",
    "rev": 24586,
-   "touched": "2026-10-24T14:47:10Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-10-24T14:47:10Z",
    "len": 40851,
    "intro": "Below is a compilation of all bow/crossbow runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Da"
@@ -704,20 +704,20 @@
    "id": 5202,
    "title": "Class Attributes",
    "display": "Class Attributes",
-   "rev": 24627,
-   "touched": "2026-10-25T00:17:32Z",
-   "edited": "2026-10-25T00:17:32Z",
-   "len": 8165,
+   "rev": 24728,
+   "touched": "2026-10-28T03:16:55Z",
+   "edited": "2026-10-28T03:16:55Z",
+   "len": 7699,
    "intro": ""
   },
   {
    "id": 18,
    "title": "Class Weapons",
    "display": "Class Weapons",
-   "rev": 24650,
-   "touched": "2026-10-25T22:42:01Z",
-   "edited": "2026-10-25T22:42:01Z",
-   "len": 53623,
+   "rev": 24704,
+   "touched": "2026-10-27T17:15:02Z",
+   "edited": "2026-10-27T17:15:02Z",
+   "len": 53607,
    "intro": ""
   },
   {
@@ -725,7 +725,7 @@
    "title": "Claw Runewords",
    "display": "Claw Runewords",
    "rev": 20267,
-   "touched": "2026-10-23T18:40:57Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2025-06-04T13:28:04Z",
    "len": 25264,
    "intro": "Below is a compilation of all claw runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger Run"
@@ -735,7 +735,7 @@
    "title": "Club Runewords",
    "display": "Club Runewords",
    "rev": 20260,
-   "touched": "2026-10-23T18:40:57Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2025-06-04T13:26:33Z",
    "len": 16092,
    "intro": "Below is a compilation of all club runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger Run"
@@ -754,20 +754,20 @@
    "id": 86,
    "title": "Combat Masteries",
    "display": "Combat Masteries",
-   "rev": 23539,
-   "touched": "2026-05-29T21:16:50Z",
-   "edited": "2026-05-29T21:16:50Z",
-   "len": 45688,
+   "rev": 24685,
+   "touched": "2026-10-27T01:58:41Z",
+   "edited": "2026-10-27T01:58:41Z",
+   "len": 46488,
    "intro": "This page lists Barbarian skills from the Combat Masteries skill tree. Other Barbarian skills: Warcries, Combat Skills, All Barbarian Skills Expand/Collapse All"
   },
   {
    "id": 94,
    "title": "Combat Skills (Barbarian)",
    "display": "Combat Skills (Barbarian)",
-   "rev": 24000,
-   "touched": "2026-10-05T03:26:01Z",
-   "edited": "2026-10-05T03:26:01Z",
-   "len": 103643,
+   "rev": 24692,
+   "touched": "2026-10-27T13:25:04Z",
+   "edited": "2026-10-27T13:25:04Z",
+   "len": 104321,
    "intro": "This page lists Barbarian skills from the Combat Skills skill tree. Other Barbarian skills: Warcries, Combat Masteries, All Barbarian Skills Expand/Collapse All"
   },
   {
@@ -804,10 +804,10 @@
    "id": 575,
    "title": "Crafting",
    "display": "Crafting",
-   "rev": 24400,
-   "touched": "2026-10-23T14:23:41Z",
-   "edited": "2026-10-23T14:23:41Z",
-   "len": 113851,
+   "rev": 24711,
+   "touched": "2026-10-27T21:09:13Z",
+   "edited": "2026-10-27T21:09:13Z",
+   "len": 113848,
    "intro": "This page lists crafting recipes and their changes in PD2 relative to the vanilla game."
   },
   {
@@ -855,7 +855,7 @@
    "title": "Dagger Runewords",
    "display": "Dagger Runewords",
    "rev": 20263,
-   "touched": "2026-10-23T18:40:57Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2025-06-04T13:27:19Z",
    "len": 13146,
    "intro": "Below is a compilation of all dagger runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger R"
@@ -934,10 +934,10 @@
    "id": 112,
    "title": "Elemental Skills",
    "display": "Elemental Skills",
-   "rev": 23976,
-   "touched": "2026-09-30T19:48:00Z",
-   "edited": "2026-09-30T19:48:00Z",
-   "len": 105094,
+   "rev": 24673,
+   "touched": "2026-10-27T01:31:25Z",
+   "edited": "2026-10-27T01:31:25Z",
+   "len": 107141,
    "intro": "This page lists Druid skills from the Elemental skill tree. Other Druid skills: Shape Shifting, Summoning, All Druid Skills Expand/Collapse All"
   },
   {
@@ -1214,10 +1214,10 @@
    "id": 5860,
    "title": "Guilds",
    "display": "Guilds",
-   "rev": 24649,
-   "touched": "2026-10-25T19:31:42Z",
-   "edited": "2026-10-25T19:31:42Z",
-   "len": 13049,
+   "rev": 24693,
+   "touched": "2026-10-27T14:54:18Z",
+   "edited": "2026-10-27T14:54:18Z",
+   "len": 13060,
    "intro": "This article is marked as a stub, meaning it is incomplete or out of date. You can help Project Diablo 2 Wiki by adding missing information, or updating it. Reason: work in progress/incomplete Guilds Steeg Stone in the G"
   },
   {
@@ -1225,19 +1225,19 @@
    "title": "Hammer Runewords",
    "display": "Hammer Runewords",
    "rev": 24583,
-   "touched": "2026-10-24T14:45:02Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-10-24T14:45:02Z",
-   "len": 47402,
+   "len": 47386,
    "intro": "Below is a compilation of all hammer runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger R"
   },
   {
    "id": 30,
    "title": "Helms",
    "display": "Helms",
-   "rev": 24610,
-   "touched": "2026-10-24T15:08:25Z",
-   "edited": "2026-10-24T15:08:25Z",
-   "len": 120668,
+   "rev": 24706,
+   "touched": "2026-10-27T17:16:39Z",
+   "edited": "2026-10-27T17:16:39Z",
+   "len": 120652,
    "intro": ""
   },
   {
@@ -1264,20 +1264,20 @@
    "id": 1164,
    "title": "Item Affixes",
    "display": "Item Affixes",
-   "rev": 24557,
-   "touched": "2026-10-24T09:44:32Z",
-   "edited": "2026-10-24T09:44:32Z",
-   "len": 420985,
+   "rev": 24688,
+   "touched": "2026-10-27T04:45:04Z",
+   "edited": "2026-10-27T04:45:04Z",
+   "len": 421089,
    "intro": "This page lists changes made to item affixes in PD2 relative to the vanilla game. For changes made to automod affixes, see Item Bases. Expand/Collapse All General Affix Info Affixes are item modifiers which each add one "
   },
   {
    "id": 617,
    "title": "Item Bases",
    "display": "Item Bases",
-   "rev": 24579,
-   "touched": "2026-10-24T14:39:47Z",
-   "edited": "2026-10-24T14:39:47Z",
-   "len": 231568,
+   "rev": 24698,
+   "touched": "2026-10-27T16:17:47Z",
+   "edited": "2026-10-27T16:17:47Z",
+   "len": 231914,
    "intro": "This page lists changes made to item bases in PD2 relative to the vanilla game. Also see the following charts which include all current item stats side-by-side instead of them being in separate charts: All Base Armor Sta"
   },
   {
@@ -1314,10 +1314,10 @@
    "id": 5408,
    "title": "Item Skills",
    "display": "Item Skills",
-   "rev": 24644,
-   "touched": "2026-10-25T01:35:30Z",
-   "edited": "2026-10-25T01:35:30Z",
-   "len": 22997,
+   "rev": 24702,
+   "touched": "2026-10-27T17:14:00Z",
+   "edited": "2026-10-27T17:14:00Z",
+   "len": 23009,
    "intro": "The following are original skills in Project Diablo 2 provided by items or set bonuses that are not otherwise available to any classes via skill points. These skills are either OSkills or skills cast automatically by ite"
   },
   {
@@ -1425,9 +1425,9 @@
    "title": "Mace Runewords",
    "display": "Mace Runewords",
    "rev": 24581,
-   "touched": "2026-10-24T14:43:51Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-10-24T14:43:51Z",
-   "len": 55845,
+   "len": 55829,
    "intro": "Below is a compilation of all mace runewords, including clubs, tipped maces, and hammers. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords —"
   },
   {
@@ -1454,10 +1454,10 @@
    "id": 1,
    "title": "Main Page",
    "display": "Main Page",
-   "rev": 24577,
-   "touched": "2026-10-24T14:32:55Z",
-   "edited": "2026-10-24T14:32:55Z",
-   "len": 7811,
+   "rev": 24727,
+   "touched": "2026-10-28T03:16:14Z",
+   "edited": "2026-10-28T03:16:14Z",
+   "len": 7829,
    "intro": "Welcome to the Project Diablo 2 Wiki! Project Diablo 2 is a mod for and by passionate Diablo 2 fans. We aim to maintain the Diablo II: Lord of Destruction experience and provide consistent ladder resets while improving o"
   },
   {
@@ -1474,20 +1474,20 @@
    "id": 1163,
    "title": "Maps",
    "display": "Maps",
-   "rev": 24348,
-   "touched": "2026-10-23T02:55:42Z",
-   "edited": "2026-10-23T02:55:42Z",
-   "len": 191235,
+   "rev": 24712,
+   "touched": "2026-10-28T00:42:16Z",
+   "edited": "2026-10-28T00:42:16Z",
+   "len": 191523,
    "intro": "Maps are items that allow access to new endgame zones (which are also referred to as maps) with higher zone levels than the vanilla game. For a list of high level zones outside of maps, see Zones. Maps are comparable to "
   },
   {
    "id": 71,
    "title": "Martial Arts",
    "display": "Martial Arts",
-   "rev": 24088,
-   "touched": "2026-10-16T16:34:47Z",
-   "edited": "2026-10-16T16:34:47Z",
-   "len": 116841,
+   "rev": 24725,
+   "touched": "2026-10-28T02:42:34Z",
+   "edited": "2026-10-28T02:42:34Z",
+   "len": 122243,
    "intro": "This page lists Assassin skills from the Martial Arts skill tree. Other Assassin skills: Shadow Disciplines, Traps, All Assassin Skills Expand/Collapse All"
   },
   {
@@ -1514,9 +1514,9 @@
    "id": 5432,
    "title": "Mercenary Skills",
    "display": "Mercenary Skills",
-   "rev": 24643,
-   "touched": "2026-10-25T01:23:08Z",
-   "edited": "2026-10-25T01:23:08Z",
+   "rev": 24696,
+   "touched": "2026-10-27T16:05:52Z",
+   "edited": "2026-10-27T16:05:52Z",
    "len": 115955,
    "intro": "The following are skills in Project Diablo 2 used by Mercenaries. Many of these skills are distinct versions of Player Skills balanced independently. Skills with distinct Mercenary versions will be denoted as such and ha"
   },
@@ -1575,9 +1575,9 @@
    "title": "New Equipment",
    "display": "New Equipment",
    "rev": 19646,
-   "touched": "2026-10-25T22:42:02Z",
+   "touched": "2026-10-27T17:16:41Z",
    "edited": "2025-05-18T21:37:13Z",
-   "len": 117372,
+   "len": 117340,
    "intro": "Below is a compilation of all new \"named\" (runeword/set/unique) equipment items. No old items are included here, even if they've been changed substantially compared to their vanilla counterparts. For a list of all new it"
   },
   {
@@ -1595,7 +1595,7 @@
    "title": "New Runewords",
    "display": "New Runewords",
    "rev": 22898,
-   "touched": "2026-10-23T18:40:57Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-05-04T14:18:51Z",
    "len": 34809,
    "intro": "Below is a compilation of all new runewords added in Project Diablo 2. For all runewords, see: All Runewords. Also see: New Equipment. Note: Runewords are included as \"new\" on this page based on Diablo II: Lord of Destru"
@@ -1625,7 +1625,7 @@
    "title": "Orb Runewords",
    "display": "Orb Runewords",
    "rev": 20264,
-   "touched": "2026-10-23T18:40:57Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2025-06-04T13:27:28Z",
    "len": 7547,
    "intro": "Below is a compilation of all orb runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger Rune"
@@ -1654,11 +1654,11 @@
    "id": 602,
    "title": "Patch Notes",
    "display": "Patch Notes",
-   "rev": 24519,
-   "touched": "2026-10-23T17:36:01Z",
-   "edited": "2026-10-23T17:36:01Z",
-   "len": 908731,
-   "intro": "This page lists patch notes for each season. Seasons are listed most recent first, but in-season patches are at the bottom of their corresponding season. Table of Contents Note: The Table of Contents is inside this colla"
+   "rev": 24691,
+   "touched": "2026-10-27T13:03:38Z",
+   "edited": "2026-10-27T13:03:38Z",
+   "len": 910129,
+   "intro": "This page lists patch notes for each season. Seasons are listed most recent first, but in-season patches are at the bottom of their corresponding season. Table of Contents - Click to Expand Note: The Table of Contents is"
   },
   {
    "id": 5095,
@@ -1714,10 +1714,10 @@
    "id": 5858,
    "title": "Patch:Season 14",
    "display": "Patch:Season 14",
-   "rev": 24396,
-   "touched": "2026-10-23T13:55:31Z",
-   "edited": "2026-10-23T13:55:31Z",
-   "len": 61387,
+   "rev": 24690,
+   "touched": "2026-10-27T13:02:37Z",
+   "edited": "2026-10-27T13:02:37Z",
+   "len": 62759,
    "intro": "Season 14 Alliance - October 23rd 2026 Patch Notes S14 Official Patch Notes Document Project Diablo 2 Season 14 Alliance Patch Notes"
   },
   {
@@ -1825,7 +1825,7 @@
    "title": "Polearm Runewords",
    "display": "Polearm Runewords",
    "rev": 24585,
-   "touched": "2026-10-24T14:46:42Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-10-24T14:46:42Z",
    "len": 57472,
    "intro": "Below is a compilation of all polearm and spear runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewor"
@@ -1865,7 +1865,7 @@
    "title": "Recent Patch Notes",
    "display": "Recent Patch Notes",
    "rev": 21048,
-   "touched": "2026-10-23T17:36:08Z",
+   "touched": "2026-10-27T13:03:40Z",
    "edited": "2025-08-31T00:54:58Z",
    "len": 50857,
    "intro": "This page is a candidate for deletion. If you disagree with its deletion, please discuss your reasons on its associated talk page. If the tag persists for over a week with no action taken, contact the #wiki-editing Disco"
@@ -1875,7 +1875,7 @@
    "title": "Recipes",
    "display": "Recipes",
    "rev": 23870,
-   "touched": "2026-10-23T14:45:21Z",
+   "touched": "2026-10-28T00:42:16Z",
    "edited": "2026-06-27T00:34:49Z",
    "len": 59054,
    "intro": "This page lists Horadric Cube recipes and covers what has changed from the vanilla game."
@@ -1954,9 +1954,9 @@
    "id": 124,
    "title": "RWShields",
    "display": "RWShields",
-   "rev": 24460,
-   "touched": "2026-10-23T16:20:59Z",
-   "edited": "2026-10-23T16:20:59Z",
+   "rev": 24700,
+   "touched": "2026-10-27T17:02:54Z",
+   "edited": "2026-10-27T17:02:54Z",
    "len": 17598,
    "intro": "This page lists all shield runewords. Other runewords: Quivers, Helms, Chests, Weapons, All Runewords"
   },
@@ -1964,10 +1964,10 @@
    "id": 92,
    "title": "RWWeapons",
    "display": "RWWeapons",
-   "rev": 24520,
-   "touched": "2026-10-23T18:40:50Z",
-   "edited": "2026-10-23T18:40:50Z",
-   "len": 114469,
+   "rev": 24703,
+   "touched": "2026-10-27T17:14:47Z",
+   "edited": "2026-10-27T17:14:47Z",
+   "len": 114453,
    "intro": "This page lists all weapon runewords. Other runewords: Helms, Chests, Shields, Quivers, All Runewords For weapon runeword compilation lists pertinent to specific weapon types and mercenaries, see: Weapon Subtype Runeword"
   },
   {
@@ -1985,7 +1985,7 @@
    "title": "Scepter Runewords",
    "display": "Scepter Runewords",
    "rev": 24588,
-   "touched": "2026-10-24T14:48:22Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-10-24T14:48:22Z",
    "len": 43768,
    "intro": "Below is a compilation of all scepter runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger "
@@ -2024,10 +2024,10 @@
    "id": 73,
    "title": "Shadow Disciplines",
    "display": "Shadow Disciplines",
-   "rev": 23940,
-   "touched": "2026-07-29T03:16:09Z",
-   "edited": "2026-07-29T03:16:09Z",
-   "len": 85181,
+   "rev": 24726,
+   "touched": "2026-10-28T02:43:47Z",
+   "edited": "2026-10-28T02:43:47Z",
+   "len": 85961,
    "intro": "This page lists Assassin skills from the Shadow Disciplines skill tree. Other Assassin skills: Martial Arts, Traps, All Assassin Skills Expand/Collapse All"
   },
   {
@@ -2044,20 +2044,20 @@
    "id": 114,
    "title": "Shape Shifting Skills",
    "display": "Shape Shifting Skills",
-   "rev": 23977,
-   "touched": "2026-09-30T19:49:28Z",
-   "edited": "2026-09-30T19:49:28Z",
-   "len": 81761,
+   "rev": 24666,
+   "touched": "2026-10-27T00:59:12Z",
+   "edited": "2026-10-27T00:59:12Z",
+   "len": 84698,
    "intro": "This page lists Druid skills from the Shape Shifting skill tree. Other Druid skills: Elemental, Summoning, All Druid Skills Expand/Collapse All"
   },
   {
    "id": 31,
    "title": "Shields",
    "display": "Shields",
-   "rev": 24612,
-   "touched": "2026-10-24T15:10:38Z",
-   "edited": "2026-10-24T15:10:38Z",
-   "len": 107537,
+   "rev": 24705,
+   "touched": "2026-10-27T17:16:29Z",
+   "edited": "2026-10-27T17:16:29Z",
+   "len": 107521,
    "intro": ""
   },
   {
@@ -2115,9 +2115,9 @@
    "title": "Staff Runewords",
    "display": "Staff Runewords",
    "rev": 24587,
-   "touched": "2026-10-24T14:47:44Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-10-24T14:47:44Z",
-   "len": 61189,
+   "len": 61173,
    "intro": "Below is a compilation of all staff runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger Ru"
   },
   {
@@ -2194,10 +2194,10 @@
    "id": 116,
    "title": "Summoning Skills (Druid)",
    "display": "Summoning Skills (Druid)",
-   "rev": 24008,
-   "touched": "2026-10-08T02:06:48Z",
-   "edited": "2026-10-08T02:06:48Z",
-   "len": 101362,
+   "rev": 24662,
+   "touched": "2026-10-26T19:20:38Z",
+   "edited": "2026-10-26T19:20:38Z",
+   "len": 110907,
    "intro": "This page lists Druid skills from the Summoning skill tree. Other Druid skills: Elemental, Shape Shifting, All Druid Skills Expand/Collapse All"
   },
   {
@@ -2225,9 +2225,9 @@
    "title": "Sword Runewords",
    "display": "Sword Runewords",
    "rev": 24584,
-   "touched": "2026-10-24T14:45:33Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-10-24T14:45:33Z",
-   "len": 64657,
+   "len": 64641,
    "intro": "Below is a compilation of all sword runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger Ru"
   },
   {
@@ -2275,7 +2275,7 @@
    "title": "Throwing Runewords",
    "display": "Throwing Runewords",
    "rev": 24435,
-   "touched": "2026-10-23T18:40:57Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-10-23T15:28:35Z",
    "len": 22737,
    "intro": "Below is a compilation of all throwing weapon runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords"
@@ -2285,7 +2285,7 @@
    "title": "Tipped Mace Runewords",
    "display": "Tipped Mace Runewords",
    "rev": 24582,
-   "touched": "2026-10-24T14:44:36Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2026-10-24T14:44:36Z",
    "len": 35651,
    "intro": "Below is a compilation of all tipped mace runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dag"
@@ -2294,20 +2294,20 @@
    "id": 5421,
    "title": "To Do",
    "display": "To Do",
-   "rev": 24641,
-   "touched": "2026-10-25T01:14:16Z",
-   "edited": "2026-10-25T01:14:16Z",
-   "len": 5560,
+   "rev": 24675,
+   "touched": "2026-10-27T01:34:40Z",
+   "edited": "2026-10-27T01:34:40Z",
+   "len": 5543,
    "intro": "This Page is intended to be a single, consolidated page to list issues with this wiki. If you would like to assist with the maintenance of the wiki, Create an Account and help! Thanks! While effort will be taken to keep "
   },
   {
    "id": 75,
    "title": "Traps",
    "display": "Traps",
-   "rev": 23974,
-   "touched": "2026-09-30T19:40:58Z",
-   "edited": "2026-09-30T19:40:58Z",
-   "len": 102895,
+   "rev": 24720,
+   "touched": "2026-10-28T01:58:03Z",
+   "edited": "2026-10-28T01:58:03Z",
+   "len": 103328,
    "intro": "This page lists Assassin skills from the Traps skill tree. Other Assassin skills: Martial Arts, Shadow Disciplines, All Assassin Skills Expand/Collapse All"
   },
   {
@@ -2315,7 +2315,7 @@
    "title": "Wand Runewords",
    "display": "Wand Runewords",
    "rev": 20265,
-   "touched": "2026-10-23T18:40:57Z",
+   "touched": "2026-10-27T17:14:48Z",
    "edited": "2025-06-04T13:27:40Z",
    "len": 8871,
    "intro": "Below is a compilation of all wand runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger Run"
@@ -2334,10 +2334,10 @@
    "id": 84,
    "title": "Warcries",
    "display": "Warcries",
-   "rev": 24097,
-   "touched": "2026-10-16T20:59:03Z",
-   "edited": "2026-10-16T20:59:03Z",
-   "len": 53612,
+   "rev": 24680,
+   "touched": "2026-10-27T01:43:19Z",
+   "edited": "2026-10-27T01:43:19Z",
+   "len": 53700,
    "intro": "This page lists Barbarian skills from the Warcries skill tree. Other Barbarian skills: Combat Masteries, Combat Skills, All Barbarian Skills Expand/Collapse All"
   },
   {
@@ -6488,9 +6488,12 @@
   "602#Crafting": "patches/s14#Crafting",
   "602#Corruptions": "patches/s14#Corruptions",
   "602#PVP": "patches/s14#PVP",
+  "602#Season_14_Patch_#1": "patches/s14#Season_14_Patch_#1",
+  "602#Guild": "patches/s14#Guild",
+  "602#Bug_Fixes_2": "patches/s14#Bug_Fixes_2",
   "602#Season_13_Betrayal_-_April_24th_2026": "patches/s13",
   "602#General_Changes_2": "patches/s13#General_Changes_2",
-  "602#Bug_Fixes_2": "patches/s13#Bug_Fixes_2",
+  "602#Bug_Fixes_3": "patches/s13#Bug_Fixes_3",
   "602#Loot_Filter_2": "patches/s13#Loot_Filter_2",
   "602#Maps_2": "patches/s13#Maps_2",
   "602#Map_Events_2": "patches/s13#Map_Events_2",
@@ -6514,7 +6517,7 @@
   "602#Season_13_Patch_#2": "patches/s13#Season_13_Patch_#2",
   "602#Season_12_Suffering_-_November_28th_2025": "patches/s12",
   "602#General_Changes_3": "patches/s12#General_Changes_3",
-  "602#Bug_Fixes_3": "patches/s12#Bug_Fixes_3",
+  "602#Bug_Fixes_4": "patches/s12#Bug_Fixes_4",
   "602#Loot_Filter_3": "patches/s12#Loot_Filter_3",
   "602#PVP_3": "patches/s12#PVP_3",
   "602#Maps_3": "patches/s12#Maps_3",
@@ -6540,7 +6543,7 @@
   "602#Season_11_Prosperity_-_May_16th_2025": "patches/s11",
   "602#GENERAL_CHANGES_4": "patches/s11#GENERAL_CHANGES_4",
   "602#TRADE_WEBSITE": "patches/s11#TRADE_WEBSITE",
-  "602#BUG_FIXES_4": "patches/s11#BUG_FIXES_4",
+  "602#BUG_FIXES_5": "patches/s11#BUG_FIXES_5",
   "602#LOOT_FILTER_4": "patches/s11#LOOT_FILTER_4",
   "602#PVP_4": "patches/s11#PVP_4",
   "602#MAPS_4": "patches/s11#MAPS_4",
@@ -6569,7 +6572,7 @@
   "602#GENERAL_CHANGES_5": "patches/s10#GENERAL_CHANGES_5",
   "602#Settings_Menu_Updates": "patches/s10#Settings_Menu_Updates",
   "602#Loot_Filter_5": "patches/s10#Loot_Filter_5",
-  "602#Bug_Fixes_5": "patches/s10#Bug_Fixes_5",
+  "602#Bug_Fixes_6": "patches/s10#Bug_Fixes_6",
   "602#D2GL": "patches/s10#D2GL",
   "602#Launcher": "patches/s10#Launcher",
   "602#Maps_5": "patches/s10#Maps_5",
@@ -6604,7 +6607,7 @@
   "602#Multiplayer": "patches/s9#Multiplayer",
   "602#Website": "patches/s9#Website",
   "602#Loot_Filter_6": "patches/s9#Loot_Filter_6",
-  "602#Bug_Fixes_6": "patches/s9#Bug_Fixes_6",
+  "602#Bug_Fixes_7": "patches/s9#Bug_Fixes_7",
   "602#D2GL_2": "patches/s9#D2GL_2",
   "602#Maps_6": "patches/s9#Maps_6",
   "602#Map_Shuffle": "patches/s9#Map_Shuffle",
@@ -6943,7 +6946,7 @@
   "5302#GENERAL_CHANGES": "patches/s10#GENERAL_CHANGES_5",
   "5302#Settings_Menu_Updates": "patches/s10#Settings_Menu_Updates",
   "5302#Loot_Filter": "patches/s10#Loot_Filter_5",
-  "5302#Bug_Fixes": "patches/s10#Bug_Fixes_5",
+  "5302#Bug_Fixes": "patches/s10#Bug_Fixes_6",
   "5302#D2GL": "patches/s10#D2GL",
   "5302#Launcher": "patches/s10#Launcher",
   "5302#Maps": "patches/s10#Maps_5",
@@ -6976,7 +6979,7 @@
   "5397#": "patches/s11",
   "5397#GENERAL_CHANGES": "patches/s11#GENERAL_CHANGES_4",
   "5397#TRADE_WEBSITE": "patches/s11#TRADE_WEBSITE",
-  "5397#BUG_FIXES": "patches/s11#BUG_FIXES_4",
+  "5397#BUG_FIXES": "patches/s11#BUG_FIXES_5",
   "5397#LOOT_FILTER": "patches/s11#LOOT_FILTER_4",
   "5397#PVP": "patches/s11#PVP_4",
   "5397#MAPS": "patches/s11#MAPS_4",
@@ -7003,7 +7006,7 @@
   "5397#Season_11_Patch_3_(2025-05-25)": "patches/s11#Season_11_Patch_3_(2025-05-25)",
   "5513#": "patches/s12",
   "5513#General_Changes": "patches/s12#General_Changes_3",
-  "5513#Bug_Fixes": "patches/s12#Bug_Fixes_3",
+  "5513#Bug_Fixes": "patches/s12#Bug_Fixes_4",
   "5513#Loot_Filter": "patches/s12#Loot_Filter_3",
   "5513#PVP": "patches/s12#PVP_3",
   "5513#Maps": "patches/s12#Maps_3",
@@ -7028,7 +7031,7 @@
   "5513#PVP_Changes": "patches/s12#PVP_Changes",
   "5713#": "patches/s13",
   "5713#General_Changes": "patches/s13#General_Changes_2",
-  "5713#Bug_Fixes": "patches/s13#Bug_Fixes_2",
+  "5713#Bug_Fixes": "patches/s13#Bug_Fixes_3",
   "5713#Loot_Filter": "patches/s13#Loot_Filter_2",
   "5713#Maps": "patches/s13#Maps_2",
   "5713#Map_Events": "patches/s13#Map_Events_2",
@@ -7077,6 +7080,9 @@
   "5858#Crafting": "patches/s14#Crafting",
   "5858#Corruptions": "patches/s14#Corruptions",
   "5858#PVP": "patches/s14#PVP",
+  "5858#Season_14_Patch_#1": "patches/s14#Season_14_Patch_#1",
+  "5858#Guild": "patches/s14#Guild",
+  "5858#Bug_Fixes_2": "patches/s14#Bug_Fixes",
   "5096#": "patches/s2",
   "5096#GENERAL_CHANGES": "patches/s2#GENERAL_CHANGES_12",
   "5096#MAP_CHANGES": "patches/s2#MAP_CHANGES_3",
@@ -7327,7 +7333,7 @@
   "5269#Multiplayer": "patches/s9#Multiplayer",
   "5269#Website": "patches/s9#Website",
   "5269#Loot_Filter": "patches/s9#Loot_Filter_6",
-  "5269#Bug_Fixes": "patches/s9#Bug_Fixes_6",
+  "5269#Bug_Fixes": "patches/s9#Bug_Fixes_7",
   "5269#D2GL": "patches/s9#D2GL_2",
   "5269#Maps": "patches/s9#Maps_6",
   "5269#Map_Shuffle": "patches/s9#Map_Shuffle",
@@ -10123,5 +10129,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "800fe7099e"
+ "v": "d1a5f58601"
 }

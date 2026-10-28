@@ -1,5 +1,287 @@
 [
  {
+  "date": "2026-10-28T14:24:23.350Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "Act 2 Mercenary Runewords",
+    "edited": "2026-10-24T14:48:50Z",
+    "summary": "/* 4-Sockets */ macness"
+   },
+   {
+    "title": "Act 3 Mercenary Runewords",
+    "edited": "2026-10-24T14:49:26Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Act 5 Mercenary Runewords",
+    "edited": "2026-10-24T14:49:49Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "All Amazon Skills",
+    "edited": "2023-09-09T16:56:26Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Assassin Skills",
+    "edited": "2023-09-09T16:59:41Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Barbarian Skills",
+    "edited": "2023-09-09T17:00:19Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Druid Skills",
+    "edited": "2023-09-09T17:10:26Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Items",
+    "edited": "2025-12-03T12:16:51Z",
+    "summary": "added quivers"
+   },
+   {
+    "title": "All Runewords",
+    "edited": "2025-11-27T17:00:54Z",
+    "summary": "Added quiver runewords"
+   },
+   {
+    "title": "All Skills",
+    "edited": "2026-06-20T22:47:43Z",
+    "summary": "Link to Merc skills"
+   },
+   {
+    "title": "All Topics",
+    "edited": "2023-09-09T16:57:53Z",
+    "summary": "added topics"
+   },
+   {
+    "title": "All Unique Non-Weapons",
+    "edited": "2025-11-29T02:32:18Z",
+    "summary": "added quivers to all uniques"
+   },
+   {
+    "title": "All Unique Weapons",
+    "edited": "2022-08-03T02:13:47Z",
+    "summary": ""
+   },
+   {
+    "title": "Axe Runewords",
+    "edited": "2026-10-24T14:43:05Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Bow Runewords",
+    "edited": "2026-10-24T14:47:10Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Class Attributes",
+    "edited": "2026-10-28T03:16:55Z",
+    "summary": "/* Amazon Attributes */"
+   },
+   {
+    "title": "Class Weapons",
+    "edited": "2026-10-27T17:15:02Z",
+    "summary": "/* Ebonbane */ templating"
+   },
+   {
+    "title": "Claw Runewords",
+    "edited": "2025-06-04T13:28:04Z",
+    "summary": "Undo revision [[Special:Diff/20251|20251]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "Club Runewords",
+    "edited": "2025-06-04T13:26:33Z",
+    "summary": "Undo revision [[Special:Diff/20244|20244]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "Combat Masteries",
+    "edited": "2026-10-27T01:58:41Z",
+    "summary": "/* Two Handed Mastery */ s14"
+   },
+   {
+    "title": "Combat Skills (Barbarian)",
+    "edited": "2026-10-27T13:25:04Z",
+    "summary": "/* Bash */"
+   },
+   {
+    "title": "Crafting",
+    "edited": "2026-10-27T21:09:13Z",
+    "summary": "/* Crafting Comparison Chart */"
+   },
+   {
+    "title": "Dagger Runewords",
+    "edited": "2025-06-04T13:27:19Z",
+    "summary": "Undo revision [[Special:Diff/20247|20247]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "Elemental Skills",
+    "edited": "2026-10-27T01:31:25Z",
+    "summary": "/* Tornado */"
+   },
+   {
+    "title": "Guilds",
+    "edited": "2026-10-27T14:54:18Z",
+    "summary": "add: tier 5 NPCs"
+   },
+   {
+    "title": "Hammer Runewords",
+    "edited": "2026-10-24T14:45:02Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Helms",
+    "edited": "2026-10-27T17:16:39Z",
+    "summary": "/* Raekor's Virtue */"
+   },
+   {
+    "title": "Item Affixes",
+    "edited": "2026-10-27T04:45:04Z",
+    "summary": "/* Equipment Affixes */ Fixed missing bonus to attack rating mods"
+   },
+   {
+    "title": "Item Bases",
+    "edited": "2026-10-27T16:17:47Z",
+    "summary": "Formatting for the boots testing report"
+   },
+   {
+    "title": "Item Skills",
+    "edited": "2026-10-27T17:14:00Z",
+    "summary": "/* Vampire Form */"
+   },
+   {
+    "title": "Mace Runewords",
+    "edited": "2026-10-24T14:43:51Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Main Page",
+    "edited": "2026-10-28T03:16:14Z",
+    "summary": ""
+   },
+   {
+    "title": "Maps",
+    "edited": "2026-10-28T00:42:16Z",
+    "summary": "/* Map Events */ new event"
+   },
+   {
+    "title": "Martial Arts",
+    "edited": "2026-10-28T02:42:34Z",
+    "summary": "/* Dragon Tail */"
+   },
+   {
+    "title": "Mercenary Skills",
+    "edited": "2026-10-27T16:05:52Z",
+    "summary": "/* Fire Ball (Mercenary-Only) */ s14 radius"
+   },
+   {
+    "title": "New Equipment",
+    "edited": "2025-05-18T21:37:13Z",
+    "summary": ""
+   },
+   {
+    "title": "New Runewords",
+    "edited": "2026-05-04T14:18:51Z",
+    "summary": "/* Quivers */"
+   },
+   {
+    "title": "Orb Runewords",
+    "edited": "2025-06-04T13:27:28Z",
+    "summary": "Undo revision [[Special:Diff/20248|20248]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "Patch Notes",
+    "edited": "2026-10-27T13:03:38Z",
+    "summary": ""
+   },
+   {
+    "title": "Patch:Season 14",
+    "edited": "2026-10-27T13:02:37Z",
+    "summary": "/* Season 14 Patch #1 */"
+   },
+   {
+    "title": "Polearm Runewords",
+    "edited": "2026-10-24T14:46:42Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "RWShields",
+    "edited": "2026-10-27T17:02:54Z",
+    "summary": "/* Exile */  new decrep level"
+   },
+   {
+    "title": "RWWeapons",
+    "edited": "2026-10-27T17:14:47Z",
+    "summary": "/* Last Wish */ new templating"
+   },
+   {
+    "title": "Scepter Runewords",
+    "edited": "2026-10-24T14:48:22Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Shadow Disciplines",
+    "edited": "2026-10-28T02:43:47Z",
+    "summary": "/* Shadow Warrior */"
+   },
+   {
+    "title": "Shape Shifting Skills",
+    "edited": "2026-10-27T00:59:12Z",
+    "summary": "/* Fire Claws */ finished"
+   },
+   {
+    "title": "Shields",
+    "edited": "2026-10-27T17:16:29Z",
+    "summary": "/* Darkforce Spawn */"
+   },
+   {
+    "title": "Staff Runewords",
+    "edited": "2026-10-24T14:47:44Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Summoning Skills (Druid)",
+    "edited": "2026-10-26T19:20:38Z",
+    "summary": "/* Summon Grizzly */ s14"
+   },
+   {
+    "title": "Sword Runewords",
+    "edited": "2026-10-24T14:45:33Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Throwing Runewords",
+    "edited": "2026-10-23T15:28:35Z",
+    "summary": "added jealousy"
+   },
+   {
+    "title": "Tipped Mace Runewords",
+    "edited": "2026-10-24T14:44:36Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "To Do",
+    "edited": "2026-10-27T01:34:40Z",
+    "summary": "/* Druid */"
+   },
+   {
+    "title": "Traps",
+    "edited": "2026-10-28T01:58:03Z",
+    "summary": "/* Blade Fury */ s14"
+   },
+   {
+    "title": "Warcries",
+    "edited": "2026-10-27T01:43:19Z",
+    "summary": "/* War Cry */ s14"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-10-26T14:24:14.327Z",
   "added": [],
   "updated": [

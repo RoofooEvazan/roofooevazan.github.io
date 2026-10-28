@@ -1625,27 +1625,27 @@
 <tr>
 <th scope="row">Base Radius (yards)
 </th>
+<td>2.66</td>
+<td>2.66</td>
+<td>3.33</td>
+<td><p>3.33</p></td>
 <td>4</td>
 <td><p>4</p></td>
 <td>4.66</td>
 <td><p>4.66</p></td>
-<td>5.33</td>
-<td><p>5.33</p></td>
-<td>6</td>
-<td><p>6</p></td>
-<td><p>6</p></td>
-<td><p>6</p></td>
-<td><p>6</p></td>
-<td><p>6</p></td>
-<td><p>6</p></td>
-<td><p>6</p></td>
-<td><p>6</p></td>
-<td><p>6</p></td>
-<td><p>6</p></td>
-<td><p>6</p></td>
-<td><p>6</p></td>
-<td><p>6</p></td>
-<td><p>6
+<td><p>4.66</p></td>
+<td><p>4.66</p></td>
+<td><p>4.66</p></td>
+<td><p>4.66</p></td>
+<td><p>4.66</p></td>
+<td><p>4.66</p></td>
+<td><p>4.66</p></td>
+<td><p>4.66</p></td>
+<td><p>4.66</p></td>
+<td><p>4.66</p></td>
+<td><p>4.66</p></td>
+<td><p>4.66</p></td>
+<td><p>4.66
 </p></td></tr>
 <tr>
 <th scope="row">Stun Length (seconds)
@@ -1683,11 +1683,12 @@
 <tr>
 <th scope="row">Extra Radius (yards)
 </th>
-<td>0</td>
 <td>1.33</td>
-<td>2.66
+<td>2.66</td>
+<td>4
 </td></tr></tbody></table>
-<p>For the "Consecutive Casts" Extra Radius to apply, Mind Blast casts must be less than 0.48 seconds (12 frames) apart. This requires at least 65% <a href="/wiki/Breakpoints#FCR" title="Breakpoints">Faster Cast Rate</a>.
+<p>The "Consecutive Casts" Extra Radius buff activates before Mind Blast is cast, resulting in at least 1 stack on every cast of Mind Blast regardless of whether it is repeated. 
+</p><p>For stacks of the "Consecutive Casts" buff to accumulate past 1, Mind Blast casts must be less than 0.8 seconds (20 frames) apart; total duration of the buff can be up to 2.4 seconds (60 frames) once maximum stacks are reached.
 </p><p><b>Mind Blast Receives Bonuses From:</b>
 </p>
 <ul><li>Psychic Hammer: +13% Damage per Level</li>
@@ -1700,6 +1701,10 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Fixed dragon flight removing mind blast stacks</li>
+<li>Stack duration increased from 12 to 20 frames</li></ul>
 <p><b>Season 11:</b>
 </p>
 <ul><li>Casting now requires line of sight.
@@ -2871,7 +2876,7 @@
 <td colspan="3"><center>0.4 seconds (10 frames)</center>
 </td></tr></tbody></table>
 </td></tr></tbody></table>
-<p>Shadow Warrior uses the two Skills you currently have active on Left and Right Click. 
+<p>Shadow Warrior uses the two Skills you currently have active on Left and Right Click. Additionally, it will cast Assassin buffs you have active (Burst of Speed, Fade, Blade Shield, and/or Venom)
 </p><p>Number of Shadows can be increased by <a href="/wiki/Whispering_Mirage" class="mw-redirect" title="Whispering Mirage">Whispering Mirage</a> and <a href="/wiki/Elite#Natalya&#39;s_Odium" title="Elite">Natalya's Odium</a>.
 </p><p>Shadow Warriors equip randomly-generated equipment which can be viewed by using the Inspect hotkey (9) while hovering over a Shadow with the Unsummon skill on right-click. This equipment improves Damage, Attack Speed, Defense, and other Attributes. Chance to Cast effects from the equipment are functional. 
 </p>
@@ -2880,6 +2885,10 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Added tooltip details regarding how the shadow’s skills scale</li>
+<li>Will now cast whatever Assassin buffs the player has applied automatically</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Traps set by master/warrior no longer “belong” to the player and instead are owned by the shadow</li>
@@ -3641,6 +3650,9 @@
 </caption>
 <tbody><tr>
 <td>
+<p><b>Season 14:</b>
+</p>
+<ul><li>Added tooltip details regarding how the shadow’s skills scale</li></ul>
 <p><b>Season 13:</b>
 </p>
 <ul><li>Traps set by master/warrior no longer “belong” to the player and instead are owned by the shadow</li>
