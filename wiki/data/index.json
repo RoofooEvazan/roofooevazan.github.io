@@ -375,9 +375,9 @@
    "title": "All Amazon Skills",
    "display": "All Amazon Skills",
    "rev": 17341,
-   "touched": "2026-10-28T03:16:56Z",
+   "touched": "2026-10-28T15:59:45Z",
    "edited": "2023-09-09T16:56:26Z",
-   "len": 233457,
+   "len": 235284,
    "intro": "This page lists all Amazon skills & stats. Also see: Amazon Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 20 Dexterity 25 • Attack Rating 95 +5 • Defense 6 +0.25 Vitality "
   },
   {
@@ -465,9 +465,9 @@
    "title": "All Skills",
    "display": "All Skills",
    "rev": 23804,
-   "touched": "2026-10-28T02:43:48Z",
+   "touched": "2026-10-28T15:59:45Z",
    "edited": "2026-06-20T22:47:43Z",
-   "len": 1889912,
+   "len": 1891739,
    "intro": "Below is a compilation of all skills. Note that mercenaries may use different versions of the skills listed here. Also see: Skill Overview, Mercenary Skills Other skill compilation lists: All Amazon Skills All Assassin S"
   },
   {
@@ -485,9 +485,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-10-28T00:42:16Z",
+   "touched": "2026-10-29T01:06:42Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1800996,
+   "len": 1801868,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -634,10 +634,10 @@
    "id": 67,
    "title": "Bow and Crossbow Skills",
    "display": "Bow and Crossbow Skills",
-   "rev": 23693,
-   "touched": "2026-06-03T02:00:34Z",
-   "edited": "2026-06-03T02:00:34Z",
-   "len": 90824,
+   "rev": 24741,
+   "touched": "2026-10-28T15:59:45Z",
+   "edited": "2026-10-28T15:59:45Z",
+   "len": 91771,
    "intro": "This page lists Amazon skills from the Bow and Crossbow Skills skill tree. Other Amazon skills: Javelin and Spear Skills, Passive and Magic Skills, All Amazon Skills Expand/Collapse All"
   },
   {
@@ -1334,10 +1334,10 @@
    "id": 57,
    "title": "Javelin and Spear Skills",
    "display": "Javelin and Spear Skills",
-   "rev": 24004,
-   "touched": "2026-10-07T01:57:04Z",
-   "edited": "2026-10-07T01:57:04Z",
-   "len": 68936,
+   "rev": 24737,
+   "touched": "2026-10-28T15:54:49Z",
+   "edited": "2026-10-28T15:54:49Z",
+   "len": 69478,
    "intro": "This page lists Amazon skills from the Javelin and Spear Skills skill tree. Other Amazon skills: Passive and Magic Skills, Bow and Crossbow Skills, All Amazon Skills Expand/Collapse All"
   },
   {
@@ -1454,10 +1454,10 @@
    "id": 1,
    "title": "Main Page",
    "display": "Main Page",
-   "rev": 24727,
-   "touched": "2026-10-28T03:16:14Z",
-   "edited": "2026-10-28T03:16:14Z",
-   "len": 7829,
+   "rev": 24742,
+   "touched": "2026-10-28T16:05:59Z",
+   "edited": "2026-10-28T16:05:59Z",
+   "len": 7481,
    "intro": "Welcome to the Project Diablo 2 Wiki! Project Diablo 2 is a mod for and by passionate Diablo 2 fans. We aim to maintain the Diablo II: Lord of Destruction experience and provide consistent ladder resets while improving o"
   },
   {
@@ -1474,11 +1474,11 @@
    "id": 1163,
    "title": "Maps",
    "display": "Maps",
-   "rev": 24712,
-   "touched": "2026-10-28T00:42:16Z",
-   "edited": "2026-10-28T00:42:16Z",
-   "len": 191523,
-   "intro": "Maps are items that allow access to new endgame zones (which are also referred to as maps) with higher zone levels than the vanilla game. For a list of high level zones outside of maps, see Zones. Maps are comparable to "
+   "rev": 24747,
+   "touched": "2026-10-29T01:06:41Z",
+   "edited": "2026-10-29T01:06:41Z",
+   "len": 192410,
+   "intro": "This article is marked as a stub, meaning it is incomplete or out of date. You can help Project Diablo 2 Wiki by adding missing information, or updating it. Reason: This page has not received most Season 14 updates yet M"
   },
   {
    "id": 71,
@@ -1644,10 +1644,10 @@
    "id": 66,
    "title": "Passive and Magic Skills",
    "display": "Passive and Magic Skills",
-   "rev": 23991,
-   "touched": "2026-10-01T01:12:25Z",
-   "edited": "2026-10-01T01:12:25Z",
-   "len": 73589,
+   "rev": 24732,
+   "touched": "2026-10-28T15:47:28Z",
+   "edited": "2026-10-28T15:47:28Z",
+   "len": 73927,
    "intro": "This page lists Amazon skills from the Passive and Magic Skills skill tree. Other Amazon skills: Javelin and Spear Skills, Bow and Crossbow Skills, All Amazon Skills Expand/Collapse All"
   },
   {
@@ -1875,9 +1875,9 @@
    "title": "Recipes",
    "display": "Recipes",
    "rev": 23870,
-   "touched": "2026-10-28T00:42:16Z",
+   "touched": "2026-10-29T01:06:42Z",
    "edited": "2026-06-27T00:34:49Z",
-   "len": 59054,
+   "len": 59556,
    "intro": "This page lists Horadric Cube recipes and covers what has changed from the vanilla game."
   },
   {
@@ -2294,10 +2294,10 @@
    "id": 5421,
    "title": "To Do",
    "display": "To Do",
-   "rev": 24675,
-   "touched": "2026-10-27T01:34:40Z",
-   "edited": "2026-10-27T01:34:40Z",
-   "len": 5543,
+   "rev": 24743,
+   "touched": "2026-10-28T16:07:13Z",
+   "edited": "2026-10-28T16:07:13Z",
+   "len": 4002,
    "intro": "This Page is intended to be a single, consolidated page to list issues with this wiki. If you would like to assist with the maintenance of the wiki, Create an Account and help! Thanks! While effort will be taken to keep "
   },
   {
@@ -10129,5 +10129,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "d1a5f58601"
+ "v": "40adf27b91"
 }
