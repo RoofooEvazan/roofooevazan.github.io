@@ -415,7 +415,7 @@
    "title": "All Items",
    "display": "All Items",
    "rev": 21738,
-   "touched": "2026-10-27T17:16:41Z",
+   "touched": "2026-10-29T16:37:15Z",
    "edited": "2025-12-03T12:16:51Z",
    "len": 1360570,
    "intro": "Below is a compilation of all \"named\" items - unique/set/runeword items and some others, whose affixes are all explicitly determined rather than generated randomly. Crafted items also have some predetermined affixes, but"
@@ -485,9 +485,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-10-29T01:06:42Z",
+   "touched": "2026-10-29T15:44:35Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1801868,
+   "len": 1801869,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -495,7 +495,7 @@
    "title": "All Unique Non-Weapons",
    "display": "All Unique Non-Weapons",
    "rev": 21711,
-   "touched": "2026-10-27T17:16:41Z",
+   "touched": "2026-10-29T16:37:15Z",
    "edited": "2025-11-29T02:32:18Z",
    "len": 365673,
    "intro": "Below is a compilation of all unique non-weapons: Helms"
@@ -694,9 +694,9 @@
    "id": 12,
    "title": "Chests",
    "display": "Chests",
-   "rev": 24614,
-   "touched": "2026-10-24T15:11:29Z",
-   "edited": "2026-10-24T15:11:29Z",
+   "rev": 24753,
+   "touched": "2026-10-29T16:37:04Z",
+   "edited": "2026-10-29T16:37:04Z",
    "len": 154487,
    "intro": ""
   },
@@ -1264,10 +1264,10 @@
    "id": 1164,
    "title": "Item Affixes",
    "display": "Item Affixes",
-   "rev": 24688,
-   "touched": "2026-10-27T04:45:04Z",
-   "edited": "2026-10-27T04:45:04Z",
-   "len": 421089,
+   "rev": 24752,
+   "touched": "2026-10-29T15:44:35Z",
+   "edited": "2026-10-29T15:44:35Z",
+   "len": 421090,
    "intro": "This page lists changes made to item affixes in PD2 relative to the vanilla game. For changes made to automod affixes, see Item Bases. Expand/Collapse All General Affix Info Affixes are item modifiers which each add one "
   },
   {
@@ -1575,7 +1575,7 @@
    "title": "New Equipment",
    "display": "New Equipment",
    "rev": 19646,
-   "touched": "2026-10-27T17:16:41Z",
+   "touched": "2026-10-29T16:37:15Z",
    "edited": "2025-05-18T21:37:13Z",
    "len": 117340,
    "intro": "Below is a compilation of all new \"named\" (runeword/set/unique) equipment items. No old items are included here, even if they've been changed substantially compared to their vanilla counterparts. For a list of all new it"
@@ -2294,10 +2294,10 @@
    "id": 5421,
    "title": "To Do",
    "display": "To Do",
-   "rev": 24743,
-   "touched": "2026-10-28T16:07:13Z",
-   "edited": "2026-10-28T16:07:13Z",
-   "len": 4002,
+   "rev": 24748,
+   "touched": "2026-10-29T14:57:32Z",
+   "edited": "2026-10-29T14:57:32Z",
+   "len": 3979,
    "intro": "This Page is intended to be a single, consolidated page to list issues with this wiki. If you would like to assist with the maintenance of the wiki, Create an Account and help! Thanks! While effort will be taken to keep "
   },
   {
@@ -10129,5 +10129,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "40adf27b91"
+ "v": "50e29f7d6c"
 }
