@@ -1,5 +1,62 @@
 [
  {
+  "date": "2026-11-01T14:23:34.913Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "All Druid Skills",
+    "edited": "2023-09-09T17:10:26Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Paladin Skills",
+    "edited": "2023-09-09T17:11:27Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Skills",
+    "edited": "2026-06-20T22:47:43Z",
+    "summary": "Link to Merc skills"
+   },
+   {
+    "title": "All Topics",
+    "edited": "2023-09-09T16:57:53Z",
+    "summary": "added topics"
+   },
+   {
+    "title": "Combat Skills (Paladin)",
+    "edited": "2026-11-01T01:08:41Z",
+    "summary": "/* Sacrifice */ wrong patch notes"
+   },
+   {
+    "title": "Maps",
+    "edited": "2026-11-01T13:59:30Z",
+    "summary": "/* Modification */ grammar"
+   },
+   {
+    "title": "Patch Notes",
+    "edited": "2026-10-27T13:03:38Z",
+    "summary": ""
+   },
+   {
+    "title": "Patch:Season 14",
+    "edited": "2026-11-01T13:17:16Z",
+    "summary": "/* Project Diablo 2 Season 14 Alliance Patch Notes */ patch 2"
+   },
+   {
+    "title": "Recipes",
+    "edited": "2026-06-27T00:34:49Z",
+    "summary": "/* Other Modification Recipes */ added mirror notes (jewel, mirrored tag on both items)"
+   },
+   {
+    "title": "Shape Shifting Skills",
+    "edited": "2026-11-01T13:37:34Z",
+    "summary": "/* Maul */ wording"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-10-30T14:23:38.947Z",
   "added": [],
   "updated": [
