@@ -1,5 +1,177 @@
 [
  {
+  "date": "2026-11-02T14:23:53.032Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "Act 2 Mercenary Runewords",
+    "edited": "2026-10-24T14:48:50Z",
+    "summary": "/* 4-Sockets */ macness"
+   },
+   {
+    "title": "Act 3 Mercenary Runewords",
+    "edited": "2026-10-24T14:49:26Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Act 5 Mercenary Runewords",
+    "edited": "2026-10-24T14:49:49Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "All Items",
+    "edited": "2025-12-03T12:16:51Z",
+    "summary": "added quivers"
+   },
+   {
+    "title": "All Runewords",
+    "edited": "2025-11-27T17:00:54Z",
+    "summary": "Added quiver runewords"
+   },
+   {
+    "title": "All Set Items",
+    "edited": "2022-04-06T23:45:25Z",
+    "summary": "add headers"
+   },
+   {
+    "title": "All Topics",
+    "edited": "2023-09-09T16:57:53Z",
+    "summary": "added topics"
+   },
+   {
+    "title": "All Unique Weapons",
+    "edited": "2022-08-03T02:13:47Z",
+    "summary": ""
+   },
+   {
+    "title": "Axe Runewords",
+    "edited": "2026-10-24T14:43:05Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Bow Runewords",
+    "edited": "2026-10-24T14:47:10Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Class Weapons",
+    "edited": "2026-11-02T09:29:13Z",
+    "summary": "/* Aidan's Scar */ Reordered indestructible line"
+   },
+   {
+    "title": "Claw Runewords",
+    "edited": "2025-06-04T13:28:04Z",
+    "summary": "Undo revision [[Special:Diff/20251|20251]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "Exceptional",
+    "edited": "2026-11-02T09:30:04Z",
+    "summary": "/* Hwanin's Justice */ Reordered indestructible line"
+   },
+   {
+    "title": "Guilds",
+    "edited": "2026-11-02T14:01:01Z",
+    "summary": "add guildChat toggle"
+   },
+   {
+    "title": "Hammer Runewords",
+    "edited": "2026-10-24T14:45:02Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Helms",
+    "edited": "2026-10-27T17:16:39Z",
+    "summary": "/* Raekor's Virtue */"
+   },
+   {
+    "title": "Mace Runewords",
+    "edited": "2026-10-24T14:43:51Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Maces",
+    "edited": "2026-11-02T09:21:22Z",
+    "summary": "/* The Cranium Basher */ Reordered indestructible line"
+   },
+   {
+    "title": "Maps",
+    "edited": "2026-11-02T03:08:45Z",
+    "summary": "/* Map Events */"
+   },
+   {
+    "title": "Mercenary Skills",
+    "edited": "2026-11-01T22:36:16Z",
+    "summary": "/* Skill Info */ wording"
+   },
+   {
+    "title": "New Equipment",
+    "edited": "2025-05-18T21:37:13Z",
+    "summary": ""
+   },
+   {
+    "title": "New Runewords",
+    "edited": "2026-05-04T14:18:51Z",
+    "summary": "/* Quivers */"
+   },
+   {
+    "title": "Polearm Runewords",
+    "edited": "2026-10-24T14:46:42Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Polearms",
+    "edited": "2026-11-02T09:26:54Z",
+    "summary": "/* Stormspire */ Reordered indestructible line"
+   },
+   {
+    "title": "Recipes",
+    "edited": "2026-06-27T00:34:49Z",
+    "summary": "/* Other Modification Recipes */ added mirror notes (jewel, mirrored tag on both items)"
+   },
+   {
+    "title": "RWHelms",
+    "edited": "2026-11-02T09:31:57Z",
+    "summary": "/* Ferocity */ Reordered indestructible line"
+   },
+   {
+    "title": "RWWeapons",
+    "edited": "2026-11-02T09:44:23Z",
+    "summary": "/* Chaos */ Split and reordered indestructible line"
+   },
+   {
+    "title": "Spears",
+    "edited": "2026-11-02T10:30:25Z",
+    "summary": "/* Uldyssian's Awakening */ Reordered energy shield line"
+   },
+   {
+    "title": "Staff Runewords",
+    "edited": "2026-10-24T14:47:44Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Sword Runewords",
+    "edited": "2026-10-24T14:45:33Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Swords",
+    "edited": "2026-11-02T09:25:05Z",
+    "summary": "/* Doombringer */ Reordered indestructible line"
+   },
+   {
+    "title": "Throwing",
+    "edited": "2026-11-02T10:21:02Z",
+    "summary": "/* Wraith Flight */ Readded ethereal"
+   },
+   {
+    "title": "Tipped Mace Runewords",
+    "edited": "2026-10-24T14:44:36Z",
+    "summary": "/* 4-Sockets */ madness"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-11-01T14:23:34.913Z",
   "added": [],
   "updated": [

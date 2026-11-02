@@ -345,7 +345,7 @@
    "title": "Act 2 Mercenary Runewords",
    "display": "Act 2 Mercenary Runewords",
    "rev": 24589,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-10-24T14:48:50Z",
    "len": 61335,
    "intro": "Below is a compilation of all weapon runewords equippable by Act 2 Mercenaries. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Ru"
@@ -355,7 +355,7 @@
    "title": "Act 3 Mercenary Runewords",
    "display": "Act 3 Mercenary Runewords",
    "rev": 24590,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-10-24T14:49:26Z",
    "len": 72422,
    "intro": "Below is a compilation of all weapon runewords equippable by Act 3 Mercenaries. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Ru"
@@ -365,7 +365,7 @@
    "title": "Act 5 Mercenary Runewords",
    "display": "Act 5 Mercenary Runewords",
    "rev": 24591,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-10-24T14:49:49Z",
    "len": 72959,
    "intro": "Below is a compilation of all weapon runewords equippable by Act 5 Mercenaries. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Ru"
@@ -415,9 +415,9 @@
    "title": "All Items",
    "display": "All Items",
    "rev": 21738,
-   "touched": "2026-10-29T16:37:15Z",
+   "touched": "2026-11-02T10:30:26Z",
    "edited": "2025-12-03T12:16:51Z",
-   "len": 1360570,
+   "len": 1360283,
    "intro": "Below is a compilation of all \"named\" items - unique/set/runeword items and some others, whose affixes are all explicitly determined rather than generated randomly. Crafted items also have some predetermined affixes, but"
   },
   {
@@ -445,9 +445,9 @@
    "title": "All Runewords",
    "display": "All Runewords",
    "rev": 21613,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2025-11-27T17:00:54Z",
-   "len": 172407,
+   "len": 172471,
    "intro": "Below is a compilation of all runeword items. Helms"
   },
   {
@@ -455,7 +455,7 @@
    "title": "All Set Items",
    "display": "All Set Items",
    "rev": 10655,
-   "touched": "2026-10-23T14:35:40Z",
+   "touched": "2026-11-02T09:30:05Z",
    "edited": "2022-04-06T23:45:25Z",
    "len": 280331,
    "intro": "Below is a compilation of all set items: Common"
@@ -485,9 +485,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-11-01T13:59:31Z",
+   "touched": "2026-11-02T03:08:46Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1801937,
+   "len": 1802230,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -505,9 +505,9 @@
    "title": "All Unique Weapons",
    "display": "All Unique Weapons",
    "rev": 14758,
-   "touched": "2026-10-27T17:15:02Z",
+   "touched": "2026-11-02T10:30:26Z",
    "edited": "2022-08-03T02:13:47Z",
-   "len": 508722,
+   "len": 508371,
    "intro": "Below is a compilation of all unique weapons: Axes"
   },
   {
@@ -525,7 +525,7 @@
    "title": "Amulets",
    "display": "Amulets",
    "rev": 24505,
-   "touched": "2026-10-23T16:54:28Z",
+   "touched": "2026-11-02T09:30:05Z",
    "edited": "2026-10-23T16:54:28Z",
    "len": 33971,
    "intro": ""
@@ -565,7 +565,7 @@
    "title": "Axe Runewords",
    "display": "Axe Runewords",
    "rev": 24580,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-10-24T14:43:05Z",
    "len": 50193,
    "intro": "Below is a compilation of all axe runewords. Also see: Weapon Runewords. Other weapon runeword compilation lists: Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Ham"
@@ -605,7 +605,7 @@
    "title": "Belts",
    "display": "Belts",
    "rev": 24615,
-   "touched": "2026-10-24T15:11:57Z",
+   "touched": "2026-11-02T09:30:05Z",
    "edited": "2026-10-24T15:11:57Z",
    "len": 45663,
    "intro": ""
@@ -625,7 +625,7 @@
    "title": "Boots",
    "display": "Boots",
    "rev": 24616,
-   "touched": "2026-10-24T15:12:24Z",
+   "touched": "2026-11-02T09:30:05Z",
    "edited": "2026-10-24T15:12:24Z",
    "len": 43699,
    "intro": ""
@@ -645,7 +645,7 @@
    "title": "Bow Runewords",
    "display": "Bow Runewords",
    "rev": 24586,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-10-24T14:47:10Z",
    "len": 40851,
    "intro": "Below is a compilation of all bow/crossbow runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Da"
@@ -695,7 +695,7 @@
    "title": "Chests",
    "display": "Chests",
    "rev": 24753,
-   "touched": "2026-10-29T16:37:04Z",
+   "touched": "2026-11-02T09:30:05Z",
    "edited": "2026-10-29T16:37:04Z",
    "len": 154487,
    "intro": ""
@@ -714,10 +714,10 @@
    "id": 18,
    "title": "Class Weapons",
    "display": "Class Weapons",
-   "rev": 24704,
-   "touched": "2026-10-27T17:15:02Z",
-   "edited": "2026-10-27T17:15:02Z",
-   "len": 53607,
+   "rev": 24779,
+   "touched": "2026-11-02T09:29:13Z",
+   "edited": "2026-11-02T09:29:13Z",
+   "len": 53316,
    "intro": ""
   },
   {
@@ -725,9 +725,9 @@
    "title": "Claw Runewords",
    "display": "Claw Runewords",
    "rev": 20267,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2025-06-04T13:28:04Z",
-   "len": 25264,
+   "len": 25328,
    "intro": "Below is a compilation of all claw runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger Run"
   },
   {
@@ -735,7 +735,7 @@
    "title": "Club Runewords",
    "display": "Club Runewords",
    "rev": 20260,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2025-06-04T13:26:33Z",
    "len": 16092,
    "intro": "Below is a compilation of all club runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger Run"
@@ -855,7 +855,7 @@
    "title": "Dagger Runewords",
    "display": "Dagger Runewords",
    "rev": 20263,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2025-06-04T13:27:19Z",
    "len": 13146,
    "intro": "Below is a compilation of all dagger runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger R"
@@ -954,9 +954,9 @@
    "id": 125,
    "title": "Exceptional",
    "display": "Exceptional",
-   "rev": 24401,
-   "touched": "2026-10-23T14:28:32Z",
-   "edited": "2026-10-23T14:28:32Z",
+   "rev": 24780,
+   "touched": "2026-11-02T09:30:04Z",
+   "edited": "2026-11-02T09:30:04Z",
    "len": 75449,
    "intro": "This page lists all uncommon set items, excluding the major class-focused sets. Also see: All Set Items"
   },
@@ -1065,7 +1065,7 @@
    "title": "Gloves",
    "display": "Gloves",
    "rev": 24609,
-   "touched": "2026-10-24T15:07:23Z",
+   "touched": "2026-11-02T09:30:05Z",
    "edited": "2026-10-24T15:07:23Z",
    "len": 42306,
    "intro": ""
@@ -1214,10 +1214,10 @@
    "id": 5860,
    "title": "Guilds",
    "display": "Guilds",
-   "rev": 24693,
-   "touched": "2026-10-27T14:54:18Z",
-   "edited": "2026-10-27T14:54:18Z",
-   "len": 13060,
+   "rev": 24788,
+   "touched": "2026-11-02T14:16:27Z",
+   "edited": "2026-11-02T14:01:01Z",
+   "len": 13100,
    "intro": "This article is marked as a stub, meaning it is incomplete or out of date. You can help Project Diablo 2 Wiki by adding missing information, or updating it. Reason: work in progress/incomplete Guilds Steeg Stone in the G"
   },
   {
@@ -1225,7 +1225,7 @@
    "title": "Hammer Runewords",
    "display": "Hammer Runewords",
    "rev": 24583,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-10-24T14:45:02Z",
    "len": 47386,
    "intro": "Below is a compilation of all hammer runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger R"
@@ -1235,7 +1235,7 @@
    "title": "Helms",
    "display": "Helms",
    "rev": 24706,
-   "touched": "2026-10-27T17:16:39Z",
+   "touched": "2026-11-02T09:31:57Z",
    "edited": "2026-10-27T17:16:39Z",
    "len": 120652,
    "intro": ""
@@ -1425,7 +1425,7 @@
    "title": "Mace Runewords",
    "display": "Mace Runewords",
    "rev": 24581,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-10-24T14:43:51Z",
    "len": 55829,
    "intro": "Below is a compilation of all mace runewords, including clubs, tipped maces, and hammers. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords —"
@@ -1434,9 +1434,9 @@
    "id": 40,
    "title": "Maces",
    "display": "Maces",
-   "rev": 24602,
-   "touched": "2026-10-24T15:03:13Z",
-   "edited": "2026-10-24T15:03:13Z",
+   "rev": 24774,
+   "touched": "2026-11-02T09:21:22Z",
+   "edited": "2026-11-02T09:21:22Z",
    "len": 69480,
    "intro": ""
   },
@@ -1474,10 +1474,10 @@
    "id": 1163,
    "title": "Maps",
    "display": "Maps",
-   "rev": 24760,
-   "touched": "2026-11-01T13:59:30Z",
-   "edited": "2026-11-01T13:59:30Z",
-   "len": 192478,
+   "rev": 24770,
+   "touched": "2026-11-02T03:08:45Z",
+   "edited": "2026-11-02T03:08:45Z",
+   "len": 192771,
    "intro": "This article is marked as a stub, meaning it is incomplete or out of date. You can help Project Diablo 2 Wiki by adding missing information, or updating it. Reason: This page has not received most Season 14 updates yet M"
   },
   {
@@ -1514,10 +1514,10 @@
    "id": 5432,
    "title": "Mercenary Skills",
    "display": "Mercenary Skills",
-   "rev": 24696,
-   "touched": "2026-10-27T16:05:52Z",
-   "edited": "2026-10-27T16:05:52Z",
-   "len": 115955,
+   "rev": 24769,
+   "touched": "2026-11-01T22:36:16Z",
+   "edited": "2026-11-01T22:36:16Z",
+   "len": 115977,
    "intro": "The following are skills in Project Diablo 2 used by Mercenaries. Many of these skills are distinct versions of Player Skills balanced independently. Skills with distinct Mercenary versions will be denoted as such and ha"
   },
   {
@@ -1575,7 +1575,7 @@
    "title": "New Equipment",
    "display": "New Equipment",
    "rev": 19646,
-   "touched": "2026-10-29T16:37:15Z",
+   "touched": "2026-11-02T10:30:26Z",
    "edited": "2025-05-18T21:37:13Z",
    "len": 117340,
    "intro": "Below is a compilation of all new \"named\" (runeword/set/unique) equipment items. No old items are included here, even if they've been changed substantially compared to their vanilla counterparts. For a list of all new it"
@@ -1595,7 +1595,7 @@
    "title": "New Runewords",
    "display": "New Runewords",
    "rev": 22898,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-05-04T14:18:51Z",
    "len": 34809,
    "intro": "Below is a compilation of all new runewords added in Project Diablo 2. For all runewords, see: All Runewords. Also see: New Equipment. Note: Runewords are included as \"new\" on this page based on Diablo II: Lord of Destru"
@@ -1625,7 +1625,7 @@
    "title": "Orb Runewords",
    "display": "Orb Runewords",
    "rev": 20264,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2025-06-04T13:27:28Z",
    "len": 7547,
    "intro": "Below is a compilation of all orb runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger Rune"
@@ -1825,7 +1825,7 @@
    "title": "Polearm Runewords",
    "display": "Polearm Runewords",
    "rev": 24585,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-10-24T14:46:42Z",
    "len": 57472,
    "intro": "Below is a compilation of all polearm and spear runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewor"
@@ -1834,9 +1834,9 @@
    "id": 41,
    "title": "Polearms",
    "display": "Polearms",
-   "rev": 24601,
-   "touched": "2026-10-24T15:02:37Z",
-   "edited": "2026-10-24T15:02:37Z",
+   "rev": 24777,
+   "touched": "2026-11-02T09:26:54Z",
+   "edited": "2026-11-02T09:26:54Z",
    "len": 36479,
    "intro": ""
   },
@@ -1875,9 +1875,9 @@
    "title": "Recipes",
    "display": "Recipes",
    "rev": 23870,
-   "touched": "2026-11-01T13:59:31Z",
+   "touched": "2026-11-02T03:08:46Z",
    "edited": "2026-06-27T00:34:49Z",
-   "len": 59566,
+   "len": 46811,
    "intro": "This page lists Horadric Cube recipes and covers what has changed from the vanilla game."
   },
   {
@@ -1895,7 +1895,7 @@
    "title": "Rings",
    "display": "Rings",
    "rev": 22862,
-   "touched": "2026-10-23T14:28:32Z",
+   "touched": "2026-11-02T09:30:05Z",
    "edited": "2026-04-30T20:23:58Z",
    "len": 20747,
    "intro": ""
@@ -1934,9 +1934,9 @@
    "id": 123,
    "title": "RWHelms",
    "display": "RWHelms",
-   "rev": 24443,
-   "touched": "2026-10-23T16:13:12Z",
-   "edited": "2026-10-23T16:13:12Z",
+   "rev": 24781,
+   "touched": "2026-11-02T09:31:57Z",
+   "edited": "2026-11-02T09:31:57Z",
    "len": 12382,
    "intro": "This page lists all helm runewords. Other runewords: Chests, Shields, Quivers, Weapons, All Runewords"
   },
@@ -1964,10 +1964,10 @@
    "id": 92,
    "title": "RWWeapons",
    "display": "RWWeapons",
-   "rev": 24703,
-   "touched": "2026-10-27T17:14:47Z",
-   "edited": "2026-10-27T17:14:47Z",
-   "len": 114453,
+   "rev": 24785,
+   "touched": "2026-11-02T09:44:23Z",
+   "edited": "2026-11-02T09:44:23Z",
+   "len": 114517,
    "intro": "This page lists all weapon runewords. Other runewords: Helms, Chests, Shields, Quivers, All Runewords For weapon runeword compilation lists pertinent to specific weapon types and mercenaries, see: Weapon Subtype Runeword"
   },
   {
@@ -1985,7 +1985,7 @@
    "title": "Scepter Runewords",
    "display": "Scepter Runewords",
    "rev": 24588,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-10-24T14:48:22Z",
    "len": 43768,
    "intro": "Below is a compilation of all scepter runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger "
@@ -2055,7 +2055,7 @@
    "title": "Shields",
    "display": "Shields",
    "rev": 24705,
-   "touched": "2026-10-27T17:16:29Z",
+   "touched": "2026-11-02T09:30:05Z",
    "edited": "2026-10-27T17:16:29Z",
    "len": 107521,
    "intro": ""
@@ -2094,9 +2094,9 @@
    "id": 44,
    "title": "Spears",
    "display": "Spears",
-   "rev": 24493,
-   "touched": "2026-10-23T16:46:37Z",
-   "edited": "2026-10-23T16:46:37Z",
+   "rev": 24787,
+   "touched": "2026-11-02T10:30:25Z",
+   "edited": "2026-11-02T10:30:25Z",
    "len": 29216,
    "intro": ""
   },
@@ -2115,7 +2115,7 @@
    "title": "Staff Runewords",
    "display": "Staff Runewords",
    "rev": 24587,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-10-24T14:47:44Z",
    "len": 61173,
    "intro": "Below is a compilation of all staff runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger Ru"
@@ -2225,7 +2225,7 @@
    "title": "Sword Runewords",
    "display": "Sword Runewords",
    "rev": 24584,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-10-24T14:45:33Z",
    "len": 64641,
    "intro": "Below is a compilation of all sword runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger Ru"
@@ -2234,10 +2234,10 @@
    "id": 42,
    "title": "Swords",
    "display": "Swords",
-   "rev": 24608,
-   "touched": "2026-10-24T15:06:29Z",
-   "edited": "2026-10-24T15:06:29Z",
-   "len": 88309,
+   "rev": 24776,
+   "touched": "2026-11-02T09:25:05Z",
+   "edited": "2026-11-02T09:25:05Z",
+   "len": 88413,
    "intro": ""
   },
   {
@@ -2264,10 +2264,10 @@
    "id": 39,
    "title": "Throwing",
    "display": "Throwing",
-   "rev": 24507,
-   "touched": "2026-10-23T16:55:55Z",
-   "edited": "2026-10-23T16:55:55Z",
-   "len": 29321,
+   "rev": 24786,
+   "touched": "2026-11-02T10:21:02Z",
+   "edited": "2026-11-02T10:21:02Z",
+   "len": 29157,
    "intro": ""
   },
   {
@@ -2275,7 +2275,7 @@
    "title": "Throwing Runewords",
    "display": "Throwing Runewords",
    "rev": 24435,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-10-23T15:28:35Z",
    "len": 22737,
    "intro": "Below is a compilation of all throwing weapon runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords"
@@ -2285,7 +2285,7 @@
    "title": "Tipped Mace Runewords",
    "display": "Tipped Mace Runewords",
    "rev": 24582,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2026-10-24T14:44:36Z",
    "len": 35651,
    "intro": "Below is a compilation of all tipped mace runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dag"
@@ -2315,7 +2315,7 @@
    "title": "Wand Runewords",
    "display": "Wand Runewords",
    "rev": 20265,
-   "touched": "2026-10-27T17:14:48Z",
+   "touched": "2026-11-02T09:44:23Z",
    "edited": "2025-06-04T13:27:40Z",
    "len": 8871,
    "intro": "Below is a compilation of all wand runewords. Also see: Weapon Runewords. Weapon Subtype Runeword Lists: Axe Runewords Mace Runewords — Club Runewords — Tipped Mace Runewords — Hammer Runewords Sword Runewords Dagger Run"
@@ -6412,7 +6412,7 @@
   "2474#Lightning_Spells": "skills/Sorceress",
   "2474#Fire_Spells": "skills/Sorceress",
   "1163#Map_Events": "maps/events",
-  "1163#Modification": "maps/modify",
+  "1163#Map_Modification": "maps",
   "1163#Affixes": "maps/affixes",
   "1163#Immunes": "maps",
   "1163#Tier_1": "maps?tier=T1",
@@ -10137,5 +10137,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "80e7daaa7f"
+ "v": "045f57e2c8"
 }
