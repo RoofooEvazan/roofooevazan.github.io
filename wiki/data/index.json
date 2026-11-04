@@ -415,9 +415,9 @@
    "title": "All Items",
    "display": "All Items",
    "rev": 21738,
-   "touched": "2026-11-03T10:07:03Z",
+   "touched": "2026-11-04T09:59:29Z",
    "edited": "2025-12-03T12:16:51Z",
-   "len": 1360307,
+   "len": 1360308,
    "intro": "Below is a compilation of all \"named\" items - unique/set/runeword items and some others, whose affixes are all explicitly determined rather than generated randomly. Crafted items also have some predetermined affixes, but"
   },
   {
@@ -485,9 +485,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-11-03T09:42:07Z",
+   "touched": "2026-11-04T08:30:42Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1802584,
+   "len": 1810285,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -505,9 +505,9 @@
    "title": "All Unique Weapons",
    "display": "All Unique Weapons",
    "rev": 14758,
-   "touched": "2026-11-03T10:07:03Z",
+   "touched": "2026-11-04T09:59:29Z",
    "edited": "2022-08-03T02:13:47Z",
-   "len": 508396,
+   "len": 508397,
    "intro": "Below is a compilation of all unique weapons: Axes"
   },
   {
@@ -654,10 +654,10 @@
    "id": 34,
    "title": "Bows",
    "display": "Bows",
-   "rev": 24816,
-   "touched": "2026-11-03T10:01:47Z",
-   "edited": "2026-11-03T10:01:47Z",
-   "len": 40058,
+   "rev": 24833,
+   "touched": "2026-11-04T09:59:29Z",
+   "edited": "2026-11-04T09:59:29Z",
+   "len": 40059,
    "intro": ""
   },
   {
@@ -845,7 +845,7 @@
    "title": "Customization",
    "display": "Customization",
    "rev": 16575,
-   "touched": "2026-10-23T15:29:33Z",
+   "touched": "2026-11-04T07:00:30Z",
    "edited": "2023-01-19T18:26:39Z",
    "len": 27842,
    "intro": "Four files have customization options: ProjectDiablo.cfg UI.ini ddraw.ini loot.filter (can be renamed) These files are in the ProjectD2 directory (C:\\Program Files (x86)\\Diablo II\\ProjectD2). They can be edited with any "
@@ -974,9 +974,9 @@
    "id": 4287,
    "title": "Filter Info",
    "display": "Filter Info",
-   "rev": 24436,
-   "touched": "2026-10-23T15:29:33Z",
-   "edited": "2026-10-23T15:29:33Z",
+   "rev": 24831,
+   "touched": "2026-11-04T07:00:30Z",
+   "edited": "2026-11-04T07:00:30Z",
    "len": 22437,
    "intro": "This is an unlisted page that is transcluded on Item Filtering and Customization."
   },
@@ -1264,10 +1264,10 @@
    "id": 1164,
    "title": "Item Affixes",
    "display": "Item Affixes",
-   "rev": 24809,
-   "touched": "2026-11-03T09:42:05Z",
-   "edited": "2026-11-03T09:42:05Z",
-   "len": 421444,
+   "rev": 24832,
+   "touched": "2026-11-04T08:30:42Z",
+   "edited": "2026-11-04T08:30:42Z",
+   "len": 429145,
    "intro": "This page lists changes made to item affixes in PD2 relative to the vanilla game. For changes made to automod affixes, see Item Bases. Expand/Collapse All General Affix Info Affixes are item modifiers which each add one "
   },
   {
@@ -1295,7 +1295,7 @@
    "title": "Item Filtering",
    "display": "Item Filtering",
    "rev": 22837,
-   "touched": "2026-10-24T20:51:19Z",
+   "touched": "2026-11-04T07:00:30Z",
    "edited": "2026-04-30T07:22:00Z",
    "len": 259675,
    "intro": "Item filtering allows players to filter out items they don't want to see, and also change the appearance of items that are not filtered out. While there are in-game options for simple item filtering, players can use item"
@@ -10141,5 +10141,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "c25659419d"
+ "v": "6161614cd1"
 }

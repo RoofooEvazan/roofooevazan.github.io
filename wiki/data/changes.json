@@ -1,5 +1,52 @@
 [
  {
+  "date": "2026-11-04T14:23:29.542Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "All Items",
+    "edited": "2025-12-03T12:16:51Z",
+    "summary": "added quivers"
+   },
+   {
+    "title": "All Topics",
+    "edited": "2023-09-09T16:57:53Z",
+    "summary": "added topics"
+   },
+   {
+    "title": "All Unique Weapons",
+    "edited": "2022-08-03T02:13:47Z",
+    "summary": ""
+   },
+   {
+    "title": "Bows",
+    "edited": "2026-11-04T09:59:29Z",
+    "summary": ""
+   },
+   {
+    "title": "Customization",
+    "edited": "2023-01-19T18:26:39Z",
+    "summary": "Removed page from translation"
+   },
+   {
+    "title": "Filter Info",
+    "edited": "2026-11-04T07:00:30Z",
+    "summary": "/* List of Public Filters */"
+   },
+   {
+    "title": "Item Affixes",
+    "edited": "2026-11-04T08:30:42Z",
+    "summary": "/* Affix Changes Compilation (Patch Notes) */ Added S14 patch notes"
+   },
+   {
+    "title": "Item Filtering",
+    "edited": "2026-04-30T07:22:00Z",
+    "summary": ""
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-11-03T14:23:46.638Z",
   "added": [],
   "updated": [
