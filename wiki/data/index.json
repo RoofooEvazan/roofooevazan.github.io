@@ -1214,10 +1214,10 @@
    "id": 5860,
    "title": "Guilds",
    "display": "Guilds",
-   "rev": 24804,
-   "touched": "2026-11-02T15:38:28Z",
-   "edited": "2026-11-02T15:38:28Z",
-   "len": 15027,
+   "rev": 24835,
+   "touched": "2026-11-05T09:36:25Z",
+   "edited": "2026-11-05T09:36:25Z",
+   "len": 15074,
    "intro": "Guilds Steeg Stone in the Guild Hall The Guild feature was added in Season 14 and is based on features that Blizzard North planned but never finished or released. Guild membership is per character, not per account, so ch"
   },
   {
@@ -10141,5 +10141,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "6161614cd1"
+ "v": "eb1faf87ef"
 }
