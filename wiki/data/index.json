@@ -485,9 +485,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-11-04T08:30:42Z",
+   "touched": "2026-11-06T03:05:27Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1810285,
+   "len": 1809957,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -1214,10 +1214,10 @@
    "id": 5860,
    "title": "Guilds",
    "display": "Guilds",
-   "rev": 24835,
-   "touched": "2026-11-05T09:36:25Z",
-   "edited": "2026-11-05T09:36:25Z",
-   "len": 15074,
+   "rev": 24837,
+   "touched": "2026-11-05T18:58:46Z",
+   "edited": "2026-11-05T18:58:46Z",
+   "len": 16413,
    "intro": "Guilds Steeg Stone in the Guild Hall The Guild feature was added in Season 14 and is based on features that Blizzard North planned but never finished or released. Guild membership is per character, not per account, so ch"
   },
   {
@@ -1404,20 +1404,20 @@
    "id": 533,
    "title": "Links",
    "display": "Links",
-   "rev": 24651,
-   "touched": "2026-10-26T12:54:03Z",
-   "edited": "2026-10-26T12:54:03Z",
-   "len": 79536,
+   "rev": 24842,
+   "touched": "2026-11-06T03:05:26Z",
+   "edited": "2026-11-06T03:05:26Z",
+   "len": 79208,
    "intro": "This page is an information hub for everything PD2-related - it includes hyperlinks for tools, guides, and other info that isn't on the wiki itself."
   },
   {
    "id": 5317,
    "title": "Low Level Dueling",
    "display": "Low Level Dueling",
-   "rev": 24264,
-   "touched": "2026-10-20T15:51:37Z",
-   "edited": "2026-10-20T15:51:37Z",
-   "len": 32403,
+   "rev": 24841,
+   "touched": "2026-11-05T21:01:59Z",
+   "edited": "2026-11-05T21:01:59Z",
+   "len": 32515,
    "intro": "This page provides various details about Low Level Dueling (LLD). For general details about PvP, see PvP Changes."
   },
   {
@@ -10141,5 +10141,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "eb1faf87ef"
+ "v": "0d2bbdf22e"
 }
