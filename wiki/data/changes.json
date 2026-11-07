@@ -1,5 +1,17 @@
 [
  {
+  "date": "2026-11-07T14:23:19.232Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "Guilds",
+    "edited": "2026-11-06T16:00:00Z",
+    "summary": "use unordered list in steeg stone features"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-11-06T14:23:23.844Z",
   "added": [],
   "updated": [
