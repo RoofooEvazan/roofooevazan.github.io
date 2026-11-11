@@ -1,5 +1,77 @@
 [
  {
+  "date": "2026-11-11T10:17:57.865Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "All Items",
+    "edited": "2025-12-03T12:16:51Z",
+    "summary": "added quivers"
+   },
+   {
+    "title": "All Topics",
+    "edited": "2023-09-09T16:57:53Z",
+    "summary": "added topics"
+   },
+   {
+    "title": "All Unique Non-Weapons",
+    "edited": "2025-11-29T02:32:18Z",
+    "summary": "added quivers to all uniques"
+   },
+   {
+    "title": "All Unique Weapons",
+    "edited": "2022-08-03T02:13:47Z",
+    "summary": ""
+   },
+   {
+    "title": "Bugs",
+    "edited": "2026-11-11T02:52:33Z",
+    "summary": "/* Vanilla */ Added link for FTJ and updated Bloodwitch bug for S14."
+   },
+   {
+    "title": "Class Weapons",
+    "edited": "2026-11-10T13:05:53Z",
+    "summary": "/* Armageddon's Blade */  -enemy fire res rolls now"
+   },
+   {
+    "title": "Guilds",
+    "edited": "2026-11-07T16:27:07Z",
+    "summary": "remove outdated /dnd note"
+   },
+   {
+    "title": "Helms",
+    "edited": "2026-11-10T11:24:38Z",
+    "summary": "/* Ursa's Nightmare */ fixed wrong values"
+   },
+   {
+    "title": "Item Affixes",
+    "edited": "2026-11-08T13:36:36Z",
+    "summary": "/* Equipment Affixes */ S14 Patch #2 - Updated Celestial and CBF affixes"
+   },
+   {
+    "title": "Maps",
+    "edited": "2026-11-09T22:38:24Z",
+    "summary": "/*  Na-Krul's Abyss */"
+   },
+   {
+    "title": "Mercenaries",
+    "edited": "2026-11-07T15:58:01Z",
+    "summary": "/* Aura Changes */  added link to skill page"
+   },
+   {
+    "title": "New Equipment",
+    "edited": "2025-05-18T21:37:13Z",
+    "summary": ""
+   },
+   {
+    "title": "To Do",
+    "edited": "2026-11-09T13:34:09Z",
+    "summary": "/* Season 14 */  Map changes done"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-11-07T14:23:19.232Z",
   "added": [],
   "updated": [

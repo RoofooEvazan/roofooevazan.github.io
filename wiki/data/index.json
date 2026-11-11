@@ -415,9 +415,9 @@
    "title": "All Items",
    "display": "All Items",
    "rev": 21738,
-   "touched": "2026-11-04T09:59:29Z",
+   "touched": "2026-11-10T13:05:53Z",
    "edited": "2025-12-03T12:16:51Z",
-   "len": 1360308,
+   "len": 1360317,
    "intro": "Below is a compilation of all \"named\" items - unique/set/runeword items and some others, whose affixes are all explicitly determined rather than generated randomly. Crafted items also have some predetermined affixes, but"
   },
   {
@@ -485,9 +485,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-11-06T03:05:27Z",
+   "touched": "2026-11-11T02:52:33Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1809957,
+   "len": 1812807,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -495,9 +495,9 @@
    "title": "All Unique Non-Weapons",
    "display": "All Unique Non-Weapons",
    "rev": 21711,
-   "touched": "2026-11-03T10:03:24Z",
+   "touched": "2026-11-10T11:24:39Z",
    "edited": "2025-11-29T02:32:18Z",
-   "len": 365672,
+   "len": 365676,
    "intro": "Below is a compilation of all unique non-weapons: Helms"
   },
   {
@@ -505,9 +505,9 @@
    "title": "All Unique Weapons",
    "display": "All Unique Weapons",
    "rev": 14758,
-   "touched": "2026-11-04T09:59:29Z",
+   "touched": "2026-11-10T13:05:53Z",
    "edited": "2022-08-03T02:13:47Z",
-   "len": 508397,
+   "len": 508402,
    "intro": "Below is a compilation of all unique weapons: Axes"
   },
   {
@@ -674,10 +674,10 @@
    "id": 1165,
    "title": "Bugs",
    "display": "Bugs",
-   "rev": 22458,
-   "touched": "2026-04-18T21:59:31Z",
-   "edited": "2026-04-18T21:59:31Z",
-   "len": 10710,
+   "rev": 24870,
+   "touched": "2026-11-11T02:52:33Z",
+   "edited": "2026-11-11T02:52:33Z",
+   "len": 12178,
    "intro": "This article is marked as a stub, meaning it is incomplete or out of date. You can help Project Diablo 2 Wiki by adding missing information, or updating it. Reason: Many old bugs listed here are (probably) fixed; in gene"
   },
   {
@@ -714,10 +714,10 @@
    "id": 18,
    "title": "Class Weapons",
    "display": "Class Weapons",
-   "rev": 24817,
-   "touched": "2026-11-03T10:02:16Z",
-   "edited": "2026-11-03T10:02:16Z",
-   "len": 53316,
+   "rev": 24868,
+   "touched": "2026-11-10T13:05:53Z",
+   "edited": "2026-11-10T13:05:53Z",
+   "len": 53321,
    "intro": ""
   },
   {
@@ -1214,10 +1214,10 @@
    "id": 5860,
    "title": "Guilds",
    "display": "Guilds",
-   "rev": 24845,
-   "touched": "2026-11-07T01:13:07Z",
-   "edited": "2026-11-06T16:00:00Z",
-   "len": 16585,
+   "rev": 24853,
+   "touched": "2026-11-07T16:27:07Z",
+   "edited": "2026-11-07T16:27:07Z",
+   "len": 16528,
    "intro": "Guilds Steeg Stone in the Guild Hall The Guild feature was added in Season 14 and is based on features that Blizzard North planned but never finished or released. Guild membership is per character, not per account, so ch"
   },
   {
@@ -1234,10 +1234,10 @@
    "id": 30,
    "title": "Helms",
    "display": "Helms",
-   "rev": 24706,
-   "touched": "2026-11-02T09:31:57Z",
-   "edited": "2026-10-27T17:16:39Z",
-   "len": 120652,
+   "rev": 24867,
+   "touched": "2026-11-10T11:24:38Z",
+   "edited": "2026-11-10T11:24:38Z",
+   "len": 120656,
    "intro": ""
   },
   {
@@ -1264,10 +1264,10 @@
    "id": 1164,
    "title": "Item Affixes",
    "display": "Item Affixes",
-   "rev": 24832,
-   "touched": "2026-11-04T08:30:42Z",
-   "edited": "2026-11-04T08:30:42Z",
-   "len": 429145,
+   "rev": 24855,
+   "touched": "2026-11-08T13:36:36Z",
+   "edited": "2026-11-08T13:36:36Z",
+   "len": 429156,
    "intro": "This page lists changes made to item affixes in PD2 relative to the vanilla game. For changes made to automod affixes, see Item Bases. Expand/Collapse All General Affix Info Affixes are item modifiers which each add one "
   },
   {
@@ -1455,7 +1455,7 @@
    "title": "Main Page",
    "display": "Main Page",
    "rev": 24742,
-   "touched": "2026-10-28T16:05:59Z",
+   "touched": "2026-11-11T09:07:23Z",
    "edited": "2026-10-28T16:05:59Z",
    "len": 7481,
    "intro": "Welcome to the Project Diablo 2 Wiki! Project Diablo 2 is a mod for and by passionate Diablo 2 fans. We aim to maintain the Diablo II: Lord of Destruction experience and provide consistent ladder resets while improving o"
@@ -1474,10 +1474,10 @@
    "id": 1163,
    "title": "Maps",
    "display": "Maps",
-   "rev": 24770,
-   "touched": "2026-11-02T03:08:45Z",
-   "edited": "2026-11-02T03:08:45Z",
-   "len": 192771,
+   "rev": 24865,
+   "touched": "2026-11-09T22:39:35Z",
+   "edited": "2026-11-09T22:38:24Z",
+   "len": 194019,
    "intro": "This article is marked as a stub, meaning it is incomplete or out of date. You can help Project Diablo 2 Wiki by adding missing information, or updating it. Reason: This page has not received most Season 14 updates yet M"
   },
   {
@@ -1494,10 +1494,10 @@
    "id": 7,
    "title": "Mercenaries",
    "display": "Mercenaries",
-   "rev": 22882,
-   "touched": "2026-05-04T19:26:55Z",
-   "edited": "2026-05-03T02:38:18Z",
-   "len": 70531,
+   "rev": 24852,
+   "touched": "2026-11-07T15:58:01Z",
+   "edited": "2026-11-07T15:58:01Z",
+   "len": 70654,
    "intro": "This page lists mercenary information in PD2. Changes from the vanilla game are shown in blue. Expand/Collapse All General Mercenaries inherit the player's Magic and Gold Find when they kill enemies (e.g. if the player h"
   },
   {
@@ -1575,9 +1575,9 @@
    "title": "New Equipment",
    "display": "New Equipment",
    "rev": 19646,
-   "touched": "2026-11-03T10:07:03Z",
+   "touched": "2026-11-10T13:05:53Z",
    "edited": "2025-05-18T21:37:13Z",
-   "len": 117340,
+   "len": 117344,
    "intro": "Below is a compilation of all new \"named\" (runeword/set/unique) equipment items. No old items are included here, even if they've been changed substantially compared to their vanilla counterparts. For a list of all new it"
   },
   {
@@ -1875,7 +1875,7 @@
    "title": "Recipes",
    "display": "Recipes",
    "rev": 23870,
-   "touched": "2026-11-02T03:08:46Z",
+   "touched": "2026-11-09T22:38:25Z",
    "edited": "2026-06-27T00:34:49Z",
    "len": 46811,
    "intro": "This page lists Horadric Cube recipes and covers what has changed from the vanilla game."
@@ -2015,7 +2015,7 @@
    "title": "Seasons",
    "display": "Seasons",
    "rev": 24017,
-   "touched": "2026-10-08T22:18:13Z",
+   "touched": "2026-11-11T02:52:33Z",
    "edited": "2026-10-08T22:18:13Z",
    "len": 12179,
    "intro": "This page lists information about seasons and gamemodes."
@@ -2065,7 +2065,7 @@
    "title": "Singleplayer",
    "display": "Singleplayer",
    "rev": 18111,
-   "touched": "2026-04-18T21:59:31Z",
+   "touched": "2026-11-11T02:52:33Z",
    "edited": "2024-04-28T04:18:49Z",
    "len": 2911,
    "intro": "This page lists all differences between the multiplayer and singleplayer versions of the game."
@@ -2294,10 +2294,10 @@
    "id": 5421,
    "title": "To Do",
    "display": "To Do",
-   "rev": 24827,
-   "touched": "2026-11-03T10:14:37Z",
-   "edited": "2026-11-03T10:14:37Z",
-   "len": 3993,
+   "rev": 24862,
+   "touched": "2026-11-09T13:34:09Z",
+   "edited": "2026-11-09T13:34:09Z",
+   "len": 3942,
    "intro": "This Page is intended to be a single, consolidated page to list issues with this wiki. If you would like to assist with the maintenance of the wiki, Create an Account and help! Thanks! While effort will be taken to keep "
   },
   {
@@ -10141,5 +10141,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "fab364304c"
+ "v": "d797eebfda"
 }

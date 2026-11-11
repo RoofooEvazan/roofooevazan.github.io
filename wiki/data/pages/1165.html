@@ -16,20 +16,23 @@ This page lists errors, unintended behavior, and glitches found in PD2. Some maj
 <p><span class="emphasis"><i>Bugs introduced in PD2 due to new features</i></span>
 </p><p><b>General Bugs:</b>
 </p>
-<ul><li><a href="/wiki/Recipes#Gem_&amp;_Rune_Recipes" title="Recipes">Flawless gems</a> can only be promoted to perfect gems while in their <i>stacked</i> form.</li>
+<ul><li><a href="/wiki/Recipes#Gem_&amp;_Rune_Recipes" title="Recipes">Flawless gems</a> can only be promoted to perfect gems while in their <i>stacked</i> form. This should no longer apply as of Season 14 with the unification of the stacked forms.</li>
 <li>In some cases, having two equipment items of the same type within the cube when using a recipe which only requires one, one of those items may be destroyed.</li>
 <li>When attempting to connect while too many players are active, players may be presented with a dialogue box showing their position in a queue. This is misleading since the queue system is not used - players will need to connect manually instead. This may take several attempts, especially if the server they've selected is at its limit and others are also trying to join it. If other servers are acceptable, try using one of them temporarily instead.</li>
-<li>Occasionally, some parts of the <a href="/wiki/Maps#Demon_Road" title="Maps">Demon Road</a> Map cannot be walked/ran through and line of sight skills cannot be cast through them.</li>
+<li>Certain corruptions may not show their red dot indicator. Especially with half freeze duration, all attributes, and minimum damage when the item already has maximum damage or vice versa.</li>
+<li>(S11) Occasionally, some parts of the <a href="/wiki/Maps#Demon_Road" title="Maps">Demon Road</a> Map cannot be walked/ran through and line of sight skills cannot be cast through them.</li>
 <li>(S11) <a href="/wiki/Monsters#Diablo_Clone" title="Monsters">Diablo Clone</a> Nova can go through pillars.</li></ul>
 <p><b>Bugs for Specific Skills or Equipment:</b>
 </p>
-<ul><li><a href="/wiki/Revive" class="mw-redirect" title="Revive">Revives'</a> own summon/sentry abilities (e.g. hydras cast by revived council members) don't grant player experience or quest progress if they kill enemies.</li>
-<li>Being in <a href="/wiki/Whirlwind" class="mw-redirect" title="Whirlwind">Whirlwind</a> (<a href="/wiki/Blade_Dance" title="Blade Dance">Blade Dance</a>) animation when leveling up on assassin locks up your animation.</li>
+<ul><li><a href="/wiki/Revive" class="mw-redirect" title="Revive">Revives'</a> own summon/sentry abilities (e.g. hydras cast by revived council members) don't grant player experience or quest progress if they kill enemies. Similar with <a href="/wiki/Shadow_Master" class="mw-redirect" title="Shadow Master">Assassin Shadows'</a> using trap skills.</li>
+<li>Similarly <a href="/wiki/Tornado" class="mw-redirect" title="Tornado">Tornado</a> does not grant quest credit in some circumstances, primarily with Baal.</li>
+<li>Being in <a href="/wiki/Whirlwind" class="mw-redirect" title="Whirlwind">Whirlwind</a> (<a href="/wiki/Blade_Dance" title="Blade Dance">Blade Dance</a>) animation when leveling up on assassin or barbarian locks up your animation when using certain buffs like <a href="/wiki/Burst_of_Speed" class="mw-redirect" title="Burst of Speed">Burst of Speed</a> or <a href="/wiki/Energy_Shield" class="mw-redirect" title="Energy Shield">Energy Shield</a>.</li>
 <li>Hydras spawned from the <a href="/wiki/Dragon_(Chest)" class="mw-redirect" title="Dragon (Chest)">Dragon</a> runeword (chest) are only staying up for ~1 second before despawning if trigged by whirlwind.</li>
 <li>Fire Resist aura from <a href="/wiki/Flickering_Flame" class="mw-redirect" title="Flickering Flame">Flickering Flame</a> on merc reduces max res back to 75 on paladin.</li>
 <li>Heart of the Wolverine (from <a href="/wiki/Wisp_Projector" class="mw-redirect" title="Wisp Projector">Wisp Projector</a>) despawns when you level up.</li>
 <li>Some items in the <a href="/wiki/Elite#Immortal_King" title="Elite">Immortal King</a> set have their set bonuses displayed in blue (like normal attributes) rather than in green.</li>
-<li>Ethereal versions of <a href="/wiki/Elite#Immortal_King&#39;s_Stone_Crusher" title="Elite">Immortal King's Stone Crusher</a> may display the incorrect damage (missing the set bonus) depending on the order of the set items being equipped.</li>
+<li>Adding jewels with maximum damage to an item that already has maximum damage may show the quantity in the added maximum damage affix incorrectly, but the weapon's shown and applied total damage will incorporate both sources of maximum damage properly.</li>
+<li>(S11) Ethereal versions of <a href="/wiki/Elite#Immortal_King&#39;s_Stone_Crusher" title="Elite">Immortal King's Stone Crusher</a> may display the incorrect damage (missing the set bonus) depending on the order of the set items being equipped. In Season 14, the item normally cannot spawn as ethereal and is indestructible so this should no longer apply.</li>
 <li>(S11) The <a href="/wiki/Conviction" class="mw-redirect" title="Conviction">Conviction</a> debuff can apply to the Player/Mercenary even if the source is dead.</li></ul>
 <div id="BH"></div><p><b>BH-Related Bugs:</b>
 </p><ul><li>Attribute ranges on tooltips are sometimes incorrect
@@ -40,7 +43,8 @@ This page lists errors, unintended behavior, and glitches found in PD2. Some maj
 <dl><dd><span class="omod">List of attribute sources: prefixes, suffixes, automods, superior affixes, predetermined crafting affixes, corruptions, socketed gems/runes/jewels, pointmods</span></dd></dl></li>
 <li>When an item has a "hybrid" affix with multiple attributes, each attribute range is still treated separately which can result in inaccurate/ambiguous comparisons. Example:
 <ul><li>A Fine Small Charm adds +[1-3] damage &amp; +[10-20] AR but the attribute range for AR shows [2-36] in-game since the Bronze/Iron/Steel affixes can add that much AR (but of course those affixes don't add any damage)</li></ul></li>
-<li>The attribute range may only reference affixes which are possible for rare items so some higher magic-only affixes won't have accurate ranges</li></ul></li>
+<li>The attribute range may only reference affixes which are possible for rare items so some higher magic-only affixes won't have accurate ranges</li>
+<li>Some items with low ilvl and high qlvl (e.g. ilvl 1 small charm, qlvl = 28) may show a lower range than the highest level affix that can spawn on that item.</li></ul></li>
 <li>Some items have their <a href="/wiki/Item_Filtering#Colors" title="Item Filtering">default color</a> built into <b>%NAME%</b>, so their color won't change unless their name is rewritten completely.</li></ul>
 <p>Note that attribute ranges and lootfilters are handled by <a rel="nofollow" class="external text" href="https://github.com/Project-Diablo-2/BH">PD2's open-source version of BH</a>, which anyone may submit improvements for. The discord's <a rel="nofollow" class="external text" href="https://discord.com/channels/701658302085595158/771820538502971402">#lootfilter</a> channel may be a good place to learn more about it if you have questions, since devs and editors often frequent the channel and discuss BH-related changes there.
 </p>
@@ -64,8 +68,8 @@ This page lists errors, unintended behavior, and glitches found in PD2. Some maj
 <li>Strength bug - if stat requirements of equipped items are only met via the stats granted by those items, the gear won't be visible to other players; this may also contribute to losing items when there are multiple corpses or there isn't enough inventory space to store unequippable items when recovering them from a corpse</li></ul>
 <dl><dd><span class="omod">When recovering items from a corpse, they are re-equipped in the following order: helm, amulet, chest, left weapon/offhand, right weapon/offhand, left ring, right ring, belt, boots, gloves</span></dd></dl>
 <ul><li>Broken-offhand-whirlwind (BOW) bug - when dual-wielding and using whirlwind, if the offhand weapon is broken (0 durability) and has 1 gemmed socket (to prevent it from disappearing), the mainhand weapon is used as both the mainhand <i>and</i> offhand weapons</li>
-<li>Failed-to-Join (FTJ) bug</li>
-<li><a href="/wiki/Monsters#Bloodwitch_the_Wild" title="Monsters">Blood Witch</a> sometimes doesn't spawn in Halls of the Dead</li></ul>
+<li><a href="/wiki/Support_FAQ#Failed_to_join_game" title="Support FAQ">Failed to Join Game</a> (FTJ) bug</li>
+<li><a href="/wiki/Monsters#Bloodwitch_the_Wild" title="Monsters">Blood Witch</a> sometimes doesn't spawn in Halls of the Dead. As of Season 14, this should be fixed.</li></ul>
 <p>For a more complete list of vanilla bugs, see wikis dedicated to vanilla. <a rel="nofollow" class="external text" href="https://www.theamazonbasin.com/wiki/index.php?title=Diablo_II">The Amazon Basin</a> wiki does an especially good job, with bugs typically written in red in their relevant categories. Another example is this <a rel="nofollow" class="external text" href="https://us.forums.blizzard.com/en/d3/t/bugproblem-list-for-devs-what-to-fix-for-d2r/30490">list of 200+ bugs</a> that focuses on what should be fixed for D2: Resurrected.
 </p><p>For bugs fixed in PD2, see <a href="/wiki/General_Changes#Bug_Fixes" title="General Changes"> General Changes</a>.
 </p>
