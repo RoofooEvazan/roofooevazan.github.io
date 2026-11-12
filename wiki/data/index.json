@@ -415,7 +415,7 @@
    "title": "All Items",
    "display": "All Items",
    "rev": 21738,
-   "touched": "2026-11-10T13:05:53Z",
+   "touched": "2026-11-11T17:08:05Z",
    "edited": "2025-12-03T12:16:51Z",
    "len": 1360317,
    "intro": "Below is a compilation of all \"named\" items - unique/set/runeword items and some others, whose affixes are all explicitly determined rather than generated randomly. Crafted items also have some predetermined affixes, but"
@@ -485,9 +485,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-11-11T02:52:33Z",
+   "touched": "2026-11-12T11:16:06Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1812807,
+   "len": 1812994,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -495,7 +495,7 @@
    "title": "All Unique Non-Weapons",
    "display": "All Unique Non-Weapons",
    "rev": 21711,
-   "touched": "2026-11-10T11:24:39Z",
+   "touched": "2026-11-11T17:08:05Z",
    "edited": "2025-11-29T02:32:18Z",
    "len": 365676,
    "intro": "Below is a compilation of all unique non-weapons: Helms"
@@ -1034,10 +1034,10 @@
    "id": 616,
    "title": "General Changes",
    "display": "General Changes",
-   "rev": 24262,
-   "touched": "2026-10-20T08:11:10Z",
-   "edited": "2026-10-20T08:11:10Z",
-   "len": 25949,
+   "rev": 24873,
+   "touched": "2026-11-12T11:16:06Z",
+   "edited": "2026-11-12T11:16:06Z",
+   "len": 26136,
    "intro": "This page lists an overview of changes made in PD2 relative to the vanilla game. Topics which are too detailed for this list include links to other pages with additional information. Also see: All Topics"
   },
   {
@@ -1234,9 +1234,9 @@
    "id": 30,
    "title": "Helms",
    "display": "Helms",
-   "rev": 24867,
-   "touched": "2026-11-10T11:24:38Z",
-   "edited": "2026-11-10T11:24:38Z",
+   "rev": 24871,
+   "touched": "2026-11-11T17:08:05Z",
+   "edited": "2026-11-11T17:08:05Z",
    "len": 120656,
    "intro": ""
   },
@@ -1575,7 +1575,7 @@
    "title": "New Equipment",
    "display": "New Equipment",
    "rev": 19646,
-   "touched": "2026-11-10T13:05:53Z",
+   "touched": "2026-11-11T17:08:05Z",
    "edited": "2025-05-18T21:37:13Z",
    "len": 117344,
    "intro": "Below is a compilation of all new \"named\" (runeword/set/unique) equipment items. No old items are included here, even if they've been changed substantially compared to their vanilla counterparts. For a list of all new it"
@@ -10141,5 +10141,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "d797eebfda"
+ "v": "10680af335"
 }

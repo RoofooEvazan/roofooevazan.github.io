@@ -1,5 +1,42 @@
 [
  {
+  "date": "2026-11-12T14:23:30.508Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "All Items",
+    "edited": "2025-12-03T12:16:51Z",
+    "summary": "added quivers"
+   },
+   {
+    "title": "All Topics",
+    "edited": "2023-09-09T16:57:53Z",
+    "summary": "added topics"
+   },
+   {
+    "title": "All Unique Non-Weapons",
+    "edited": "2025-11-29T02:32:18Z",
+    "summary": "added quivers to all uniques"
+   },
+   {
+    "title": "General Changes",
+    "edited": "2026-11-12T11:16:06Z",
+    "summary": "/* Quality-of-Life */"
+   },
+   {
+    "title": "Helms",
+    "edited": "2026-11-11T17:08:05Z",
+    "summary": "/* Ursa's Nightmare */ fixed life steal"
+   },
+   {
+    "title": "New Equipment",
+    "edited": "2025-05-18T21:37:13Z",
+    "summary": ""
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-11-11T10:17:57.865Z",
   "added": [],
   "updated": [
