@@ -1,5 +1,132 @@
 [
  {
+  "date": "2026-11-13T14:23:51.902Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "Act 3 Mercenary Runewords",
+    "edited": "2026-10-24T14:49:26Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "All Items",
+    "edited": "2025-12-03T12:16:51Z",
+    "summary": "added quivers"
+   },
+   {
+    "title": "All Runewords",
+    "edited": "2025-11-27T17:00:54Z",
+    "summary": "Added quiver runewords"
+   },
+   {
+    "title": "All Set Items",
+    "edited": "2022-04-06T23:45:25Z",
+    "summary": "add headers"
+   },
+   {
+    "title": "All Topics",
+    "edited": "2023-09-09T16:57:53Z",
+    "summary": "added topics"
+   },
+   {
+    "title": "All Unique Non-Weapons",
+    "edited": "2025-11-29T02:32:18Z",
+    "summary": "added quivers to all uniques"
+   },
+   {
+    "title": "All Unique Weapons",
+    "edited": "2022-08-03T02:13:47Z",
+    "summary": ""
+   },
+   {
+    "title": "Bow Runewords",
+    "edited": "2026-10-24T14:47:10Z",
+    "summary": "/* 4-Sockets */ madness"
+   },
+   {
+    "title": "Chests",
+    "edited": "2026-10-29T16:37:04Z",
+    "summary": "/* Toothrow */ fixed to 20 str"
+   },
+   {
+    "title": "Class Weapons",
+    "edited": "2026-11-13T05:21:32Z",
+    "summary": "/* Blood Raven's Charge */ You may Summon -> Maximum"
+   },
+   {
+    "title": "Elite",
+    "edited": "2026-11-13T05:09:58Z",
+    "summary": "/* Set Bonuses for Natalya's Odium */ You may summon -> Maximum"
+   },
+   {
+    "title": "Helms",
+    "edited": "2026-11-13T05:23:18Z",
+    "summary": "/* Denmother */ You may summon -> Maximum"
+   },
+   {
+    "title": "New Equipment",
+    "edited": "2025-05-18T21:37:13Z",
+    "summary": ""
+   },
+   {
+    "title": "New Runewords",
+    "edited": "2026-05-04T14:18:51Z",
+    "summary": "/* Quivers */"
+   },
+   {
+    "title": "Polearms",
+    "edited": "2026-11-13T05:17:51Z",
+    "summary": "/* Grim's Burning Dead */ You may summon -> Maximum"
+   },
+   {
+    "title": "PvP Changes",
+    "edited": "2026-11-13T03:15:27Z",
+    "summary": "/* Damage Multipliers */"
+   },
+   {
+    "title": "Quivers",
+    "edited": "2026-11-13T05:47:49Z",
+    "summary": "/* Bannerlord's Call */ Reordered affixes"
+   },
+   {
+    "title": "RWChests",
+    "edited": "2026-11-13T05:32:58Z",
+    "summary": "/* Dragon */ You may summon -> Maximum"
+   },
+   {
+    "title": "RWShields",
+    "edited": "2026-11-13T05:33:50Z",
+    "summary": "/* Dragon */ You may summon -> Maximum"
+   },
+   {
+    "title": "RWWeapons",
+    "edited": "2026-11-13T05:35:57Z",
+    "summary": "/* Dominion */ You may summon -> Maximum"
+   },
+   {
+    "title": "Shields",
+    "edited": "2026-11-13T05:24:14Z",
+    "summary": "/* Sacred Totem */ You may summon -> Maximum"
+   },
+   {
+    "title": "Staves",
+    "edited": "2026-11-13T05:49:43Z",
+    "summary": "/* Ribcracker */ Reordered affixes"
+   },
+   {
+    "title": "Wand Runewords",
+    "edited": "2025-06-04T13:27:40Z",
+    "summary": "Undo revision [[Special:Diff/20249|20249]] by [[Special:Contributions/Grandalf|Grandalf]] ([[User talk:Grandalf|talk]])"
+   },
+   {
+    "title": "Wands",
+    "edited": "2026-11-13T05:19:51Z",
+    "summary": "/* Arm of King Leoric */ You may summon -> Maximum"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-11-12T14:23:30.508Z",
   "added": [],
   "updated": [
