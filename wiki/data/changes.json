@@ -1,5 +1,32 @@
 [
  {
+  "date": "2026-11-15T14:23:27.771Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "All Amazon Skills",
+    "edited": "2023-09-09T16:56:26Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Skills",
+    "edited": "2026-06-20T22:47:43Z",
+    "summary": "Link to Merc skills"
+   },
+   {
+    "title": "Item Filtering",
+    "edited": "2026-11-15T11:37:54Z",
+    "summary": "/* Mutable Codes */ Added new compendium discovery terms"
+   },
+   {
+    "title": "Passive and Magic Skills",
+    "edited": "2026-11-14T14:32:08Z",
+    "summary": "/* Dodge */ Fix rounding error on diminishing returns"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-11-13T14:23:51.902Z",
   "added": [],
   "updated": [

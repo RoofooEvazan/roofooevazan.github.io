@@ -375,7 +375,7 @@
    "title": "All Amazon Skills",
    "display": "All Amazon Skills",
    "rev": 17341,
-   "touched": "2026-10-28T15:59:45Z",
+   "touched": "2026-11-14T14:32:08Z",
    "edited": "2023-09-09T16:56:26Z",
    "len": 235284,
    "intro": "This page lists all Amazon skills & stats. Also see: Amazon Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 20 Dexterity 25 • Attack Rating 95 +5 • Defense 6 +0.25 Vitality "
@@ -465,7 +465,7 @@
    "title": "All Skills",
    "display": "All Skills",
    "rev": 23804,
-   "touched": "2026-11-03T10:33:15Z",
+   "touched": "2026-11-14T14:32:08Z",
    "edited": "2026-06-20T22:47:43Z",
    "len": 1891603,
    "intro": "Below is a compilation of all skills. Note that mercenaries may use different versions of the skills listed here. Also see: Skill Overview, Mercenary Skills Other skill compilation lists: All Amazon Skills All Assassin S"
@@ -1294,10 +1294,10 @@
    "id": 491,
    "title": "Item Filtering",
    "display": "Item Filtering",
-   "rev": 22837,
-   "touched": "2026-11-04T07:00:30Z",
-   "edited": "2026-04-30T07:22:00Z",
-   "len": 259675,
+   "rev": 24898,
+   "touched": "2026-11-15T11:37:54Z",
+   "edited": "2026-11-15T11:37:54Z",
+   "len": 260013,
    "intro": "Item filtering allows players to filter out items they don't want to see, and also change the appearance of items that are not filtered out. While there are in-game options for simple item filtering, players can use item"
   },
   {
@@ -1644,9 +1644,9 @@
    "id": 66,
    "title": "Passive and Magic Skills",
    "display": "Passive and Magic Skills",
-   "rev": 24732,
-   "touched": "2026-10-28T15:47:28Z",
-   "edited": "2026-10-28T15:47:28Z",
+   "rev": 24895,
+   "touched": "2026-11-14T14:32:08Z",
+   "edited": "2026-11-14T14:32:08Z",
    "len": 73927,
    "intro": "This page lists Amazon skills from the Passive and Magic Skills skill tree. Other Amazon skills: Javelin and Spear Skills, Bow and Crossbow Skills, All Amazon Skills Expand/Collapse All"
   },
@@ -10141,5 +10141,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "d1cd9c377a"
+ "v": "af57e691f8"
 }
