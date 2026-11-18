@@ -14,6 +14,10 @@
      "title": "Support FAQ"
     },
     {
+     "label": "Seasons",
+     "title": "Seasons"
+    },
+    {
      "label": "Patch Notes",
      "title": "Patch Notes"
     },
@@ -395,9 +399,9 @@
    "title": "All Barbarian Skills",
    "display": "All Barbarian Skills",
    "rev": 17344,
-   "touched": "2026-11-03T10:33:15Z",
+   "touched": "2026-11-17T19:03:24Z",
    "edited": "2023-09-09T17:00:19Z",
-   "len": 205057,
+   "len": 205335,
    "intro": "This page lists all Barbarian skills & stats. Also see: Barbarian Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 30 Dexterity 20 • Attack Rating 85 +5 • Defense 5 +0.25 Vit"
   },
   {
@@ -465,9 +469,9 @@
    "title": "All Skills",
    "display": "All Skills",
    "rev": 23804,
-   "touched": "2026-11-14T14:32:08Z",
+   "touched": "2026-11-17T19:03:24Z",
    "edited": "2026-06-20T22:47:43Z",
-   "len": 1891603,
+   "len": 1891881,
    "intro": "Below is a compilation of all skills. Note that mercenaries may use different versions of the skills listed here. Also see: Skill Overview, Mercenary Skills Other skill compilation lists: All Amazon Skills All Assassin S"
   },
   {
@@ -485,7 +489,7 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-11-13T03:15:27Z",
+   "touched": "2026-11-17T18:07:38Z",
    "edited": "2023-09-09T16:57:53Z",
    "len": 1814084,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
@@ -764,10 +768,10 @@
    "id": 94,
    "title": "Combat Skills (Barbarian)",
    "display": "Combat Skills (Barbarian)",
-   "rev": 24692,
-   "touched": "2026-10-27T13:25:04Z",
-   "edited": "2026-10-27T13:25:04Z",
-   "len": 104321,
+   "rev": 24900,
+   "touched": "2026-11-17T19:03:23Z",
+   "edited": "2026-11-17T19:03:23Z",
+   "len": 104599,
    "intro": "This page lists Barbarian skills from the Combat Skills skill tree. Other Barbarian skills: Warcries, Combat Masteries, All Barbarian Skills Expand/Collapse All"
   },
   {
@@ -1454,10 +1458,10 @@
    "id": 1,
    "title": "Main Page",
    "display": "Main Page",
-   "rev": 24742,
-   "touched": "2026-11-17T11:45:41Z",
-   "edited": "2026-10-28T16:05:59Z",
-   "len": 7481,
+   "rev": 24912,
+   "touched": "2026-11-17T20:05:27Z",
+   "edited": "2026-11-17T20:05:27Z",
+   "len": 7542,
    "intro": "Welcome to the Project Diablo 2 Wiki! Project Diablo 2 is a mod for and by passionate Diablo 2 fans. We aim to maintain the Diablo II: Lord of Destruction experience and provide consistent ladder resets while improving o"
   },
   {
@@ -1524,9 +1528,9 @@
    "id": 2,
    "title": "Monsters",
    "display": "Monsters",
-   "rev": 24213,
-   "touched": "2026-10-18T19:31:23Z",
-   "edited": "2026-10-18T19:31:23Z",
+   "rev": 24899,
+   "touched": "2026-11-17T18:07:37Z",
+   "edited": "2026-11-17T18:07:37Z",
    "len": 68931,
    "intro": "This article is marked as a stub, meaning it is incomplete or out of date. You can help Project Diablo 2 Wiki by adding missing information, or updating it. Reason: This page has outdated or missing info (from S5 changes"
   },
@@ -2014,10 +2018,10 @@
    "id": 5208,
    "title": "Seasons",
    "display": "Seasons",
-   "rev": 24017,
-   "touched": "2026-11-11T02:52:33Z",
-   "edited": "2026-10-08T22:18:13Z",
-   "len": 12179,
+   "rev": 24911,
+   "touched": "2026-11-17T19:54:36Z",
+   "edited": "2026-11-17T19:54:36Z",
+   "len": 21365,
    "intro": "This page lists information about seasons and gamemodes."
   },
   {
@@ -7765,6 +7769,7 @@
   "5208#Beta": "about/seasons#Beta",
   "5208#Ladder": "about/seasons#Ladder",
   "5208#Singleplayer": "about/singleplayer",
+  "5208#Seasonal_Promotional_Banners": "about/seasons#Seasonal_Promotional_Banners",
   "5208#": "about/seasons",
   "5712#": "patches/s13",
   "5408#Blade_Dance": "skills/Items/Blade_Dance",
@@ -10141,5 +10146,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "af57e691f8"
+ "v": "ba5bedfeae"
 }
