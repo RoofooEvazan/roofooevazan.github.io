@@ -489,9 +489,9 @@
    "title": "All Topics",
    "display": "All Topics",
    "rev": 17342,
-   "touched": "2026-11-17T18:07:38Z",
+   "touched": "2026-11-21T07:10:33Z",
    "edited": "2023-09-09T16:57:53Z",
-   "len": 1814084,
+   "len": 1814428,
    "intro": "Below is a compilation of all topics other than individual skills and items: Expand/Collapse All General Changes"
   },
   {
@@ -1408,10 +1408,10 @@
    "id": 533,
    "title": "Links",
    "display": "Links",
-   "rev": 24842,
-   "touched": "2026-11-06T03:05:26Z",
-   "edited": "2026-11-06T03:05:26Z",
-   "len": 79208,
+   "rev": 24914,
+   "touched": "2026-11-21T07:10:32Z",
+   "edited": "2026-11-21T07:10:32Z",
+   "len": 79458,
    "intro": "This page is an information hub for everything PD2-related - it includes hyperlinks for tools, guides, and other info that isn't on the wiki itself."
   },
   {
@@ -1528,10 +1528,10 @@
    "id": 2,
    "title": "Monsters",
    "display": "Monsters",
-   "rev": 24899,
-   "touched": "2026-11-17T18:07:37Z",
-   "edited": "2026-11-17T18:07:37Z",
-   "len": 68931,
+   "rev": 24913,
+   "touched": "2026-11-20T19:37:16Z",
+   "edited": "2026-11-20T19:37:16Z",
+   "len": 69025,
    "intro": "This article is marked as a stub, meaning it is incomplete or out of date. You can help Project Diablo 2 Wiki by adding missing information, or updating it. Reason: This page has outdated or missing info (from S5 changes"
   },
   {
@@ -10146,5 +10146,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "ba5bedfeae"
+ "v": "8da0196e75"
 }
