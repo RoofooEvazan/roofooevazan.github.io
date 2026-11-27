@@ -399,7 +399,7 @@
    "title": "All Barbarian Skills",
    "display": "All Barbarian Skills",
    "rev": 17344,
-   "touched": "2026-11-17T19:03:24Z",
+   "touched": "2026-11-26T21:06:54Z",
    "edited": "2023-09-09T17:00:19Z",
    "len": 205335,
    "intro": "This page lists all Barbarian skills & stats. Also see: Barbarian Build Guides, Class Attributes, All Skills Attributes Attribute Level 1 /Level /Point Strength 30 Dexterity 20 • Attack Rating 85 +5 • Defense 5 +0.25 Vit"
@@ -469,7 +469,7 @@
    "title": "All Skills",
    "display": "All Skills",
    "rev": 23804,
-   "touched": "2026-11-17T19:03:24Z",
+   "touched": "2026-11-26T21:06:54Z",
    "edited": "2026-06-20T22:47:43Z",
    "len": 1891881,
    "intro": "Below is a compilation of all skills. Note that mercenaries may use different versions of the skills listed here. Also see: Skill Overview, Mercenary Skills Other skill compilation lists: All Amazon Skills All Assassin S"
@@ -758,9 +758,9 @@
    "id": 86,
    "title": "Combat Masteries",
    "display": "Combat Masteries",
-   "rev": 24685,
-   "touched": "2026-10-27T01:58:41Z",
-   "edited": "2026-10-27T01:58:41Z",
+   "rev": 24918,
+   "touched": "2026-11-26T21:06:53Z",
+   "edited": "2026-11-26T21:06:53Z",
    "len": 46488,
    "intro": "This page lists Barbarian skills from the Combat Masteries skill tree. Other Barbarian skills: Warcries, Combat Skills, All Barbarian Skills Expand/Collapse All"
   },
@@ -10146,5 +10146,5 @@
    "iso": "2020-11-06"
   }
  ],
- "v": "9458763261"
+ "v": "ce6e00dc36"
 }

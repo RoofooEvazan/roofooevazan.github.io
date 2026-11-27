@@ -1,5 +1,27 @@
 [
  {
+  "date": "2026-11-27T14:23:25.071Z",
+  "added": [],
+  "updated": [
+   {
+    "title": "All Barbarian Skills",
+    "edited": "2023-09-09T17:00:19Z",
+    "summary": "transclusion & links"
+   },
+   {
+    "title": "All Skills",
+    "edited": "2026-06-20T22:47:43Z",
+    "summary": "Link to Merc skills"
+   },
+   {
+    "title": "Combat Masteries",
+    "edited": "2026-11-26T21:06:53Z",
+    "summary": "/* Two Handed Mastery */"
+   }
+  ],
+  "removed": []
+ },
+ {
   "date": "2026-11-23T14:23:39.128Z",
   "added": [],
   "updated": [
